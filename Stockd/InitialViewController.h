@@ -12,7 +12,6 @@
 #import "ProfileTableViewController.h"
 #import "TourViewController.h"
 
-
 @interface InitialViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
@@ -21,6 +20,8 @@
 
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+
+
 
 
 @end

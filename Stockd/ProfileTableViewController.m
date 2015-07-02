@@ -37,8 +37,13 @@
     }
     else {
         
+        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+
         InitialViewController *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
         [self.navigationController pushViewController:tvc animated:NO];
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+
     }
     
     PFFile *profilePicture = [[PFUser currentUser] objectForKey:@"profilePic"];
@@ -109,6 +114,8 @@
     
     //Nav Bar Color
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"whiteBkg"] forBarMetrics:UIBarMetricsDefault];
+    //[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
     
 }
 

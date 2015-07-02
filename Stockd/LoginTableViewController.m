@@ -53,21 +53,7 @@
                                                object:nil];
     
     
-    //Nav Bar Color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    
-    //Nav Bar Back Button Color
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
-    
-    //Navigation Bar Title Properties
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor clearColor];
-    shadow.shadowOffset = CGSizeMake(0, .0);
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
-                                                          shadow, NSShadowAttributeName,
-                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
-    
+       
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -232,9 +218,18 @@
                                                  style:UIBarButtonItemStyleBordered
                                                 target:nil
                                                 action:nil];
+                
+                [CATransaction begin];
+                [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+                CATransition *transition = [CATransition animation];
+                [transition setType:kCATransitionFade];
+                [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
+
+                
                 [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
-                [self.navigationController presentViewController:navigationController animated:YES completion:^{
-                }];
+                [self.navigationController pushViewController:destViewController animated:NO];
+                
+                [CATransaction commit];
 
             }
         }];

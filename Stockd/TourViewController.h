@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "InitialViewController.h"
+#import "SlideNavigationController.h"
 
-@interface TourViewController : UIViewController <UIScrollViewDelegate>
+@interface TourViewController : UIViewController <UIScrollViewDelegate, SlideNavigationControllerDelegate>
+
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu;
+
 
 @end

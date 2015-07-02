@@ -31,8 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //Nav Bar Color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 
@@ -469,10 +468,6 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
                                                     subtitle:[error.userInfo objectForKey:@"error"]
                                                         type:TSMessageNotificationTypeError];
                     }
-
-//                    [TSMessage showNotificationWithTitle:nil
-//                                                subtitle:[error.userInfo objectForKey:@"error"]
-//                                                    type:TSMessageNotificationTypeError];
                 }
             }
             else {
@@ -492,10 +487,19 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
                                                  style:UIBarButtonItemStyleBordered
                                                 target:nil
                                                 action:nil];
+                
+                [CATransaction begin];
+                [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+                CATransition *transition = [CATransition animation];
+                [transition setType:kCATransitionFade];
+                [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
+                
+                
                 [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
-                [self.navigationController presentViewController:navigationController animated:YES completion:^{
-                }];
-
+                [self.navigationController pushViewController:destViewController animated:NO];
+                
+                [CATransaction commit];
+                
             }
         }];
     }

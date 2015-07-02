@@ -125,7 +125,7 @@
     [self.imageSelectedView addSubview:self.capturedImageView];
 
     
-    UIButton *cancelPhoto = [[UIButton alloc]initWithFrame:CGRectMake(9, 6.5, 29, 29)];
+    UIButton *cancelPhoto = [[UIButton alloc]initWithFrame:CGRectMake(9, 56.5, 29, 29)];
     [cancelPhoto setImage:[UIImage imageNamed:@"cancelPhoto"] forState:UIControlStateNormal];
     [cancelPhoto addTarget:self action:@selector(cancelSelectedPhoto:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelPhoto];
@@ -350,6 +350,8 @@
         // Need to reset flash btn
     }
 }
+
+
 -(IBAction)showalbum:(id)sender
 {
     [self presentViewController:self.picker animated:YES completion:nil];

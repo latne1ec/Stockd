@@ -28,6 +28,9 @@ alpha:1.0]
 -(void)viewDidLoad
 {
     
+    [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasRanApp"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     _w = self.view.frame.size.width;
     _h = self.view.frame.size.height;
     
@@ -186,6 +189,18 @@ alpha:1.0]
     _pageControl.currentPageIndicatorTintColor = [UIColor colorWithWhite:0 alpha:0.5f];
     [self.view addSubview:_pageControl];
 }
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+    return YES;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    return NO;
+}
+
+
 
 -(float)compare:(float)cual
 {

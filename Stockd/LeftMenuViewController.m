@@ -48,8 +48,11 @@
     _data = @[
               @{@"text":@"Home",@"viewC":@"Camera"},
               @{@"text":@"Food",@"viewC":@"Profile"},
-              @{@"text":@"Beer",@"viewC":@"Profile"},
-              @{@"text":@"Pizza",@"viewC":@"Profile"}
+              @{@"text":@"Drinks",@"viewC":@"Profile"},
+              @{@"text":@"Snacks",@"viewC":@"Profile"},
+              @{@"text":@"21+",@"viewC":@"Profile"},
+              @{@"text":@"Profile",@"viewC":@"Profile"},
+               @{@"text":@"Help",@"viewC":@"Tour"}
               ];
     
     float h = 60;

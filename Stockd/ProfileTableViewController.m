@@ -32,6 +32,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([PFUser currentUser]) {
+        
+    }
+    else {
+        
+        InitialViewController *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
+        [self.navigationController pushViewController:tvc animated:NO];
+    }
+    
     PFFile *profilePicture = [[PFUser currentUser] objectForKey:@"profilePic"];
     
     PFImageView *ImageView = (PFImageView*)self.profilePic;
@@ -50,22 +59,57 @@
     
 
     //Nav Bar Back Button Color
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
                              forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.translucent = NO;
     
     self.tableView.layer.masksToBounds = YES;
     self.tableView.clipsToBounds = YES;
     
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
+    self.navigationController.navigationItem.hidesBackButton = YES;
     
 
+    
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+    return YES;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    return NO;
+}
+
+
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    self.navigationController.navigationItem.hidesBackButton = YES;
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    
+    //Nav Bar Color
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
 }
 
 #pragma mark - Table view data source
@@ -257,8 +301,12 @@
                 picker.allowsEditing = YES;
                 picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 [weakSelf presentViewController:picker animated:YES completion:^{
-                    
+
+                    [[UIApplication sharedApplication] setStatusBarHidden:NO];
                     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                    
+                    picker.navigationBar.barTintColor = [UIColor colorWithRed:0.941 green:0.353 blue:0.663 alpha:1];
+                    
  
                 }];
                 [sheet dismissAnimated:NO];
@@ -347,6 +395,9 @@ UIImage* ResizeImage2(UIImage *image, CGFloat width, CGFloat height) {
     [transition setType:kCATransitionFade];
     [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
     [PFUser logOut];
+    //Nav Bar Color
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"whiteBkg"] forBarMetrics:UIBarMetricsDefault];
+
     InitialViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
     [self.navigationController pushViewController:ivc animated:NO];
     [CATransaction commit];

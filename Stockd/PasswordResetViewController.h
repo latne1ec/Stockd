@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "TSMessage.h"
+#import "InitialViewController.h"
 
-@interface PasswordResetViewController : UITableViewController <UITextFieldDelegate>
+@interface PasswordResetViewController : UITableViewController <UITextFieldDelegate, TSMessageViewProtocol>
 
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *emailCell;

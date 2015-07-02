@@ -28,11 +28,37 @@
                                                                             target:self
                                                                             action:@selector(dismissViewControllerAnimated:completion:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"save" style:UIBarButtonItemStylePlain target:self action:@selector(saveButton:)];
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"saveButton"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(saveButton:)];
     
     
     self.title = @"Email Info";
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"initialBkg"]];
+    [self.tableView setBackgroundView:imageView];
+    
+    
+    //Nav Bar Back Button Color
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    self.tableView.layer.masksToBounds = YES;
+    self.tableView.clipsToBounds = YES;
+    
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
 
     
 }

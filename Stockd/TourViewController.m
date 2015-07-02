@@ -27,13 +27,22 @@ alpha:1.0]
 
 -(void)viewDidLoad
 {
+    
+    _w = self.view.frame.size.width;
+    _h = self.view.frame.size.height;
+    
+    UIView *whiteSquare = [[UIView alloc] initWithFrame:CGRectMake(0, _h/2.0f, _w, _h/2.0f)];
+    whiteSquare.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:whiteSquare];
+    
+    
     _pages = 4;
     _pagedTour = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     _pagedTour.contentSize = CGSizeMake(_pagedTour.frame.size.width*_pages, _pagedTour.frame.size.height);
     _pagedTour.showsHorizontalScrollIndicator = NO;
     _pagedTour.showsVerticalScrollIndicator = NO;
     _pagedTour.delegate = self;
-    _pagedTour.bounces = NO;
+    _pagedTour.bounces = YES;
     _pagedTour.pagingEnabled = YES;
     [self.view addSubview:_pagedTour];
     
@@ -49,32 +58,19 @@ alpha:1.0]
     
     NSString *thankYouMessage = @"THANK YOU!\nYOU'LL BE NOTIFIED WHEN YOUR DELIVERY IS ON THE WAY!";
     
-    _w = self.view.frame.size.width;
-    _h = self.view.frame.size.height;
-    
-    
     
     UIView *page1 = [[UIView alloc] initWithFrame:self.view.bounds];
     page1.backgroundColor = [UIColor clearColor];
     [_pagedTour addSubview:page1];
     
-    float maxHeight = _h/2.0f;
     float maxWidth = _w;
-    float scaleTo = 1.0f;
-    if([image1 size].width>=[image1 size].height){
-        scaleTo = maxWidth/[image1 size].width;
-    } else if([image1 size].width<[image1 size].height){
-        scaleTo = maxHeight/[image1 size].height;
-    }
+    float scaleTo = maxWidth/[image1 size].width;
     
-    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image1 size].width*scaleTo)/2.0f, _h/4.0f-([image1 size].height*scaleTo)/2.0f, ([image1 size].width*scaleTo), ([image1 size].height*scaleTo))];
+    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image1 size].width*scaleTo)/2.0f, ((_h/2.0f)-([image1 size].height*scaleTo)), ([image1 size].width*scaleTo), ([image1 size].height*scaleTo))];
     imageView1.backgroundColor = [UIColor clearColor];
     imageView1.image = image1;
     [page1 addSubview:imageView1];
     
-    UIView *whiteSquare = [[UIView alloc] initWithFrame:CGRectMake(0, _h/2.0f, _w, _h/2.0f)];
-    whiteSquare.backgroundColor = [UIColor whiteColor];
-    [page1 addSubview:whiteSquare];
     
     UILabel *page1Message = [[UILabel alloc] initWithFrame:CGRectMake(75, _h/2.0f, _w-150, _h/2.0f)];
     page1Message.text = message1;
@@ -88,15 +84,9 @@ alpha:1.0]
     page2.backgroundColor = [UIColor clearColor];
     [_pagedTour addSubview:page2];
     
-
-    scaleTo = 1.0f;
-    if([image2 size].width>=[image2 size].height){
-        scaleTo = maxWidth/[image2 size].width;
-    } else if([image2 size].width<[image2 size].height){
-        scaleTo = maxHeight/[image2 size].height;
-    }
+    scaleTo = maxWidth/[image2 size].width;
     
-    UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image2 size].width*scaleTo)/2.0f, _h/4.0f-([image2 size].height*scaleTo)/2.0f, ([image2 size].width*scaleTo), ([image2 size].height*scaleTo))];
+    UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image2 size].width*scaleTo)/2.0f, ((_h/2.0f)-([image2 size].height*scaleTo)), ([image2 size].width*scaleTo), ([image2 size].height*scaleTo))];
     imageView2.backgroundColor = [UIColor clearColor];
     imageView2.image = image2;
     [page2 addSubview:imageView2];
@@ -117,14 +107,9 @@ alpha:1.0]
     page3.backgroundColor = [UIColor clearColor];
     [_pagedTour addSubview:page3];
     
-    scaleTo = 1.0f;
-    if([image3 size].width>=[image3 size].height){
-        scaleTo = maxWidth/[image3 size].width;
-    } else if([image3 size].width<[image3 size].height){
-        scaleTo = maxHeight/[image3 size].height;
-    }
+    scaleTo = maxWidth/[image3 size].width;
     
-    UIImageView *imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image3 size].width*scaleTo)/2.0f, _h/4.0f-([image3 size].height*scaleTo)/2.0f, ([image3 size].width*scaleTo), ([image3 size].height*scaleTo))];
+    UIImageView *imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image3 size].width*scaleTo)/2.0f, ((_h/2.0f)-([image3 size].height*scaleTo)), ([image3 size].width*scaleTo), ([image3 size].height*scaleTo))];
     imageView3.backgroundColor = [UIColor clearColor];
     imageView3.image = image3;
     [page3 addSubview:imageView3];
@@ -165,11 +150,16 @@ alpha:1.0]
     page4ThankYou.textAlignment = NSTextAlignmentCenter;
     [page4 addSubview:page4ThankYou];
     
+    
+    
+    
     float buttonWidth = _w*0.5f;
     float buttonHeight = 45.0f;
     UIButton *startButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    
     startButton.backgroundColor = [UIColor whiteColor];
-    startButton.frame = CGRectMake(_w/2.0f-buttonWidth/2.0f, _h/2.0f+180, buttonWidth, buttonHeight);
+    startButton.frame = CGRectMake(_w/2.0f-buttonWidth/2.0f, _h/2.0f+[self compare:180], buttonWidth, buttonHeight);
     [startButton addTarget:self action:@selector(getStarted:) forControlEvents:UIControlEventTouchUpInside];
     [page4 addSubview:startButton];
     
@@ -195,6 +185,11 @@ alpha:1.0]
     _pageControl.pageIndicatorTintColor = [UIColor colorWithWhite:0 alpha:0.2f];
     _pageControl.currentPageIndicatorTintColor = [UIColor colorWithWhite:0 alpha:0.5f];
     [self.view addSubview:_pageControl];
+}
+
+-(float)compare:(float)cual
+{
+    return (self.view.frame.size.height/685)*cual;
 }
 
 -(IBAction)getStarted:(id)sender

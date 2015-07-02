@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InitialViewController.h"
 
 @interface TourViewController : UIViewController <UIScrollViewDelegate>
 

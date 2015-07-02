@@ -104,10 +104,10 @@
     [camerabutton.layer setCornerRadius:20.0];
     [self.view addSubview:camerabutton];
     
-    UIButton *menu = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 32, 32)];
-    [menu setImage:[UIImage imageNamed:@"stockdMenu"] forState:UIControlStateNormal];
-    [menu addTarget:self action:@selector(flash:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:menu];
+//    UIButton *menu = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 32, 32)];
+//    [menu setImage:[UIImage imageNamed:@"stockdMenu"] forState:UIControlStateNormal];
+//    [menu addTarget:self action:@selector(flash:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:menu];
     }
     
     UIButton *flash = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)-54, CGRectGetHeight(self.view.frame)-54, 36, 36)];
@@ -162,6 +162,16 @@
 {
     [self.captureSession stopRunning];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+    return YES;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    return NO;
 }
 
 //////Fill Meter

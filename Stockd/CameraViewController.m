@@ -24,11 +24,8 @@
     [super viewDidLoad];
     
     self.imagePicker = [[PKImagePickerViewController alloc]init];
-    
     [self.imagePicker.view addSubview:self.menuButton];
-    
     [self.imagePicker.view addSubview:self.navigationController.navigationBar];
-    
     self.imagePicker.delegate = self;
     
     //Nav Bar Color
@@ -41,8 +38,18 @@
 
 }
 
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+    return YES;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    return NO;
+}
+
+
 -(void)viewWillAppear:(BOOL)animated {
-    
     
 }
 
@@ -65,7 +72,6 @@
 }
 
 -(void)imageSelectionCancelled {
-    
     
 }
 

@@ -16,7 +16,7 @@
 		<string>https://github.com/latne1ec/Yapster.git</string>
 		<key>D1F187D7BA64E701EF69C6EE57E151099542784E</key>
 		<string>https://github.com/latne1ec/ADClientProject.git</string>
-		<key>DBC62D3511AECBA2B76F5F0D3979E8A83F01D172</key>
+		<key>D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6</key>
 		<string>https://bitbucket.org/rogelioRuiz/stockd.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
@@ -29,7 +29,7 @@
 		<string>../../../Evan/Yapster</string>
 		<key>D1F187D7BA64E701EF69C6EE57E151099542784E</key>
 		<string>../../../Level%20Labs/Clients/Adena%20Data/AdenaData</string>
-		<key>DBC62D3511AECBA2B76F5F0D3979E8A83F01D172</key>
+		<key>D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -37,7 +37,7 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>DBC62D3511AECBA2B76F5F0D3979E8A83F01D172</string>
+	<string>D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -60,7 +60,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DBC62D3511AECBA2B76F5F0D3979E8A83F01D172</string>
+			<string>D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Stockd</string>
 		</dict>

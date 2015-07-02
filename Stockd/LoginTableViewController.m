@@ -42,10 +42,69 @@
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    
+    //Nav Bar Color
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
+    //Nav Bar Back Button Color
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self dismissKeyboard];
+-(void)viewWillAppear:(BOOL)animated {
+    
+    //Nav Bar Color
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
+    //Nav Bar Back Button Color
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{    
+    UIEdgeInsets contentInsets;
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        contentInsets = UIEdgeInsetsMake(0.0, 0.0, (40), 0.0);
+    }
+    
+    self.tableView.contentInset = contentInsets;
+    //self.tableView.scrollIndicatorInsets = contentInsets;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    self.tableView.contentInset = UIEdgeInsetsZero;
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
 -(void)dismissKeyboard {
@@ -126,10 +185,9 @@
         
     }
     else if ([password length] == 0) {
-//        [TSMessage showNotificationWithTitle:nil
-//                                    subtitle:@"Please enter your password"
-//                                        type:TSMessageNotificationTypeError];
-        [ProgressHUD showError:@"Please enter a password"];
+        [TSMessage showNotificationWithTitle:nil
+                                    subtitle:@"Please enter your password"
+                                        type:TSMessageNotificationTypeError];
     }
     else {
         [ProgressHUD show:nil];
@@ -138,16 +196,25 @@
                 
                 [ProgressHUD dismiss];
                 if (error.userInfo.count >= 3) {
-                    [TSMessage showNotificationWithTitle:nil
-                                                subtitle:@"something went wrong, try again"
-                                                    type:TSMessageNotificationTypeError];
+                    NSLog(@"Here");
+                    if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"invalid login parameters"]) {
+                        [TSMessage showNotificationWithTitle:nil
+                                                    subtitle:@"invalid username/password combination"
+                                                        type:TSMessageNotificationTypeError];
+                        
+                    }
+                    else {
+                        [TSMessage showNotificationWithTitle:nil
+                                                    subtitle:[error.userInfo objectForKey:@"error"]
+                                                        type:TSMessageNotificationTypeError];
+                    }
                     
                 }
                 else {
-                    [TSMessage showNotificationWithTitle:nil
-                                                subtitle:[error.userInfo objectForKey:@"error"]
-                                                    type:TSMessageNotificationTypeError];
-                }
+                        [TSMessage showNotificationWithTitle:nil
+                                                    subtitle:[error.userInfo objectForKey:@"error"]
+                                                        type:TSMessageNotificationTypeError];
+                    }
             }
             else {
                 [ProgressHUD dismiss];

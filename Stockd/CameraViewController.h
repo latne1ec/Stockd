@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "PKImagePickerViewController.h"
 #import <Parse/Parse.h>
+#import "SlideNavigationController.h"
 
 
-@interface CameraViewController : UIViewController <PKImagePickerViewControllerDelegate>
+
+@interface CameraViewController : UIViewController <PKImagePickerViewControllerDelegate, SlideNavigationControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic,strong) PKImagePickerViewController *imagePicker;
 
@@ -21,6 +23,9 @@
 
 
 -(void)imageSelected:(UIImage *)img;
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu;
 
 
 @end

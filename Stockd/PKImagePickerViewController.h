@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SlideNavigationController.h"
 
 @protocol PKImagePickerViewControllerDelegate <NSObject>
 
@@ -15,10 +16,14 @@
 
 @end
 
-@interface PKImagePickerViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate>
+@interface PKImagePickerViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate, UITextFieldDelegate, SlideNavigationControllerDelegate>
 
 @property(nonatomic,weak) id<PKImagePickerViewControllerDelegate> delegate;
 @property (nonatomic, strong) UITextField *caption;
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu;
+
 
 
 @end

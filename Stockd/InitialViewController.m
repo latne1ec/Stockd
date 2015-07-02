@@ -16,27 +16,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
     CALayer *btn1 = [self.signupWithEmailButton layer];
     [btn1 setMasksToBounds:YES];
     [btn1 setCornerRadius:3.5f];
     [btn1 setBorderWidth:1.5f];
     [btn1 setBorderColor:[UIColor colorWithRed:0.737 green:0.298 blue:0.475 alpha:1].CGColor];
     
-//    CALayer *btn2 = [self.loginButton layer];
-//    [btn2 setMasksToBounds:YES];
-//    [btn2 setCornerRadius:3.5f];
-//    [btn2 setBorderWidth:1.5f];
-//    [btn2 setBorderColor:[UIColor colorWithRed:0.941 green:0.353 blue:0.643 alpha:1].CGColor];
     
-    if (![PFUser currentUser]) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasRanApp"] isEqualToString:@"yes"]) {
+        
+        if ([PFUser currentUser]) {
+            ProfileTableViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Profile"];
+            [self.navigationController pushViewController:pvc animated:NO];
+            //Nav Bar Back Button Color
+            [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        }
         
     }
     else {
-        
-        ProfileTableViewController *pvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Profile"];
-        [self.navigationController pushViewController:pvc animated:NO];
+        TourViewController *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Tour"];
+        [self.navigationController pushViewController:tvc animated:NO];
     }
+    
+    //Nav Bar Color
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
+    //Nav Bar Back Button Color
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
 }
 

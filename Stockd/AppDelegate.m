@@ -36,26 +36,41 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFImageView class];
     
+    LeftMenuViewController *leftMenu = [[LeftMenuViewController alloc] init];
+    
+    [SlideNavigationController sharedInstance].leftMenu = leftMenu;
+    [SlideNavigationController sharedInstance].portraitSlideOffset = 160.0f;
+    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
+    
+    UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(-15, 0, 30, 30)];
+    [button setImage:[UIImage imageNamed:@"stockdMenu"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"stockdMenu"] forState:UIControlStateHighlighted];
+    [button addTarget:[SlideNavigationController sharedInstance] action:@selector(toggleLeftMenu) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [SlideNavigationController sharedInstance].leftBarButtonItem = leftBarButtonItem;
+    
+    
+    
     //Stripe Keys
     [Stripe setDefaultPublishableKey:StripePublishableKey];
     
     //Status Bar
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    //Nav Bar Color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    
-    //Nav Bar Back Button Color
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
-    
-    //Navigation Bar Title Properties
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor clearColor];
-    shadow.shadowOffset = CGSizeMake(0, .0);
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
-                                                          shadow, NSShadowAttributeName,
-                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+//    //Nav Bar Color
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+//    
+//    //Nav Bar Back Button Color
+//    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+//    
+//    //Navigation Bar Title Properties
+//    NSShadow *shadow = [[NSShadow alloc] init];
+//    shadow.shadowColor = [UIColor clearColor];
+//    shadow.shadowOffset = CGSizeMake(0, .0);
+//    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
+//                                                          shadow, NSShadowAttributeName,
+//                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
     
     

@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import "ProfileTableViewController.h"
+#import "TourViewController.h"
 
 
 @interface InitialViewController : UIViewController

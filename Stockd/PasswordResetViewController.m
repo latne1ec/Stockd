@@ -29,6 +29,9 @@
     
     self.emailTextfield.delegate = self;
     
+    [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
+    
     
 }
 - (void)viewDidAppear:(BOOL)animated {
@@ -76,14 +79,26 @@
     
     [PFUser requestPasswordResetForEmailInBackground:email block:^(BOOL succeeded, NSError *error) {
         if (error) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"That email address was not found in our system. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
+            
+            [TSMessage showNotificationWithTitle:@"" subtitle:@"Email address not found" type:TSMessageNotificationTypeError];
+            
         }
         else {
             
-            [self dismissViewControllerAnimated:YES completion:nil];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email Sent" message:@"A password reset link has been sent to your email address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
+            
+            [CATransaction begin];
+            [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+            CATransition *transition = [CATransition animation];
+            [transition setType:kCATransitionFade];
+            [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
+            InitialViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
+            [self.navigationController pushViewController:ivc animated:NO];
+            [CATransaction commit];
+            
+            
+            
         }
         
     }];

@@ -70,15 +70,41 @@
     [btn4 setBorderColor:[UIColor colorWithRed:0.941 green:0.353 blue:0.643 alpha:1].CGColor];
         
 
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+//                                   initWithTarget:self
+//                                   action:@selector(dismissKeyboard)];
+//    //[self.view addGestureRecognizer:tap];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
     
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self dismissKeyboard];
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets;
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        contentInsets = UIEdgeInsetsMake(50.0, 0.0, (keyboardSize.height), 0.0);
+    }
+    
+    self.tableView.contentInset = contentInsets;
+    //self.tableView.scrollIndicatorInsets = contentInsets;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    self.tableView.contentInset = UIEdgeInsetsZero;
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -89,6 +115,8 @@
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
 }
 
 
@@ -305,6 +333,13 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
 //*********************************************
 // Format Phone Number As It's Entered
 
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    NSLog(@"Its working");
+    
+    
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
     if ([self.phoneNumberField isFirstResponder]) {
@@ -407,15 +442,37 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
                 [ProgressHUD dismiss];
                 
                 if (error.userInfo.count >= 3) {
-                    [TSMessage showNotificationWithTitle:nil
-                                                subtitle:@"Something went wrong, try again"
-                                                    type:TSMessageNotificationTypeError];
-                    
-                }
-                else {
+                    NSLog(@"Here");
+                    if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"invalid login parameters"]) {
+                        [TSMessage showNotificationWithTitle:nil
+                                                    subtitle:@"invalid username/password"
+                                                        type:TSMessageNotificationTypeError];
+                        
+                    }
+                    else {
                     [TSMessage showNotificationWithTitle:nil
                                                 subtitle:[error.userInfo objectForKey:@"error"]
                                                     type:TSMessageNotificationTypeError];
+                    }
+                    
+                }
+                else {
+                    NSLog(@"Yo");
+                    if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"invalid login parameters"]) {
+                        [TSMessage showNotificationWithTitle:nil
+                                                    subtitle:@"invalid username/password"
+                                                        type:TSMessageNotificationTypeError];
+                        
+                    }
+                    else {
+                        [TSMessage showNotificationWithTitle:nil
+                                                    subtitle:[error.userInfo objectForKey:@"error"]
+                                                        type:TSMessageNotificationTypeError];
+                    }
+
+//                    [TSMessage showNotificationWithTitle:nil
+//                                                subtitle:[error.userInfo objectForKey:@"error"]
+//                                                    type:TSMessageNotificationTypeError];
                 }
             }
             else {

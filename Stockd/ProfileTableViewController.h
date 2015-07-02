@@ -14,9 +14,11 @@
 #import "PaymentTableViewController.h"
 #import "PhoneTableViewController.h"
 #import "EmailTableViewController.h"
+#import "SlideNavigationController.h"
 
 
-@interface ProfileTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@interface ProfileTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SlideNavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *profilePicCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *addressCell;
@@ -32,6 +34,11 @@
 - (IBAction)tappedProfilePic:(id)sender;
 
 - (IBAction)showActionSheet:(id)sender;
+
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu;
+
+
 
 
 

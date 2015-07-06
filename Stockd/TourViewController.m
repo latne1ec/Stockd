@@ -47,9 +47,11 @@ alpha:1.0]
     _pagedTour.delegate = self;
     _pagedTour.bounces = YES;
     _pagedTour.pagingEnabled = YES;
+    _pagedTour.contentSize = CGSizeMake(_pagedTour.contentSize.width,_pagedTour.frame.size.height);
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:_pagedTour];
     
-    UIFont *font = [UIFont fontWithName:@"BELLABOO" size:48];
+    UIFont *font = [UIFont fontWithName:@"BELLABOO" size:26];
     NSString *message1 = @"SNAP A PHOTO OF WHAT YOU WANT STOCKED";
     NSString *message2 = @"CHOOSE WHETHER YOU WANT TO FILL IT FULL OR HALF";
     NSString *message3 = @"PICK FROM YUMMY PRESELECTED FOODS";
@@ -188,16 +190,19 @@ alpha:1.0]
     _pageControl.pageIndicatorTintColor = [UIColor colorWithWhite:0 alpha:0.2f];
     _pageControl.currentPageIndicatorTintColor = [UIColor colorWithWhite:0 alpha:0.5f];
     [self.view addSubview:_pageControl];
+    
+    
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
-    return YES;
-}
 
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
-    return NO;
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    [self.navigationController.navigationBar setHidden:NO];
+
+    
 }
 
 
@@ -210,6 +215,19 @@ alpha:1.0]
 -(IBAction)getStarted:(id)sender
 {
     NSLog(@"GET STARTED!");
+    
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    CATransition *transition = [CATransition animation];
+    [transition setType:kCATransitionFade];
+    [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
+    
+    InitialViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
+    [self.navigationController pushViewController:ivc animated:NO];
+    [CATransaction commit];
+
+    
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)_scrollView

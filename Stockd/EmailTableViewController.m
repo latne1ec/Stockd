@@ -14,7 +14,7 @@
 
 @implementation EmailTableViewController
 
-@synthesize firstCell, emailCell, emailTextfield;
+@synthesize firstCell, emailCell, emailTextfield, parent;
 
 
 - (void)viewDidLoad {
@@ -103,7 +103,7 @@
     
     [ProgressHUD show:nil];
     NSString *email = self.emailTextfield.text;
-    if ([email length ] < 10) {
+    if (email == nil) {
         
         [ProgressHUD showError:@"Please enter a valid email"];
     }
@@ -120,8 +120,8 @@
             }
             else {
                 
-                [self.tableView reloadData];
-                [ProgressHUD showSuccess:@"Updated Email"];
+                [ProgressHUD dismiss];
+                [parent emailMessage];
                 [self dismissViewControllerAnimated:YES completion:^{
                     
                 }];

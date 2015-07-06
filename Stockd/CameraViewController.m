@@ -7,6 +7,7 @@
 //
 
 #import "CameraViewController.h"
+#import "InitialViewController.h"
 
 @interface CameraViewController () {
     SCRecorder *_recorder;
@@ -21,6 +22,8 @@
 
 @implementation CameraViewController
 
+@synthesize caption;
+
 -(BOOL)prefersStatusBarHidden {
     
     return YES;
@@ -29,6 +32,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([PFUser currentUser]) {
+        
+    }
+    else {
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+        
+        InitialViewController *tvc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
+        [self.navigationController pushViewController:tvc animated:NO];
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+        
+    }
     
     
     //Photo Views
@@ -60,11 +77,12 @@
     self.camTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(capturePhoto:)];
     self.camTap.numberOfTapsRequired = 1;
     
-    UIView *bottomViewTwo = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-175, CGRectGetWidth(self.view.frame), 150)];
-    [bottomViewTwo setBackgroundColor:[UIColor colorWithRed:0.976 green:0.365 blue:0.29 alpha:1]];
+    UIView *bottomViewTwo = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-190, CGRectGetWidth(self.view.frame), 150)];
+    //[bottomViewTwo setBackgroundColor:[UIColor colorWithRed:0.976 green:0.365 blue:0.29 alpha:1]];
+    bottomViewTwo.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"initialBkg"]];
     [self.previewView.layer addSublayer:bottomViewTwo.layer];
     
-    UIButton *camerabutton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-150, 100, 100)];
+    UIButton *camerabutton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-175, 100, 100)];
     [camerabutton setImage:[UIImage imageNamed:@"snapPhoto"] forState:UIControlStateNormal];
     [camerabutton addTarget:self action:@selector(capturePhoto:) forControlEvents:UIControlEventTouchUpInside];
     [camerabutton setTintColor:[UIColor blueColor]];
@@ -77,7 +95,7 @@
     [self.flash setImage:[UIImage imageNamed:@"flashSelected"] forState:UIControlStateSelected];
     [self.view addSubview:self.flash];
     
-    UIButton *fillButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-150, 100, 100)];
+    UIButton *fillButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-175, 100, 100)];
     [fillButton setImage:[UIImage imageNamed:@"fillButton"] forState:UIControlStateNormal];
     [fillButton addTarget:self action:@selector(uploadPhoto) forControlEvents:UIControlEventTouchUpInside];
     [fillButton.layer setCornerRadius:20.0];
@@ -88,52 +106,81 @@
     //[topView addSubview:cancelPhoto];
 
     
-    self.cancelPhoto = [[UIButton alloc]initWithFrame:CGRectMake(9, -32.5, 29, 29)];
-    [self.cancelPhoto setImage:[UIImage imageNamed:@"cancelPhoto"] forState:UIControlStateNormal];
+    self.cancelPhoto = [[UIButton alloc]initWithFrame:CGRectMake(44, 50, 50, 50)];
+    //[self.cancelPhoto setImage:[UIImage imageNamed:@"cancelPhoto"] forState:UIControlStateNormal];
+    [self.cancelPhoto setTitle:@"retake" forState:UIControlStateNormal];
     [self.cancelPhoto addTarget:self action:@selector(cancelSelectedPhoto:) forControlEvents:UIControlEventTouchUpInside];
-    [self.imageSelectedView addSubview:self.cancelPhoto];
+    //[self.imageSelectedView addSubview:self.cancelPhoto];
     
     UITapGestureRecognizer *cancel = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelSelectedPhoto:)];
     [topView addGestureRecognizer:cancel];
     
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-175, CGRectGetWidth(self.view.frame), 150)];
-    [bottomView setBackgroundColor:[UIColor colorWithRed:0.976 green:0.365 blue:0.29 alpha:1]];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.frame)-190, CGRectGetWidth(self.view.frame), 150)];
+    //[bottomView setBackgroundColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    bottomView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"initialBkg"]];
+    [bottomView addSubview:self.cancelPhoto];
     [self.imageSelectedView addSubview:bottomView];
     [self.imageSelectedView addSubview:fillButton];
-
-
-}
-
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-    NSLog(@"got here");
-    CGFloat radius = 100.0;
-    CGRect frame = CGRectMake(-radius, -radius,
-                              self.view.frame.size.width + radius,
-                              self.view.frame.size.height + radius);
     
-    if (CGRectContainsPoint(frame, point)) {
-        return self.view;
-    }
-    return nil;
+    UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(captionDrag:)];
+    [self.capturedImageView addGestureRecognizer:drag];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appClosed) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
+    
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                                     shadow, NSShadowAttributeName,
+                                                                     [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
+    self.title = @"Stockd";
+    
 }
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
-{
+-(void)appClosed {
     
-    NSLog(@"got here");
-    if (CGRectContainsPoint(self.view.bounds, point) ||
-        CGRectContainsPoint(self.cancelPhoto.frame, point))
-    {
-        return YES;
-    }
-    return NO;
+     [[SlideNavigationController sharedInstance] setEnableSwipeGesture:YES];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [_recorder startRunningSession];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"Disappear");
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:UIApplicationDidEnterBackgroundNotification];
+    [[SlideNavigationController sharedInstance] setEnableSwipeGesture:YES];
+    
+      
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+        _recorder = nil;
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+        });
+    });
 }
 
 - (void) prepareCamera {
@@ -145,8 +192,6 @@
     }
 }
 
-
-
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
 {
     return YES;
@@ -157,26 +202,87 @@
     return NO;
 }
 
-
--(void)viewWillAppear:(BOOL)animated {
+- (void)imageViewTapped:(UITapGestureRecognizer *)recognizer {
     
+    
+    NSLog(@"Tap tap");
+    caption.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    caption.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    if([caption isFirstResponder]){
+        [caption resignFirstResponder];
+        caption.alpha = ([caption.text isEqualToString:@""]) ? 0 : caption.alpha;
+        
+    } else {
+        if (caption.alpha == 1) {
+        }
+        else {
+            [self initCaption];
+            caption.alpha = 1;
+        }
+    }
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+-(void)showFullMeter {
     
-    self.selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+    [self imageViewTapped:tap];
     
+}
+- (void) initCaption{
+    
+    caption.alpha = ([caption.text isEqualToString:@""]) ? 0 : caption.alpha;
+    
+    // Caption
+    caption = [[UITextField alloc] initWithFrame:CGRectMake(0,self.capturedImageView.frame.size.height/2,self.capturedImageView.frame.size.width,34)];
+    caption.backgroundColor = [[UIColor colorWithRed:0.318 green:0.89 blue:0.761 alpha:1] colorWithAlphaComponent:1.00];
+    caption.textAlignment = NSTextAlignmentCenter;
+    caption.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    caption.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    caption.textColor = [UIColor whiteColor];
+    caption.alpha = 0;
+    caption.tintColor = [UIColor whiteColor];
+    caption.delegate = self;
+    caption.font = [UIFont fontWithName:@"BELLABOO-Regular" size:18];
+    caption.text = @"Half";
+    [caption setEnabled:NO];
+    caption.allowsEditingTextAttributes = NO;
+    caption.layer.cornerRadius = 15;
+    
+    [self.capturedImageView addSubview:caption];
 }
 
--(void)imageSelected:(UIImage *)img {
+- (void) captionDrag: (UIGestureRecognizer*)gestureRecognizer{
     
-    self.selectedImage = img;
-    NSLog(@"Image: %@", img);
+    CGPoint translation = [gestureRecognizer locationInView:self.view];
+    
+    float yPosition = translation.y;
+    
+    float upperLimit = 16;
+    float lowerLimit = self.view.frame.size.height-146-caption.frame.size.height/2;
+    
+    if(yPosition<upperLimit){
+        yPosition = upperLimit;
+    } else if(yPosition>lowerLimit){
+        yPosition = lowerLimit;
+    }
+    
+    if(yPosition < caption.frame.size.height/2){
+        caption.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2,  caption.frame.size.height/2);
+    } else if(self.capturedImageView.frame.size.height < yPosition + caption.frame.size.height/2){
+        caption.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2,  self.capturedImageView.frame.size.height - caption.frame.size.height/2);
+    } else {
+        caption.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2,  yPosition);
+
+        if (yPosition < 205) {
+            caption.text = @"Full";
+        }
+        if (yPosition > 205) {
+            caption.text = @"Half";
+        }
+    }
 }
 
--(void)imageSelectionCancelled {
-    
-}
+
 
 - (IBAction)switchFlash:(id)sender {
     NSString *flashModeString = nil;
@@ -227,17 +333,16 @@
     [_recorder capturePhoto:^(NSError *error, UIImage *image) {
         if (image != nil) {
             
+            [self showFullMeter];
         
             NSLog(@"Got Pic: %@", image);
             self.capturedImageView.image = image;
             [self.view addSubview:self.imageSelectedView];
             
-            self.navigationController.navigationBar.hidden = YES;
+            self.navigationController.navigationBar.userInteractionEnabled = YES;
             
-            //[[SlideNavigationController sharedInstance] setEnableSwipeGesture:NO];
-            
-            }
-        }];
+        }
+    }];
 }
 
 -(IBAction)cancelSelectedPhoto:(id)sender {
@@ -247,12 +352,14 @@
     
     self.navigationController.navigationBar.hidden = NO;
     
+    [[SlideNavigationController sharedInstance] setEnableSwipeGesture:YES];
+    
+    
 }
 
 -(void)uploadPhoto {
 
     NSLog(@"upload");
 }
-
 
 @end

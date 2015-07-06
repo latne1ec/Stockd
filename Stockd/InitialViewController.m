@@ -16,11 +16,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"Load");
+    
     CALayer *btn1 = [self.signupWithEmailButton layer];
     [btn1 setMasksToBounds:YES];
     [btn1 setCornerRadius:3.5f];
     [btn1 setBorderWidth:1.5f];
-    [btn1 setBorderColor:[UIColor colorWithRed:0.737 green:0.298 blue:0.475 alpha:1].CGColor];
+    [btn1 setBorderColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1].CGColor];
         
     
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"hasRanApp"] isEqualToString:@"yes"]) {
@@ -43,31 +46,16 @@
         [self.navigationController pushViewController:tvc animated:NO];
     }
     
-    //Nav Bar Color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    
-    //Nav Bar Back Button Color
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
-    
-    //Navigation Bar Title Properties
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor clearColor];
-    shadow.shadowOffset = CGSizeMake(0, .0);
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
-                                                          shadow, NSShadowAttributeName,
-                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
-    
-    //Nav Bar Back Button Color
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whiteBkg"]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
     
     
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
-//                                                  forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = NO;
+    self.stockdLabel.textColor = [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1];
+    
+    
+    
     
 }
 
@@ -78,27 +66,21 @@
     
     [self.navigationController setNavigationBarHidden: YES animated:YES];
     
-    //Nav Bar Back Button Color
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-
-
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     
-    
-    //Nav Bar Color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    //[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
-    
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor whiteColor]];
-    
-    [[UINavigationBar appearance] setTranslucent:NO];
-    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
+                                                                     shadow, NSShadowAttributeName,
+                                                                     [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
 }
-
 
 
 

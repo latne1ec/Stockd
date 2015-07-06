@@ -110,7 +110,13 @@
 		20D52D301B45B86C00A1C60B /* SCSwipeableFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D191B45B86C00A1C60B /* SCSwipeableFilterView.m */; };
 		20D52D311B45B86C00A1C60B /* SCVideoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D1B1B45B86C00A1C60B /* SCVideoConfiguration.m */; };
 		20D52D321B45B86C00A1C60B /* SCVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D1D1B45B86C00A1C60B /* SCVideoPlayerView.m */; };
-		20D52D361B45D19600A1C60B /* PhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D351B45D19600A1C60B /* PhotoPreviewViewController.m */; };
+		20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D3D1B46208000A1C60B /* HelpTableViewController.m */; };
+		20E2EC0A1B4727BD002E317A /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC051B4727BD002E317A /* SVIndefiniteAnimatedView.m */; };
+		20E2EC0B1B4727BD002E317A /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20E2EC071B4727BD002E317A /* SVProgressHUD.bundle */; };
+		20E2EC0C1B4727BD002E317A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC091B4727BD002E317A /* SVProgressHUD.m */; };
+		20E2EC121B485095002E317A /* SVBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC0F1B485095002E317A /* SVBlurView.m */; };
+		20E2EC131B485095002E317A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC111B485095002E317A /* UIImage+ImageEffects.m */; };
+		20E2EC171B486107002E317A /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC161B486107002E317A /* FXBlurView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -283,8 +289,20 @@
 		20D52D1B1B45B86C00A1C60B /* SCVideoConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCVideoConfiguration.m; sourceTree = "<group>"; };
 		20D52D1C1B45B86C00A1C60B /* SCVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCVideoPlayerView.h; sourceTree = "<group>"; };
 		20D52D1D1B45B86C00A1C60B /* SCVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCVideoPlayerView.m; sourceTree = "<group>"; };
-		20D52D341B45D19600A1C60B /* PhotoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPreviewViewController.h; sourceTree = "<group>"; };
-		20D52D351B45D19600A1C60B /* PhotoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPreviewViewController.m; sourceTree = "<group>"; };
+		20D52D3C1B46208000A1C60B /* HelpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpTableViewController.h; sourceTree = "<group>"; };
+		20D52D3D1B46208000A1C60B /* HelpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpTableViewController.m; sourceTree = "<group>"; };
+		20E2EC041B4727BD002E317A /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		20E2EC051B4727BD002E317A /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		20E2EC061B4727BD002E317A /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		20E2EC071B4727BD002E317A /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		20E2EC081B4727BD002E317A /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		20E2EC091B4727BD002E317A /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		20E2EC0E1B485095002E317A /* SVBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVBlurView.h; sourceTree = "<group>"; };
+		20E2EC0F1B485095002E317A /* SVBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVBlurView.m; sourceTree = "<group>"; };
+		20E2EC101B485095002E317A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		20E2EC111B485095002E317A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		20E2EC151B486107002E317A /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		20E2EC161B486107002E317A /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -354,12 +372,12 @@
 				201186271B41C16200A59D55 /* AppDelegate.h */,
 				201186281B41C16200A59D55 /* AppDelegate.m */,
 				2011862D1B41C16200A59D55 /* Main.storyboard */,
-				20D52CED1B45A7B200A1C60B /* LeftMenuViewController.h */,
-				20D52CEE1B45A7B200A1C60B /* LeftMenuViewController.m */,
-				2037DDED1B442BDE0076B0F2 /* Camera */,
+				2067F8AD1B4A05A4001F5478 /* Menu */,
 				20D52D371B45F7D300A1C60B /* Tour */,
+				2037DDED1B442BDE0076B0F2 /* Camera */,
 				201186491B41EC8100A59D55 /* Login/Signup */,
 				2037DDCE1B42DF9A0076B0F2 /* Profile */,
+				20D52D3B1B46201000A1C60B /* Help */,
 				201186301B41C16200A59D55 /* Images.xcassets */,
 				201186321B41C16200A59D55 /* LaunchScreen.xib */,
 				201186891B42021900A59D55 /* Images */,
@@ -444,6 +462,9 @@
 		201186701B41F07D00A59D55 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				20E2EC181B48610B002E317A /* FXBlurView */,
+				20E2EC141B48509A002E317A /* SVBlurView */,
+				20E2EC0D1B4727C3002E317A /* SVProgressHUD */,
 				20D52D331B45B87400A1C60B /* SCRecorder */,
 				20D52CD31B45A7A700A1C60B /* SlideMenu */,
 				2037DDEE1B442CCA0076B0F2 /* Camera */,
@@ -538,8 +559,6 @@
 			children = (
 				2037DDEA1B442BD90076B0F2 /* CameraViewController.h */,
 				2037DDEB1B442BD90076B0F2 /* CameraViewController.m */,
-				20D52D341B45D19600A1C60B /* PhotoPreviewViewController.h */,
-				20D52D351B45D19600A1C60B /* PhotoPreviewViewController.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -552,6 +571,15 @@
 				2037DDF11B442CE20076B0F2 /* PKImagePickerViewController.m */,
 			);
 			name = Camera;
+			sourceTree = "<group>";
+		};
+		2067F8AD1B4A05A4001F5478 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				20D52CED1B45A7B200A1C60B /* LeftMenuViewController.h */,
+				20D52CEE1B45A7B200A1C60B /* LeftMenuViewController.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		20D52CD31B45A7A700A1C60B /* SlideMenu */ = {
@@ -655,6 +683,48 @@
 				20D52CC01B44D4E300A1C60B /* TourViewController.m */,
 			);
 			name = Tour;
+			sourceTree = "<group>";
+		};
+		20D52D3B1B46201000A1C60B /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				20D52D3C1B46208000A1C60B /* HelpTableViewController.h */,
+				20D52D3D1B46208000A1C60B /* HelpTableViewController.m */,
+			);
+			name = Help;
+			sourceTree = "<group>";
+		};
+		20E2EC0D1B4727C3002E317A /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				20E2EC041B4727BD002E317A /* SVIndefiniteAnimatedView.h */,
+				20E2EC051B4727BD002E317A /* SVIndefiniteAnimatedView.m */,
+				20E2EC061B4727BD002E317A /* SVProgressHUD-Prefix.pch */,
+				20E2EC071B4727BD002E317A /* SVProgressHUD.bundle */,
+				20E2EC081B4727BD002E317A /* SVProgressHUD.h */,
+				20E2EC091B4727BD002E317A /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		20E2EC141B48509A002E317A /* SVBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				20E2EC0E1B485095002E317A /* SVBlurView.h */,
+				20E2EC0F1B485095002E317A /* SVBlurView.m */,
+				20E2EC101B485095002E317A /* UIImage+ImageEffects.h */,
+				20E2EC111B485095002E317A /* UIImage+ImageEffects.m */,
+			);
+			name = SVBlurView;
+			sourceTree = "<group>";
+		};
+		20E2EC181B48610B002E317A /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				20E2EC151B486107002E317A /* FXBlurView.h */,
+				20E2EC161B486107002E317A /* FXBlurView.m */,
+			);
+			name = FXBlurView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -764,6 +834,7 @@
 				2011868B1B42022600A59D55 /* facebookLogin@2x.png in Resources */,
 				2037DDCA1B424E630076B0F2 /* addPhotoPink@2x.png in Resources */,
 				201186311B41C16200A59D55 /* Images.xcassets in Resources */,
+				20E2EC0B1B4727BD002E317A /* SVProgressHUD.bundle in Resources */,
 				20D52CEA1B45A7A700A1C60B /* menu-button.png in Resources */,
 				2037DDE91B4355A00076B0F2 /* YapHolderTwo@2x.png in Resources */,
 				2037DDE51B430E740076B0F2 /* stockdMenu@2x.png in Resources */,
@@ -788,11 +859,12 @@
 				2011867F1B41F12200A59D55 /* TSMessage.m in Sources */,
 				201186921B42119E00A59D55 /* SignupTableViewController.m in Sources */,
 				20D52D221B45B86C00A1C60B /* SCAudioTools.m in Sources */,
-				20D52D361B45D19600A1C60B /* PhotoPreviewViewController.m in Sources */,
 				20D52D321B45B86C00A1C60B /* SCVideoPlayerView.m in Sources */,
 				201186841B41F13200A59D55 /* HexColor.m in Sources */,
+				20E2EC0C1B4727BD002E317A /* SVProgressHUD.m in Sources */,
 				20D52CE91B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				20D52CE71B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				20E2EC131B485095002E317A /* UIImage+ImageEffects.m in Sources */,
 				2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */,
 				20D52CC41B44D4E300A1C60B /* TourViewController.m in Sources */,
 				201186291B41C16200A59D55 /* AppDelegate.m in Sources */,
@@ -801,15 +873,18 @@
 				20D52D1F1B45B86C00A1C60B /* SCArchivedVector.m in Sources */,
 				2037DDD71B42F34D0076B0F2 /* PhoneTableViewController.m in Sources */,
 				20D52D2E1B45B86C00A1C60B /* SCRecordSession.m in Sources */,
+				20E2EC121B485095002E317A /* SVBlurView.m in Sources */,
 				2011867E1B41F12200A59D55 /* TSBlurView.m in Sources */,
 				20D52D1E1B45B86C00A1C60B /* CIImageRendererUtils.m in Sources */,
 				2011864C1B41EC9300A59D55 /* LoginTableViewController.m in Sources */,
 				201186971B421F2900A59D55 /* JGActionSheet.m in Sources */,
 				20D52D311B45B86C00A1C60B /* SCVideoConfiguration.m in Sources */,
 				20D52D2D1B45B86C00A1C60B /* SCRecorderTools.m in Sources */,
+				20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */,
 				20D52D2C1B45B86C00A1C60B /* SCRecorderFocusView.m in Sources */,
 				201186751B41F08F00A59D55 /* ProgressHUD.m in Sources */,
 				2037DDD11B42E5950076B0F2 /* AddressTableViewController.m in Sources */,
+				20E2EC0A1B4727BD002E317A /* SVIndefiniteAnimatedView.m in Sources */,
 				2037DDD41B42EDAF0076B0F2 /* PaymentTableViewController.m in Sources */,
 				20D52D261B45B86C00A1C60B /* SCImageView.m in Sources */,
 				20D52D281B45B86C00A1C60B /* SCPhotoConfiguration.m in Sources */,
@@ -834,6 +909,7 @@
 				20D52D301B45B86C00A1C60B /* SCSwipeableFilterView.m in Sources */,
 				20D52D251B45B86C00A1C60B /* SCFilterSelectorView.m in Sources */,
 				2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */,
+				20E2EC171B486107002E317A /* FXBlurView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

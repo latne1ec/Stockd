@@ -11,9 +11,12 @@
 #import "ProgressHUD.h"
 #import "TSMessage.h"
 
-@interface PhoneTableViewController : UITableViewController <UITextFieldDelegate>
+@interface PhoneTableViewController : UITableViewController <UITextFieldDelegate, TSMessageViewProtocol>
+{
+    id parent;
+}
 
-
+@property(nonatomic,strong) id parent;
 @property (weak, nonatomic) IBOutlet UITableViewCell *firstCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *mobileNumberCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *houseNumberCell;

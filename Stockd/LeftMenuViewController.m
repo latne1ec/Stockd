@@ -38,10 +38,11 @@
     
     self.view.backgroundColor = UIColorFromRGB(0x4FD0FF);
 	
-	
     UIScrollView *sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-[SlideNavigationController sharedInstance].portraitSlideOffset, self.view.bounds.size.height)];
     
     sc.backgroundColor = [UIColor clearColor];
+    
+    sc.scrollEnabled = NO;
     
     UIFont *font = [UIFont fontWithName:@"BELLABOO-Regular" size:24];
     
@@ -52,12 +53,12 @@
               @{@"text":@"Snacks",@"viewC":@"Profile"},
               @{@"text":@"21+",@"viewC":@"Profile"},
               @{@"text":@"Profile",@"viewC":@"Profile"},
-               @{@"text":@"Help",@"viewC":@"Tour"}
+               @{@"text":@"Help",@"viewC":@"Help"}
               ];
     
     float h = 60;
     UILabel *menuLabel;
-    float dif = 100;
+    float dif = 40;
     for(int i=0; i<[_data count]; i++){
         menuLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, dif+(i*h), sc.frame.size.width-30, h)];
         menuLabel.text = _data[i][@"text"];
@@ -86,19 +87,12 @@
     
 }
 
--(IBAction)changeView:(id)sender
-{
+-(IBAction)changeView:(id)sender {
  
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                              bundle: nil];
-    
     int tag = [sender tag]*-1;
-    
     UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier: _data[tag][@"viewC"]];
-    
-    //NSLog(@"La data: %@",_data[tag][@"viewC"]);
-   
-    
     [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc withSlideOutAnimation:NO andCompletion:nil];
     
 }

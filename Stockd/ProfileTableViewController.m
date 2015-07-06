@@ -32,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"yo");
+    
     if ([PFUser currentUser]) {
         
     }
@@ -78,12 +80,16 @@
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor clearColor];
     shadow.shadowOffset = CGSizeMake(0, .0);
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                          shadow, NSShadowAttributeName,
-                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                            [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                                                            shadow, NSShadowAttributeName,
+                                                                                            [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
     
     self.navigationController.navigationItem.hidesBackButton = YES;
+    
+    [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
     
 
     
@@ -104,9 +110,11 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    
     self.navigationController.navigationItem.hidesBackButton = YES;
-
+    
+    [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -116,6 +124,8 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"whiteBkg"] forBarMetrics:UIBarMetricsDefault];
     //[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    
+    [_currentAnchoredActionSheet dismissAnimated:YES];
     
 }
 
@@ -151,6 +161,9 @@
     if (indexPath.row == 1) {
         
         AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
+        
+        destViewController.parent = self;
+        
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
@@ -166,6 +179,7 @@
     if (indexPath.row == 2) {
         
         PaymentTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Payment"];
+        destViewController.parent = self;
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
@@ -181,6 +195,7 @@
     if (indexPath.row == 3) {
         
         PhoneTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Phone"];
+        destViewController.parent = self;
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
@@ -196,6 +211,7 @@
     if (indexPath.row == 4) {
         
         EmailTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Email"];
+        destViewController.parent = self;
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
@@ -266,6 +282,8 @@
 
 - (IBAction)showActionSheet:(UIView *)anchor {
     
+    [[SlideNavigationController sharedInstance] setEnableSwipeGesture:NO];
+    
     if (!_simple) {
         
         _simple = [JGActionSheet actionSheetWithSections:@[[JGActionSheetSection sectionWithTitle:@"Add Profile Picture" message:@"" buttonTitles:@[@"Take Photo", @"Choose From Library"] buttonStyle:JGActionSheetButtonStyleDefault]]];
@@ -274,11 +292,15 @@
         [_simple setOutsidePressBlock:^(JGActionSheet *sheet) {
             [sheet dismissAnimated:YES];
             
+            [[SlideNavigationController sharedInstance] setEnableSwipeGesture:YES];
+            
         }];
         
         __unsafe_unretained typeof(self) weakSelf = self;
         
         [_simple setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
+            
+            [[SlideNavigationController sharedInstance] setEnableSwipeGesture:YES];
             
             if (indexPath.row == 0) {
                 
@@ -336,6 +358,7 @@
 //*********************************************
 
 
+
 //*********************************************
 // User Finished Taking Photo
 
@@ -371,6 +394,14 @@
 //*********************************************
 
 
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+   
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+    [[SlideNavigationController sharedInstance] setEnableSwipeGesture:YES];
+}
 
 
 
@@ -390,26 +421,83 @@ UIImage* ResizeImage2(UIImage *image, CGFloat width, CGFloat height) {
 
 
 
-
-
-
-
 - (IBAction)logoutButtonTapped:(id)sender {
+
     
     [CATransaction begin];
+    InitialViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionFade];
     [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
+    //navigationController.navigationBar.hidden = YES;
     [PFUser logOut];
-    //Nav Bar Color
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"whiteBkg"] forBarMetrics:UIBarMetricsDefault];
-
-    InitialViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
-    [self.navigationController pushViewController:ivc animated:NO];
+    [self.navigationController pushViewController:destViewController animated:NO];
     [CATransaction commit];
 
 }
 - (IBAction)tappedProfilePic:(id)sender {
 }
+
+-(void)addressMessage {
+    
+    [TSMessage showNotificationInViewController:self.navigationController
+                                          title:@"Success"
+                                       subtitle:@"Saved Address Info"
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:^{}
+                                     atPosition:TSMessageNotificationPositionNavBarOverlay
+                           canBeDismissedByUser:YES];
+}
+
+-(void)paymentMessage {
+    
+    [TSMessage showNotificationInViewController:self.navigationController
+                                          title:@"Success"
+                                       subtitle:@"Saved Payment Info"
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:^{}
+                                     atPosition:TSMessageNotificationPositionNavBarOverlay
+                           canBeDismissedByUser:YES];
+}
+
+-(void)phoneMessage {
+    
+    [TSMessage showNotificationInViewController:self.navigationController
+                                          title:@"Success"
+                                       subtitle:@"Saved Phone Info"
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:^{}
+                                     atPosition:TSMessageNotificationPositionNavBarOverlay
+                           canBeDismissedByUser:YES];
+}
+
+-(void)emailMessage {
+    
+    [TSMessage showNotificationInViewController:self.navigationController
+                                          title:@"Success"
+                                       subtitle:@"Saved Email Info"
+                                          image:nil
+                                           type:TSMessageNotificationTypeSuccess
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:^{}
+                                     atPosition:TSMessageNotificationPositionNavBarOverlay
+                           canBeDismissedByUser:YES];
+}
+
+
 @end

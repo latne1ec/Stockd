@@ -27,6 +27,8 @@
 
 #import "SlideNavigationController.h"
 #import "SlideNavigationContorllerAnimator.h"
+#import "SVBlurView.h"
+#import "FXBlurView.h"
 
 typedef enum {
     PopTypeAll,
@@ -35,7 +37,13 @@ typedef enum {
 
 @interface SlideNavigationController()
 
-@property(nonatomic,strong)UIToolbar* blur;
+//@property(nonatomic,strong)UIToolbar* blur;
+//@property(nonatomic,strong)SVBlurView* blur;
+@property(nonatomic,strong)UIVisualEffectView* blur;
+
+@property CGFloat menuLocation;
+
+
 
 @end
 
@@ -45,6 +53,7 @@ typedef enum {
 @property (nonatomic, assign) CGPoint draggingPoint;
 @property (nonatomic, assign) Menu lastRevealedMenu;
 @property (nonatomic, assign) BOOL menuNeedsLayout;
+@property (nonatomic, assign) BOOL userSwiped;
 @end
 
 @implementation SlideNavigationController
@@ -53,12 +62,12 @@ NSString * const SlideNavigationControllerDidOpen = @"SlideNavigationControllerD
 NSString * const SlideNavigationControllerDidClose = @"SlideNavigationControllerDidClose";
 NSString  *const SlideNavigationControllerDidReveal = @"SlideNavigationControllerDidReveal";
 
-#define MENU_SLIDE_ANIMATION_DURATION .3
+#define MENU_SLIDE_ANIMATION_DURATION .08
 #define MENU_SLIDE_ANIMATION_OPTION UIViewAnimationOptionCurveEaseOut
-#define MENU_QUICK_SLIDE_ANIMATION_DURATION .18
+#define MENU_QUICK_SLIDE_ANIMATION_DURATION .08
 #define MENU_IMAGE @"menu-button"
 #define MENU_SHADOW_RADIUS 10
-#define MENU_SHADOW_OPACITY 1
+#define MENU_SHADOW_OPACITY 0
 #define MENU_DEFAULT_SLIDE_OFFSET 60
 #define MENU_FAST_VELOCITY_FOR_SWIPE_FOLLOW_DIRECTION 1200
 #define STATUS_BAR_HEIGHT 20
@@ -184,26 +193,26 @@ static SlideNavigationController *singletonInstance;
 
 - (void)bounceMenu:(Menu)menu withCompletion:(void (^)())completion
 {
-    [self prepareMenuForReveal:menu];
+    //[self prepareMenuForReveal:menu];
     NSInteger movementDirection = (menu == MenuLeft) ? 1 : -1;
     
-    [UIView animateWithDuration:.16 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        [self moveHorizontallyToLocation:30*movementDirection];
+    [UIView animateWithDuration:.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        //[self moveHorizontallyToLocation:0*movementDirection];
     } completion:^(BOOL finished){
-        [UIView animateWithDuration:.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-            [self moveHorizontallyToLocation:0];
+        [UIView animateWithDuration:.0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            //[self moveHorizontallyToLocation:0];
         } completion:^(BOOL finished){
-            [UIView animateWithDuration:.12 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                [self moveHorizontallyToLocation:16*movementDirection];
+            [UIView animateWithDuration:.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                //[self moveHorizontallyToLocation:0*movementDirection];
             } completion:^(BOOL finished){
-                [UIView animateWithDuration:.08 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                    [self moveHorizontallyToLocation:0];
+                [UIView animateWithDuration:.0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                    //[self moveHorizontallyToLocation:0];
                 } completion:^(BOOL finished){
-                    [UIView animateWithDuration:.08 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                        [self moveHorizontallyToLocation:6*movementDirection];
+                    [UIView animateWithDuration:.0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                        //[self moveHorizontallyToLocation:0*movementDirection];
                     } completion:^(BOOL finished){
-                        [UIView animateWithDuration:.06 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                            [self moveHorizontallyToLocation:0];
+                        [UIView animateWithDuration:.0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                            //[self moveHorizontallyToLocation:0];
                         } completion:^(BOOL finished){
                             if (completion)
                                 completion();
@@ -308,7 +317,7 @@ static SlideNavigationController *singletonInstance;
 
 - (void)closeMenuWithCompletion:(void (^)())completion
 {
-    [self mustBlur:NO];
+    //[self mustBlur:NO];
     [self closeMenuWithDuration:self.menuRevealAnimationDuration andCompletion:completion];
 }
 
@@ -320,26 +329,88 @@ static SlideNavigationController *singletonInstance;
 -(void)mustBlur:(BOOL)blur
 {
     
-    if(_blur==nil){
-        _blur = [[UIToolbar alloc] initWithFrame:self.view.bounds];
-        _blur.barStyle = UIBarStyleDefault;
+//    if(_blur==nil){
+//        _blur = [[UIToolbar alloc] initWithFrame:self.view.bounds];
+//        _blur.barStyle = UIBarStyleDefault;
+//    }
+//    
+//    if(blur){
+//        _blur.hidden = NO;
+//    } else {
+//        _blur.hidden = YES;
+//    }
+//
+//    [self.navigationBar addSubview:_blur];
+    
+    //*******************************************************
+    
+    if (_blur == nil) {
+        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _blur.frame = self.view.bounds;
     }
     
-    if(blur){
+    if (blur) {
+        
         _blur.hidden = NO;
+        
+//        if (self.menuLocation >=200) {
+//            
+//            [self blurNoAnimation];
+//            NSLog(@"No Animation");
+//        }
+//        else {
+        [self blurView];
+        //NSLog(@"Yes");
+        //}
+        
     } else {
+        NSLog(@"No");
         _blur.hidden = YES;
     }
     
-    [self.navigationBar addSubview:_blur];
+    
+    
+    
+    //[self.view addSubview:_blur];
+    
     
 }
+
+-(void)blurView {
+    
+    [UIView animateWithDuration:0.15f animations:^{
+        
+        [_blur setAlpha:0.0f];
+        [self.view addSubview:_blur];
+        
+    } completion:^(BOOL finished) {
+        
+        //fade out
+        [UIView animateWithDuration:0.18f animations:^{
+            
+            [_blur setAlpha:1.0f];
+            
+        } completion:nil];
+        
+    }];
+
+}
+
+-(void)blurNoAnimation {
+    
+    [_blur setAlpha:1.0f];
+    [self.view addSubview:_blur];
+}
+
+
 
 - (void)toggleLeftMenu
 {
     [self toggleMenu:MenuLeft withCompletion:nil];
     
-    [self mustBlur:YES];
+    //[self mustBlur:YES];
+    
 }
 
 - (void)toggleRightMenu
@@ -350,26 +421,27 @@ static SlideNavigationController *singletonInstance;
 - (BOOL)isMenuOpen
 {
     return (self.horizontalLocation == 0) ? NO : YES;
+    
 }
 
 - (void)setEnableShadow:(BOOL)enable
 {
     _enableShadow = enable;
     
-    //	if (enable)
-    //	{
-    //		self.view.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    //		self.view.layer.shadowRadius = MENU_SHADOW_RADIUS;
-    //		self.view.layer.shadowOpacity = MENU_SHADOW_OPACITY;
-    //		self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.bounds].CGPath;
-    //		self.view.layer.shouldRasterize = YES;
-    //		self.view.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    //	}
-    //	else
-    //	{
+    	if (enable)
+    	{
+    		self.view.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    		self.view.layer.shadowRadius = MENU_SHADOW_RADIUS;
+    		self.view.layer.shadowOpacity = MENU_SHADOW_OPACITY;
+    		self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.bounds].CGPath;
+    		self.view.layer.shouldRasterize = YES;
+    		self.view.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    	}
+    	else
+    	{
     self.view.layer.shadowOpacity = 0;
     self.view.layer.shadowRadius = 0;
-    //}
+    }
 }
 
 #pragma mark - Override Methods -
@@ -548,6 +620,16 @@ static SlideNavigationController *singletonInstance;
 
 - (void)moveHorizontallyToLocation:(CGFloat)location
 {
+    self.menuLocation = location;
+    //NSLog(@"Location: %f", self.menuLocation);
+    
+//    if (location >= 200) {
+//        [self mustBlur:YES];
+//    }
+//    else if (location < 199){
+//        [self mustBlur:NO];
+//    }
+    
     CGRect rect = self.view.frame;
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     Menu menu = (self.horizontalLocation >= 0 && location >= 0) ? MenuLeft : MenuRight;
@@ -577,6 +659,24 @@ static SlideNavigationController *singletonInstance;
     
     self.view.frame = rect;
     [self updateMenuAnimation:menu];
+    
+    [self updateBlur];
+    
+}
+
+-(void)updateBlur {
+    
+    if (_blur == nil) {
+        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _blur.frame = self.view.bounds;
+        
+    }
+    
+    float daAlpha = self.menuLocation / 145.0f;
+    [_blur setAlpha:daAlpha];
+    [self.view addSubview:_blur];
+    
 }
 
 - (void)updateMenuAnimation:(Menu)menu
@@ -586,6 +686,7 @@ static SlideNavigationController *singletonInstance;
     : (self.horizontalLocation / ((self.horizontalSize - self.slideOffset) * -1));
     
     [self.menuRevealAnimator animateMenu:menu withProgress:progress];
+    
 }
 
 - (CGRect)initialRectForMenu
@@ -686,6 +787,8 @@ static SlideNavigationController *singletonInstance;
 
 - (void)postNotificationWithName:(NSString *)name forMenu:(Menu)menu
 {
+    //NSLog(@"ayyyy");
+    
     NSString *menuString = (menu == MenuLeft) ? NOTIFICATION_USER_INFO_MENU_LEFT : NOTIFICATION_USER_INFO_MENU_RIGHT;
     NSDictionary *userInfo = @{ NOTIFICATION_USER_INFO_MENU : menuString };
     [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
@@ -787,6 +890,7 @@ static SlideNavigationController *singletonInstance;
     }
     else if (aPanRecognizer.state == UIGestureRecognizerStateEnded)
     {
+        NSLog(@"Changed");
         NSInteger currentX = [self horizontalLocation];
         NSInteger currentXOffset = (currentX > 0) ? currentX : currentX * -1;
         NSInteger positiveVelocity = (velocity.x > 0) ? velocity.x : velocity.x * -1;

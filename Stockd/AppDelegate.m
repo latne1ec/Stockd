@@ -36,6 +36,9 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFImageView class];
     
+    //Stripe Keys
+    [Stripe setDefaultPublishableKey:StripePublishableKey];
+    
     LeftMenuViewController *leftMenu = [[LeftMenuViewController alloc] init];
     
     [SlideNavigationController sharedInstance].leftMenu = leftMenu;
@@ -49,59 +52,19 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     [SlideNavigationController sharedInstance].leftBarButtonItem = leftBarButtonItem;
     
-    
-    
-    //Stripe Keys
-    [Stripe setDefaultPublishableKey:StripePublishableKey];
-    
-    //Status Bar
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-//    //Nav Bar Color
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-//    
-//    //Nav Bar Back Button Color
-//    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
-//    
-//    //Navigation Bar Title Properties
-//    NSShadow *shadow = [[NSShadow alloc] init];
-//    shadow.shadowColor = [UIColor clearColor];
-//    shadow.shadowOffset = CGSizeMake(0, .0);
-//    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
-//                                                          shadow, NSShadowAttributeName,
-//                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
-    
-    
-    
     return YES;
 }
-
 - (void)applicationWillResignActive:(UIApplication *)application {
-    
-    
 }
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-
-    
 }
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-   
-    
 }
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
     [FBSDKAppEvents activateApp];
-    
 }
-
 - (void)applicationWillTerminate:(UIApplication *)application {
-
 }
-
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -109,7 +72,7 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
                                                 sourceApplication:sourceApplication
-                                                       annotation:annotation];
+                                                annotation:annotation];
 }
 
 

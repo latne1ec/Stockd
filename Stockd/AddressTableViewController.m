@@ -7,6 +7,7 @@
 //
 
 #import "AddressTableViewController.h"
+#import "ProfileTableViewController.h"
 
 @interface AddressTableViewController ()
 
@@ -14,7 +15,7 @@
 
 @implementation AddressTableViewController
 
-@synthesize firstCell, streetCell, apartmentDormCell, zipcodeCell, instructionsCell;
+@synthesize firstCell, streetCell, apartmentDormCell, zipcodeCell, instructionsCell, parent;
 @synthesize streetTextfield, apartmentDormTextField, zipTextfield, instructionsTextfield;
 
 - (void)viewDidLoad {
@@ -75,6 +76,9 @@
     else {
         self.instructionsPlaceholder.hidden = YES;
     }
+    
+    [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
     
 }
 
@@ -195,29 +199,61 @@
 
 - (IBAction)saveButton:(id)sender {
     
-    [ProgressHUD show:nil];
+    //[ProgressHUD show:nil];
     NSString *streetName = self.streetTextfield.text;
     NSString *aptDormNumber = self.apartmentDormTextField.text;
     NSString *zipCode = self.zipTextfield.text;
     NSString *deliveryInstructions = self.instructionsTextfield.text;
     
     
-    if ([streetName length ] < 10) {
+    if ([streetName length ] < 7) {
         
-        [ProgressHUD showError:@"Invalid Street Name"];
-        
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Invalid street name"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+
     }
     else if (aptDormNumber == nil) {
         
-        [ProgressHUD showError:@"Invalid Apt/Dorm Number"];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Invalid apt/dorm number"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+
     }
     else if ([zipCode length] < 5) {
         
-        [ProgressHUD showError:@"Invalid Zip Code"];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Invalid zip code"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+
     }
     
     else {
-        
+        [ProgressHUD show:nil];
         PFUser *user = [PFUser currentUser];
         [user setObject:streetName forKey:@"streetName"];
         [user setObject:aptDormNumber forKey:@"aptDormNumber"];
@@ -226,16 +262,26 @@
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
            
             if (error) {
-                
-                [TSMessage showNotificationWithTitle:nil
-                                            subtitle:@"Error Saving Address Preferences"
-                                                type:TSMessageNotificationTypeError];
+                [ProgressHUD dismiss];
+                [TSMessage showNotificationInViewController:self.navigationController
+                                                      title:@"Eror"
+                                                   subtitle:@"There was an issue saving your address information"
+                                                      image:nil
+                                                       type:TSMessageNotificationTypeSuccess
+                                                   duration:TSMessageNotificationDurationAutomatic
+                                                   callback:nil
+                                                buttonTitle:nil
+                                             buttonCallback:^{}
+                                                 atPosition:TSMessageNotificationPositionNavBarOverlay
+                                       canBeDismissedByUser:YES];
+
                 
             }
             else {
-                
+                [ProgressHUD dismiss];
                 [self.tableView reloadData];
-                [ProgressHUD showSuccess:@"Saved Address Info"];
+                [parent addressMessage];
+
                 [self dismissViewControllerAnimated:YES completion:^{
                     
                 }];

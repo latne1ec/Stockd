@@ -31,16 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 
-    
-    UIImage *image = [UIImage imageNamed:@"YapHolderTwo.png"];
+    UIImage *image = [UIImage imageNamed:@"addPhotoPink"];
 
     
     self.tableView.tableFooterView = [UIView new];
-    
     PFFile *defaultPic = [PFFile fileWithName:@"picture.png" data:UIImagePNGRepresentation(image)];
     self.currentUser = [PFUser currentUser];
     
@@ -67,12 +63,6 @@
     [btn4 setCornerRadius:3.5f];
     [btn4 setBorderWidth:1.0f];
     [btn4 setBorderColor:[UIColor colorWithRed:0.941 green:0.353 blue:0.643 alpha:1].CGColor];
-        
-
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-//                                   initWithTarget:self
-//                                   action:@selector(dismissKeyboard)];
-//    //[self.view addGestureRecognizer:tap];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -111,10 +101,19 @@
     profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
     profilePic.clipsToBounds = YES;
     
-    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
+                                                                     shadow, NSShadowAttributeName,
+                                                                     [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
 
 }
 
@@ -125,6 +124,15 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
     [nameField resignFirstResponder];
     [emailField resignFirstResponder];
@@ -215,7 +223,14 @@
                 picker.delegate = weakSelf;
                 picker.allowsEditing = YES;
                 picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                [weakSelf presentViewController:picker animated:YES completion:NULL];
+                [weakSelf presentViewController:picker animated:YES completion:^{
+                    
+                    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+                    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                    
+                    picker.navigationBar.tintColor = [UIColor colorWithRed:0.941 green:0.353 blue:0.663 alpha:1];
+                    
+                }];
                 [sheet dismissAnimated:NO];
             }
         }];
@@ -401,27 +416,59 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
      NSString *phone = [self.phoneNumberField.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if ([name length] == 0) {
-    
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:@"Please enter your name"
-                                        type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Please enter your name"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
         
     }
     else if ([email length] == 0) {
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:@"Please enter your email"
-                                        type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Please enter your email"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+       
     }
     else if ([phone length] < 10) {
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:@"Please enter a valid mobile number"
-                                        type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Please enter a valid mobile number"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
     }
     
     else if ([password length] == 0) {
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:@"Please enter a password"
-                                        type:TSMessageNotificationTypeError];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Please enter a password"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
     }
     
     
@@ -438,47 +485,28 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
         [newUser setObject:phone forKey:@"mobileNumber"];
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) {
-                [ProgressHUD dismiss];
                 
-                if (error.userInfo.count >= 3) {
-                    NSLog(@"Here");
-                    if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"invalid login parameters"]) {
-                        [TSMessage showNotificationWithTitle:nil
-                                                    subtitle:@"invalid username/password"
-                                                        type:TSMessageNotificationTypeError];
-                        
-                    }
-                    else {
-                    [TSMessage showNotificationWithTitle:nil
-                                                subtitle:[error.userInfo objectForKey:@"error"]
-                                                    type:TSMessageNotificationTypeError];
-                    }
-                    
-                }
-                else {
-                    NSLog(@"Yo");
-                    if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"invalid login parameters"]) {
-                        [TSMessage showNotificationWithTitle:nil
-                                                    subtitle:@"invalid username/password"
-                                                        type:TSMessageNotificationTypeError];
-                        
-                    }
-                    else {
-                        [TSMessage showNotificationWithTitle:nil
-                                                    subtitle:[error.userInfo objectForKey:@"error"]
-                                                        type:TSMessageNotificationTypeError];
-                    }
-                }
+                [ProgressHUD dismiss];
+                [TSMessage showNotificationInViewController:self.navigationController
+                                                      title:@"Error"
+                                                   subtitle:[error.userInfo objectForKey:@"error"]
+                                                      image:nil
+                                                       type:TSMessageNotificationTypeError
+                                                   duration:TSMessageNotificationDurationAutomatic
+                                                   callback:nil
+                                                buttonTitle:nil
+                                             buttonCallback:^{}
+                                                 atPosition:TSMessageNotificationPositionNavBarOverlay
+                                       canBeDismissedByUser:YES];
+
+                
             }
             else {
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
                 [currentInstallation saveInBackground];
                 
-               //Pop to Home View Controller
-                
                 [ProgressHUD dismiss];
-                /////Pop To Main View Controller
                 ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Profile"];
                 UINavigationController *navigationController =
                 [[UINavigationController alloc] initWithRootViewController:destViewController];

@@ -36,6 +36,8 @@
     [btn4 setCornerRadius:3.5f];
     [btn4 setBorderWidth:1.0f];
     [btn4 setBorderColor:[UIColor colorWithRed:0.941 green:0.353 blue:0.643 alpha:1].CGColor];
+    
+    [self.loginButton setTintColor:[UIColor blueColor]];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -58,20 +60,15 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
-    //Nav Bar Color
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
     
-    //Nav Bar Back Button Color
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
     
-    //Navigation Bar Title Properties
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor clearColor];
-    shadow.shadowOffset = CGSizeMake(0, .0);
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1], NSForegroundColorAttributeName,
-                                                          shadow, NSShadowAttributeName,
-                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    [emailTextfield resignFirstResponder];
+    [passwordTextfield resignFirstResponder];
+    
+    [TSMessage dismissActiveNotification];
     
 }
 
@@ -104,15 +101,6 @@
     
     [super viewDidAppear:animated];
     [emailTextfield becomeFirstResponder];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [emailTextfield resignFirstResponder];
-    [passwordTextfield resignFirstResponder];
-    
-    [TSMessage dismissActiveNotification];
-    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField; {
@@ -165,15 +153,38 @@
     NSString *password = [self.passwordTextfield.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if ([email length] == 0) {
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:@"Please enter your email"
-                                        type:TSMessageNotificationTypeError];
+        [ProgressHUD dismiss];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Please enter your email"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{
+                                         NSLog(@"User tapped the button");
+                                     }
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
         
     }
     else if ([password length] == 0) {
-        [TSMessage showNotificationWithTitle:nil
-                                    subtitle:@"Please enter your password"
-                                        type:TSMessageNotificationTypeError];
+        [ProgressHUD dismiss];
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Please enter your password"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{
+                                         NSLog(@"User tapped the button");
+                                     }
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+
     }
     else {
         [ProgressHUD show:nil];
@@ -184,27 +195,56 @@
                 if (error.userInfo.count >= 3) {
                     NSLog(@"Here");
                     if ([[error.userInfo objectForKey:@"error"] isEqualToString:@"invalid login parameters"]) {
-                        [TSMessage showNotificationWithTitle:nil
-                                                    subtitle:@"invalid username/password combination"
-                                                        type:TSMessageNotificationTypeError];
+                        [ProgressHUD dismiss];
+                        [TSMessage showNotificationInViewController:self.navigationController
+                                                              title:@"Error"
+                                                           subtitle:@"Invalid username/password combination"
+                                                              image:nil
+                                                               type:TSMessageNotificationTypeError
+                                                           duration:TSMessageNotificationDurationAutomatic
+                                                           callback:nil
+                                                        buttonTitle:nil
+                                                     buttonCallback:^{}
+                                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                                               canBeDismissedByUser:YES];
+
                         
                     }
                     else {
-                        [TSMessage showNotificationWithTitle:nil
-                                                    subtitle:[error.userInfo objectForKey:@"error"]
-                                                        type:TSMessageNotificationTypeError];
+                        [ProgressHUD dismiss];
+                        [TSMessage showNotificationInViewController:self.navigationController
+                                                              title:@"Error"
+                                                           subtitle:[error.userInfo objectForKey:@"error"]
+                                                              image:nil
+                                                               type:TSMessageNotificationTypeError
+                                                           duration:TSMessageNotificationDurationAutomatic
+                                                           callback:nil
+                                                        buttonTitle:nil
+                                                     buttonCallback:^{}
+                                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                                               canBeDismissedByUser:YES];
+
                     }
                     
                 }
                 else {
-                        [TSMessage showNotificationWithTitle:nil
-                                                    subtitle:[error.userInfo objectForKey:@"error"]
-                                                        type:TSMessageNotificationTypeError];
+                    [ProgressHUD dismiss];
+                    [TSMessage showNotificationInViewController:self.navigationController
+                                                          title:@"Error"
+                                                       subtitle:[error.userInfo objectForKey:@"error"]
+                                                          image:nil
+                                                           type:TSMessageNotificationTypeError
+                                                       duration:TSMessageNotificationDurationAutomatic
+                                                       callback:nil
+                                                    buttonTitle:nil
+                                                 buttonCallback:^{}
+                                                     atPosition:TSMessageNotificationPositionNavBarOverlay
+                                           canBeDismissedByUser:YES];
                     }
             }
             else {
-                [ProgressHUD dismiss];
                 
+                [ProgressHUD dismiss];
                 PFInstallation *currentInstallation = [PFInstallation currentInstallation];
                 [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
                 [currentInstallation saveInBackground];
@@ -225,18 +265,15 @@
                 [transition setType:kCATransitionFade];
                 [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
 
-                
                 [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
                 [self.navigationController pushViewController:destViewController animated:NO];
                 
                 [CATransaction commit];
-
+            
             }
         }];
     }
 }
-
-
 
 - (IBAction)forgotPasswordTapped:(id)sender {
     
@@ -248,6 +285,9 @@
                                      style:UIBarButtonItemStyleBordered
                                     target:nil
                                     action:nil];
+    
+    [navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whiteBkg"] forBarMetrics:UIBarMetricsDefault];
+    
     [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
     [self.navigationController presentViewController:navigationController animated:YES completion:^{
     }];

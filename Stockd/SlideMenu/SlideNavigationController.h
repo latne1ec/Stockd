@@ -75,4 +75,8 @@ extern NSString  *const SlideNavigationControllerDidReveal;
 - (void)toggleRightMenu;
 - (BOOL)isMenuOpen;
 
+- (void)enableTapGestureToCloseMenu:(BOOL)enable;
+
+
+
 @end

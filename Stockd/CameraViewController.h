@@ -11,13 +11,11 @@
 #import <Parse/Parse.h>
 #import "SlideNavigationController.h"
 #import "SCRecorder.h"
-#import "PhotoPreviewViewController.h"
 
 
 
-@interface CameraViewController : UIViewController <PKImagePickerViewControllerDelegate, SlideNavigationControllerDelegate, UINavigationControllerDelegate, SCRecorderDelegate>
+@interface CameraViewController : UIViewController <SlideNavigationControllerDelegate, UINavigationControllerDelegate, SCRecorderDelegate, UITextFieldDelegate>
 
-@property (nonatomic,strong) PKImagePickerViewController *imagePicker;
 @property (weak, nonatomic) IBOutlet UIButton *menuButton;
 @property (nonatomic, strong) UIImage *selectedImage;
 @property(nonatomic,strong) UIImageView *capturedImageView;
@@ -27,16 +25,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *camTap;
 @property (nonatomic, strong) IBOutlet UIButton *flash;
 @property (nonatomic, strong) UIButton *cancelPhoto;
-
-
-
-
-
-
-
-
-
--(void)imageSelected:(UIImage *)img;
+@property (nonatomic, strong) UITextField *caption;
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
 - (BOOL)slideNavigationControllerShouldDisplayRightMenu;

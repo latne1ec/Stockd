@@ -15,10 +15,11 @@
 #import "PhoneTableViewController.h"
 #import "EmailTableViewController.h"
 #import "SlideNavigationController.h"
+#import "TSMessage.h"
 
 
 
-@interface ProfileTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SlideNavigationControllerDelegate>
+@interface ProfileTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SlideNavigationControllerDelegate, TSMessageViewProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *profilePicCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *addressCell;
@@ -38,7 +39,10 @@
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
 - (BOOL)slideNavigationControllerShouldDisplayRightMenu;
 
-
+-(void)addressMessage;
+-(void)paymentMessage;
+-(void)phoneMessage;
+-(void)emailMessage;
 
 
 

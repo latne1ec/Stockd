@@ -11,8 +11,10 @@
 #import "ProgressHUD.h"
 #import "TSMessage.h"
 
-@interface AddressTableViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate>
-
+@interface AddressTableViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate, TSMessageViewProtocol>
+{
+    id parent;
+}
 
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *firstCell;
@@ -20,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *apartmentDormCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *zipcodeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *instructionsCell;
+
+@property(nonatomic,strong) id parent;
 
 @property (weak, nonatomic) IBOutlet UITextField *streetTextfield;
 

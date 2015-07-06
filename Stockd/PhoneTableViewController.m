@@ -7,6 +7,8 @@
 //
 
 #import "PhoneTableViewController.h"
+#import "ProfileTableViewController.h"
+
 
 @interface PhoneTableViewController ()
 
@@ -14,7 +16,7 @@
 
 @implementation PhoneTableViewController
 
-@synthesize firstCell, mobileNumberCell, houseNumberCell, workNumberCell;
+@synthesize firstCell, mobileNumberCell, houseNumberCell, workNumberCell, parent;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,6 +62,9 @@
                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
                                                           shadow, NSShadowAttributeName,
                                                           [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
+    [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
     
 }
 
@@ -238,9 +243,9 @@
                 
             }
             else {
-                
+                [ProgressHUD dismiss];
                 [self.tableView reloadData];
-                [ProgressHUD showSuccess:@"Saved Phone Info"];
+                [parent phoneMessage];
                 [self dismissViewControllerAnimated:YES completion:^{
                     
                 }];                

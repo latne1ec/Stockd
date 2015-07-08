@@ -60,6 +60,13 @@
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1186,6 +1193,133 @@
             </objects>
             <point key="canvasLocation" x="3731" y="71"/>
         </scene>
+        <!--Confirmation Table View Controller-->
+        <scene sceneID="ipW-29-qQ6">
+            <objects>
+                <tableViewController storyboardIdentifier="Confirmation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yy8-br-Lwi" customClass="ConfirmationTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="43R-hl-0fe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="cIy-6k-io1">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="Kb3-cz-zxa">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kb3-cz-zxa" id="FQy-xM-SEV">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You'll be notified when your delivery is on the way!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gd3-an-fzb">
+                                                    <rect key="frame" x="64" y="73" width="193" height="93"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="24"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thank you!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eih-VQ-HkZ">
+                                                    <rect key="frame" x="64" y="44" width="193" height="33"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="24"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="94" id="cc7-Ns-2zZ">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cc7-Ns-2zZ" id="2V2-Ah-dW9">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1u3-VV-fvS">
+                                                    <rect key="frame" x="19" y="11" width="87" height="21"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City, State, Zip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdo-Oc-Bk6">
+                                                    <rect key="frame" x="19" y="63" width="275" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Street Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pd-en-GAo">
+                                                    <rect key="frame" x="19" y="40" width="275" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="68" id="uuZ-mA-qLC">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uuZ-mA-qLC" id="1k2-Sb-xK2">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqA-ji-3hA">
+                                                    <rect key="frame" x="19" y="23" width="49" height="21"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$544.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ML-Ff-Sbh">
+                                                    <rect key="frame" x="67" y="25" width="186" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="84" id="ngT-Aw-hGp">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ngT-Aw-hGp" id="iGg-xn-2jm">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKi-Qs-pCh">
+                                                    <rect key="frame" x="57" y="18" width="206" height="48"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.90980398650000005" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="22"/>
+                                                    <state key="normal" title="Home">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="homeButtonTapped:" destination="yy8-br-Lwi" eventType="touchUpInside" id="VmH-BF-RFd"/>
+                                                        <action selector="updateCartTapped:" destination="TVb-Hv-xD7" eventType="touchUpInside" id="Fx9-Z3-Tqx"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="yy8-br-Lwi" id="VkW-Rk-uCL"/>
+                            <outlet property="delegate" destination="yy8-br-Lwi" id="9eT-ga-4gx"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="cityStateZipLabel" destination="Fdo-Oc-Bk6" id="tcH-Ka-KWP"/>
+                        <outlet property="firstCell" destination="Kb3-cz-zxa" id="xlw-T2-yA4"/>
+                        <outlet property="fourthCell" destination="ngT-Aw-hGp" id="j1F-26-2PB"/>
+                        <outlet property="homeButton" destination="LKi-Qs-pCh" id="1Tz-b3-Tgx"/>
+                        <outlet property="secondCell" destination="cc7-Ns-2zZ" id="ya5-zr-Hle"/>
+                        <outlet property="streetNameLabel" destination="6Pd-en-GAo" id="M1A-S9-2Nc"/>
+                        <outlet property="thirdCell" destination="uuZ-mA-qLC" id="qSD-8k-5Z0"/>
+                        <outlet property="totalPriceLabel" destination="7ML-Ff-Sbh" id="3Tc-2G-Sk3"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8IJ-2h-Wnw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4157" y="71"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="TJ2-A4-HzQ">
             <objects>
@@ -1633,9 +1767,10 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="IbI-bV-VnH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="PXA-Ig-sPj">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -1653,9 +1788,53 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="393 N Sunnyvale Ave." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wFB-v8-EZD">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Street name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wFB-v8-EZD">
                                                     <rect key="frame" x="96" y="12" width="216" height="30"/>
                                                     <color key="textColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="54" id="N6l-nO-VAA">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N6l-nO-VAA" id="hoR-Sg-KZW">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEq-P3-VuV">
+                                                    <rect key="frame" x="18" y="16" width="64" height="21"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EcI-9a-wa6">
+                                                    <rect key="frame" x="96" y="12" width="216" height="30"/>
+                                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="54" id="Mc3-nP-O3X">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mc3-nP-O3X" id="IEk-5f-aUe">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="State" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2M-VW-1jE">
+                                                    <rect key="frame" x="18" y="16" width="64" height="21"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="State" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gS0-Tb-2ge">
+                                                    <rect key="frame" x="96" y="12" width="216" height="30"/>
+                                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                 </textField>
@@ -1674,7 +1853,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Apt. #16" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWk-cY-mOj">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Apartment/Dorm #" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWk-cY-mOj">
                                                     <rect key="frame" x="96" y="12" width="216" height="30"/>
                                                     <color key="textColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -1696,7 +1875,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="94085" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-GP-mwr">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Example: 94085" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-GP-mwr">
                                                     <rect key="frame" x="96" y="12" width="216" height="30"/>
                                                     <color key="textColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -1764,9 +1943,13 @@
                     <connections>
                         <outlet property="apartmentDormCell" destination="RY4-U0-tOF" id="20L-MR-3SS"/>
                         <outlet property="apartmentDormTextField" destination="gWk-cY-mOj" id="e4S-e8-uKa"/>
+                        <outlet property="cityCell" destination="N6l-nO-VAA" id="Qyl-fJ-RjV"/>
+                        <outlet property="cityTextField" destination="EcI-9a-wa6" id="fUl-Vi-SEi"/>
                         <outlet property="instructionsCell" destination="jqc-41-6ND" id="nkJ-XU-fVG"/>
                         <outlet property="instructionsPlaceholder" destination="LwS-Yg-vlT" id="mTw-h8-csd"/>
                         <outlet property="instructionsTextfield" destination="qgQ-3a-7R7" id="5W4-lS-lNW"/>
+                        <outlet property="stateCell" destination="Mc3-nP-O3X" id="ig3-ro-xsZ"/>
+                        <outlet property="stateTextField" destination="gS0-Tb-2ge" id="Icf-08-gua"/>
                         <outlet property="streetCell" destination="cMu-4C-q3H" id="ved-cw-9d8"/>
                         <outlet property="streetTextfield" destination="wFB-v8-EZD" id="ggs-en-fvE"/>
                         <outlet property="zipTextfield" destination="4i4-GP-mwr" id="SlA-So-eGL"/>

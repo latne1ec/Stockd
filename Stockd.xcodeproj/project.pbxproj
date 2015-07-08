@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2010B7DC1B4D712E00F897CF /* ConfirmationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2010B7DB1B4D712E00F897CF /* ConfirmationTableViewController.m */; };
 		201186261B41C16200A59D55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 201186251B41C16200A59D55 /* main.m */; };
 		201186291B41C16200A59D55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 201186281B41C16200A59D55 /* AppDelegate.m */; };
 		2011862F1B41C16200A59D55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2011862D1B41C16200A59D55 /* Main.storyboard */; };
@@ -148,6 +149,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2010B7DA1B4D712E00F897CF /* ConfirmationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationTableViewController.h; sourceTree = "<group>"; };
+		2010B7DB1B4D712E00F897CF /* ConfirmationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationTableViewController.m; sourceTree = "<group>"; };
 		201186201B41C16200A59D55 /* Stockd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stockd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		201186241B41C16200A59D55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		201186251B41C16200A59D55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -399,6 +402,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2010B7DD1B4D713B00F897CF /* Order Confirmation */ = {
+			isa = PBXGroup;
+			children = (
+				2010B7DA1B4D712E00F897CF /* ConfirmationTableViewController.h */,
+				2010B7DB1B4D712E00F897CF /* ConfirmationTableViewController.m */,
+			);
+			name = "Order Confirmation";
+			sourceTree = "<group>";
+		};
 		201186171B41C16200A59D55 = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +444,7 @@
 				2067F8D61B4B3F82001F5478 /* Add To Cart */,
 				2067F8F11B4C2A93001F5478 /* Cart */,
 				2067F8FB1B4C5692001F5478 /* Edit Cart */,
+				2010B7DD1B4D713B00F897CF /* Order Confirmation */,
 				2067F8B71B4ACA7C001F5478 /* Food Choices */,
 				2067F8C11B4B04B0001F5478 /* Drink Choices */,
 				2067F8C91B4B33AB001F5478 /* 21+ */,
@@ -1079,6 +1092,7 @@
 				20D52D301B45B86C00A1C60B /* SCSwipeableFilterView.m in Sources */,
 				2067F8FE1B4C7085001F5478 /* UpdateCartTableCell.m in Sources */,
 				2067F8F41B4C2C3E001F5478 /* SubtotalTableCell.m in Sources */,
+				2010B7DC1B4D712E00F897CF /* ConfirmationTableViewController.m in Sources */,
 				20D52D251B45B86C00A1C60B /* SCFilterSelectorView.m in Sources */,
 				2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */,
 				20E2EC171B486107002E317A /* FXBlurView.m in Sources */,

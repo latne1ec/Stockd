@@ -15,8 +15,8 @@
 
 @implementation AddressTableViewController
 
-@synthesize firstCell, streetCell, apartmentDormCell, zipcodeCell, instructionsCell, parent;
-@synthesize streetTextfield, apartmentDormTextField, zipTextfield, instructionsTextfield;
+@synthesize firstCell, streetCell, cityCell, stateCell, apartmentDormCell, zipcodeCell, instructionsCell, parent;
+@synthesize streetTextfield, cityTextField, stateTextField, apartmentDormTextField, zipTextfield, instructionsTextfield;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +39,8 @@
     
     
     self.streetTextfield.delegate = self;
+    self.cityTextField.delegate = self;
+    self.stateTextField.delegate = self;
     self.apartmentDormTextField.delegate = self;
     self.zipTextfield.delegate = self;
     self.instructionsTextfield.delegate = self;
@@ -93,13 +95,19 @@
 -(BOOL)textFieldShouldReturn:(UITextField*)textField; {
     
     if([streetTextfield isFirstResponder]){
-        [apartmentDormTextField becomeFirstResponder];
+        [cityTextField becomeFirstResponder];
         
+    }
+    else if ([cityTextField isFirstResponder]){
+        [stateTextField becomeFirstResponder];
+    }
+    else if ([stateTextField isFirstResponder]){
+        [apartmentDormTextField becomeFirstResponder];
     }
     else if ([apartmentDormTextField isFirstResponder]){
         [zipTextfield becomeFirstResponder];
     }
-    else if ([zipTextfield isFirstResponder]){
+    else if ([zipTextfield isFirstResponder]) {
         [instructionsTextfield becomeFirstResponder];
     }
     else if ([instructionsTextfield isFirstResponder]) {
@@ -117,24 +125,28 @@
 // Custom Placeholder
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    
+    if ([instructionsTextfield isFirstResponder]) {
+        
     self.instructionsPlaceholder.hidden = YES;
+    }
     
 }
 
 - (void)textViewDidChange:(UITextView *)txtView {
+    if ([instructionsTextfield isFirstResponder]) {
     self.instructionsPlaceholder.hidden = ([txtView.text length] > 0);
+    }
     
 }
 
 - (void)textViewDidEndEditing:(UITextView *)txtView {
+    if ([instructionsTextfield isFirstResponder]) {
     self.instructionsPlaceholder.hidden = ([txtView.text length] > 0);
+    }
     
 }
 
 //*********************************************
-
-
 
 
 
@@ -148,7 +160,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 4;
+    return 6;
 }
 
 
@@ -166,6 +178,24 @@
         return streetCell;
     }
     if (indexPath.row == 1) {
+        NSString *userCity = [[PFUser currentUser] objectForKey:@"userCity"];
+        if (userCity == nil) {
+        }
+        else {
+            self.cityTextField.text = [[PFUser currentUser] objectForKey:@"userCity"];
+        }
+        return cityCell;
+    }
+    if (indexPath.row == 2) {
+        NSString *stateName = [[PFUser currentUser] objectForKey:@"userState"];
+        if (stateName == nil) {
+        }
+        else {
+            self.stateTextField.text = [[PFUser currentUser] objectForKey:@"userState"];
+        }
+        return stateCell;
+    }
+    if (indexPath.row == 3) {
         NSString *aptDormNumber = [[PFUser currentUser] objectForKey:@"aptDormNumber"];
         if (aptDormNumber == nil) {
         }
@@ -174,7 +204,8 @@
         }
         return apartmentDormCell;
     }
-    if (indexPath.row == 2) {
+
+    if (indexPath.row == 4) {
         NSString *zipCode = [[PFUser currentUser] objectForKey:@"zipCode"];
         if (zipCode == nil) {
         }
@@ -183,7 +214,7 @@
         }
         return zipcodeCell;
     }
-    if (indexPath.row == 3) {
+    if (indexPath.row == 5) {
         NSString *instructions = [[PFUser currentUser] objectForKey:@"deliveryInstructions"];
         if (instructions == nil) {
         }
@@ -193,7 +224,6 @@
         }
         return instructionsCell;
     }
-    
    
     return nil;
 }
@@ -206,6 +236,8 @@
     
     //[ProgressHUD show:nil];
     NSString *streetName = self.streetTextfield.text;
+    NSString *cityName = self.cityTextField.text;
+    NSString *stateName = self.stateTextField.text;
     NSString *aptDormNumber = self.apartmentDormTextField.text;
     NSString *zipCode = self.zipTextfield.text;
     NSString *deliveryInstructions = self.instructionsTextfield.text;
@@ -226,6 +258,39 @@
                                canBeDismissedByUser:YES];
 
     }
+    else if ([cityName length ] < 2) {
+        
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Invalid City name"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+        
+    }
+
+    else if ([stateName length ] < 1) {
+        
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Invalid State name"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+        
+    }
+
+    
     else if (aptDormNumber == nil) {
         
         [TSMessage showNotificationInViewController:self.navigationController
@@ -261,6 +326,8 @@
         [ProgressHUD show:nil];
         PFUser *user = [PFUser currentUser];
         [user setObject:streetName forKey:@"streetName"];
+        [user setObject:cityName forKey:@"userCity"];
+        [user setObject:stateName forKey:@"userState"];
         [user setObject:aptDormNumber forKey:@"aptDormNumber"];
         [user setObject:zipCode forKey:@"zipCode"];
         [user setObject:deliveryInstructions forKey:@"deliveryInstructions"];

@@ -19,6 +19,12 @@
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *firstCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *streetCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cityCell;
+@property (weak, nonatomic) IBOutlet UITextField *cityTextField;
+@property (weak, nonatomic) IBOutlet UITableViewCell *stateCell;
+
+@property (weak, nonatomic) IBOutlet UITextField *stateTextField;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *apartmentDormCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *zipcodeCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *instructionsCell;

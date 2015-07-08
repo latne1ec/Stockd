@@ -42,7 +42,15 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     LeftMenuViewController *leftMenu = [[LeftMenuViewController alloc] init];
     
     [SlideNavigationController sharedInstance].leftMenu = leftMenu;
-    [SlideNavigationController sharedInstance].portraitSlideOffset = 160.0f;
+    
+    if([UIScreen mainScreen].bounds.size.height <= 568.0) {
+        //iPhone 5
+        [SlideNavigationController sharedInstance].portraitSlideOffset = 200.0f;
+    }
+    else {
+        [SlideNavigationController sharedInstance].portraitSlideOffset = 240.0f;
+    }
+    
     [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
     
     UIButton *button  = [[UIButton alloc] initWithFrame:CGRectMake(-15, 0, 30, 30)];

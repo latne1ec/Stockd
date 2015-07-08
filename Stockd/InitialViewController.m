@@ -17,8 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"Load");
-    
     CALayer *btn1 = [self.signupWithEmailButton layer];
     [btn1 setMasksToBounds:YES];
     [btn1 setCornerRadius:3.5f];
@@ -54,9 +52,6 @@
     
     self.stockdLabel.textColor = [UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1];
     
-    
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -81,8 +76,6 @@
                                                                      shadow, NSShadowAttributeName,
                                                                      [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
 }
-
-
 
 - (IBAction)facebookButtonTapped:(id)sender {
     

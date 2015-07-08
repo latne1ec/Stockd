@@ -618,14 +618,6 @@ static SlideNavigationController *singletonInstance;
 - (void)moveHorizontallyToLocation:(CGFloat)location
 {
     self.menuLocation = location;
-    //NSLog(@"Location: %f", self.menuLocation);
-    
-//    if (location >= 200) {
-//        [self mustBlur:YES];
-//    }
-//    else if (location < 199){
-//        [self mustBlur:NO];
-//    }
     
     CGRect rect = self.view.frame;
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
@@ -685,7 +677,7 @@ static SlideNavigationController *singletonInstance;
         
     }
     
-    float daAlpha = self.menuLocation / 145.0f;
+    float daAlpha = self.menuLocation / 100.0f;
     [_blur setAlpha:daAlpha];
     [self.view addSubview:_blur];
     

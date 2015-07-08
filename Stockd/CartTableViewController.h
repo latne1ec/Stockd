@@ -12,8 +12,12 @@
 #import "CartTableCell.h"
 #import "SubtotalTableCell.h"
 #import "EditPackageTableViewController.h"
+#import "PaymentTableViewController.h"
+#import "TSMessage.h"
+#import "ConfirmationTableViewController.h"
 
-@interface CartTableViewController : UITableViewController
+@interface CartTableViewController : UITableViewController <TSMessageViewProtocol>
+
 
 @property (nonatomic, strong) NSArray *packages;
 @property (nonatomic, strong) NSDictionary *items;

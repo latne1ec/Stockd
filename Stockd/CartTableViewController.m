@@ -68,7 +68,10 @@
                                                           shadow, NSShadowAttributeName,
                                                           [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
-        [self updateTotal];
+    [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
+    
+    [self updateTotal];
     
 }
 -(void)viewWillAppear:(BOOL)animated {
@@ -306,9 +309,97 @@
     NSString *userStripeToken = [[PFUser currentUser] objectForKey:@"stripeToken"];
     if (userStripeToken == nil) {
         
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Payment Method" message:@"Before making any purchases on Stockd, you must first enter a payment method." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+
+        PaymentTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Payment"];
+        destViewController.parent = self;
+        UINavigationController *navigationController =
+        [[UINavigationController alloc] initWithRootViewController:destViewController];
+        UIBarButtonItem *newBackButton =
+        [[UIBarButtonItem alloc] initWithTitle:@"Payment Info"
+                                         style:UIBarButtonItemStyleBordered
+                                        target:nil
+                                        action:nil];
+        [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+        [self.navigationController presentViewController:navigationController animated:YES completion:^{
+        }];
     }
     else {
-        NSLog(@"Charge User");
+        
+        [ProgressHUD show:nil Interaction:NO];
+        
+        NSString *customerID = [[PFUser currentUser] objectForKey:@"customerID"];
+        float amountInCents = _subtotal*100;
+        NSNumber *amount = [NSNumber numberWithFloat:amountInCents];
+        
+        [self chargeCustomer:customerID amount:amount completion:^(id object, NSError *error) {
+            if (error) {
+                [ProgressHUD dismiss];
+                [self showError:error];
+            }
+            else {
+                NSLog(@"Object Up Here: %@", object);
+            }
+        }];
     }
 }
+
+-(void)chargeCustomer:(NSString *)customerId amount:(NSNumber *)amountInCents completion:(PFIdResultBlock)handler {
+    
+    [PFCloud callFunctionInBackground:@"chargeCustomer"
+                       withParameters:@{
+                                        @"amount":amountInCents,
+                                        @"customerId":customerId
+                                        }
+                                block:^(id object, NSError *error) {
+                                    handler(object,error);
+                                    if (error) {
+                                        [ProgressHUD dismiss];
+                                        NSLog(@"Error: %@", error);
+                                    }
+                                    else {
+                                        NSLog(@"Success: %@", object);
+                                        [self showConfirmation];
+                                }
+                    }];
+                                
+}
+
+-(void)showConfirmation {
+    
+    ConfirmationTableViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Confirmation"];
+    cvc.subtotal = _subtotal;
+    UINavigationController *navigationController =
+    [[UINavigationController alloc] initWithRootViewController:cvc];
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStyleBordered
+                                    target:nil
+                                    action:nil];
+    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+    [self.navigationController presentViewController:navigationController animated:YES completion:^{
+    }];
+
+    
+}
+
+-(void)showError:(NSError *)error {
+
+    
+    NSLog(@"Error: %@", error);
+    [TSMessage showNotificationInViewController:self.navigationController
+                                          title:@"Error"
+                                       subtitle:[error.userInfo objectForKey:@"error"]
+                                          image:nil
+                                           type:TSMessageNotificationTypeError
+                                       duration:TSMessageNotificationDurationAutomatic
+                                       callback:nil
+                                    buttonTitle:nil
+                                 buttonCallback:^{}
+                                     atPosition:TSMessageNotificationPositionNavBarOverlay
+                           canBeDismissedByUser:YES];
+    
+}
+
 @end

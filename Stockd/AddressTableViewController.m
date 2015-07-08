@@ -82,6 +82,11 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    [ProgressHUD dismiss];
+}
+
 //*********************************************
 // Keyboard Button Actions
 

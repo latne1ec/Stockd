@@ -66,6 +66,24 @@
 		2037DDEC1B442BD90076B0F2 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDEB1B442BD90076B0F2 /* CameraViewController.m */; };
 		2037DDF21B442CE20076B0F2 /* PKImageBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDEF1B442CE20076B0F2 /* PKImageBundle.bundle */; };
 		2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDF11B442CE20076B0F2 /* PKImagePickerViewController.m */; };
+		2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */; };
+		2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B91B4ACC50001F5478 /* FoodTableCell.m */; };
+		2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8BC1B4B0132001F5478 /* DrinksTableViewController.m */; };
+		2067F8C01B4B0152001F5478 /* DrinksTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8BF1B4B0152001F5478 /* DrinksTableCell.m */; };
+		2067F8C41B4B055B001F5478 /* PackageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8C31B4B055B001F5478 /* PackageDetailViewController.m */; };
+		2067F8C71B4B05A8001F5478 /* ItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8C61B4B05A8001F5478 /* ItemTableCell.m */; };
+		2067F8CC1B4B33EB001F5478 /* BoozeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8CB1B4B33EB001F5478 /* BoozeTableCell.m */; };
+		2067F8CF1B4B33F9001F5478 /* BoozeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8CE1B4B33F9001F5478 /* BoozeTableViewController.m */; };
+		2067F8D21B4B3CBC001F5478 /* AddPackagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8D11B4B3CBC001F5478 /* AddPackagesTableViewController.m */; };
+		2067F8D51B4B3DDB001F5478 /* PackageTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8D41B4B3DDB001F5478 /* PackageTableCell.m */; };
+		2067F8E01B4B7B74001F5478 /* cartIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2067F8DF1B4B7B74001F5478 /* cartIcon@2x.png */; };
+		2067F8EA1B4C1BC2001F5478 /* BBBadgeBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8E91B4C1BC2001F5478 /* BBBadgeBarButtonItem.m */; };
+		2067F8ED1B4C28C6001F5478 /* CartTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8EC1B4C28C6001F5478 /* CartTableViewController.m */; };
+		2067F8F01B4C2989001F5478 /* CartTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8EF1B4C2989001F5478 /* CartTableCell.m */; };
+		2067F8F41B4C2C3E001F5478 /* SubtotalTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8F31B4C2C3E001F5478 /* SubtotalTableCell.m */; };
+		2067F8F71B4C5450001F5478 /* EditPackageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8F61B4C5450001F5478 /* EditPackageTableViewController.m */; };
+		2067F8FA1B4C5683001F5478 /* EditItemsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8F91B4C5683001F5478 /* EditItemsTableCell.m */; };
+		2067F8FE1B4C7085001F5478 /* UpdateCartTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8FD1B4C7085001F5478 /* UpdateCartTableCell.m */; };
 		20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */; };
 		20D52CAB1B4436B200A1C60B /* flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CAA1B4436B200A1C60B /* flash@2x.png */; };
 		20D52CAD1B4438BA00A1C60B /* fillButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */; };
@@ -211,6 +229,41 @@
 		2037DDEF1B442CE20076B0F2 /* PKImageBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PKImageBundle.bundle; sourceTree = "<group>"; };
 		2037DDF01B442CE20076B0F2 /* PKImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKImagePickerViewController.h; sourceTree = "<group>"; };
 		2037DDF11B442CE20076B0F2 /* PKImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKImagePickerViewController.m; sourceTree = "<group>"; };
+		2067F8B41B4ACA5E001F5478 /* FoodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewController.h; sourceTree = "<group>"; };
+		2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableViewController.m; sourceTree = "<group>"; };
+		2067F8B81B4ACC50001F5478 /* FoodTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableCell.h; sourceTree = "<group>"; };
+		2067F8B91B4ACC50001F5478 /* FoodTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableCell.m; sourceTree = "<group>"; };
+		2067F8BB1B4B0132001F5478 /* DrinksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrinksTableViewController.h; path = Stockd/DrinksTableViewController.h; sourceTree = "<group>"; };
+		2067F8BC1B4B0132001F5478 /* DrinksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrinksTableViewController.m; path = Stockd/DrinksTableViewController.m; sourceTree = "<group>"; };
+		2067F8BE1B4B0152001F5478 /* DrinksTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrinksTableCell.h; sourceTree = "<group>"; };
+		2067F8BF1B4B0152001F5478 /* DrinksTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrinksTableCell.m; sourceTree = "<group>"; };
+		2067F8C21B4B055B001F5478 /* PackageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageDetailViewController.h; sourceTree = "<group>"; };
+		2067F8C31B4B055B001F5478 /* PackageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageDetailViewController.m; sourceTree = "<group>"; };
+		2067F8C51B4B05A8001F5478 /* ItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableCell.h; sourceTree = "<group>"; };
+		2067F8C61B4B05A8001F5478 /* ItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableCell.m; sourceTree = "<group>"; };
+		2067F8CA1B4B33EB001F5478 /* BoozeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoozeTableCell.h; sourceTree = "<group>"; };
+		2067F8CB1B4B33EB001F5478 /* BoozeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoozeTableCell.m; sourceTree = "<group>"; };
+		2067F8CD1B4B33F9001F5478 /* BoozeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoozeTableViewController.h; sourceTree = "<group>"; };
+		2067F8CE1B4B33F9001F5478 /* BoozeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoozeTableViewController.m; sourceTree = "<group>"; };
+		2067F8D01B4B3CBC001F5478 /* AddPackagesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPackagesTableViewController.h; sourceTree = "<group>"; };
+		2067F8D11B4B3CBC001F5478 /* AddPackagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPackagesTableViewController.m; sourceTree = "<group>"; };
+		2067F8D31B4B3DDB001F5478 /* PackageTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageTableCell.h; sourceTree = "<group>"; };
+		2067F8D41B4B3DDB001F5478 /* PackageTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageTableCell.m; sourceTree = "<group>"; };
+		2067F8DF1B4B7B74001F5478 /* cartIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cartIcon@2x.png"; sourceTree = "<group>"; };
+		2067F8E81B4C1BC2001F5478 /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
+		2067F8E91B4C1BC2001F5478 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
+		2067F8EB1B4C28C6001F5478 /* CartTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartTableViewController.h; sourceTree = "<group>"; };
+		2067F8EC1B4C28C6001F5478 /* CartTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartTableViewController.m; sourceTree = "<group>"; };
+		2067F8EE1B4C2989001F5478 /* CartTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartTableCell.h; sourceTree = "<group>"; };
+		2067F8EF1B4C2989001F5478 /* CartTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartTableCell.m; sourceTree = "<group>"; };
+		2067F8F21B4C2C3E001F5478 /* SubtotalTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubtotalTableCell.h; sourceTree = "<group>"; };
+		2067F8F31B4C2C3E001F5478 /* SubtotalTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubtotalTableCell.m; sourceTree = "<group>"; };
+		2067F8F51B4C5450001F5478 /* EditPackageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPackageTableViewController.h; sourceTree = "<group>"; };
+		2067F8F61B4C5450001F5478 /* EditPackageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPackageTableViewController.m; sourceTree = "<group>"; };
+		2067F8F81B4C5683001F5478 /* EditItemsTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditItemsTableCell.h; sourceTree = "<group>"; };
+		2067F8F91B4C5683001F5478 /* EditItemsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditItemsTableCell.m; sourceTree = "<group>"; };
+		2067F8FC1B4C7085001F5478 /* UpdateCartTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCartTableCell.h; sourceTree = "<group>"; };
+		2067F8FD1B4C7085001F5478 /* UpdateCartTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCartTableCell.m; sourceTree = "<group>"; };
 		20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snapPhoto@2x.png"; sourceTree = "<group>"; };
 		20D52CAA1B4436B200A1C60B /* flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@2x.png"; sourceTree = "<group>"; };
 		20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fillButton@2x.png"; sourceTree = "<group>"; };
@@ -374,8 +427,15 @@
 				2011862D1B41C16200A59D55 /* Main.storyboard */,
 				2067F8AD1B4A05A4001F5478 /* Menu */,
 				20D52D371B45F7D300A1C60B /* Tour */,
-				2037DDED1B442BDE0076B0F2 /* Camera */,
 				201186491B41EC8100A59D55 /* Login/Signup */,
+				2037DDED1B442BDE0076B0F2 /* Camera */,
+				2067F8D61B4B3F82001F5478 /* Add To Cart */,
+				2067F8F11B4C2A93001F5478 /* Cart */,
+				2067F8FB1B4C5692001F5478 /* Edit Cart */,
+				2067F8B71B4ACA7C001F5478 /* Food Choices */,
+				2067F8C11B4B04B0001F5478 /* Drink Choices */,
+				2067F8C91B4B33AB001F5478 /* 21+ */,
+				2067F8C81B4B05AD001F5478 /* Package Details */,
 				2037DDCE1B42DF9A0076B0F2 /* Profile */,
 				20D52D3B1B46201000A1C60B /* Help */,
 				201186301B41C16200A59D55 /* Images.xcassets */,
@@ -462,6 +522,7 @@
 		201186701B41F07D00A59D55 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2067F8E71B4C145E001F5478 /* Cart Badge */,
 				20E2EC181B48610B002E317A /* FXBlurView */,
 				20E2EC141B48509A002E317A /* SVBlurView */,
 				20E2EC0D1B4727C3002E317A /* SVProgressHUD */,
@@ -505,6 +566,7 @@
 		201186891B42021900A59D55 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2067F8DF1B4B7B74001F5478 /* cartIcon@2x.png */,
 				20D52CD11B45956B00A1C60B /* whiteBkg@2x.png */,
 				20D52CCF1B4590BE00A1C60B /* saveButton@2x.png */,
 				20D52CBA1B44865500A1C60B /* cancelPink@2x.png */,
@@ -580,6 +642,98 @@
 				20D52CEE1B45A7B200A1C60B /* LeftMenuViewController.m */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		2067F8B71B4ACA7C001F5478 /* Food Choices */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8B81B4ACC50001F5478 /* FoodTableCell.h */,
+				2067F8B91B4ACC50001F5478 /* FoodTableCell.m */,
+				2067F8B41B4ACA5E001F5478 /* FoodTableViewController.h */,
+				2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */,
+			);
+			name = "Food Choices";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		2067F8C11B4B04B0001F5478 /* Drink Choices */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8BE1B4B0152001F5478 /* DrinksTableCell.h */,
+				2067F8BF1B4B0152001F5478 /* DrinksTableCell.m */,
+				2067F8BB1B4B0132001F5478 /* DrinksTableViewController.h */,
+				2067F8BC1B4B0132001F5478 /* DrinksTableViewController.m */,
+			);
+			name = "Drink Choices";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		2067F8C81B4B05AD001F5478 /* Package Details */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8C51B4B05A8001F5478 /* ItemTableCell.h */,
+				2067F8C61B4B05A8001F5478 /* ItemTableCell.m */,
+				2067F8C21B4B055B001F5478 /* PackageDetailViewController.h */,
+				2067F8C31B4B055B001F5478 /* PackageDetailViewController.m */,
+			);
+			name = "Package Details";
+			sourceTree = "<group>";
+		};
+		2067F8C91B4B33AB001F5478 /* 21+ */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8CA1B4B33EB001F5478 /* BoozeTableCell.h */,
+				2067F8CB1B4B33EB001F5478 /* BoozeTableCell.m */,
+				2067F8CD1B4B33F9001F5478 /* BoozeTableViewController.h */,
+				2067F8CE1B4B33F9001F5478 /* BoozeTableViewController.m */,
+			);
+			name = "21+";
+			sourceTree = "<group>";
+		};
+		2067F8D61B4B3F82001F5478 /* Add To Cart */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8D31B4B3DDB001F5478 /* PackageTableCell.h */,
+				2067F8D41B4B3DDB001F5478 /* PackageTableCell.m */,
+				2067F8D01B4B3CBC001F5478 /* AddPackagesTableViewController.h */,
+				2067F8D11B4B3CBC001F5478 /* AddPackagesTableViewController.m */,
+			);
+			name = "Add To Cart";
+			sourceTree = "<group>";
+		};
+		2067F8E71B4C145E001F5478 /* Cart Badge */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8E81B4C1BC2001F5478 /* BBBadgeBarButtonItem.h */,
+				2067F8E91B4C1BC2001F5478 /* BBBadgeBarButtonItem.m */,
+			);
+			name = "Cart Badge";
+			sourceTree = "<group>";
+		};
+		2067F8F11B4C2A93001F5478 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8EE1B4C2989001F5478 /* CartTableCell.h */,
+				2067F8EF1B4C2989001F5478 /* CartTableCell.m */,
+				2067F8F21B4C2C3E001F5478 /* SubtotalTableCell.h */,
+				2067F8F31B4C2C3E001F5478 /* SubtotalTableCell.m */,
+				2067F8EB1B4C28C6001F5478 /* CartTableViewController.h */,
+				2067F8EC1B4C28C6001F5478 /* CartTableViewController.m */,
+			);
+			name = Cart;
+			sourceTree = "<group>";
+		};
+		2067F8FB1B4C5692001F5478 /* Edit Cart */ = {
+			isa = PBXGroup;
+			children = (
+				2067F8F81B4C5683001F5478 /* EditItemsTableCell.h */,
+				2067F8F91B4C5683001F5478 /* EditItemsTableCell.m */,
+				2067F8FC1B4C7085001F5478 /* UpdateCartTableCell.h */,
+				2067F8FD1B4C7085001F5478 /* UpdateCartTableCell.m */,
+				2067F8F51B4C5450001F5478 /* EditPackageTableViewController.h */,
+				2067F8F61B4C5450001F5478 /* EditPackageTableViewController.m */,
+			);
+			name = "Edit Cart";
 			sourceTree = "<group>";
 		};
 		20D52CD31B45A7A700A1C60B /* SlideMenu */ = {
@@ -809,6 +963,7 @@
 			files = (
 				20D52CAF1B443D8000A1C60B /* cancel@2x.png in Resources */,
 				20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */,
+				2067F8E01B4B7B74001F5478 /* cartIcon@2x.png in Resources */,
 				201186741B41F08F00A59D55 /* ProgressHUD.bundle in Resources */,
 				2037DDDF1B4309990076B0F2 /* cancel@2x.png in Resources */,
 				20D52CC21B44D4E300A1C60B /* TourImage2.png in Resources */,
@@ -857,27 +1012,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				2011867F1B41F12200A59D55 /* TSMessage.m in Sources */,
+				2067F8D51B4B3DDB001F5478 /* PackageTableCell.m in Sources */,
 				201186921B42119E00A59D55 /* SignupTableViewController.m in Sources */,
 				20D52D221B45B86C00A1C60B /* SCAudioTools.m in Sources */,
 				20D52D321B45B86C00A1C60B /* SCVideoPlayerView.m in Sources */,
 				201186841B41F13200A59D55 /* HexColor.m in Sources */,
+				2067F8F01B4C2989001F5478 /* CartTableCell.m in Sources */,
 				20E2EC0C1B4727BD002E317A /* SVProgressHUD.m in Sources */,
 				20D52CE91B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				20D52CE71B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
 				20E2EC131B485095002E317A /* UIImage+ImageEffects.m in Sources */,
+				2067F8FA1B4C5683001F5478 /* EditItemsTableCell.m in Sources */,
+				2067F8C71B4B05A8001F5478 /* ItemTableCell.m in Sources */,
 				2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */,
 				20D52CC41B44D4E300A1C60B /* TourViewController.m in Sources */,
 				201186291B41C16200A59D55 /* AppDelegate.m in Sources */,
 				2037DDDD1B43044E0076B0F2 /* EmailTableViewController.m in Sources */,
 				201186881B41F32C00A59D55 /* PasswordResetViewController.m in Sources */,
+				2067F8CC1B4B33EB001F5478 /* BoozeTableCell.m in Sources */,
 				20D52D1F1B45B86C00A1C60B /* SCArchivedVector.m in Sources */,
 				2037DDD71B42F34D0076B0F2 /* PhoneTableViewController.m in Sources */,
 				20D52D2E1B45B86C00A1C60B /* SCRecordSession.m in Sources */,
+				2067F8CF1B4B33F9001F5478 /* BoozeTableViewController.m in Sources */,
 				20E2EC121B485095002E317A /* SVBlurView.m in Sources */,
 				2011867E1B41F12200A59D55 /* TSBlurView.m in Sources */,
 				20D52D1E1B45B86C00A1C60B /* CIImageRendererUtils.m in Sources */,
 				2011864C1B41EC9300A59D55 /* LoginTableViewController.m in Sources */,
+				2067F8F71B4C5450001F5478 /* EditPackageTableViewController.m in Sources */,
 				201186971B421F2900A59D55 /* JGActionSheet.m in Sources */,
+				2067F8C41B4B055B001F5478 /* PackageDetailViewController.m in Sources */,
 				20D52D311B45B86C00A1C60B /* SCVideoConfiguration.m in Sources */,
 				20D52D2D1B45B86C00A1C60B /* SCRecorderTools.m in Sources */,
 				20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */,
@@ -891,22 +1054,31 @@
 				20D52D291B45B86C00A1C60B /* SCPlayer.m in Sources */,
 				20D52D231B45B86C00A1C60B /* SCFilter.m in Sources */,
 				20D52CE51B45A7A700A1C60B /* SlideNavigationContorllerAnimatorFade.m in Sources */,
+				2067F8C01B4B0152001F5478 /* DrinksTableCell.m in Sources */,
 				20D52D271B45B86C00A1C60B /* SCMediaTypeConfiguration.m in Sources */,
+				2067F8EA1B4C1BC2001F5478 /* BBBadgeBarButtonItem.m in Sources */,
 				20D52D211B45B86C00A1C60B /* SCAudioConfiguration.m in Sources */,
 				20D52D241B45B86C00A1C60B /* SCFilterGroup.m in Sources */,
+				2067F8D21B4B3CBC001F5478 /* AddPackagesTableViewController.m in Sources */,
 				2037DDCD1B42DF900076B0F2 /* ProfileTableViewController.m in Sources */,
 				20D52D201B45B86C00A1C60B /* SCAssetExportSession.m in Sources */,
 				2037DDEC1B442BD90076B0F2 /* CameraViewController.m in Sources */,
+				2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */,
+				2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */,
 				201186261B41C16200A59D55 /* main.m in Sources */,
+				2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */,
 				20D52CEC1B45A7A700A1C60B /* SlideNavigationController.m in Sources */,
 				20D52CEF1B45A7B200A1C60B /* LeftMenuViewController.m in Sources */,
 				20D52D2B1B45B86C00A1C60B /* SCRecorderFocusTargetView.m in Sources */,
 				20D52CE81B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
 				20D52D2A1B45B86C00A1C60B /* SCRecorder.m in Sources */,
 				20D52CE61B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScale.m in Sources */,
+				2067F8ED1B4C28C6001F5478 /* CartTableViewController.m in Sources */,
 				201186811B41F12200A59D55 /* TSMessageView.m in Sources */,
 				20D52D2F1B45B86C00A1C60B /* SCSampleBufferHolder.m in Sources */,
 				20D52D301B45B86C00A1C60B /* SCSwipeableFilterView.m in Sources */,
+				2067F8FE1B4C7085001F5478 /* UpdateCartTableCell.m in Sources */,
+				2067F8F41B4C2C3E001F5478 /* SubtotalTableCell.m in Sources */,
 				20D52D251B45B86C00A1C60B /* SCFilterSelectorView.m in Sources */,
 				2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */,
 				20E2EC171B486107002E317A /* FXBlurView.m in Sources */,

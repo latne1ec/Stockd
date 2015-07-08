@@ -52,6 +52,8 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     [SlideNavigationController sharedInstance].leftBarButtonItem = leftBarButtonItem;
     
+    [[SlideNavigationController sharedInstance] enableTapGestureToCloseMenu:YES];
+    
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application {

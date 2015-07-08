@@ -12,6 +12,7 @@
 #import "SlideNavigationContorllerAnimatorScale.h"
 #import "SlideNavigationContorllerAnimatorScaleAndFade.h"
 #import "SlideNavigationContorllerAnimatorSlideAndFade.h"
+#import "FoodTableViewController.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -36,6 +37,8 @@
 {
 	[super viewDidLoad];
     
+    //[[SlideNavigationController sharedInstance] enableTapGestureToCloseMenu:YES];
+    
     self.view.backgroundColor = UIColorFromRGB(0x4FD0FF);
 	
     UIScrollView *sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-[SlideNavigationController sharedInstance].portraitSlideOffset, self.view.bounds.size.height)];
@@ -48,10 +51,9 @@
     
     _data = @[
               @{@"text":@"Home",@"viewC":@"Camera"},
-              @{@"text":@"Food",@"viewC":@"Profile"},
-              @{@"text":@"Drinks",@"viewC":@"Profile"},
-              @{@"text":@"Snacks",@"viewC":@"Profile"},
-              @{@"text":@"21+",@"viewC":@"Profile"},
+              @{@"text":@"Food",@"viewC":@"Food"},
+              @{@"text":@"Drinks",@"viewC":@"Drinks"},
+              @{@"text":@"21+",@"viewC":@"21+"},
               @{@"text":@"Profile",@"viewC":@"Profile"},
                @{@"text":@"Help",@"viewC":@"Help"}
               ];
@@ -87,14 +89,36 @@
     
 }
 
+-(void)continueView:(id)sender
+{
+    
+    
+    [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:sender withSlideOutAnimation:NO andCompletion:nil];
+}
+
 -(IBAction)changeView:(id)sender {
  
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                              bundle: nil];
     int tag = [sender tag]*-1;
     UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier: _data[tag][@"viewC"]];
-    [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc withSlideOutAnimation:NO andCompletion:nil];
+        int reload = 0;
+//    if(_data[tag][@"tapped"]){
+//        if([(FoodTableViewController*)vc tappedMenu]){
+//            reload = 1;
+//        }
+//        [(FoodTableViewController*)vc setTappedMenu:_data[tag][@"tapped"]];
+//    }
     
+    //[[SlideNavigationController sharedInstance] popToRootViewControllerAnimated:NO];
+    //[self performSelector:@selector(continueView:) withObject:vc afterDelay:0.1f];
+    
+    [[SlideNavigationController sharedInstance] popToRootAndSwitchToViewController:vc withSlideOutAnimation:NO andCompletion:^{
+    
+        [vc viewWillAppear:YES];
+    }];
+    
+
 }
 
 @end

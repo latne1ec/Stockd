@@ -69,6 +69,13 @@
 
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    [ProgressHUD dismiss];
+}
+
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -115,8 +122,18 @@
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             
             if (error) {
-                [ProgressHUD showError:@"Network Error"];
-                NSLog(@"Error: %@", error);
+                [ProgressHUD dismiss];
+                [TSMessage showNotificationInViewController:self.navigationController
+                                                      title:@"Error"
+                                                   subtitle:[error.userInfo objectForKey:@"error"]
+                                                      image:nil
+                                                       type:TSMessageNotificationTypeError
+                                                   duration:TSMessageNotificationDurationAutomatic
+                                                   callback:nil
+                                                buttonTitle:nil
+                                             buttonCallback:^{}
+                                                 atPosition:TSMessageNotificationPositionNavBarOverlay
+                                       canBeDismissedByUser:YES];
             }
             else {
                 

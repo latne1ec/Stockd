@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "SlideNavigationController.h"
 #import "SCRecorder.h"
+#import "AddPackagesTableViewController.h"
 
 
 
@@ -26,6 +27,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *flash;
 @property (nonatomic, strong) UIButton *cancelPhoto;
 @property (nonatomic, strong) UITextField *caption;
+@property (nonatomic, strong) PFFile *filePicture;
+
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
 - (BOOL)slideNavigationControllerShouldDisplayRightMenu;

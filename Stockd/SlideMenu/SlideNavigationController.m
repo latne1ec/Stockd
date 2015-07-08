@@ -129,12 +129,11 @@ static SlideNavigationController *singletonInstance;
 
 - (void)setup
 {
+    NSLog(@"Setup");
     if (singletonInstance)
         NSLog(@"Singleton instance already exists. You can only instantiate one instance of SlideNavigationController. This could cause major issues");
     
     singletonInstance = self;
-    
-    
     
     self.menuRevealAnimationDuration = MENU_SLIDE_ANIMATION_DURATION;
     self.menuRevealAnimationOption = MENU_SLIDE_ANIMATION_OPTION;
@@ -145,6 +144,10 @@ static SlideNavigationController *singletonInstance;
     self.enableShadow = YES;
     self.enableSwipeGesture = YES;
     self.delegate = self;
+    
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleLeftMenu)];
+//    [self.view addGestureRecognizer:tap];
+    
 }
 
 - (void)viewWillLayoutSubviews
@@ -326,56 +329,50 @@ static SlideNavigationController *singletonInstance;
     [self openMenu:menu withDuration:self.menuRevealAnimationDuration andCompletion:completion];
 }
 
--(void)mustBlur:(BOOL)blur
-{
-    
-//    if(_blur==nil){
-//        _blur = [[UIToolbar alloc] initWithFrame:self.view.bounds];
-//        _blur.barStyle = UIBarStyleDefault;
+//-(void)mustBlur:(BOOL)blur
+//{
+//    
+////    if(_blur==nil){
+////        _blur = [[UIToolbar alloc] initWithFrame:self.view.bounds];
+////        _blur.barStyle = UIBarStyleDefault;
+////    }
+////    
+////    if(blur){
+////        _blur.hidden = NO;
+////    } else {
+////        _blur.hidden = YES;
+////    }
+////
+////    [self.navigationBar addSubview:_blur];
+//    
+//    //*******************************************************
+//    
+//    if (_blur == nil) {
+//        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//        _blur.frame = self.view.bounds;
 //    }
 //    
-//    if(blur){
+//    if (blur) {
+//        
 //        _blur.hidden = NO;
+//        
+////        if (self.menuLocation >=200) {
+////            
+////            [self blurNoAnimation];
+////            NSLog(@"No Animation");
+////        }
+////        else {
+//        [self blurView];
+//        //NSLog(@"Yes");
+//        //}
+//        
 //    } else {
+//        NSLog(@"No");
 //        _blur.hidden = YES;
 //    }
-//
-//    [self.navigationBar addSubview:_blur];
-    
-    //*******************************************************
-    
-    if (_blur == nil) {
-        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        _blur.frame = self.view.bounds;
-    }
-    
-    if (blur) {
-        
-        _blur.hidden = NO;
-        
-//        if (self.menuLocation >=200) {
-//            
-//            [self blurNoAnimation];
-//            NSLog(@"No Animation");
-//        }
-//        else {
-        [self blurView];
-        //NSLog(@"Yes");
-        //}
-        
-    } else {
-        NSLog(@"No");
-        _blur.hidden = YES;
-    }
-    
-    
-    
-    
-    //[self.view addSubview:_blur];
-    
-    
-}
+//    //[self.view addSubview:_blur];
+//}
 
 -(void)blurView {
     
@@ -511,7 +508,7 @@ static SlideNavigationController *singletonInstance;
     {
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0"))
             self.interactivePopGestureRecognizer.enabled = NO;
-        
+        NSLog(@"Yoooooo");
         self.topViewController.view.userInteractionEnabled = NO;
         [self.view addGestureRecognizer:self.tapRecognizer];
     }
@@ -670,6 +667,21 @@ static SlideNavigationController *singletonInstance;
         UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         _blur.frame = self.view.bounds;
+        
+//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//        [_blur setFrame:self.view.bounds];
+//        
+//        UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+//        UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
+//        [vibrancyEffectView setFrame:self.view.bounds];
+//        
+//        // Add Vibrancy View to Blur View
+//        [_blur.contentView addSubview:vibrancyEffectView];
+//        
+//        //[self.view addSubview:_blur];
+//        
+//        NSLog(@"Here");
         
     }
     
@@ -837,6 +849,7 @@ static SlideNavigationController *singletonInstance;
 - (void)tapDetected:(UITapGestureRecognizer *)tapRecognizer
 {
     [self closeMenuWithCompletion:nil];
+    NSLog(@"Tap tap");
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -890,7 +903,6 @@ static SlideNavigationController *singletonInstance;
     }
     else if (aPanRecognizer.state == UIGestureRecognizerStateEnded)
     {
-        NSLog(@"Changed");
         NSInteger currentX = [self horizontalLocation];
         NSInteger currentXOffset = (currentX > 0) ? currentX : currentX * -1;
         NSInteger positiveVelocity = (velocity.x > 0) ? velocity.x : velocity.x * -1;

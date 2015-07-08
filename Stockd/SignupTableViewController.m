@@ -204,13 +204,12 @@
                     picker.delegate = weakSelf;
                     picker.allowsEditing = YES;
                     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                    [weakSelf presentViewController:picker animated:NO completion:NULL];
+                    [weakSelf presentViewController:picker animated:YES completion:NULL];
                     [sheet dismissAnimated:NO];
                     
                 }
                 else {
                     //Cannot Take Photo -- Capturing photo's is not supported
-                    //[sheet dismissAnimated:YES];
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Camera Not Available" message:@"Choose a photo from your library instead." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     [alert show];
                     

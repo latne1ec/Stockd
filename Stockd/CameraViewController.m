@@ -17,6 +17,11 @@
 }
 
 
+@property (nonatomic, strong) NSArray *food;
+@property (nonatomic, strong) NSArray *drinks;
+
+
+
 
 @end
 
@@ -35,6 +40,8 @@
     
     if ([PFUser currentUser]) {
         
+        [self queryForDrinkPackages];
+        [self queryForFoodPackages];
     }
     else {
         
@@ -68,7 +75,7 @@
     UIView *previewView = self.previewView;
     self.previewView.frame = self.view.frame;
     _recorder.previewView = previewView;
-
+    
     _recorder.initializeRecordSessionLazily = YES;
     [_recorder openSession:^(NSError *sessionError, NSError *audioError, NSError *videoError, NSError *photoError) {
         [self prepareCamera];
@@ -151,10 +158,15 @@
      [[SlideNavigationController sharedInstance] setEnableSwipeGesture:YES];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [_recorder startRunningSession];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_recorder startRunningSession];
+    //[_recorder startRunningSession];
 }
 
 
@@ -181,6 +193,7 @@
             
         });
     });
+    
 }
 
 - (void) prepareCamera {
@@ -337,6 +350,7 @@
         
             NSLog(@"Got Pic: %@", image);
             self.capturedImageView.image = image;
+           self.selectedImage = self.capturedImageView.image;
             [self.view addSubview:self.imageSelectedView];
             
             self.navigationController.navigationBar.userInteractionEnabled = YES;
@@ -359,7 +373,78 @@
 
 -(void)uploadPhoto {
 
-    NSLog(@"upload");
+    NSString *uuidStr = [[NSUUID UUID] UUIDString];
+//
+//    NSLog(@"upload");
+//    [ProgressHUD show:nil Interaction:NO];
+//    self.filePicture = [PFFile fileWithName:@"picture.png" data:UIImagePNGRepresentation(self.selectedImage)];
+//    [self.filePicture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//       
+//        if (error) {
+//            [ProgressHUD showError:@"Network Error"];
+//        }
+//        else {
+//        
+//            PFObject *order = [PFObject objectWithClassName:@"Orders"];
+//            [order setObject:self.filePicture forKey:@"image"];
+//            [order setObject:[PFUser currentUser] forKey:@"user"];
+//            [order setObject:caption.text forKey:@"orderSize"];
+//            [order setObject:uuidStr forKey:@"orderNumber"];
+//            [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//                if (error) {
+//                    [ProgressHUD showError:@"Error"];
+//                }
+//                else {
+                    [self pushViewToAddPackages:uuidStr];
+//                }
+//            }];
+//        }
+//    }];
 }
+
+-(void)pushViewToAddPackages:(NSString *)orderNumber {
+    
+    AddPackagesTableViewController *apvc = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
+    apvc.picture = self.filePicture;
+    apvc.orderNumber = orderNumber;
+    apvc.food = self.food;
+    apvc.drinks = self.drinks;
+    [self.navigationController pushViewController:apvc animated:YES];
+    
+}
+
+
+-(void)queryForFoodPackages {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Packages"];
+    [query whereKey:@"packageCategory" equalTo:@"Food"];
+    [query orderByAscending:@"packageName"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (error) {
+        }
+        else {
+            self.food = objects;
+        }
+    }];
+
+}
+
+-(void)queryForDrinkPackages {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Packages"];
+    [query whereKey:@"packageCategory" equalTo:@"Drinks"];
+    [query orderByAscending:@"packageName"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (error) {
+        }
+        else {
+            self.drinks = objects;
+        }
+    }];
+}
+
+
 
 @end

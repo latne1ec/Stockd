@@ -68,6 +68,12 @@
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    [ProgressHUD dismiss];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

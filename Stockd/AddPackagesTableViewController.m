@@ -10,6 +10,7 @@
 #import "CameraViewController.h"
 #import "BBBadgeBarButtonItem.h"
 #import "AppDelegate.h"
+#import "InitialViewController.h"
 
 
 @interface AddPackagesTableViewController ()
@@ -38,6 +39,11 @@
         _position = -1;
     self.packages = [[NSMutableArray alloc] init];
     
+//    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                                     [UIColor whiteColor], NSForegroundColorAttributeName,
+//                                                                     shadow, NSShadowAttributeName,
+//                                                                     [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
 //    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
 //    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
 //    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -49,6 +55,23 @@
 //            //NSLog(@"Order: %@", self.order);
 //        }
 //    }];
+    
+    
+    if ([PFUser currentUser]) {
+        
+        [self queryForDrinkPackages];
+        [self queryForFoodPackages];
+    }
+    else {
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+        
+        InitialViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"InitialVC"];
+        [self.navigationController pushViewController:ivc animated:NO];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+        
+    }
+
     
     self.title = @"Add Packages";
     self.navigationItem.backBarButtonItem.title = @"";
@@ -158,6 +181,8 @@
     [ad showAnimation];
     
     self.navigationItem.hidesBackButton = YES;
+    
+    
     
     [self.tableView reloadData];
     

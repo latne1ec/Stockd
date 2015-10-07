@@ -7,6 +7,7 @@
 //
 
 #import "PackageDetailViewController.h"
+#import "CartButton.h"
 
 @interface PackageDetailViewController ()
 
@@ -28,6 +29,15 @@
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(dismissViewControllerAnimated:completion:)];
+    
+    
+    CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0,0,25,25);
+    [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
+    [btn load];
+    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    
+    self.navigationItem.rightBarButtonItem = barBtn;
     
 
     self.title = [NSString stringWithFormat:@"%@ Items", self.packageName];
@@ -138,6 +148,28 @@
     
     
 }
+
+-(void)goToCartScreen {
+    
+//    if (self.packages.count == 0) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cart Empty" message:@"Your cart is empty. Add a package or two before checking out!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//        [alert show];
+//    }
+//    else {
+    
+        CartTableViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Cart"];
+//        cvc.packages = self.packages;
+//        cvc.items = _itemsDictionary;
+//        //cvc.packageSize = self.packageSize;
+//        cvc.packageSize = 1;
+//        cvc.orderNumber = _orderNumber;
+//        cvc.beerItem = self.beerItem;
+//        cvc.liquorItem = self.liquorItem;
+        [self.navigationController pushViewController:cvc animated:YES];
+    //}
+    
+}
+
 
 
 @end

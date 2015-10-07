@@ -507,7 +507,7 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
                 [currentInstallation saveInBackground];
                 
                 [ProgressHUD dismiss];
-                ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Camera"];
+                ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
                 UINavigationController *navigationController =
                 [[UINavigationController alloc] initWithRootViewController:destViewController];
                 UIBarButtonItem *newBackButton =

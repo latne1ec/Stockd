@@ -250,7 +250,7 @@
                 [currentInstallation saveInBackground];
                 
                 /////Pop To Main View Controller
-                ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Camera"];
+                ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
                 UINavigationController *navigationController =
                 [[UINavigationController alloc] initWithRootViewController:destViewController];
                 UIBarButtonItem *newBackButton =

@@ -30,7 +30,7 @@
                                                                             action:@selector(dismissViewControllerAnimated:completion:)];
     
 
-    self.title = [NSString stringWithFormat:@"%@ Package", self.packageName];
+    self.title = [NSString stringWithFormat:@"%@ Items", self.packageName];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"initialBkg"]];
     [self.tableView setBackgroundView:imageView];
@@ -70,12 +70,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
     return self.items.count;
 }
 
@@ -86,9 +84,19 @@
 
     PFObject *object = [self.items objectAtIndex:indexPath.row];
     cell.itemNameLabel.text = [object objectForKey:@"itemName"];
-    cell.itemQuantityLabel.text = [object objectForKey:@"itemQuantity"];
+    cell.itemDetailLabel.text = [object objectForKey:@"itemQuantity"];
+    cell.itemQuantityLabel.text = @"0";
+    float price = [[object objectForKey:@"itemPrice"] floatValue];
+    cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f",price];
+    
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 70;
+    
 }
 
 -(void)queryForItems {
@@ -100,12 +108,12 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
             [ProgressHUD dismiss];
-            NSLog(@"Error: %@", error);
+            //NSLog(@"Error: %@", error);
         }
         else {
             [ProgressHUD dismiss];
             self.items = objects;
-            NSLog(@"Items: %@", objects);
+            //NSLog(@"Items: %@", objects);
             [self.tableView reloadData];
         }
     }];
@@ -118,6 +126,18 @@
     }];
 }
 
+
+
+-(IBAction)incrementQuantity:(id)sender {
+    
+    
+}
+
+
+-(IBAction)decrementQuantity:(id)sender {
+    
+    
+}
 
 
 @end

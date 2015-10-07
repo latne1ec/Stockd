@@ -22,6 +22,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *stockdLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stockdTitle;
+
+@property (weak, nonatomic) IBOutlet UILabel *labelOne;
+@property (weak, nonatomic) IBOutlet UILabel *labelTwo;
+
+@property (weak, nonatomic) IBOutlet UIView *videoBkg;
+
+@property (weak, nonatomic) IBOutlet UILabel *alreadyHaveAccountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *i4TitleLabel;
+
 
 
 

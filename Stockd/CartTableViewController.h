@@ -15,12 +15,26 @@
 #import "PaymentTableViewController.h"
 #import "TSMessage.h"
 #import "ConfirmationTableViewController.h"
+#import "PickSizeViewController.h"
+#import "SlideNavigationController.h"
 
-@interface CartTableViewController : UITableViewController <TSMessageViewProtocol>
+
+
+@interface CartTableViewController : UITableViewController <TSMessageViewProtocol, SlideNavigationControllerDelegate>
 
 
 @property (nonatomic, strong) NSArray *packages;
 @property (nonatomic, strong) NSDictionary *items;
+@property (nonatomic, strong) NSString *orderNumber;
+@property (nonatomic, strong) PFObject *order;
+@property (nonatomic, strong) NSString *beerItem;
+@property (nonatomic, strong) NSString *liquorItem;
+
+
+@property (nonatomic) int packageSize;
+
+
+- (IBAction)sizeButtonTapped:(id)sender;
 
 
 - (IBAction)getStockedTapped:(id)sender;

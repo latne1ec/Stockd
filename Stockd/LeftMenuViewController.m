@@ -37,8 +37,6 @@
 {
 	[super viewDidLoad];
     
-    //[[SlideNavigationController sharedInstance] enableTapGestureToCloseMenu:YES];
-    
     self.view.backgroundColor = UIColorFromRGB(0x4FD0FF);
 	
     UIScrollView *sc = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-[SlideNavigationController sharedInstance].portraitSlideOffset, self.view.bounds.size.height)];
@@ -50,7 +48,7 @@
     UIFont *font = [UIFont fontWithName:@"BELLABOO-Regular" size:24];
     
     _data = @[
-              @{@"text":@"Home",@"viewC":@"Camera"},
+              @{@"text":@"Home",@"viewC":@"AddPackages"},
               @{@"text":@"Food",@"viewC":@"Food"},
               @{@"text":@"Drinks",@"viewC":@"Drinks"},
               @{@"text":@"21+",@"viewC":@"21+"},
@@ -102,7 +100,7 @@
                                                              bundle: nil];
     int tag = [sender tag]*-1;
     UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier: _data[tag][@"viewC"]];
-        int reload = 0;
+        //int reload = 0;
 //    if(_data[tag][@"tapped"]){
 //        if([(FoodTableViewController*)vc tappedMenu]){
 //            reload = 1;

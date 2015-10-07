@@ -28,6 +28,11 @@
 @property (nonatomic, strong) UIButton *cancelPhoto;
 @property (nonatomic, strong) UITextField *caption;
 @property (nonatomic, strong) PFFile *filePicture;
+@property (weak, nonatomic) IBOutlet UIImageView *toastOne;
+
+@property (strong, nonatomic) IBOutlet UIImageView *toastTwo;
+
+@property (nonatomic) int fbLogin;
 
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu;

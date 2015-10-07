@@ -21,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"View did load Address");
+    
     self.tableView.tableFooterView = [UIView new];
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
@@ -72,7 +74,7 @@
                                                           shadow, NSShadowAttributeName,
                                                           [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
-    if ([[PFUser currentUser] objectForKey:@"deliveryInstructions"] == nil) {
+    if ([[[PFUser currentUser] objectForKey:@"deliveryInstructions"] length] <= 2) {
         self.instructionsPlaceholder.hidden = NO;
     }
     else {
@@ -119,8 +121,6 @@
 //*********************************************
 
 
-
-
 //*********************************************
 // Custom Placeholder
 
@@ -147,8 +147,6 @@
 }
 
 //*********************************************
-
-
 
 
 #pragma mark - Table view data source
@@ -216,7 +214,7 @@
     }
     if (indexPath.row == 5) {
         NSString *instructions = [[PFUser currentUser] objectForKey:@"deliveryInstructions"];
-        if (instructions == nil) {
+        if ([instructions length] <= 2) {
         }
         else {
             self.instructionsPlaceholder.hidden = YES;
@@ -241,7 +239,6 @@
     NSString *aptDormNumber = self.apartmentDormTextField.text;
     NSString *zipCode = self.zipTextfield.text;
     NSString *deliveryInstructions = self.instructionsTextfield.text;
-    
     
     if ([streetName length ] < 7) {
         
@@ -350,19 +347,65 @@
                 
             }
             else {
-                [ProgressHUD dismiss];
-                [self.tableView reloadData];
-                [parent addressMessage];
-
-                [self dismissViewControllerAnimated:YES completion:^{
-                    
-                }];
                 
+                [self checkIfParticipatingArea];
+
             }
         }];
     }
 }
 //*********************************************
+
+
+-(void)checkIfParticipatingArea {
+    
+    NSString *zipCode = self.zipTextfield.text;
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Zipcodes"];
+    [query whereKey:@"zipcode" equalTo:zipCode];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (object == nil) {
+            NSLog(@"Not in that area");
+            [ProgressHUD dismiss];
+            [self popBack];
+            
+            [[PFUser currentUser] setObject:@"NO" forKey:@"canOrder"];
+            [[PFUser currentUser] saveInBackground];
+        }
+        else {
+            
+            [ProgressHUD dismiss];
+            [self.tableView reloadData];
+            [[PFUser currentUser] setObject:@"YES" forKey:@"canOrder"];
+            [[PFUser currentUser] saveInBackground];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [parent addressMessage];
+            }];
+
+            
+        }
+    }];
+}
+
+- (void)popBack {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"We are sorry but Stockd isn't serving your area yet. We'll notify you as soon as we are!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    [alert show];
+    alert.tag = 55;
+    alert.delegate = self;
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger) buttonIndex {
+    
+    if (alertView.tag == 55) {
+        
+            [self dismissKeyboard];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+    }
+}
+
 
 
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
@@ -381,8 +424,5 @@
     [self.instructionsTextfield resignFirstResponder];
     
 }
-
-
-
 
 @end

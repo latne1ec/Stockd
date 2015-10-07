@@ -16,5 +16,8 @@
 
 @property (nonatomic, strong) NSString *packageName;
 
+- (IBAction)decrementQuantity:(id)sender;
+- (IBAction)incrementQuantity:(id)sender;
+
 
 @end

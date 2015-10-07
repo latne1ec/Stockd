@@ -16,22 +16,48 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(dismissViewControllerAnimated:completion:)];
+    
+    self.title = @"Terms of Service";
+    
+    UIImage *img = [UIImage imageNamed:@"initialBkg"];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:img]];
+    
+    
+    //Nav Bar Back Button Color
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
+    
+   
+    
+    //Navigation Bar Title Properties
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor clearColor];
+    shadow.shadowOffset = CGSizeMake(0, .0);
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+                                                          shadow, NSShadowAttributeName,
+                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
 
 @end

@@ -9,10 +9,11 @@
 #import "UIViewController+ENPopUp.h"
 #import "JWBlurView.h"
 #import <objc/runtime.h>
+#import "PopupViewController.h"
 
 static void * ENPopupViewControllerPropertyKey = &ENPopupViewControllerPropertyKey;
 
-static CGFloat const kAnimationDuration = .4f;
+static CGFloat const kAnimationDuration = .34f;
 static CGFloat const kRotationAngle = 70.f;
 
 static NSInteger const kENPopUpOverlayViewTag   = 351301;
@@ -35,7 +36,13 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 
 - (void)dismissPopUpViewController
 {
+    NSLog(@"CALLED HERE");
+     UIView *sourceView = [self topView];
+    UIView *overlayView = [sourceView viewWithTag:kENPopUpOverlayViewTag];
+    [overlayView  removeFromSuperview];
+    
 	[self dismissPopUpViewControllerWithcompletion:nil];
+    
 }
 
 - (void)dismissPopUpViewControllerWithcompletion:(void (^)(void))completionBlock
@@ -45,6 +52,9 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     UIView *popupView = [sourceView viewWithTag:kENPopUpViewTag];
     UIView *overlayView = [sourceView viewWithTag:kENPopUpOverlayViewTag];
     [self performDismissAnimationInSourceView:sourceView withBlurView:blurView popupView:popupView overlayView:overlayView completion:completionBlock];
+}
+
+- (IBAction)monthTextField:(id)sender {
 }
 
 #pragma mark - Getters & Setters
@@ -74,6 +84,9 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     
     // Add Blured View
     JWBlurView *bluredView = [[JWBlurView alloc] initWithFrame:overlayView.bounds];
+    
+
+    
     bluredView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     bluredView.tag = kENPopUpBluredViewTag;
     [bluredView setBlurAlpha:.0f];
@@ -89,15 +102,32 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
     dismissButton.frame = sourceView.bounds;
     [overlayView addSubview:dismissButton];
     
-    [dismissButton addTarget:self action:@selector(dismissPopUpViewController)
-            forControlEvents:UIControlEventTouchUpInside];
+//    [dismissButton addTarget:self action:@selector(dismissPopUpViewController)
+//            forControlEvents:UIControlEventTouchUpInside];
     
     // Customize popUpView
-    popUpView.layer.cornerRadius = 3.5f;
+    popUpView.layer.cornerRadius = 5.0f;
     popUpView.layer.masksToBounds = YES;
     popUpView.layer.zPosition = 99;
     popUpView.tag = kENPopUpViewTag;
-    popUpView.center = overlayView.center;
+    
+    
+    if([UIScreen mainScreen].bounds.size.height < 568.0) {
+        
+        NSLog(@"iPhone 4");
+        popUpView.frame = CGRectMake(25, 70, 270, 180);
+    }
+    
+    else if ([UIScreen mainScreen].bounds.size.height == 568) {
+        
+        popUpView.frame = CGRectMake(25, 150, 270, 180);
+    }
+    
+    else {
+        
+        popUpView.center = overlayView.center;
+    }
+    
     [popUpView setNeedsLayout];
     [popUpView setNeedsDisplay];
     

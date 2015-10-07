@@ -11,7 +11,7 @@
 #import "ProgressHUD.h"
 #import "TSMessage.h"
 
-@interface AddressTableViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate, TSMessageViewProtocol>
+@interface AddressTableViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate, TSMessageViewProtocol, UIAlertViewDelegate>
 {
     id parent;
 }

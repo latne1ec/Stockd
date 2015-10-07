@@ -16,21 +16,29 @@
 #import "EmailTableViewController.h"
 #import "SlideNavigationController.h"
 #import "TSMessage.h"
+#import "KAProgressLabel.h"
+#import "MessageUI/MessageUI.h"
 
 
 
-@interface ProfileTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SlideNavigationControllerDelegate, TSMessageViewProtocol>
+
+
+@interface ProfileTableViewController : UITableViewController <UITextFieldDelegate, UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SlideNavigationControllerDelegate, TSMessageViewProtocol, MFMessageComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *profilePicCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *addressCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *paymentCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *phoneCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *emailCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *inviteFriendsCell;
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *logoutCell;
-
 @property (weak, nonatomic) IBOutlet UIImageView *profilePic;
-
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextfield;
+
+@property (weak, nonatomic) IBOutlet KAProgressLabel *circleView;
+
 
 - (IBAction)tappedProfilePic:(id)sender;
 

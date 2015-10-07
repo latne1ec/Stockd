@@ -656,24 +656,24 @@ static SlideNavigationController *singletonInstance;
 -(void)updateBlur {
     
     if (_blur == nil) {
-        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        _blur.frame = self.view.bounds;
-        
-//        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//        UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 //        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-//        [_blur setFrame:self.view.bounds];
-//        
-//        UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
-//        UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
-//        [vibrancyEffectView setFrame:self.view.bounds];
-//        
-//        // Add Vibrancy View to Blur View
-//        [_blur.contentView addSubview:vibrancyEffectView];
-//        
-//        //[self.view addSubview:_blur];
-//        
-//        NSLog(@"Here");
+//        _blur.frame = self.view.bounds;
+        
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        _blur = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        [_blur setFrame:self.view.bounds];
+        
+        UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+        UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
+        [vibrancyEffectView setFrame:self.view.bounds];
+        
+        // Add Vibrancy View to Blur View
+        [_blur.contentView addSubview:vibrancyEffectView];
+        
+        //[self.view addSubview:_blur];
+        
+        NSLog(@"Here");
         
     }
     

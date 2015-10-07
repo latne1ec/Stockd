@@ -9,14 +9,21 @@
 #import "AddPackagesTableViewController.h"
 #import "CameraViewController.h"
 #import "BBBadgeBarButtonItem.h"
+#import "AppDelegate.h"
 
 
 @interface AddPackagesTableViewController ()
 
-
 @property (nonatomic, strong) NSArray *booze;
+@property (nonatomic) int oldPosition;
+@property (nonatomic) int position, counts;
 @property (nonatomic, strong) NSMutableArray *packages;
 @property (nonatomic, strong) NSMutableDictionary *itemsDictionary;
+@property (nonatomic, strong) NSString *beerItem;
+@property (nonatomic, strong) NSString *liquorItem;
+
+@property (nonatomic, strong) UIImageView *toast;
+@property (nonatomic, strong) UIImage *toastPic;
 
 
 
@@ -27,41 +34,49 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _oldPosition = -1;
+        _position = -1;
     self.packages = [[NSMutableArray alloc] init];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
-    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (error) {
-            
-        }
-        else {
-            self.order = object;
-            NSLog(@"Order: %@", self.order);
-        }
-    }];
-    
+//    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
+//    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
+//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//        if (error) {
+//            
+//        }
+//        else {
+//            self.order = object;
+//            //NSLog(@"Order: %@", self.order);
+//        }
+//    }];
     
     self.title = @"Add Packages";
     self.navigationItem.backBarButtonItem.title = @"";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    self.tableView.frame = CGRectMake(0, -60, self.view.frame.size.width, self.view.frame.size.height);
+    
+    _counts = 0;
     
     self.tableView.tableFooterView = [UIView new];
 
     //Nav Bar Back Button Color
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(closeTheController)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+//                                                                             style:UIBarButtonItemStylePlain
+//                                                                            target:self
+//                                                                            action:@selector(closeTheController)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cartIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(goToCartScreen)];
+    CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0,0,25,25);
+    [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
+    [btn load];
+    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
+
+    self.navigationItem.rightBarButtonItem = barBtn;
     
+//[[UIImage imageNamed:@"cartIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -69,7 +84,7 @@
     self.navigationController.navigationBar.translucent = NO;
     
     self.tableView.layer.masksToBounds = YES;
-    self.tableView.clipsToBounds = YES;
+    //self.tableView.clipsToBounds = YES;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"initialBkg"]];
     [self.tableView setBackgroundView:imageView];
@@ -86,13 +101,31 @@
     [self queryForFoodPackages];
     [self queryForDrinkPackages];
     [self queryForBoozePackages];
-    
     [self queryForPackageItems];
+    [self getPreselectedBeerItem];
+    
+
+    NSString *uuidStr = [[NSUUID UUID] UUIDString];
+
+    self.orderNumber = uuidStr;
+    NSLog(@"Order Numba: %@",self.orderNumber);
+    
+    //[self queryForOrderNumber];
     
 }
 
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+    return YES;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    return NO;
+}
+
 -(void)closeTheController {
-    //[ProgressHUD show:nil];
+
     CameraViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Camera"];
     [self.navigationController pushViewController:cvc animated:NO];
     
@@ -100,7 +133,6 @@
 
 -(void)goToCartScreen {
     
-    NSLog(@"Cart: %@", self.packages);
     if (self.packages.count == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cart Empty" message:@"Your cart is empty. Add a package or two before checking out!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
@@ -109,7 +141,12 @@
     
     CartTableViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Cart"];
     cvc.packages = self.packages;
-        cvc.items = _itemsDictionary;
+    cvc.items = _itemsDictionary;
+    //cvc.packageSize = self.packageSize;
+    cvc.packageSize = 1;
+    cvc.orderNumber = _orderNumber;
+    cvc.beerItem = self.beerItem;
+    cvc.liquorItem = self.liquorItem;
     [self.navigationController pushViewController:cvc animated:YES];
     }
     
@@ -117,12 +154,39 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     
+    AppDelegate *ad = [[UIApplication sharedApplication] delegate];
+    [ad showAnimation];
+    
     self.navigationItem.hidesBackButton = YES;
+    
+    [self.tableView reloadData];
+    
+    UIView *headerView = [self.tableView headerViewForSection:0];
+    [headerView setNeedsDisplay];
+    [headerView setNeedsLayout];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     
     [ProgressHUD dismiss];
+
+    self.toast = nil;
+    self.toastPic = nil;
+    
+    [self.toast removeFromSuperview];
+    
+    self.toast.alpha = 0.0;
+    
+    for(UIView* view in self.navigationController.navigationBar.subviews)
+    {
+        if(view.tag == 9)
+        {
+            [view removeFromSuperview];
+        }
+    }
+    
+    
 }
 
 #pragma mark - Table view data source
@@ -130,32 +194,50 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     
-    return 2;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    //[[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
-
-//    [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"initialBkg"]]];
     
-    
-    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont fontWithName:@"BELLABOO-Regular" size:24]];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont fontWithName:@"BELLABOO-Regular" size:22]];
 
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextAlignment:NSTextAlignmentCenter];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor whiteColor]];
-    
     [[UIButton appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTintColor:[UIColor blackColor]];
     
-    
     if (section == 0) {
+        
+        if(_position<0){
+             [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+        } else {
+            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
+        }
+        
         return @"Food";
+        
     }
+    
     if (section == 1) {
+            if(_position>=1){
+                [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
+
+            } else {
+        [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+                
+            }
         return @"Drinks";
     }
+    
     if (section == 2) {
-        return @"Booze";
+        if(_position>=2){
+            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
+
+        } else {
+            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+        }
+
+        return @"21+";
     }
     return nil;
 }
@@ -169,14 +251,33 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    if (self.tableView.contentOffset.y > 100) {
-        
+//    NSLog(@"Position: %d", _position);
+    
+    float offsetY = scrollView.contentOffset.y;
+      //NSLog(@"Position: %f", offsetY);
+    
+    _position = 0;
+    
+    if(offsetY<0){
+        _position = 0;
+    }
+    
+    if(offsetY>605.0f){
+        _position = 1;
+    }
+    if(offsetY>918.0f){
+        _position = 2;
+    }
+    
+    if(_position!=_oldPosition){
+        _oldPosition = _position;
+        [self.tableView reloadData];
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 38;
+    return 42;
 }
 
 
@@ -189,7 +290,7 @@
         return self.drinks.count;
     }
     if (section == 2) {
-        return 0;
+        return self.booze.count;
     }
     
     return 0;
@@ -213,10 +314,10 @@
         if (![self.packages containsObject:packageName]) {
             cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-            
+
             
         } else {
-            
+
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
@@ -243,12 +344,40 @@
 
         return cell;
     }
+    
+    if (indexPath.section == 2) {
+        PFObject *object = [self.booze objectAtIndex:indexPath.row];
+        NSString *packageName = [object objectForKey:@"packageName"];
+        cell.packageNameLabel.text = [NSString stringWithFormat:@"+ %@", packageName];
+        
+        if (![self.packages containsObject:packageName]) {
+            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+            
+            
+        } else {
+            
+            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        }
+        
+        return cell;
+    }
+
+    
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    
+    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:6];
+    
+    
     PackageTableCell *cell = (PackageTableCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    [self showToast];
     
     if (indexPath.section == 0) {
         PFObject *object = [self.food objectAtIndex:indexPath.row];
@@ -265,6 +394,24 @@
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
     }
+    
+    else if (indexPath.section == 2) {
+        PFObject *object = [self.booze objectAtIndex:indexPath.row];
+        NSString *packageName = [object objectForKey:@"packageName"];
+        if ([self.packages containsObject:packageName]) {
+            [self.packages removeObject:packageName];
+            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+            
+        } else {
+            
+            [self.packages addObject:packageName];
+            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        }
+    }
+
+    
     else {
         
         PFObject *object = [self.drinks objectAtIndex:indexPath.row];
@@ -280,6 +427,8 @@
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
     }
+    
+    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:(int)[self.packages count]];
 }
 
 -(void)queryForFoodPackages {
@@ -332,6 +481,7 @@
             [ProgressHUD showError:@"Error"];
         }
         else {
+            
             [ProgressHUD dismiss];
             self.booze = objects;
             [self.tableView reloadData];
@@ -344,10 +494,13 @@
     _itemsDictionary = [[NSMutableDictionary alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Items"];
+    [query setLimit:1000];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
+        //NSLog(@"objetos: %@",objects);
+        
         if (error) {
-            
+            NSLog(@"Error: %@", error);
         }
         else {
             for(int i=0; i<[objects count]; i++){
@@ -358,9 +511,90 @@
                 [_itemsDictionary[item[@"itemPackage"]] addObject:item];
             }
         }
+                    //NSLog(@"Dictionary: %@", _itemsDictionary);
+    }];    
+}
+
+-(void)getPreselectedBeerItem {
+    
+    [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+        if (error) {
+            [ProgressHUD showError:@"Network Error"];
+        }
+        else {
+            [ProgressHUD dismiss];
+            self.beerItem = config[@"preselectedBeerItem"];
+        }
     }];
 }
 
+-(void)getPreselectedLiquorItem {
+    
+    [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+        if (error) {
+            [ProgressHUD showError:@"Network Error"];
+        }
+        else {
+            [ProgressHUD dismiss];
+            self.liquorItem = config[@"preselectedLiquorItem"];
+        }
+    }];
+}
 
+-(void)showToast {
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasRanApp3"] isEqualToString:@"yes"]) {
+        NSLog(@"hi");
+    }
+    else {
+    
+    if ([UIScreen mainScreen].bounds.size.height <= 568.0) {
+        self.toastPic = [UIImage imageNamed:@"toastThreeSmall"];
+    }
+    else {
+    self.toastPic = [UIImage imageNamed:@"toastThree"];
+    }
+    
+    self.toast = [[UIImageView alloc] initWithImage:self.toastPic];
+    self.toast.alpha = 1.0;
+    self.toast.tag = 9;
+    
+    CGPoint dasCenter = CGPointMake(self.navigationController.navigationBar.bounds.size.width/2, 24);
+    
+    [self.toast setCenter:dasCenter];
+    
+    [self.navigationController.navigationBar addSubview:self.toast];
+    
+        [UIView animateWithDuration:0.07 animations:^{
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasRanApp3"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            self.toast.alpha = 1.0;
+
+            self.toast.transform = CGAffineTransformMakeScale(1.045, 1.045);
+            
+        } completion:^(BOOL finished) {
+            self.toast.transform = CGAffineTransformMakeScale(1.0, 1.0);
+
+        }];
+    }
+}
+
+-(void)queryForOrderNumber {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
+    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (error) {
+            [self queryForOrderNumber];
+        }
+        else {
+            self.order = object;
+            //NSLog(@"Order: %@", self.order);
+        }
+    }];
+
+}
 
 @end

@@ -10,4 +10,13 @@
 
 @interface AlcoholPolicyViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *continueButton;
+
+- (IBAction)continueButtonTapped:(id)sender;
+
+
+-(void)showPopup;
+
+
+
 @end

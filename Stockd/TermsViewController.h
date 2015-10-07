@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TermsViewController : UIViewController
+@interface TermsViewController : UIViewController <UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
 
 @end

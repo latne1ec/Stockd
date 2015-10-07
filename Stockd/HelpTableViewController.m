@@ -7,6 +7,8 @@
 //
 
 #import "HelpTableViewController.h"
+#import "TermsViewController.h"
+
 
 @interface HelpTableViewController ()
 
@@ -44,14 +46,11 @@
                                                           [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
     self.navigationController.navigationItem.hidesBackButton = YES;
-    
     self.title = @"Help";
     
-    
-    
+    [TSMessage setDefaultViewController:self];
+    [TSMessage setDelegate:self];
 
-    
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -65,17 +64,13 @@
     //[self.navigationController.navigationBar setHidden:YES];
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu{
     return YES;
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu{
     return NO;
 }
-
-
 
 #pragma mark - Table view data source
 
@@ -93,8 +88,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) return _firstCell;
-    if (indexPath.row == 1) return _secondCell;
-    if (indexPath.row == 2) return _thirdCell;
+    if (indexPath.row == 1) return _thirdCell;
+    if (indexPath.row == 2) return _fourthCell;
     
     return nil;
 }
@@ -105,12 +100,25 @@
     
     if (indexPath.row == 0) {
         
+        
+//        TourViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Tour"];
+//        destViewController.view.alpha = 0.0;
+//        [UIView animateWithDuration:0.5 delay:0.0 options:0 animations:^{
+//            
+//            destViewController.view.alpha = 1.0;
+//            [self.navigationController pushViewController:destViewController animated:NO];
+//            
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+        
         [CATransaction begin];
         TourViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Tour"];
         [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
         CATransition *transition = [CATransition animation];
+        transition.removedOnCompletion = YES;
         [transition setType:kCATransitionFade];
-        [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
+        [self.navigationController.view.layer addAnimation:transition forKey:[NSString stringWithFormat:@"someAnimation_%f",(double)[[NSDate date] timeIntervalSince1970]]];
         //navigationController.navigationBar.hidden = YES;
         
         [self.navigationController pushViewController:destViewController animated:NO];
@@ -118,12 +126,73 @@
 
     }
 
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Link to Stockd Website" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
+        [self sendEmail];
     }
     
+    if (indexPath.row == 2) {
+        
+        TermsViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Terms"];
+        UINavigationController *navigationController =
+        [[UINavigationController alloc] initWithRootViewController:destViewController];
+        UIBarButtonItem *newBackButton =
+        [[UIBarButtonItem alloc] initWithTitle:@"Terms of Service"
+                                         style:UIBarButtonItemStyleBordered
+                                        target:nil
+                                        action:nil];
+        [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+        [self.navigationController presentViewController:navigationController animated:YES completion:^{
+        }];
+        
+    }
+}
+
+-(void)sendEmail {
+    
+    if ([MFMailComposeViewController canSendMail]) {
+        
+        
+        MFMailComposeViewController *composeViewController = [[MFMailComposeViewController alloc] initWithNibName:nil bundle:nil];
+        [composeViewController setMailComposeDelegate:self];
+        [composeViewController setToRecipients:@[@"matt.mason@getstockd.co"]];
+        [composeViewController setSubject:@"Contact Stockd"];
+        
+        [[composeViewController navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+        
+        [[composeViewController navigationBar] setTintColor: [UIColor blackColor]];
+        
+        [self presentViewController:composeViewController animated:YES completion:^{
+           
+            }];
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    
+    if (error) {
+        NSLog(@"Error");
+    }
+    
+    else if (result == 2) {
+        
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Success"
+                                           subtitle:@"Message sent successfully"
+                                              image:nil
+                                               type:TSMessageNotificationTypeSuccess
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+
+    }
+    
+    NSLog(@"Result: %u", result);
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

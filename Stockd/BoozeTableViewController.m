@@ -46,17 +46,14 @@
                                                           [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
     [self queryForBoozePackages];
-
     
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu{
     return YES;
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu {
     return NO;
 }
 
@@ -64,12 +61,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
+
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+
     return self.booze.count;
 }
 

@@ -74,8 +74,6 @@
     [ProgressHUD dismiss];
 }
 
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -96,12 +94,14 @@
     if (indexPath.row == 0) {
         self.emailTextfield.text = [[PFUser currentUser] objectForKey:@"email"];
         
-    }
     return emailCell;
+    }
+    if (indexPath.row == 1) {
+        return _secondCell;
+    }
     
     return nil;
 }
-
 
 //*********************************************
 // Save Phone Numbers To Parse
@@ -160,7 +160,6 @@
 -(void)dismissKeyboard {
     
     [self.emailTextfield resignFirstResponder];
-
 }
 
 @end

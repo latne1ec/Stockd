@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "TourViewController.h"
 #import "SlideNavigationController.h"
+#import <MessageUI/MessageUI.h>
+#import "TSMessage.h"
 
 
-@interface HelpTableViewController : UITableViewController <SlideNavigationControllerDelegate>
+
+
+@interface HelpTableViewController : UITableViewController <SlideNavigationControllerDelegate, MFMailComposeViewControllerDelegate, TSMessageViewProtocol>
 
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *firstCell;
@@ -19,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *secondCell;
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *thirdCell;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *fourthCell;
+
 
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu;

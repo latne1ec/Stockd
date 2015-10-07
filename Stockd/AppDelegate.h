@@ -15,5 +15,9 @@
 @property (strong, nonatomic) UIWindow *window;
 
 
+-(void)showAnimation;
+
+
+
 @end
 

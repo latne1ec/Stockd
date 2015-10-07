@@ -41,7 +41,6 @@
     [btn4 setBorderWidth:1.0f];
     [btn4 setBorderColor:[UIColor colorWithRed:0.941 green:0.353 blue:0.643 alpha:1].CGColor];
 
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -81,7 +80,6 @@
     return 2;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) return emailCell;
@@ -89,7 +87,6 @@
     if (indexPath.row == 1) {
         resetCell.separatorInset = UIEdgeInsetsMake(0.f, 10000.0f, 0.f, 0.0f);
     }
-
     
     if (indexPath.row == 1) return resetCell;
     
@@ -168,7 +165,5 @@
     [self.emailTextfield resignFirstResponder];
     
 }
-
-
 
 @end

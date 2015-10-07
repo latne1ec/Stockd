@@ -12,7 +12,14 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *getStockdButton;
 
-@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *sizeButton;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *taxesLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *finalTotalLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *discountLabel;
 
 @end

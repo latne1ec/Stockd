@@ -34,7 +34,7 @@
     stockd.textAlignment = NSTextAlignmentCenter;
     stockd.transform = CGAffineTransformMakeScale(0.00000001f,0.00000001f);
     stockd.textColor = [UIColor whiteColor];
-    stockd.font = [UIFont fontWithName:@"HelveticaNeue" size:58.0f];
+    stockd.font = [UIFont fontWithName:@"Bellaboo-regular" size:58.0f];
     stockd.text = @"STOCKD";
     [self addSubview:stockd];
     
@@ -44,8 +44,8 @@
     NSMutableArray *arr = [NSMutableArray array];
     
     
-    bw = [[UIImage imageNamed:images[1]] size].width/3.8f;
-    bh = [[UIImage imageNamed:images[1]] size].height/3.8f;
+    bw = [[UIImage imageNamed:images[1]] size].width/1.5f;
+    bh = [[UIImage imageNamed:images[1]] size].height/1.5f;
     
     for(int i=0; i<[images count]; i++){
         UIImage *icon = [UIImage imageNamed:images[i]];

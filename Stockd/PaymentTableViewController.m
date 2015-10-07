@@ -502,8 +502,15 @@ typedef void (^STPCardCompletionBlock)(STPCard *card,NSError *error);
             self.cardNumberTextfield.text = nil;
             self.cardExpirationTextfield.text = nil;
             self.cvvTextfield.text = nil;
+            
+            self.cardNumberTextfield.enabled = YES;
+            self.cardExpirationTextfield.enabled = YES;
+            self.cvvTextfield.enabled = YES;
         }
     }];
+}
+
+-(void)textFieldChanged:(id)sender {
 }
 
 

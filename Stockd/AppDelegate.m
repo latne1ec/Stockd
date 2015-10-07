@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import <Stripe/Stripe.h>
+#import "Animation.h"
 
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -20,7 +21,7 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
 
 
 @interface AppDelegate ()
-
+@property(nonatomic) int alreadyShowed;
 @end
 
 @implementation AppDelegate
@@ -29,7 +30,7 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    
+    _alreadyShowed = 0;
     //Parse Keys
     [Parse setApplicationId:@"CYM8KYF8jzPvy9usbmgAZouY1X1t3WbWLErZzxgc"
                   clientKey:@"56dirzgs3IEhiIrV6AWu898rTmNIyUBf79vWwbE8"];
@@ -63,6 +64,7 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     [[SlideNavigationController sharedInstance] enableTapGestureToCloseMenu:YES];
     
     return YES;
+    
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
 }
@@ -85,7 +87,17 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
                                                 annotation:annotation];
 }
 
-
-
+-(void)showAnimation {
+    if(_alreadyShowed==0) {
+            
+        _alreadyShowed = 1;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    Animation *animation = [[Animation alloc] initWithFrame:CGRectMake(0,0,screenRect.size.width,screenRect.size.height)];
+    UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
+    [currentWindow addSubview:animation];
+    [animation load];
+        
+    }
+}
 
 @end

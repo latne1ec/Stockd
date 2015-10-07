@@ -43,11 +43,12 @@
 		2011868D1B4205DA00A59D55 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2011868C1B4205DA00A59D55 /* Stripe.framework */; };
 		2011868F1B42060F00A59D55 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2011868E1B42060F00A59D55 /* PassKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		201186921B42119E00A59D55 /* SignupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201186911B42119E00A59D55 /* SignupTableViewController.m */; };
-		201186941B421EC700A59D55 /* addPhotoPic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201186931B421EC700A59D55 /* addPhotoPic@2x.png */; };
 		201186971B421F2900A59D55 /* JGActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 201186961B421F2900A59D55 /* JGActionSheet.m */; };
 		2011869D1B422E1900A59D55 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2011869C1B422E1900A59D55 /* Social.framework */; };
 		2011869F1B422E3800A59D55 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2011869E1B422E3800A59D55 /* Accounts.framework */; };
 		201186A11B422EA400A59D55 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201186A01B422EA400A59D55 /* AVFoundation.framework */; };
+		20268B381B5C282400B711B5 /* toastOne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20268B371B5C282400B711B5 /* toastOne@2x.png */; };
+		20268B3B1B5C2AB100B711B5 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20268B3A1B5C2AB100B711B5 /* Animation.m */; };
 		2037DDBF1B42337F0076B0F2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2037DDBE1B42337F0076B0F2 /* FBSDKCoreKit.framework */; };
 		2037DDC11B4234E10076B0F2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2037DDC01B4234E00076B0F2 /* FBSDKLoginKit.framework */; };
 		2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDC31B4237200076B0F2 /* InitialViewController.m */; };
@@ -59,14 +60,25 @@
 		2037DDD41B42EDAF0076B0F2 /* PaymentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDD31B42EDAF0076B0F2 /* PaymentTableViewController.m */; };
 		2037DDD71B42F34D0076B0F2 /* PhoneTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDD61B42F34D0076B0F2 /* PhoneTableViewController.m */; };
 		2037DDDD1B43044E0076B0F2 /* EmailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDDC1B43044E0076B0F2 /* EmailTableViewController.m */; };
-		2037DDDF1B4309990076B0F2 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDDE1B4309990076B0F2 /* cancel@2x.png */; };
 		2037DDE11B4309FE0076B0F2 /* cancelWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDE01B4309FE0076B0F2 /* cancelWhite@2x.png */; };
 		2037DDE51B430E740076B0F2 /* stockdMenu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDE41B430E740076B0F2 /* stockdMenu@2x.png */; };
-		2037DDE71B430FEC0076B0F2 /* photo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDE61B430FEC0076B0F2 /* photo.JPG */; };
 		2037DDE91B4355A00076B0F2 /* YapHolderTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDE81B4355A00076B0F2 /* YapHolderTwo@2x.png */; };
 		2037DDEC1B442BD90076B0F2 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDEB1B442BD90076B0F2 /* CameraViewController.m */; };
 		2037DDF21B442CE20076B0F2 /* PKImageBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDEF1B442CE20076B0F2 /* PKImageBundle.bundle */; };
 		2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDF11B442CE20076B0F2 /* PKImagePickerViewController.m */; };
+		203FFCF71BC44796008B4CED /* PickSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203FFCF61BC44796008B4CED /* PickSizeViewController.m */; };
+		203FFCF91BC5856C008B4CED /* pickButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203FFCF81BC5856C008B4CED /* pickButton@2x.png */; };
+		20497DD81B5C33D3004A2950 /* Apple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DD71B5C33D3004A2950 /* Apple@2x.png */; };
+		20497DDD1B5C34A0004A2950 /* Bread@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DD91B5C34A0004A2950 /* Bread@2x.png */; };
+		20497DDE1B5C34A0004A2950 /* Chicken@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DDA1B5C34A0004A2950 /* Chicken@2x.png */; };
+		20497DDF1B5C34A0004A2950 /* Donut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DDB1B5C34A0004A2950 /* Donut@2x.png */; };
+		20497DE01B5C34A0004A2950 /* Fish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DDC1B5C34A0004A2950 /* Fish@2x.png */; };
+		20497DE61B6457B5004A2950 /* CartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497DE51B6457B5004A2950 /* CartButton.m */; };
+		20497DEE1B657E26004A2950 /* cartIconYo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DED1B657E26004A2950 /* cartIconYo@2x.png */; };
+		20497E6D1B73E93F004A2950 /* TermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E6C1B73E93F004A2950 /* TermsViewController.m */; };
+		20497E701B73EED8004A2950 /* AlcoholPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E6F1B73EED8004A2950 /* AlcoholPolicyViewController.m */; };
+		20497E751B7BE4CD004A2950 /* KAProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E721B7BE4CD004A2950 /* KAProgressLabel.m */; };
+		20497E761B7BE4CD004A2950 /* TPPropertyAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E741B7BE4CD004A2950 /* TPPropertyAnimation.m */; };
 		2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */; };
 		2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B91B4ACC50001F5478 /* FoodTableCell.m */; };
 		2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8BC1B4B0132001F5478 /* DrinksTableViewController.m */; };
@@ -85,6 +97,7 @@
 		2067F8F71B4C5450001F5478 /* EditPackageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8F61B4C5450001F5478 /* EditPackageTableViewController.m */; };
 		2067F8FA1B4C5683001F5478 /* EditItemsTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8F91B4C5683001F5478 /* EditItemsTableCell.m */; };
 		2067F8FE1B4C7085001F5478 /* UpdateCartTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8FD1B4C7085001F5478 /* UpdateCartTableCell.m */; };
+		2068E8471B4EC2CA0005CA27 /* fruits@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2068E8461B4EC2CA0005CA27 /* fruits@2x.png */; };
 		20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */; };
 		20D52CAB1B4436B200A1C60B /* flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CAA1B4436B200A1C60B /* flash@2x.png */; };
 		20D52CAD1B4438BA00A1C60B /* fillButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */; };
@@ -136,6 +149,18 @@
 		20E2EC121B485095002E317A /* SVBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC0F1B485095002E317A /* SVBlurView.m */; };
 		20E2EC131B485095002E317A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC111B485095002E317A /* UIImage+ImageEffects.m */; };
 		20E2EC171B486107002E317A /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC161B486107002E317A /* FXBlurView.m */; };
+		20F5A2EB1B84CF1F00FC7BA5 /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A2E81B84CF1F00FC7BA5 /* JWBlurView.m */; };
+		20F5A2EC1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A2EA1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m */; };
+		20F5A2F01B84D6C000FC7BA5 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A2EF1B84D6C000FC7BA5 /* PopupViewController.m */; };
+		20F5A2F21B84FC4900FC7BA5 /* tourTresNew.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F5A2F11B84FC4900FC7BA5 /* tourTresNew.png */; };
+		20F5A2F41B85448D00FC7BA5 /* toastTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F5A2F31B85448D00FC7BA5 /* toastTwo@2x.png */; };
+		20F5A3061B8A46AF00FC7BA5 /* toastThreeSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F5A3051B8A46AF00FC7BA5 /* toastThreeSmall@2x.png */; };
+		20F5A30A1B8A4CD600FC7BA5 /* toastThree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F5A3091B8A4CD600FC7BA5 /* toastThree@2x.png */; };
+		20F94E0C1B7FB0B9004828B8 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E0B1B7FB0B9004828B8 /* Todo */; };
+		20F94E0E1B801458004828B8 /* tourUno.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E0D1B801458004828B8 /* tourUno.png */; };
+		20F94E101B8014D1004828B8 /* tourDos.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E0F1B8014D1004828B8 /* tourDos.png */; };
+		20F94E181B8016FE004828B8 /* tourTres.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E171B8016FE004828B8 /* tourTres.png */; };
+		20F94E1A1B8146A3004828B8 /* tourTresiPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E191B8146A3004828B8 /* tourTresiPhone4.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,12 +224,14 @@
 		2011868E1B42060F00A59D55 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		201186901B42119E00A59D55 /* SignupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupTableViewController.h; sourceTree = "<group>"; };
 		201186911B42119E00A59D55 /* SignupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupTableViewController.m; sourceTree = "<group>"; };
-		201186931B421EC700A59D55 /* addPhotoPic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "addPhotoPic@2x.png"; path = "../../../Spotshot/Spotshot/Stories/addPhotoPic@2x.png"; sourceTree = "<group>"; };
 		201186951B421F2900A59D55 /* JGActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGActionSheet.h; sourceTree = "<group>"; };
 		201186961B421F2900A59D55 /* JGActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGActionSheet.m; sourceTree = "<group>"; };
 		2011869C1B422E1900A59D55 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2011869E1B422E3800A59D55 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		201186A01B422EA400A59D55 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		20268B371B5C282400B711B5 /* toastOne@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastOne@2x.png"; sourceTree = "<group>"; };
+		20268B391B5C2AB100B711B5 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		20268B3A1B5C2AB100B711B5 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
 		2037DDBE1B42337F0076B0F2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		2037DDC01B4234E00076B0F2 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2037DDC21B4237200076B0F2 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
@@ -222,16 +249,33 @@
 		2037DDD61B42F34D0076B0F2 /* PhoneTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneTableViewController.m; sourceTree = "<group>"; };
 		2037DDDB1B43044E0076B0F2 /* EmailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailTableViewController.h; sourceTree = "<group>"; };
 		2037DDDC1B43044E0076B0F2 /* EmailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailTableViewController.m; sourceTree = "<group>"; };
-		2037DDDE1B4309990076B0F2 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancel@2x.png"; path = "../../../Level Labs/Clients/Adena Data/AdenaData/AdenaData/cancel@2x.png"; sourceTree = "<group>"; };
 		2037DDE01B4309FE0076B0F2 /* cancelWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cancelWhite@2x.png"; path = "../../In App Images/cancelWhite@2x.png"; sourceTree = "<group>"; };
 		2037DDE41B430E740076B0F2 /* stockdMenu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "stockdMenu@2x.png"; path = "../../In App Images/stockdMenu@2x.png"; sourceTree = "<group>"; };
-		2037DDE61B430FEC0076B0F2 /* photo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo.JPG; path = ../../../Evan/photo.JPG; sourceTree = "<group>"; };
 		2037DDE81B4355A00076B0F2 /* YapHolderTwo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "YapHolderTwo@2x.png"; path = "../../../Evan/Yapster/Yapster Project/Yapster/YapHolderTwo@2x.png"; sourceTree = "<group>"; };
 		2037DDEA1B442BD90076B0F2 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		2037DDEB1B442BD90076B0F2 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		2037DDEF1B442CE20076B0F2 /* PKImageBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PKImageBundle.bundle; sourceTree = "<group>"; };
 		2037DDF01B442CE20076B0F2 /* PKImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKImagePickerViewController.h; sourceTree = "<group>"; };
 		2037DDF11B442CE20076B0F2 /* PKImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKImagePickerViewController.m; sourceTree = "<group>"; };
+		203FFCF51BC44796008B4CED /* PickSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickSizeViewController.h; sourceTree = "<group>"; };
+		203FFCF61BC44796008B4CED /* PickSizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickSizeViewController.m; sourceTree = "<group>"; };
+		203FFCF81BC5856C008B4CED /* pickButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pickButton@2x.png"; sourceTree = "<group>"; };
+		20497DD71B5C33D3004A2950 /* Apple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Apple@2x.png"; sourceTree = "<group>"; };
+		20497DD91B5C34A0004A2950 /* Bread@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bread@2x.png"; sourceTree = "<group>"; };
+		20497DDA1B5C34A0004A2950 /* Chicken@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chicken@2x.png"; sourceTree = "<group>"; };
+		20497DDB1B5C34A0004A2950 /* Donut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Donut@2x.png"; sourceTree = "<group>"; };
+		20497DDC1B5C34A0004A2950 /* Fish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fish@2x.png"; sourceTree = "<group>"; };
+		20497DE41B6457B5004A2950 /* CartButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartButton.h; sourceTree = "<group>"; };
+		20497DE51B6457B5004A2950 /* CartButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartButton.m; sourceTree = "<group>"; };
+		20497DED1B657E26004A2950 /* cartIconYo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cartIconYo@2x.png"; sourceTree = "<group>"; };
+		20497E6B1B73E93F004A2950 /* TermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermsViewController.h; sourceTree = "<group>"; };
+		20497E6C1B73E93F004A2950 /* TermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsViewController.m; sourceTree = "<group>"; };
+		20497E6E1B73EED8004A2950 /* AlcoholPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlcoholPolicyViewController.h; sourceTree = "<group>"; };
+		20497E6F1B73EED8004A2950 /* AlcoholPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlcoholPolicyViewController.m; sourceTree = "<group>"; };
+		20497E711B7BE4CD004A2950 /* KAProgressLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KAProgressLabel.h; sourceTree = "<group>"; };
+		20497E721B7BE4CD004A2950 /* KAProgressLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAProgressLabel.m; sourceTree = "<group>"; };
+		20497E731B7BE4CD004A2950 /* TPPropertyAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPropertyAnimation.h; sourceTree = "<group>"; };
+		20497E741B7BE4CD004A2950 /* TPPropertyAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPropertyAnimation.m; sourceTree = "<group>"; };
 		2067F8B41B4ACA5E001F5478 /* FoodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewController.h; sourceTree = "<group>"; };
 		2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableViewController.m; sourceTree = "<group>"; };
 		2067F8B81B4ACC50001F5478 /* FoodTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableCell.h; sourceTree = "<group>"; };
@@ -267,6 +311,7 @@
 		2067F8F91B4C5683001F5478 /* EditItemsTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditItemsTableCell.m; sourceTree = "<group>"; };
 		2067F8FC1B4C7085001F5478 /* UpdateCartTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateCartTableCell.h; sourceTree = "<group>"; };
 		2067F8FD1B4C7085001F5478 /* UpdateCartTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateCartTableCell.m; sourceTree = "<group>"; };
+		2068E8461B4EC2CA0005CA27 /* fruits@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fruits@2x.png"; sourceTree = "<group>"; };
 		20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snapPhoto@2x.png"; sourceTree = "<group>"; };
 		20D52CAA1B4436B200A1C60B /* flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@2x.png"; sourceTree = "<group>"; };
 		20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fillButton@2x.png"; sourceTree = "<group>"; };
@@ -359,6 +404,21 @@
 		20E2EC111B485095002E317A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		20E2EC151B486107002E317A /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
 		20E2EC161B486107002E317A /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		20F5A2E71B84CF1F00FC7BA5 /* JWBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWBlurView.h; sourceTree = "<group>"; };
+		20F5A2E81B84CF1F00FC7BA5 /* JWBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWBlurView.m; sourceTree = "<group>"; };
+		20F5A2E91B84CF1F00FC7BA5 /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
+		20F5A2EA1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ENPopUp.m"; sourceTree = "<group>"; };
+		20F5A2EE1B84D6C000FC7BA5 /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
+		20F5A2EF1B84D6C000FC7BA5 /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
+		20F5A2F11B84FC4900FC7BA5 /* tourTresNew.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourTresNew.png; sourceTree = "<group>"; };
+		20F5A2F31B85448D00FC7BA5 /* toastTwo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastTwo@2x.png"; sourceTree = "<group>"; };
+		20F5A3051B8A46AF00FC7BA5 /* toastThreeSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastThreeSmall@2x.png"; sourceTree = "<group>"; };
+		20F5A3091B8A4CD600FC7BA5 /* toastThree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastThree@2x.png"; sourceTree = "<group>"; };
+		20F94E0B1B7FB0B9004828B8 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
+		20F94E0D1B801458004828B8 /* tourUno.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourUno.png; sourceTree = "<group>"; };
+		20F94E0F1B8014D1004828B8 /* tourDos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourDos.png; sourceTree = "<group>"; };
+		20F94E171B8016FE004828B8 /* tourTres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourTres.png; sourceTree = "<group>"; };
+		20F94E191B8146A3004828B8 /* tourTresiPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourTresiPhone4.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,12 +497,14 @@
 				201186271B41C16200A59D55 /* AppDelegate.h */,
 				201186281B41C16200A59D55 /* AppDelegate.m */,
 				2011862D1B41C16200A59D55 /* Main.storyboard */,
+				20F94E0B1B7FB0B9004828B8 /* Todo */,
 				2067F8AD1B4A05A4001F5478 /* Menu */,
 				20D52D371B45F7D300A1C60B /* Tour */,
 				201186491B41EC8100A59D55 /* Login/Signup */,
 				2037DDED1B442BDE0076B0F2 /* Camera */,
 				2067F8D61B4B3F82001F5478 /* Add To Cart */,
 				2067F8F11B4C2A93001F5478 /* Cart */,
+				203FFCFA1BC58A76008B4CED /* Pick Size */,
 				2067F8FB1B4C5692001F5478 /* Edit Cart */,
 				2010B7DD1B4D713B00F897CF /* Order Confirmation */,
 				2067F8B71B4ACA7C001F5478 /* Food Choices */,
@@ -535,6 +597,9 @@
 		201186701B41F07D00A59D55 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				20F5A2ED1B84CF2500FC7BA5 /* ENPopup */,
+				20497E771B7BE4E7004A2950 /* CircleView */,
+				20497DE31B5ED1C0004A2950 /* Initial Anime */,
 				2067F8E71B4C145E001F5478 /* Cart Badge */,
 				20E2EC181B48610B002E317A /* FXBlurView */,
 				20E2EC141B48509A002E317A /* SVBlurView */,
@@ -579,6 +644,18 @@
 		201186891B42021900A59D55 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				203FFCF81BC5856C008B4CED /* pickButton@2x.png */,
+				20F5A3091B8A4CD600FC7BA5 /* toastThree@2x.png */,
+				20F5A3051B8A46AF00FC7BA5 /* toastThreeSmall@2x.png */,
+				20F5A2F31B85448D00FC7BA5 /* toastTwo@2x.png */,
+				20497DED1B657E26004A2950 /* cartIconYo@2x.png */,
+				20497DD91B5C34A0004A2950 /* Bread@2x.png */,
+				20497DDA1B5C34A0004A2950 /* Chicken@2x.png */,
+				20497DDB1B5C34A0004A2950 /* Donut@2x.png */,
+				20497DDC1B5C34A0004A2950 /* Fish@2x.png */,
+				20497DD71B5C33D3004A2950 /* Apple@2x.png */,
+				20268B371B5C282400B711B5 /* toastOne@2x.png */,
+				2068E8461B4EC2CA0005CA27 /* fruits@2x.png */,
 				2067F8DF1B4B7B74001F5478 /* cartIcon@2x.png */,
 				20D52CD11B45956B00A1C60B /* whiteBkg@2x.png */,
 				20D52CCF1B4590BE00A1C60B /* saveButton@2x.png */,
@@ -591,13 +668,10 @@
 				20D52CAA1B4436B200A1C60B /* flash@2x.png */,
 				20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */,
 				2037DDE81B4355A00076B0F2 /* YapHolderTwo@2x.png */,
-				2037DDE61B430FEC0076B0F2 /* photo.JPG */,
 				2037DDE41B430E740076B0F2 /* stockdMenu@2x.png */,
 				2037DDE01B4309FE0076B0F2 /* cancelWhite@2x.png */,
-				2037DDDE1B4309990076B0F2 /* cancel@2x.png */,
 				2037DDC91B424E630076B0F2 /* addPhotoPink@2x.png */,
 				2037DDC71B424C280076B0F2 /* addPhotoPic@2x.png */,
-				201186931B421EC700A59D55 /* addPhotoPic@2x.png */,
 				2011868A1B42022600A59D55 /* facebookLogin@2x.png */,
 			);
 			name = Images;
@@ -646,6 +720,35 @@
 				2037DDF11B442CE20076B0F2 /* PKImagePickerViewController.m */,
 			);
 			name = Camera;
+			sourceTree = "<group>";
+		};
+		203FFCFA1BC58A76008B4CED /* Pick Size */ = {
+			isa = PBXGroup;
+			children = (
+				203FFCF51BC44796008B4CED /* PickSizeViewController.h */,
+				203FFCF61BC44796008B4CED /* PickSizeViewController.m */,
+			);
+			name = "Pick Size";
+			sourceTree = "<group>";
+		};
+		20497DE31B5ED1C0004A2950 /* Initial Anime */ = {
+			isa = PBXGroup;
+			children = (
+				20268B391B5C2AB100B711B5 /* Animation.h */,
+				20268B3A1B5C2AB100B711B5 /* Animation.m */,
+			);
+			name = "Initial Anime";
+			sourceTree = "<group>";
+		};
+		20497E771B7BE4E7004A2950 /* CircleView */ = {
+			isa = PBXGroup;
+			children = (
+				20497E711B7BE4CD004A2950 /* KAProgressLabel.h */,
+				20497E721B7BE4CD004A2950 /* KAProgressLabel.m */,
+				20497E731B7BE4CD004A2950 /* TPPropertyAnimation.h */,
+				20497E741B7BE4CD004A2950 /* TPPropertyAnimation.m */,
+			);
+			name = CircleView;
 			sourceTree = "<group>";
 		};
 		2067F8AD1B4A05A4001F5478 /* Menu */ = {
@@ -710,6 +813,8 @@
 				2067F8D41B4B3DDB001F5478 /* PackageTableCell.m */,
 				2067F8D01B4B3CBC001F5478 /* AddPackagesTableViewController.h */,
 				2067F8D11B4B3CBC001F5478 /* AddPackagesTableViewController.m */,
+				20497DE41B6457B5004A2950 /* CartButton.h */,
+				20497DE51B6457B5004A2950 /* CartButton.m */,
 			);
 			name = "Add To Cart";
 			sourceTree = "<group>";
@@ -843,6 +948,11 @@
 		20D52D371B45F7D300A1C60B /* Tour */ = {
 			isa = PBXGroup;
 			children = (
+				20F94E0D1B801458004828B8 /* tourUno.png */,
+				20F94E0F1B8014D1004828B8 /* tourDos.png */,
+				20F94E171B8016FE004828B8 /* tourTres.png */,
+				20F5A2F11B84FC4900FC7BA5 /* tourTresNew.png */,
+				20F94E191B8146A3004828B8 /* tourTresiPhone4.png */,
 				20D52CBC1B44D4E300A1C60B /* TourImage1.png */,
 				20D52CBD1B44D4E300A1C60B /* TourImage2.png */,
 				20D52CBE1B44D4E300A1C60B /* TourImage3.png */,
@@ -857,6 +967,12 @@
 			children = (
 				20D52D3C1B46208000A1C60B /* HelpTableViewController.h */,
 				20D52D3D1B46208000A1C60B /* HelpTableViewController.m */,
+				20497E6B1B73E93F004A2950 /* TermsViewController.h */,
+				20497E6C1B73E93F004A2950 /* TermsViewController.m */,
+				20497E6E1B73EED8004A2950 /* AlcoholPolicyViewController.h */,
+				20497E6F1B73EED8004A2950 /* AlcoholPolicyViewController.m */,
+				20F5A2EE1B84D6C000FC7BA5 /* PopupViewController.h */,
+				20F5A2EF1B84D6C000FC7BA5 /* PopupViewController.m */,
 			);
 			name = Help;
 			sourceTree = "<group>";
@@ -892,6 +1008,17 @@
 				20E2EC161B486107002E317A /* FXBlurView.m */,
 			);
 			name = FXBlurView;
+			sourceTree = "<group>";
+		};
+		20F5A2ED1B84CF2500FC7BA5 /* ENPopup */ = {
+			isa = PBXGroup;
+			children = (
+				20F5A2E71B84CF1F00FC7BA5 /* JWBlurView.h */,
+				20F5A2E81B84CF1F00FC7BA5 /* JWBlurView.m */,
+				20F5A2E91B84CF1F00FC7BA5 /* UIViewController+ENPopUp.h */,
+				20F5A2EA1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m */,
+			);
+			name = ENPopup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -943,9 +1070,11 @@
 				TargetAttributes = {
 					2011861F1B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = WTC7TJVBL2;
 					};
 					201186381B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = WTC7TJVBL2;
 						TestTargetID = 2011861F1B41C16200A59D55;
 					};
 				};
@@ -977,36 +1106,51 @@
 				20D52CAF1B443D8000A1C60B /* cancel@2x.png in Resources */,
 				20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */,
 				2067F8E01B4B7B74001F5478 /* cartIcon@2x.png in Resources */,
+				2068E8471B4EC2CA0005CA27 /* fruits@2x.png in Resources */,
+				20497DDE1B5C34A0004A2950 /* Chicken@2x.png in Resources */,
+				20F94E101B8014D1004828B8 /* tourDos.png in Resources */,
 				201186741B41F08F00A59D55 /* ProgressHUD.bundle in Resources */,
-				2037DDDF1B4309990076B0F2 /* cancel@2x.png in Resources */,
+				20F5A30A1B8A4CD600FC7BA5 /* toastThree@2x.png in Resources */,
 				20D52CC21B44D4E300A1C60B /* TourImage2.png in Resources */,
+				20268B381B5C282400B711B5 /* toastOne@2x.png in Resources */,
 				2037DDC81B424C280076B0F2 /* addPhotoPic@2x.png in Resources */,
 				20D52CB91B4481A000A1C60B /* initialBkg@2x.png in Resources */,
 				20D52CBB1B44865500A1C60B /* cancelPink@2x.png in Resources */,
+				20497DE01B5C34A0004A2950 /* Fish@2x.png in Resources */,
 				20D52CD21B45956B00A1C60B /* whiteBkg@2x.png in Resources */,
 				20D52CAD1B4438BA00A1C60B /* fillButton@2x.png in Resources */,
 				20D52CC11B44D4E300A1C60B /* TourImage1.png in Resources */,
 				2011862F1B41C16200A59D55 /* Main.storyboard in Resources */,
 				20D52CB51B4453A000A1C60B /* cancelPhoto@2x.png in Resources */,
+				20F5A2F21B84FC4900FC7BA5 /* tourTresNew.png in Resources */,
+				20F5A2F41B85448D00FC7BA5 /* toastTwo@2x.png in Resources */,
 				2037DDF21B442CE20076B0F2 /* PKImageBundle.bundle in Resources */,
 				20D52CD01B4590BE00A1C60B /* saveButton@2x.png in Resources */,
-				2037DDE71B430FEC0076B0F2 /* photo.JPG in Resources */,
 				20D52CB31B444DC900A1C60B /* flashSelected@2x.png in Resources */,
+				20497DDD1B5C34A0004A2950 /* Bread@2x.png in Resources */,
 				20D52CEB1B45A7A700A1C60B /* menu-button@2x.png in Resources */,
 				20D52CAB1B4436B200A1C60B /* flash@2x.png in Resources */,
+				20F5A3061B8A46AF00FC7BA5 /* toastThreeSmall@2x.png in Resources */,
 				20D52CC31B44D4E300A1C60B /* TourImage3.png in Resources */,
-				201186941B421EC700A59D55 /* addPhotoPic@2x.png in Resources */,
 				201186801B41F12200A59D55 /* TSMessagesDefaultDesign.json in Resources */,
 				2037DDE11B4309FE0076B0F2 /* cancelWhite@2x.png in Resources */,
 				201186341B41C16200A59D55 /* LaunchScreen.xib in Resources */,
+				20F94E1A1B8146A3004828B8 /* tourTresiPhone4.png in Resources */,
+				203FFCF91BC5856C008B4CED /* pickButton@2x.png in Resources */,
 				2011868B1B42022600A59D55 /* facebookLogin@2x.png in Resources */,
+				20497DDF1B5C34A0004A2950 /* Donut@2x.png in Resources */,
 				2037DDCA1B424E630076B0F2 /* addPhotoPink@2x.png in Resources */,
 				201186311B41C16200A59D55 /* Images.xcassets in Resources */,
+				20497DEE1B657E26004A2950 /* cartIconYo@2x.png in Resources */,
 				20E2EC0B1B4727BD002E317A /* SVProgressHUD.bundle in Resources */,
+				20F94E0C1B7FB0B9004828B8 /* Todo in Resources */,
 				20D52CEA1B45A7A700A1C60B /* menu-button.png in Resources */,
+				20F94E181B8016FE004828B8 /* tourTres.png in Resources */,
 				2037DDE91B4355A00076B0F2 /* YapHolderTwo@2x.png in Resources */,
 				2037DDE51B430E740076B0F2 /* stockdMenu@2x.png in Resources */,
 				2037DDC61B4247880076B0F2 /* BELLABOO-Regular.ttf in Resources */,
+				20497DD81B5C33D3004A2950 /* Apple@2x.png in Resources */,
+				20F94E0E1B801458004828B8 /* tourUno.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1028,6 +1172,7 @@
 				2067F8D51B4B3DDB001F5478 /* PackageTableCell.m in Sources */,
 				201186921B42119E00A59D55 /* SignupTableViewController.m in Sources */,
 				20D52D221B45B86C00A1C60B /* SCAudioTools.m in Sources */,
+				20F5A2EC1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m in Sources */,
 				20D52D321B45B86C00A1C60B /* SCVideoPlayerView.m in Sources */,
 				201186841B41F13200A59D55 /* HexColor.m in Sources */,
 				2067F8F01B4C2989001F5478 /* CartTableCell.m in Sources */,
@@ -1054,6 +1199,8 @@
 				2067F8F71B4C5450001F5478 /* EditPackageTableViewController.m in Sources */,
 				201186971B421F2900A59D55 /* JGActionSheet.m in Sources */,
 				2067F8C41B4B055B001F5478 /* PackageDetailViewController.m in Sources */,
+				20497E6D1B73E93F004A2950 /* TermsViewController.m in Sources */,
+				203FFCF71BC44796008B4CED /* PickSizeViewController.m in Sources */,
 				20D52D311B45B86C00A1C60B /* SCVideoConfiguration.m in Sources */,
 				20D52D2D1B45B86C00A1C60B /* SCRecorderTools.m in Sources */,
 				20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */,
@@ -1062,6 +1209,7 @@
 				2037DDD11B42E5950076B0F2 /* AddressTableViewController.m in Sources */,
 				20E2EC0A1B4727BD002E317A /* SVIndefiniteAnimatedView.m in Sources */,
 				2037DDD41B42EDAF0076B0F2 /* PaymentTableViewController.m in Sources */,
+				20F5A2F01B84D6C000FC7BA5 /* PopupViewController.m in Sources */,
 				20D52D261B45B86C00A1C60B /* SCImageView.m in Sources */,
 				20D52D281B45B86C00A1C60B /* SCPhotoConfiguration.m in Sources */,
 				20D52D291B45B86C00A1C60B /* SCPlayer.m in Sources */,
@@ -1075,10 +1223,12 @@
 				2067F8D21B4B3CBC001F5478 /* AddPackagesTableViewController.m in Sources */,
 				2037DDCD1B42DF900076B0F2 /* ProfileTableViewController.m in Sources */,
 				20D52D201B45B86C00A1C60B /* SCAssetExportSession.m in Sources */,
+				20268B3B1B5C2AB100B711B5 /* Animation.m in Sources */,
 				2037DDEC1B442BD90076B0F2 /* CameraViewController.m in Sources */,
 				2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */,
 				2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */,
 				201186261B41C16200A59D55 /* main.m in Sources */,
+				20497E761B7BE4CD004A2950 /* TPPropertyAnimation.m in Sources */,
 				2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */,
 				20D52CEC1B45A7A700A1C60B /* SlideNavigationController.m in Sources */,
 				20D52CEF1B45A7B200A1C60B /* LeftMenuViewController.m in Sources */,
@@ -1086,7 +1236,9 @@
 				20D52CE81B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
 				20D52D2A1B45B86C00A1C60B /* SCRecorder.m in Sources */,
 				20D52CE61B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScale.m in Sources */,
+				20497DE61B6457B5004A2950 /* CartButton.m in Sources */,
 				2067F8ED1B4C28C6001F5478 /* CartTableViewController.m in Sources */,
+				20F5A2EB1B84CF1F00FC7BA5 /* JWBlurView.m in Sources */,
 				201186811B41F12200A59D55 /* TSMessageView.m in Sources */,
 				20D52D2F1B45B86C00A1C60B /* SCSampleBufferHolder.m in Sources */,
 				20D52D301B45B86C00A1C60B /* SCSwipeableFilterView.m in Sources */,
@@ -1094,6 +1246,8 @@
 				2067F8F41B4C2C3E001F5478 /* SubtotalTableCell.m in Sources */,
 				2010B7DC1B4D712E00F897CF /* ConfirmationTableViewController.m in Sources */,
 				20D52D251B45B86C00A1C60B /* SCFilterSelectorView.m in Sources */,
+				20497E701B73EED8004A2950 /* AlcoholPolicyViewController.m in Sources */,
+				20497E751B7BE4CD004A2950 /* KAProgressLabel.m in Sources */,
 				2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */,
 				20E2EC171B486107002E317A /* FXBlurView.m in Sources */,
 			);
@@ -1154,6 +1308,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1174,6 +1329,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1195,6 +1351,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1208,6 +1365,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1217,15 +1375,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Stockd",
 					/Users/evan/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Stockd/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1233,15 +1396,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Stockd",
 					/Users/evan/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = Stockd/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -1249,6 +1417,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1260,6 +1430,7 @@
 				INFOPLIST_FILE = StockdTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stockd.app/Stockd";
 			};
 			name = Debug;
@@ -1268,6 +1439,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1275,6 +1448,7 @@
 				INFOPLIST_FILE = StockdTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stockd.app/Stockd";
 			};
 			name = Release;

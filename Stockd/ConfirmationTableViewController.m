@@ -7,6 +7,8 @@
 //
 
 #import "ConfirmationTableViewController.h"
+#import "ProfileTableViewController.h"
+#import "InitialViewController.h"
 
 @interface ConfirmationTableViewController ()
 
@@ -73,6 +75,18 @@
     self.navigationItem.hidesBackButton = YES;
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [self.navigationItem setHidesBackButton:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    self.navigationItem.hidesBackButton = YES;
+    [self.navigationItem setHidesBackButton:YES];
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -101,7 +115,19 @@
 }
 
 - (IBAction)homeButtonTapped:(id)sender {
+
+    ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Camera"];
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    CATransition *transition = [CATransition animation];
+    [transition setType:kCATransitionFade];
+    [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController pushViewController:destViewController animated:NO];
+    
+    
+    [CATransaction commit];
+
+    
 }
 @end

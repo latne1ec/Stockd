@@ -49,9 +49,9 @@
     [self setClipsToBounds:YES];
     self.backgroundColor = [UIColor clearColor];
     if (![self blurBar]) {  // lazy instantiate
-        self.BlurBar = [[UIToolbar alloc] initWithFrame:[self bounds]];
+        self.blurBar = [[UIToolbar alloc] initWithFrame:[self bounds]];
         self.blurBar.barStyle = UIBarStyleBlack;
-        self.blurBar.alpha = 1.00f;
+        self.blurBar.alpha = 1.0f;
         [self.layer insertSublayer:[self.blurBar layer] atIndex:0];
         
     }

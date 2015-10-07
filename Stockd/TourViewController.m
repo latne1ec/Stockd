@@ -53,16 +53,16 @@ alpha:1.0]
     
     UIFont *font = [UIFont fontWithName:@"BELLABOO" size:26];
     NSString *message1 = @"SNAP A PHOTO OF WHAT YOU WANT STOCKED";
-    NSString *message2 = @"CHOOSE WHETHER YOU WANT TO FILL IT FULL OR HALF";
+    NSString *message2 = @"SELECT A PACKAGE SIZE";
     NSString *message3 = @"PICK FROM YUMMY PRESELECTED FOODS";
     NSString *message4 = @"THAT'S IT!\n#GETSTOCKD";
     
-    UIImage *image1 = [UIImage imageNamed:@"TourImage1.png"];
-    UIImage *image2 = [UIImage imageNamed:@"TourImage2.png"];
-    UIImage *image3 = [UIImage imageNamed:@"TourImage3.png"];
+    UIImage *image1 = [UIImage imageNamed:@"tourUno.png"];
+    UIImage *image2 = [UIImage imageNamed:@"tourDos.png"];
+    UIImage *image3 = [UIImage imageNamed:@"tourTresNew.png"];
+    UIImage *image4 = [UIImage imageNamed:@"tourTresiPhone4"];
     
     NSString *thankYouMessage = @"THANK YOU!\nYOU'LL BE NOTIFIED WHEN YOUR DELIVERY IS ON THE WAY!";
-    
     
     UIView *page1 = [[UIView alloc] initWithFrame:self.view.bounds];
     page1.backgroundColor = [UIColor clearColor];
@@ -77,7 +77,7 @@ alpha:1.0]
     [page1 addSubview:imageView1];
     
     
-    UILabel *page1Message = [[UILabel alloc] initWithFrame:CGRectMake(75, _h/2.0f, _w-150, _h/2.0f)];
+    UILabel *page1Message = [[UILabel alloc] initWithFrame:CGRectMake(75, _h/2.0f, _w-150, _h/2.0f-_h*0.075f)];
     page1Message.text = message1;
     page1Message.numberOfLines = 0;
     page1Message.font = font;
@@ -100,7 +100,7 @@ alpha:1.0]
     whiteSquare.backgroundColor = [UIColor whiteColor];
     [page2 addSubview:whiteSquare];
     
-    UILabel *page2Message = [[UILabel alloc] initWithFrame:CGRectMake(75, _h/2.0f, _w-150, _h/2.0f)];
+    UILabel *page2Message = [[UILabel alloc] initWithFrame:CGRectMake(75, _h/2.0f, _w-150, _h/2.0f-_h*0.075f)];
     page2Message.text = message2;
     page2Message.numberOfLines = 0;
     page2Message.font = font;
@@ -114,16 +114,31 @@ alpha:1.0]
     
     scaleTo = maxWidth/[image3 size].width;
     
-    UIImageView *imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image3 size].width*scaleTo)/2.0f, ((_h/2.0f)-([image3 size].height*scaleTo)), ([image3 size].width*scaleTo), ([image3 size].height*scaleTo))];
-    imageView3.backgroundColor = [UIColor clearColor];
-    imageView3.image = image3;
-    [page3 addSubview:imageView3];
+    if([UIScreen mainScreen].bounds.size.height < 568.0) {
+        
+        NSLog(@"iPhone 4");
+        
+        UIImageView *imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image4 size].width*scaleTo)/2.0f, ((_h/2.0f)-([image4 size].height*scaleTo)), ([image4 size].width*scaleTo), ([image4 size].height*scaleTo))];
+        imageView3.backgroundColor = [UIColor clearColor];
+        imageView3.image = image4;
+        [page3 addSubview:imageView3];
+        
+    }
+    else {
+        
+        UIImageView *imageView3 = [[UIImageView alloc] initWithFrame:CGRectMake(_w/2.0f-([image3 size].width*scaleTo)/2.0f, ((_h/2.0f)-([image3 size].height*scaleTo)), ([image3 size].width*scaleTo), ([image3 size].height*scaleTo))];
+        imageView3.backgroundColor = [UIColor clearColor];
+        imageView3.image = image3;
+        [page3 addSubview:imageView3];
+        
+    }
+    
     
     whiteSquare = [[UIView alloc] initWithFrame:CGRectMake(0, _h/2.0f, _w, _h/2.0f)];
     whiteSquare.backgroundColor = [UIColor whiteColor];
     [page3 addSubview:whiteSquare];
     
-    UILabel *page3Message = [[UILabel alloc] initWithFrame:CGRectMake(75, _h/2.0f, _w-150, _h/2.0f)];
+    UILabel *page3Message = [[UILabel alloc] initWithFrame:CGRectMake(75, _h/2.0f, _w-150, _h/2.0f-_h*0.075f)];
     page3Message.text = message3;
     page3Message.numberOfLines = 0;
     page3Message.font = font;
@@ -154,8 +169,6 @@ alpha:1.0]
     page4ThankYou.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
     page4ThankYou.textAlignment = NSTextAlignmentCenter;
     [page4 addSubview:page4ThankYou];
-    
-    
     
     
     float buttonWidth = _w*0.5f;
@@ -195,17 +208,21 @@ alpha:1.0]
     [self.navigationController.navigationBar setHidden:YES];
 }
 
-
-
+//-(void)viewWillAppear:(BOOL)animated {
+//    
+//    [super viewWillAppear:animated];
+//    
+//    self.navigationController.navigationItem.hidesBackButton = YES;
+//    
+//    [self.navigationItem setHidesBackButton:YES];
+//    
+//}
 
 -(void)viewWillDisappear:(BOOL)animated {
     
     [self.navigationController.navigationBar setHidden:NO];
 
-    
 }
-
-
 
 -(float)compare:(float)cual
 {

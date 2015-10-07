@@ -21,5 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableViewCell *firstCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *emailCell;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextfield;
+@property (weak, nonatomic) IBOutlet UITableViewCell *secondCell;
+@property (weak, nonatomic) IBOutlet UITextField *confirmEmailTextfield;
 
 @end

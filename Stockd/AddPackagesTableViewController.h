@@ -11,10 +11,14 @@
 #import "PackageTableCell.h"
 #import "SubtotalTableCell.h"
 #import "ProgressHUD.h"
+#import "CartButton.h"
 #import "CartTableViewController.h"
+#import "SlideNavigationController.h"
 
 
-@interface AddPackagesTableViewController : UITableViewController
+
+@interface AddPackagesTableViewController : UITableViewController <SlideNavigationControllerDelegate>
+
 
 @property (nonatomic, strong) PFFile *picture;
 @property (nonatomic, strong) NSString *orderNumber;
@@ -22,6 +26,8 @@
 
 @property (nonatomic, strong) NSArray *food;
 @property (nonatomic, strong) NSArray *drinks;
+
+@property (nonatomic) int packageSize;
 
 
 @end

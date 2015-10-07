@@ -15,8 +15,6 @@
 @property (nonatomic, strong) NSArray *drinks;
 
 
-
-
 @end
 
 @implementation FoodTableViewController
@@ -107,10 +105,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NSLog(@"Tapped Row %ld", (long)indexPath.row);
+    //NSLog(@"Tapped Row %ld", (long)indexPath.row);
     PFObject *object = [self.food objectAtIndex:indexPath.row];
     NSString *packageName = [object objectForKey:@"packageName"];
-    NSLog(@"Package Name: %@", packageName);
+    //NSLog(@"Package Name: %@", packageName);
     
     PackageDetailViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PackageDetail"];
     destViewController.packageName = packageName;

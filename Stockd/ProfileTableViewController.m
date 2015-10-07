@@ -8,6 +8,8 @@
 
 #import "ProfileTableViewController.h"
 #import "JGActionSheet.h"
+#import "AppDelegate.h"
+
 #define SOURCETYPE UIImagePickerControllerSourceTypeCamera
 
 
@@ -18,6 +20,8 @@
     JGActionSheet *_simple;
 }
 
+@property (nonatomic, strong) NSString *shareMessage;
+
 
 @end
 
@@ -26,13 +30,24 @@
 #define iOS7 (kCFCoreFoundationVersionNumber >= kCFCoreFoundationVersionNumber_iOS_7_0)
 #define iPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-@synthesize profilePicCell, addressCell, paymentCell, phoneCell, emailCell, logoutCell;
+@synthesize profilePicCell, addressCell, paymentCell, phoneCell, emailCell, inviteFriendsCell, logoutCell;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"yo");
+    self.circleView.backgroundColor = [UIColor clearColor];
+    self.circleView.trackWidth = 13;
+    self.circleView.progressWidth = 13;
+    self.circleView.roundedCornersWidth = 13;
+    self.circleView.trackColor = [UIColor colorWithRed:0.945 green:0.412 blue:0.612 alpha:1];
+    self.circleView.progressColor = [UIColor colorWithRed:0.345 green:0.882 blue:0.761 alpha:1];
+    self.circleView.labelVCBlock = ^(KAProgressLabel *label){
+        //self.pLabel1.startLabel.text = [NSString stringWithFormat:@"%.f",self.pLabel1.progress*100];
+    };
+    self.circleView.isEndDegreeUserInteractive = NO;
+    
+    
     
     if ([PFUser currentUser]) {
         
@@ -49,7 +64,6 @@
     }
     
     PFFile *profilePicture = [[PFUser currentUser] objectForKey:@"profilePic"];
-    
     PFImageView *ImageView = (PFImageView*)self.profilePic;
     ImageView.image = [UIImage imageNamed:@"YapHolder"];
     ImageView.file = profilePicture;
@@ -60,6 +74,7 @@
     self.tableView.tableFooterView = [UIView new];
     
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"initialBkg"]];
+    
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"initialBkg"]];
     [self.tableView setBackgroundView:imageView];
@@ -91,7 +106,35 @@
     [TSMessage setDefaultViewController:self];
     [TSMessage setDelegate:self];
     
-
+    float limiter = 5.0f;
+    int level = (int)floorf(([[[PFUser currentUser] objectForKey:@"karmaScore"] intValue])/limiter)+1;
+    NSLog(@"Level: %d", level);
+    
+    self.levelLabel.text = [NSString stringWithFormat:@"Karma Level %d",level];
+    
+     [self selectAnimate:nil];
+    [self getShareMessage];
+    
+    NSString *birthDate = [[PFUser currentUser] objectForKey:@"userDOB"];
+    NSDate *todayDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    int time = [todayDate timeIntervalSinceDate:[dateFormatter dateFromString:birthDate]];
+    int allDays = (((time/60)/60)/24);
+    //int days = allDays%365;
+    //int years = (allDays-days)/365;
+    
+    NSLog(@"User BDAY: %@", birthDate);
+    
+    NSLog(@"Days: %d", allDays);
+    
+    if (allDays >= 7670) {
+        NSLog(@"User is over 21");
+    }
+    else {
+        
+        NSLog(@"User is NOT 21");
+    }
     
 }
 
@@ -105,6 +148,21 @@
     return NO;
 }
 
+-(void)getShareMessage {
+    
+    [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+        
+        if (error) {
+            
+            [ProgressHUD showError:@"Network Error"];
+        }
+        else {
+            [ProgressHUD dismiss];
+            self.shareMessage = config[@"shareMessage"];
+            NSLog(@"Yay! The message is %@!",self.shareMessage);
+        }
+    }];
+}
 
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -115,6 +173,9 @@
     [TSMessage setDefaultViewController:self];
     [TSMessage setDelegate:self];
     
+    [self slideNavigationControllerShouldDisplayLeftMenu];
+    [self slideNavigationControllerShouldDisplayRightMenu];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -122,9 +183,6 @@
     
     //Nav Bar Color
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"whiteBkg"] forBarMetrics:UIBarMetricsDefault];
-    //[[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.937 green:0.204 blue:0.733 alpha:1]];
-    
     [_currentAnchoredActionSheet dismissAnimated:YES];
     
 }
@@ -138,7 +196,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -149,7 +207,8 @@
     if (indexPath.row == 2) return paymentCell;
     if (indexPath.row == 3) return phoneCell;
     if (indexPath.row == 4) return emailCell;
-    if (indexPath.row == 5) return logoutCell;
+    if (indexPath.row == 5) return inviteFriendsCell;
+    if (indexPath.row == 6) return logoutCell;
     
     return nil;
 }
@@ -163,16 +222,17 @@
         AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
         
         destViewController.parent = self;
-        
+        NSLog(@"Tapped Address");
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
         [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
-                                         style:UIBarButtonItemStyleBordered
+                                         style:UIBarButtonItemStylePlain
                                         target:nil
                                         action:nil];
         [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
         [self.navigationController presentViewController:navigationController animated:YES completion:^{
+            NSLog(@"Presenting");
         }];
     }
     
@@ -184,7 +244,7 @@
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
         [[UIBarButtonItem alloc] initWithTitle:@"Payment Info"
-                                         style:UIBarButtonItemStyleBordered
+                                         style:UIBarButtonItemStylePlain
                                         target:nil
                                         action:nil];
         [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
@@ -200,7 +260,7 @@
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
         [[UIBarButtonItem alloc] initWithTitle:@"Contact Info"
-                                         style:UIBarButtonItemStyleBordered
+                                         style:UIBarButtonItemStylePlain
                                         target:nil
                                         action:nil];
         [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
@@ -216,7 +276,7 @@
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
         [[UIBarButtonItem alloc] initWithTitle:@"Email Info"
-                                         style:UIBarButtonItemStyleBordered
+                                         style:UIBarButtonItemStylePlain
                                         target:nil
                                         action:nil];
         [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
@@ -225,17 +285,79 @@
     }
     
     if (indexPath.row == 5) {
+     
+        [self inviteFriends];
+    }
+    
+    if (indexPath.row == 6) {
         
         [self logout];
     }
-
-
 }
 
 - (IBAction)homeButtonTapped:(id)sender {
     
-    
 }
+
+
+-(void)inviteFriends {
+        
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    if([MFMessageComposeViewController canSendText]) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            controller.body = self.shareMessage;
+            controller.messageComposeDelegate = self;
+            //[controller.navigationBar setTintColor:[UIColor blackColor]];
+            [[controller navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+            
+            [self presentViewController:controller animated:YES completion:^{
+                
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                
+            }];
+        });
+    }
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    
+    if (result == MessageComposeResultCancelled) {
+        
+        [PFAnalytics trackEvent:@"SMSInviteCancelled"];
+        NSLog(@"Canceled");
+        
+        
+    } else if (result == MessageComposeResultSent) {
+        
+        if ([[[PFUser currentUser] objectForKey:@"invitedFriends"] isEqualToString:@"YES"]) {
+            NSLog(@"Already Shared");
+        }
+        else {
+            NSLog(@"Update Score");
+        [PFAnalytics trackEvent:@"SMSInviteSent"];
+        [[PFUser currentUser] setObject:@"YES" forKey:@"invitedFriends"];
+        [[PFUser currentUser] incrementKey:@"karmaScore" byAmount:[NSNumber numberWithInt:5]];
+        [[PFUser currentUser] saveInBackground];
+            
+            NSNumber *score = [[PFUser currentUser] objectForKey:@"karmaScore"];
+            
+            if ([score intValue] >=5) {
+                NSLog(@"HERERER");
+                [[PFUser currentUser] incrementKey:@"karmaCash" byAmount:[NSNumber numberWithInt:10]];
+                [[PFUser currentUser] saveInBackground];
+            }
+            
+        [self performSelector:@selector(selectAnimate:) withObject:nil afterDelay:0.5];
+            
+        }
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 //*********************************************
 // Log Out the Current User
@@ -358,15 +480,13 @@
 //*********************************************
 
 
-
 //*********************************************
 // User Finished Taking Photo
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    UIControl *sender = [[UIControl alloc] init];
+    //UIControl *sender = [[UIControl alloc] init];
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    
     
     if (image.size.width > 140) image = ResizeImage2(image, 140, 140);
     
@@ -498,6 +618,49 @@ UIImage* ResizeImage2(UIImage *image, CGFloat width, CGFloat height) {
                                      atPosition:TSMessageNotificationPositionNavBarOverlay
                            canBeDismissedByUser:YES];
 }
+
+
+- (IBAction)selectAnimate:(id)sender
+{
+ 
+    float limiter = 5.0f;
+    int level = (int)floorf(([[[PFUser currentUser] objectForKey:@"karmaScore"] intValue])/limiter)+1;
+    NSLog(@"Level: %d", level);
+    self.levelLabel.text = [NSString stringWithFormat:@"Karma Level %d",level];
+    
+    
+    self.circleView.progress = 0;
+    int kar = [[[PFUser currentUser] objectForKey:@"karmaScore"] intValue];
+    
+    
+    int karma = kar;
+    float progress;
+    if(karma>0){
+        progress = (karma%5)/5.0f;
+        
+        if (progress == 0) {
+            progress = 1;
+        }
+    } else {
+        progress = 0;
+    }
+    
+    [self.circleView setProgress:(progress) timing:TPPropertyAnimationTimingEaseInEaseOut duration:1 delay:.2];
+}
+
+
+-(IBAction) trackWidthSliderValueChanged:(UISlider *)sender {
+    [self.circleView setTrackWidth:sender.value];
+}
+
+-(IBAction) progressWidthSliderValueChanged:(UISlider *)sender {
+    [self.circleView setProgressWidth:sender.value];
+}
+
+-(IBAction)roundedCornersWidthSliderValueChanged:(UISlider *)sender {
+    [self.circleView setRoundedCornersWidth:sender.value];
+}
+
 
 
 @end

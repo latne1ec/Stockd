@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CartButton : UIBarButtonItem
+@interface CartButton : UIButton
+
+-(void)changeNumber:(int)number;
+-(void)load;
 
 @end

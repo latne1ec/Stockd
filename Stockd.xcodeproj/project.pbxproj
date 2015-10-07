@@ -49,11 +49,7 @@
 		201186A11B422EA400A59D55 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201186A01B422EA400A59D55 /* AVFoundation.framework */; };
 		20268B381B5C282400B711B5 /* toastOne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20268B371B5C282400B711B5 /* toastOne@2x.png */; };
 		20268B3B1B5C2AB100B711B5 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20268B3A1B5C2AB100B711B5 /* Animation.m */; };
-		2037DDBF1B42337F0076B0F2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2037DDBE1B42337F0076B0F2 /* FBSDKCoreKit.framework */; };
-		2037DDC11B4234E10076B0F2 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2037DDC01B4234E00076B0F2 /* FBSDKLoginKit.framework */; };
 		2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDC31B4237200076B0F2 /* InitialViewController.m */; };
-		2037DDC61B4247880076B0F2 /* BELLABOO-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDC51B4247880076B0F2 /* BELLABOO-Regular.ttf */; };
-		2037DDC81B424C280076B0F2 /* addPhotoPic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2037DDC71B424C280076B0F2 /* addPhotoPic@2x.png */; };
 		2037DDCD1B42DF900076B0F2 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDCC1B42DF900076B0F2 /* ProfileTableViewController.m */; };
 		2037DDD11B42E5950076B0F2 /* AddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDD01B42E5950076B0F2 /* AddressTableViewController.m */; };
 		2037DDD41B42EDAF0076B0F2 /* PaymentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDD31B42EDAF0076B0F2 /* PaymentTableViewController.m */; };
@@ -161,6 +157,9 @@
 		20F94E101B8014D1004828B8 /* tourDos.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E0F1B8014D1004828B8 /* tourDos.png */; };
 		20F94E181B8016FE004828B8 /* tourTres.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E171B8016FE004828B8 /* tourTres.png */; };
 		20F94E1A1B8146A3004828B8 /* tourTresiPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E191B8146A3004828B8 /* tourTresiPhone4.png */; };
+		FABBCABD1BC5B1C90058A201 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABBCABB1BC5B1C90058A201 /* FBSDKCoreKit.framework */; };
+		FABBCABE1BC5B1C90058A201 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */; };
+		FABBCAC01BC5B2960058A201 /* BELLABOO-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -232,12 +231,8 @@
 		20268B371B5C282400B711B5 /* toastOne@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastOne@2x.png"; sourceTree = "<group>"; };
 		20268B391B5C2AB100B711B5 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		20268B3A1B5C2AB100B711B5 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
-		2037DDBE1B42337F0076B0F2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		2037DDC01B4234E00076B0F2 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		2037DDC21B4237200076B0F2 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
 		2037DDC31B4237200076B0F2 /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
-		2037DDC51B4247880076B0F2 /* BELLABOO-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BELLABOO-Regular.ttf"; path = "../../../../Downloads/BELLABOO/TTF/BELLABOO-Regular.ttf"; sourceTree = "<group>"; };
-		2037DDC71B424C280076B0F2 /* addPhotoPic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "addPhotoPic@2x.png"; path = "../../../Evan/Yapster/Yapster Project/Yapster/addPhotoPic@2x.png"; sourceTree = "<group>"; };
 		2037DDCB1B42DF900076B0F2 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
 		2037DDCC1B42DF900076B0F2 /* ProfileTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewController.m; sourceTree = "<group>"; };
 		2037DDCF1B42E5950076B0F2 /* AddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewController.h; sourceTree = "<group>"; };
@@ -419,6 +414,9 @@
 		20F94E0F1B8014D1004828B8 /* tourDos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourDos.png; sourceTree = "<group>"; };
 		20F94E171B8016FE004828B8 /* tourTres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourTres.png; sourceTree = "<group>"; };
 		20F94E191B8146A3004828B8 /* tourTresiPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourTresiPhone4.png; sourceTree = "<group>"; };
+		FABBCABB1BC5B1C90058A201 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BELLABOO-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,9 +427,10 @@
 				201186A11B422EA400A59D55 /* AVFoundation.framework in Frameworks */,
 				2011869F1B422E3800A59D55 /* Accounts.framework in Frameworks */,
 				2011869D1B422E1900A59D55 /* Social.framework in Frameworks */,
+				FABBCABD1BC5B1C90058A201 /* FBSDKCoreKit.framework in Frameworks */,
 				2011868F1B42060F00A59D55 /* PassKit.framework in Frameworks */,
+				FABBCABE1BC5B1C90058A201 /* FBSDKLoginKit.framework in Frameworks */,
 				201186651B41EED400A59D55 /* AudioToolbox.framework in Frameworks */,
-				2037DDC11B4234E10076B0F2 /* FBSDKLoginKit.framework in Frameworks */,
 				201186661B41EED400A59D55 /* CFNetwork.framework in Frameworks */,
 				201186671B41EED400A59D55 /* CoreGraphics.framework in Frameworks */,
 				201186681B41EED400A59D55 /* CoreLocation.framework in Frameworks */,
@@ -446,7 +445,6 @@
 				201186551B41EDC600A59D55 /* Parse.framework in Frameworks */,
 				201186561B41EDC600A59D55 /* ParseCrashReporting.framework in Frameworks */,
 				201186541B41EDC600A59D55 /* Bolts.framework in Frameworks */,
-				2037DDBF1B42337F0076B0F2 /* FBSDKCoreKit.framework in Frameworks */,
 				201186581B41EDC600A59D55 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				2011868D1B4205DA00A59D55 /* Stripe.framework in Frameworks */,
 			);
@@ -524,7 +522,7 @@
 		201186231B41C16200A59D55 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2037DDC51B4247880076B0F2 /* BELLABOO-Regular.ttf */,
+				FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */,
 				201186241B41C16200A59D55 /* Info.plist */,
 				201186251B41C16200A59D55 /* main.m */,
 			);
@@ -566,8 +564,8 @@
 		2011864D1B41ED7E00A59D55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2037DDC01B4234E00076B0F2 /* FBSDKLoginKit.framework */,
-				2037DDBE1B42337F0076B0F2 /* FBSDKCoreKit.framework */,
+				FABBCABB1BC5B1C90058A201 /* FBSDKCoreKit.framework */,
+				FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */,
 				201186A01B422EA400A59D55 /* AVFoundation.framework */,
 				2011869E1B422E3800A59D55 /* Accounts.framework */,
 				2011869C1B422E1900A59D55 /* Social.framework */,
@@ -671,7 +669,6 @@
 				20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */,
 				20D52CAA1B4436B200A1C60B /* flash@2x.png */,
 				20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */,
-				2037DDC71B424C280076B0F2 /* addPhotoPic@2x.png */,
 				2011868A1B42022600A59D55 /* facebookLogin@2x.png */,
 			);
 			name = Images;
@@ -1115,7 +1112,6 @@
 				20F5A30A1B8A4CD600FC7BA5 /* toastThree@2x.png in Resources */,
 				20D52CC21B44D4E300A1C60B /* TourImage2.png in Resources */,
 				20268B381B5C282400B711B5 /* toastOne@2x.png in Resources */,
-				2037DDC81B424C280076B0F2 /* addPhotoPic@2x.png in Resources */,
 				20D52CB91B4481A000A1C60B /* initialBkg@2x.png in Resources */,
 				20D52CBB1B44865500A1C60B /* cancelPink@2x.png in Resources */,
 				20497DE01B5C34A0004A2950 /* Fish@2x.png in Resources */,
@@ -1130,6 +1126,7 @@
 				2037DDF21B442CE20076B0F2 /* PKImageBundle.bundle in Resources */,
 				20D52CD01B4590BE00A1C60B /* saveButton@2x.png in Resources */,
 				20D52CB31B444DC900A1C60B /* flashSelected@2x.png in Resources */,
+				FABBCAC01BC5B2960058A201 /* BELLABOO-Regular.ttf in Resources */,
 				20497DDD1B5C34A0004A2950 /* Bread@2x.png in Resources */,
 				20D52CEB1B45A7A700A1C60B /* menu-button@2x.png in Resources */,
 				20D52CAB1B4436B200A1C60B /* flash@2x.png in Resources */,
@@ -1148,7 +1145,6 @@
 				20D52CEA1B45A7A700A1C60B /* menu-button.png in Resources */,
 				203FFD0C1BC5B0AB008B4CED /* stockdMenu@2x.png in Resources */,
 				20F94E181B8016FE004828B8 /* tourTres.png in Resources */,
-				2037DDC61B4247880076B0F2 /* BELLABOO-Regular.ttf in Resources */,
 				20497DD81B5C33D3004A2950 /* Apple@2x.png in Resources */,
 				20F94E0E1B801458004828B8 /* tourUno.png in Resources */,
 			);

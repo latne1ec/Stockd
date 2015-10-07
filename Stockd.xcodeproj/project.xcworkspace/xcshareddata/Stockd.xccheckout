@@ -10,28 +10,52 @@
 	<string>Stockd</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>5F878E0FE993FDB67E77801EA9D0BC94089CC211</key>
+		<string>https://github.com/latne1ec/Stories.git</string>
 		<key>826871FB24AEC3E2D3414585A54C63DF2EAFA4E9</key>
 		<string>https://github.com/latne1ec/Yapster.git</string>
+		<key>D1F187D7BA64E701EF69C6EE57E151099542784E</key>
+		<string>https://github.com/latne1ec/ADClientProject.git</string>
 		<key>D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6</key>
-		<string>https://github.com/latne1ec/Stockd.git</string>
+		<string>https://bitbucket.org/rogelioRuiz/stockd.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Stockd.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>5F878E0FE993FDB67E77801EA9D0BC94089CC211</key>
+		<string>../../../Spotshot/Spotshot</string>
 		<key>826871FB24AEC3E2D3414585A54C63DF2EAFA4E9</key>
 		<string>../../../Evan/Yapster</string>
+		<key>D1F187D7BA64E701EF69C6EE57E151099542784E</key>
+		<string>../../../Level%20Labs/Clients/Adena%20Data/AdenaData</string>
 		<key>D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/latne1ec/Stockd.git</string>
+	<string>https://bitbucket.org/rogelioRuiz/stockd.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
 	<string>D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D1F187D7BA64E701EF69C6EE57E151099542784E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AdenaData</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5F878E0FE993FDB67E77801EA9D0BC94089CC211</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Spotshot</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

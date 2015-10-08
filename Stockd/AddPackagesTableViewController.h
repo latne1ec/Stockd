@@ -29,5 +29,9 @@
 
 @property (nonatomic) int packageSize;
 
+@property (nonatomic, strong) NSString *packageType;
+
+
+
 
 @end

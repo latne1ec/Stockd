@@ -64,6 +64,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont
+                                                                           fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
     
     [emailTextfield resignFirstResponder];
     [passwordTextfield resignFirstResponder];

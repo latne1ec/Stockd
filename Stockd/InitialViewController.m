@@ -175,10 +175,15 @@
         NSShadow *shadow = [[NSShadow alloc] init];
         shadow.shadowColor = [UIColor clearColor];
         shadow.shadowOffset = CGSizeMake(0, .0);
-        [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                         [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                                         shadow, NSShadowAttributeName,
-                                                                         [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+//        [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                                         [UIColor whiteColor], NSForegroundColorAttributeName,
+//                                                                         shadow, NSShadowAttributeName,
+//                                                                         [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+        
+        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont
+                                                                               fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName,
+                                    [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+        [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     }
     
     [self.avPlayer pause];

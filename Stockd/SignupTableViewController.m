@@ -126,13 +126,18 @@
 - (void)viewWillDisappear:(BOOL)animated {
     
     //Navigation Bar Title Properties
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor clearColor];
-    shadow.shadowOffset = CGSizeMake(0, .0);
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                          shadow, NSShadowAttributeName,
-                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+//    NSShadow *shadow = [[NSShadow alloc] init];
+//    shadow.shadowColor = [UIColor clearColor];
+//    shadow.shadowOffset = CGSizeMake(0, .0);
+//    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
+//                                                          shadow, NSShadowAttributeName,
+//                                                          [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont
+                                                                           fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     [nameField resignFirstResponder];
     [emailField resignFirstResponder];

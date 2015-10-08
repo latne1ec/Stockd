@@ -11,6 +11,7 @@
 #import "BBBadgeBarButtonItem.h"
 #import "AppDelegate.h"
 #import "InitialViewController.h"
+#import "AppDelegate.h"
 
 
 @interface AddPackagesTableViewController ()
@@ -131,18 +132,23 @@
     [self queryForBoozePackages];
     [self queryForPackageItems];
     [self getPreselectedBeerItem];
+        //[self queryForOrderNumber];
     
     
     NSString *uuidStr = [[NSUUID UUID] UUIDString];
-    
     self.orderNumber = uuidStr;
-    NSLog(@"Order Numba: %@",self.orderNumber);
     
     
-    NSLog(@"App Delegate Dic: %@",  [_appDelegate package_itemsDictionary]);
+    for (int i = 0; i < [_appDelegate package_itemsDictionary].count; i++) {
+       
+        NSString *packageName = [[[_appDelegate package_itemsDictionary] allKeys] objectAtIndex:i];
+        NSLog(@"Here you go: %@", packageName);
+        [self.packages addObject:packageName];
+    }
     
-    //[self queryForOrderNumber];
+    NSLog(@"dic: %@", [_appDelegate package_itemsDictionary]);
     
+
 }
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
@@ -177,14 +183,25 @@
         NSLog(@"package name %@", self.packages);
         
         
-        for (NSString* keyPackageName in cvc.packages){
-            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
-                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
-                for (PFObject* itemPFObj in [cvc.items valueForKey:keyPackageName]){
-                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
-                }
-            }
-        }
+//        for (NSString* keyPackageName in cvc.packages){
+//            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
+//                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
+//                for (PFObject* itemPFObj in [cvc.items valueForKey:keyPackageName]){
+//                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+//                }
+//            }
+//        }
+        
+//        for (NSString* keyPackageName in self.packages){
+//            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
+//                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
+//                for (PFObject* itemPFObj in [_itemsDictionary valueForKey:keyPackageName]){
+//                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+//                }
+//            }
+//        }
+
+        
         
         NSLog(@"packageDictionary: %@", [_appDelegate package_itemsDictionary]);
         
@@ -212,6 +229,8 @@
     UIView *headerView = [self.tableView headerViewForSection:0];
     [headerView setNeedsDisplay];
     [headerView setNeedsLayout];
+    
+    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:(int)[[_appDelegate package_itemsDictionary] count]];
     
 }
 
@@ -370,6 +389,20 @@
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
         
+        if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+                
+            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+
+            }
+            
+        else {
+            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        }
+
+        
+        
         return cell;
         
     }
@@ -389,6 +422,19 @@
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
+       
+        if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            
+            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+            
+        }
+        
+        else {
+            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        }
+
         
         return cell;
     }
@@ -409,10 +455,21 @@
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
         
+        if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            
+            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+            
+        }
+        
+        else {
+            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        }
+        
         return cell;
     }
-    
-    
+
     
     return cell;
 }
@@ -441,6 +498,18 @@
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
+        
+            if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
+                for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
+                    [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+                }
+            }
+            else {
+                [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
+            }
+        
+        
     }
     
     else if (indexPath.section == 2) {
@@ -457,6 +526,17 @@
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
+        
+        if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
+            for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
+                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+            }
+        }
+        else {
+            [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
+        }
+        
     }
     
     
@@ -474,9 +554,21 @@
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
+        
+        if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
+            for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
+                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+            }
+        }
+        else {
+            [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
+        }
+
+        
     }
     
-    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:(int)[self.packages count]];
+    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:(int)[[_appDelegate package_itemsDictionary] count]];
 }
 
 -(void)queryForFoodPackages {

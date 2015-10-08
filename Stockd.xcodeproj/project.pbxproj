@@ -162,6 +162,7 @@
 		FABBCABD1BC5B1C90058A201 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABBCABB1BC5B1C90058A201 /* FBSDKCoreKit.framework */; };
 		FABBCABE1BC5B1C90058A201 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */; };
 		FABBCAC01BC5B2960058A201 /* BELLABOO-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */; };
+		FABBCAC41BC6EF240058A201 /* CartItemObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FABBCAC31BC6EF240058A201 /* CartItemObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -422,6 +423,8 @@
 		FABBCABB1BC5B1C90058A201 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BELLABOO-Regular.ttf"; sourceTree = "<group>"; };
+		FABBCAC21BC6EF240058A201 /* CartItemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartItemObject.h; sourceTree = "<group>"; };
+		FABBCAC31BC6EF240058A201 /* CartItemObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartItemObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -497,6 +500,7 @@
 		201186221B41C16200A59D55 /* Stockd */ = {
 			isa = PBXGroup;
 			children = (
+				FABBCAC11BC6EE880058A201 /* Model */,
 				201186271B41C16200A59D55 /* AppDelegate.h */,
 				201186281B41C16200A59D55 /* AppDelegate.m */,
 				2011862D1B41C16200A59D55 /* Main.storyboard */,
@@ -1026,6 +1030,15 @@
 			name = ENPopup;
 			sourceTree = "<group>";
 		};
+		FABBCAC11BC6EE880058A201 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FABBCAC21BC6EF240058A201 /* CartItemObject.h */,
+				FABBCAC31BC6EF240058A201 /* CartItemObject.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1189,6 +1202,7 @@
 				2067F8C71B4B05A8001F5478 /* ItemTableCell.m in Sources */,
 				2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */,
 				20D52CC41B44D4E300A1C60B /* TourViewController.m in Sources */,
+				FABBCAC41BC6EF240058A201 /* CartItemObject.m in Sources */,
 				201186291B41C16200A59D55 /* AppDelegate.m in Sources */,
 				203FFD151BC6E2E7008B4CED /* ExtraItemTableCell.m in Sources */,
 				2037DDDD1B43044E0076B0F2 /* EmailTableViewController.m in Sources */,

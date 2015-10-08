@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "InitialViewController.h"
 #import "AppDelegate.h"
+#include "CartItemObject.h"
 
 
 @interface AddPackagesTableViewController ()
@@ -505,7 +506,7 @@
             if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
                 [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
                 for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                    [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+                    [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
                 }
             }
             else {
@@ -532,7 +533,9 @@
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
             for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+                
+                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
+                
             }
         }
         else {
@@ -560,7 +563,7 @@
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
             for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
             }
         }
         else {

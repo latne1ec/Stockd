@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
 #import "LeftMenuViewController.h"
+#import "CartItemObject.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

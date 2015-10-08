@@ -94,6 +94,7 @@
     
     PackageDetailViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PackageDetail"];
     destViewController.packageName = packageName;
+    destViewController.packageType = @"21+";
     
     [self.navigationController pushViewController:destViewController animated:YES];
     [ProgressHUD show:nil];

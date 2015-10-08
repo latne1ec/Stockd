@@ -96,6 +96,7 @@
     
     PackageDetailViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PackageDetail"];
     destViewController.packageName = packageName;
+    destViewController.packageType = @"Drink";
     
     [self.navigationController pushViewController:destViewController animated:YES];
     [ProgressHUD show:nil];

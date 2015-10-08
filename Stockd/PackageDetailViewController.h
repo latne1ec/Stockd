@@ -16,9 +16,12 @@
 @interface PackageDetailViewController : UITableViewController
 
 @property (nonatomic, strong) NSString *packageName;
+@property (nonatomic, strong) NSString *packageType;
 
-- (IBAction)decrementQuantity:(id)sender;
-- (IBAction)incrementQuantity:(id)sender;
+
+- (IBAction)incrementQuantityButtonTapped:(id)sender;
+
+- (IBAction)decrementQuantityButtonTapped:(id)sender;
 
 
 @end

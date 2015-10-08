@@ -8,6 +8,7 @@
 
 #import "PackageDetailViewController.h"
 #import "CartButton.h"
+#import "AppDelegate.h"
 
 @interface PackageDetailViewController ()
 
@@ -15,9 +16,7 @@
 @property (nonatomic, strong) NSArray *items;
 
 @property (nonatomic, strong) UIView *headerview;
-
-
-
+@property (nonatomic, strong) AppDelegate *appDelegate;
 
 @end
 
@@ -25,6 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    if (![[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType]){
+        [[_appDelegate extraPackage_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey: _packageType];
+    }
     
     self.tableView.tableFooterView = [UIView new];
     
@@ -116,9 +121,18 @@
     PFObject *object = [self.items objectAtIndex:indexPath.row];
     cell.itemNameLabel.text = [object objectForKey:@"itemName"];
     cell.itemDetailLabel.text = [object objectForKey:@"itemQuantity"];
-    cell.itemQuantityLabel.text = @"0";
+    
+    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:[object objectForKey:@"itemName"]]){
+        cell.itemQuantityLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:[object objectForKey:@"itemName"]] stringValue];
+    }else{
+        cell.itemQuantityLabel.text = @"0";
+    }
+    
     float price = [[object objectForKey:@"itemPrice"] floatValue];
     cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f",price];
+    
+    cell.decrementButton.tag = indexPath.row;
+    cell.incrementButton.tag = indexPath.row;
     
     
     return cell;
@@ -176,16 +190,50 @@
 
 
 
--(IBAction)incrementQuantity:(id)sender {
+- (IBAction)incrementQuantityButtonTapped:(id)sender {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
+    ItemTableCell *cell = (ItemTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     
+    NSString *itemNameLabel = cell.itemNameLabel.text;
     
+    if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
+        [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject:[NSNumber numberWithInt:1] forKey:itemNameLabel];
+    }else{
+        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] integerValue] + 1;
+        
+        [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject: [NSNumber numberWithInt: value] forKey:itemNameLabel];
+    }
+    
+    cell.itemQuantityLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] stringValue];
+}
+
+- (IBAction)decrementQuantityButtonTapped:(id)sender {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
+    ItemTableCell *cell = (ItemTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    
+    NSString *itemNameLabel = cell.itemNameLabel.text;
+    
+    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
+        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] integerValue] - 1;
+        
+        if (value < 1){
+            [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] removeObjectForKey:itemNameLabel];
+        }else{
+            [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject: [NSNumber numberWithInt: value] forKey:itemNameLabel];
+        }
+    }
+    
+    cell.decrementButton.tag = indexPath.row;
+    cell.incrementButton.tag = indexPath.row;
+    
+    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
+        cell.itemQuantityLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] stringValue];
+    }else{
+        cell.itemQuantityLabel.text = @"0";
+    }
 }
 
 
--(IBAction)decrementQuantity:(id)sender {
-    
-    
-}
 
 -(void)goToCartScreen {
     
@@ -208,7 +256,6 @@
     //}
     
 }
-
 
 
 @end

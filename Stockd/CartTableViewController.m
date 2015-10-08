@@ -335,50 +335,6 @@
     return price;
 }
 
-
--(void)updateQuantitiesFor:(NSString*)packageName with:(NSMutableArray*)edited {
-    
-    NSLog(@"We are getting %@",edited);
-    
-    NSMutableString *result = [[NSMutableString alloc] init];
-    float newPrice = 0;
-    
-    for(int i=0; i<[edited count]; i++){
-        PFObject *itemObjectId = edited[i][@"item"];
-        int quantity = [edited[i][@"quantity"] intValue];
-        
-        NSLog(@"Item Object: %@", itemObjectId);
-        
-        if(i==[edited count]-1){
-            [result appendString:[NSString stringWithFormat:@"%@ x%d", itemObjectId[@"itemName"], quantity]];
-        } else {
-            [result appendString:[NSString stringWithFormat:@"%@ x%d, ", itemObjectId[@"itemName"], quantity]];
-        }
-        
-        newPrice += (quantity*1.0f)*[itemObjectId[@"itemPrice"] floatValue];
-        
-    }
-
-    _updatedPrice[packageName] = [NSNumber numberWithFloat:newPrice];
-    _updatedItemList[packageName] = result;
-    
-    
-    NSLog(@"Result: %@", result);
-    [self.tableView reloadData];
-    
-    /*int indexValue = (int)[self.packages indexOfObject:packageName];
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexValue inSection:0];
-    CartTableCell *cell = (CartTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-
-    NSString *priceString = [NSString stringWithFormat:@"$%0.2f", newPrice];
-    
-    cell.packageItems.text = result;
-    cell.packagePriceLabel.text = priceString;*/
-    
-    [self updateTotal];
-}
-
 -(void)updateTotal {
     
     _subtotal = 0;
@@ -429,7 +385,7 @@
         destViewController.packageName = packageName;
         destViewController.beerItem = self.beerItem;
         destViewController.parent = self;
-        destViewController.itemsToEdit = self.itemsToEdit;
+        //destViewController.itemsToEdit = self.itemsToEdit;
         
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];

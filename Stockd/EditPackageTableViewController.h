@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString *packageName;
 @property (nonatomic) int packageSize;
 @property (nonatomic, strong) id parent;
-@property (nonatomic, strong) NSArray *itemsToEdit;
+//@property (nonatomic, strong) NSArray *itemsToEdit;
 @property (nonatomic, strong) NSString *beerItem;
 @property (nonatomic, strong) NSString *liquorItem;
 

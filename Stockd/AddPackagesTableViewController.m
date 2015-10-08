@@ -138,6 +138,9 @@
     self.orderNumber = uuidStr;
     NSLog(@"Order Numba: %@",self.orderNumber);
     
+    
+    NSLog(@"App Delegate Dic: %@",  [_appDelegate package_itemsDictionary]);
+    
     //[self queryForOrderNumber];
     
 }

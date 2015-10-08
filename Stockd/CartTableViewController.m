@@ -711,18 +711,20 @@
 
 -(void)setNavTitle {
     
-    if (self.packageSize == 1) {
-        self.title = @"Small Basket";
-    }
-    else if (self.packageSize == 2) {
-        self.title = @"Medium Basket";
-    }
-    else if (self.packageSize == 3) {
-        self.title = @"Large Basket";
-    }
-    else if (self.packageSize == 4) {
-        self.title = @"XL Basket";
-    }
+    self.title = @"Basket";
+    
+//    if (self.packageSize == 1) {
+//        self.title = @"Small Basket";
+//    }
+//    else if (self.packageSize == 2) {
+//        self.title = @"Medium Basket";
+//    }
+//    else if (self.packageSize == 3) {
+//        self.title = @"Large Basket";
+//    }
+//    else if (self.packageSize == 4) {
+//        self.title = @"XL Basket";
+//    }
 }
 
 

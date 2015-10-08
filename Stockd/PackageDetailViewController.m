@@ -28,10 +28,10 @@
     
     self.tableView.tableFooterView = [UIView new];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(dismissViewControllerAnimated:completion:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+//                                                                             style:UIBarButtonItemStylePlain
+//                                                                            target:self
+//                                                                            action:@selector(dismissViewControllerAnimated:completion:)];
     
     
     CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
@@ -76,9 +76,16 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    //self.navigationItem.hidesBackButton = YES;
+}
+
+
 -(void)viewWillDisappear:(BOOL)animated {
     
     [ProgressHUD dismiss];
+    //self.navigationItem.hidesBackButton = YES;
 }
 
 
@@ -197,6 +204,7 @@
 //        cvc.beerItem = self.beerItem;
 //        cvc.liquorItem = self.liquorItem;
         [self.navigationController pushViewController:cvc animated:YES];
+    
     //}
     
 }

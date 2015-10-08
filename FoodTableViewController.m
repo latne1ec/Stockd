@@ -55,7 +55,14 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationItem.hidesBackButton = YES;
    
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    self.navigationItem.hidesBackButton = YES;
 }
 
 -(void)reloadTheTable {
@@ -113,17 +120,20 @@
     PackageDetailViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PackageDetail"];
     destViewController.packageName = packageName;
     
-    UINavigationController *navigationController =
-    [[UINavigationController alloc] initWithRootViewController:destViewController];
-    UIBarButtonItem *newBackButton =
-    [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
-                                     style:UIBarButtonItemStylePlain
-                                    target:nil
-                                    action:nil];
-    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+    [self.navigationController pushViewController:destViewController animated:YES];
     [ProgressHUD show:nil];
-    [self.navigationController presentViewController:navigationController animated:YES completion:^{
-    }];
+    
+//    UINavigationController *navigationController =
+//    [[UINavigationController alloc] initWithRootViewController:destViewController];
+//    UIBarButtonItem *newBackButton =
+//    [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
+//                                     style:UIBarButtonItemStylePlain
+//                                    target:nil
+//                                    action:nil];
+//    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+//    [ProgressHUD show:nil];
+//    [self.navigationController presentViewController:navigationController animated:YES completion:^{
+//    }];
 
 }
 

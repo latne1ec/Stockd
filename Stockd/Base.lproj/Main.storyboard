@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="RWw-Ga-uI3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="RWw-Ga-uI3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -711,7 +711,9 @@
                             <outlet property="delegate" destination="v4k-Dj-de8" id="YwV-B3-reT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="f1y-73-awR"/>
+                    <navigationItem key="navigationItem" id="f1y-73-awR">
+                        <barButtonItem key="backBarButtonItem" title=" " id="8eJ-zO-xdf"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHY-FT-OW1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -901,7 +903,9 @@
                             <outlet property="delegate" destination="pgp-bd-zAX" id="I8r-gJ-wSt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="55h-8J-jnQ"/>
+                    <navigationItem key="navigationItem" id="55h-8J-jnQ">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Fiy-89-ohd"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rW-aM-kfg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -966,7 +970,9 @@
                             <outlet property="delegate" destination="c9p-yl-MMV" id="6Se-Qg-V1A"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hej-F5-c8c"/>
+                    <navigationItem key="navigationItem" id="hej-F5-c8c">
+                        <barButtonItem key="backBarButtonItem" title=" " id="6dr-4v-P0x"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gru-aO-Wcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

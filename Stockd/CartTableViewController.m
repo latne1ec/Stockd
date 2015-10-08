@@ -463,12 +463,10 @@
     
     PickSizeViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PickSize"];
     
-    
-    
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:destViewController];
     UIBarButtonItem *newBackButton =
-    [[UIBarButtonItem alloc] initWithTitle:@"PickSize"
+    [[UIBarButtonItem alloc] initWithTitle:@"Pick Size"
                                      style:UIBarButtonItemStylePlain
                                     target:nil
                                     action:nil];
@@ -490,9 +488,7 @@
     int allDays = (((time/60)/60)/24);
     
     NSLog(@"User BDAY: %@", birthDate);
-    
-    NSLog(@"Days: %d", allDays);
-    
+        
     if (allDays >= 7670) {
         NSLog(@"User is over 21");
     }

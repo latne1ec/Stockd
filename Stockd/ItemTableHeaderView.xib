@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="BELLABOO-Regular.ttf">
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwU-PO-sd4">
+                    <rect key="frame" x="168" y="12" width="71" height="21"/>
+                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jM4-EN-uco">
+                    <rect key="frame" x="247" y="12" width="49" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="49" id="c6t-Yf-EjN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZW-Di-Fl8">
+                    <rect key="frame" x="5" y="12" width="67" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="67" id="zoX-5G-ihA"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="jM4-EN-uco" secondAttribute="trailing" constant="24" id="1M0-5A-6Wq"/>
+                <constraint firstAttribute="bottom" secondItem="8ZW-Di-Fl8" secondAttribute="bottom" constant="13" id="9rT-Zn-03K"/>
+                <constraint firstItem="jM4-EN-uco" firstAttribute="leading" secondItem="rwU-PO-sd4" secondAttribute="trailing" constant="8" symbolic="YES" id="JQv-99-Gsb"/>
+                <constraint firstItem="rwU-PO-sd4" firstAttribute="firstBaseline" secondItem="jM4-EN-uco" secondAttribute="firstBaseline" id="Kva-Yq-CRk"/>
+                <constraint firstItem="jM4-EN-uco" firstAttribute="baseline" secondItem="rwU-PO-sd4" secondAttribute="baseline" id="ZTc-E4-dgf"/>
+                <constraint firstItem="rwU-PO-sd4" firstAttribute="baseline" secondItem="8ZW-Di-Fl8" secondAttribute="baseline" id="bu7-om-BL0"/>
+                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="byt-La-Jok"/>
+                <constraint firstItem="rwU-PO-sd4" firstAttribute="leading" secondItem="8ZW-Di-Fl8" secondAttribute="trailing" constant="96" id="tfc-xC-SBg"/>
+                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="firstBaseline" secondItem="rwU-PO-sd4" secondAttribute="firstBaseline" id="xQn-vx-5Px"/>
+                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="ySX-PI-M0x"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="426" y="390"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

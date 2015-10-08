@@ -14,6 +14,9 @@
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) NSMutableDictionary *editedCells;
 
+@property (nonatomic, strong) UIView *headerview;
+
+
 @end
 
 @implementation EditPackageTableViewController
@@ -94,6 +97,7 @@
                                                           [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
     
+    self.headerview = [[[NSBundle mainBundle] loadNibNamed:@"ItemTableHeaderView" owner:self options:nil] objectAtIndex:0];
     
 }
 
@@ -103,6 +107,19 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 2;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        
+        self.headerview.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+        return self.headerview;
+    }
+    
+    UIView *clearView = [UIView new];
+    clearView.backgroundColor = [UIColor clearColor];
+    return clearView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -119,8 +136,6 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-
 
     EditItemsTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     UpdateCartTableCell *cell2 = [tableView dequeueReusableCellWithIdentifier:@"Cell2"];
@@ -128,7 +143,6 @@
     if([self.itemsToEdit count]==0){
         return cell;
     }
-    
     
     if (indexPath.section == 0) {
 
@@ -177,11 +191,29 @@
     return 0;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return 46;
+}
+
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    NSLog(@"Scroll: %f", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y < 0) {
+        self.headerview.backgroundColor = [UIColor clearColor];
+    }
+    else {
+        
+        self.headerview.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+    }
+}
+
+
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
     
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
     }];
-    
 }
 
 

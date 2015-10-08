@@ -512,7 +512,7 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
                 [[UINavigationController alloc] initWithRootViewController:destViewController];
                 UIBarButtonItem *newBackButton =
                 [[UIBarButtonItem alloc] initWithTitle:@""
-                                                 style:UIBarButtonItemStyleBordered
+                                                 style:UIBarButtonItemStylePlain
                                                 target:nil
                                                 action:nil];
                 

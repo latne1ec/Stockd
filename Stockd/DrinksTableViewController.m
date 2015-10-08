@@ -101,7 +101,7 @@
     [[UINavigationController alloc] initWithRootViewController:destViewController];
     UIBarButtonItem *newBackButton =
     [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
-                                     style:UIBarButtonItemStyleBordered
+                                     style:UIBarButtonItemStylePlain
                                     target:nil
                                     action:nil];
     [[navigationController navigationItem] setBackBarButtonItem:newBackButton];

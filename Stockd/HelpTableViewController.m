@@ -138,7 +138,7 @@
         [[UINavigationController alloc] initWithRootViewController:destViewController];
         UIBarButtonItem *newBackButton =
         [[UIBarButtonItem alloc] initWithTitle:@"Terms of Service"
-                                         style:UIBarButtonItemStyleBordered
+                                         style:UIBarButtonItemStylePlain
                                         target:nil
                                         action:nil];
         [[navigationController navigationItem] setBackBarButtonItem:newBackButton];

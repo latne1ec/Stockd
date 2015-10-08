@@ -22,10 +22,10 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
 
 @interface AppDelegate ()
 @property(nonatomic) int alreadyShowed;
+
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -62,6 +62,9 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     [SlideNavigationController sharedInstance].leftBarButtonItem = leftBarButtonItem;
     
     [[SlideNavigationController sharedInstance] enableTapGestureToCloseMenu:YES];
+    
+    _package_itemsDictionary = [[NSMutableDictionary alloc] init];
+    _extra_qtDictionary = [[NSMutableDictionary alloc] init];
     
     return YES;
     

@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, strong) NSMutableDictionary *package_itemsDictionary;
+@property (nonatomic, strong) NSMutableDictionary *extra_qtDictionary;
 
 -(void)showAnimation;
 

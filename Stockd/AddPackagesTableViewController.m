@@ -26,6 +26,8 @@
 @property (nonatomic, strong) UIImageView *toast;
 @property (nonatomic, strong) UIImage *toastPic;
 
+@property (nonatomic, strong) AppDelegate *appDelegate;
+
 
 
 
@@ -34,27 +36,30 @@
 @implementation AddPackagesTableViewController
 
 - (void)viewDidLoad {
+    
+    _appDelegate = [[UIApplication sharedApplication] delegate];
+    
     [super viewDidLoad];
     _oldPosition = -1;
-        _position = -1;
+    _position = -1;
     self.packages = [[NSMutableArray alloc] init];
     
-//    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                                     [UIColor whiteColor], NSForegroundColorAttributeName,
-//                                                                     shadow, NSShadowAttributeName,
-//                                                                     [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    //    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                                                     [UIColor whiteColor], NSForegroundColorAttributeName,
+    //                                                                     shadow, NSShadowAttributeName,
+    //                                                                     [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
     
-//    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
-//    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
-//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//        if (error) {
-//            
-//        }
-//        else {
-//            self.order = object;
-//            //NSLog(@"Order: %@", self.order);
-//        }
-//    }];
+    //    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
+    //    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
+    //    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    //        if (error) {
+    //
+    //        }
+    //        else {
+    //            self.order = object;
+    //            //NSLog(@"Order: %@", self.order);
+    //        }
+    //    }];
     
     
     if ([PFUser currentUser]) {
@@ -71,7 +76,7 @@
         [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
         
     }
-
+    
     
     self.title = @"Add Packages";
     self.navigationItem.backBarButtonItem.title = @"";
@@ -82,24 +87,24 @@
     _counts = 0;
     
     self.tableView.tableFooterView = [UIView new];
-
+    
     //Nav Bar Back Button Color
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-//                                                                             style:UIBarButtonItemStylePlain
-//                                                                            target:self
-//                                                                            action:@selector(closeTheController)];
+    //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+    //                                                                             style:UIBarButtonItemStylePlain
+    //                                                                            target:self
+    //                                                                            action:@selector(closeTheController)];
     
     CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0,0,25,25);
     [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
     [btn load];
     UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
-
+    
     self.navigationItem.rightBarButtonItem = barBtn;
     
-//[[UIImage imageNamed:@"cartIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+    //[[UIImage imageNamed:@"cartIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -127,9 +132,9 @@
     [self queryForPackageItems];
     [self getPreselectedBeerItem];
     
-
+    
     NSString *uuidStr = [[NSUUID UUID] UUIDString];
-
+    
     self.orderNumber = uuidStr;
     NSLog(@"Order Numba: %@",self.orderNumber);
     
@@ -148,7 +153,7 @@
 }
 
 -(void)closeTheController {
-
+    
     CameraViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Camera"];
     [self.navigationController pushViewController:cvc animated:NO];
     
@@ -161,16 +166,31 @@
         [alert show];
     }
     else {
-    
-    CartTableViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Cart"];
-    cvc.packages = self.packages;
-    cvc.items = _itemsDictionary;
-    //cvc.packageSize = self.packageSize;
-    cvc.packageSize = 1;
-    cvc.orderNumber = _orderNumber;
-    cvc.beerItem = self.beerItem;
-    cvc.liquorItem = self.liquorItem;
-    [self.navigationController pushViewController:cvc animated:YES];
+        
+        CartTableViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Cart"];
+        cvc.packages = self.packages;
+        cvc.items = _itemsDictionary;
+        NSLog(@"items %@", _itemsDictionary);
+        NSLog(@"package name %@", self.packages);
+        
+        
+        for (NSString* keyPackageName in cvc.items){
+            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
+                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
+                for (PFObject* itemPFObj in [cvc.items valueForKey:keyPackageName]){
+                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+                }
+            }
+        }
+        
+        NSLog(@"packageDictionary: %@", [_appDelegate package_itemsDictionary]);
+        
+        //cvc.packageSize = self.packageSize;
+        cvc.packageSize = 1;
+        cvc.orderNumber = _orderNumber;
+        cvc.beerItem = self.beerItem;
+        cvc.liquorItem = self.liquorItem;
+        [self.navigationController pushViewController:cvc animated:YES];
     }
     
 }
@@ -189,13 +209,13 @@
     UIView *headerView = [self.tableView headerViewForSection:0];
     [headerView setNeedsDisplay];
     [headerView setNeedsLayout];
-
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     
     [ProgressHUD dismiss];
-
+    
     self.toast = nil;
     self.toastPic = nil;
     
@@ -226,7 +246,7 @@
     
     
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont fontWithName:@"BELLABOO-Regular" size:22]];
-
+    
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextAlignment:NSTextAlignmentCenter];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor whiteColor]];
     [[UIButton appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTintColor:[UIColor blackColor]];
@@ -234,7 +254,7 @@
     if (section == 0) {
         
         if(_position<0){
-             [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
         } else {
             [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
         }
@@ -244,24 +264,24 @@
     }
     
     if (section == 1) {
-            if(_position>=1){
-                [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
-
-            } else {
-        [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
-                
-            }
+        if(_position>=1){
+            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
+            
+        } else {
+            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+            
+        }
         return @"Drinks";
     }
     
     if (section == 2) {
         if(_position>=2){
             [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
-
+            
         } else {
             [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
         }
-
+        
         return @"21+";
     }
     return nil;
@@ -271,15 +291,15 @@
     
     UITableViewHeaderFooterView *v = (UITableViewHeaderFooterView *)view;
     v.backgroundView.backgroundColor = [UIColor clearColor];
-
+    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-//    NSLog(@"Position: %d", _position);
+    //    NSLog(@"Position: %d", _position);
     
     float offsetY = scrollView.contentOffset.y;
-      //NSLog(@"Position: %f", offsetY);
+    //NSLog(@"Position: %f", offsetY);
     
     _position = 0;
     
@@ -307,7 +327,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-   
+    
     if (section == 0) {
         return self.food.count;
     }
@@ -323,7 +343,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     PackageTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     CALayer *btn = [cell.greenBkgView layer];
@@ -339,15 +359,15 @@
         if (![self.packages containsObject:packageName]) {
             cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-
+            
             
         } else {
-
+            
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
         
-    return cell;
+        return cell;
         
     }
     
@@ -366,7 +386,7 @@
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
-
+        
         return cell;
     }
     
@@ -388,7 +408,7 @@
         
         return cell;
     }
-
+    
     
     
     return cell;
@@ -435,7 +455,7 @@
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
     }
-
+    
     
     else {
         
@@ -536,8 +556,8 @@
                 [_itemsDictionary[item[@"itemPackage"]] addObject:item];
             }
         }
-                    //NSLog(@"Dictionary: %@", _itemsDictionary);
-    }];    
+        //NSLog(@"Dictionary: %@", _itemsDictionary);
+    }];
 }
 
 -(void)getPreselectedBeerItem {
@@ -572,36 +592,36 @@
         NSLog(@"hi");
     }
     else {
-    
-    if ([UIScreen mainScreen].bounds.size.height <= 568.0) {
-        self.toastPic = [UIImage imageNamed:@"toastThreeSmall"];
-    }
-    else {
-    self.toastPic = [UIImage imageNamed:@"toastThree"];
-    }
-    
-    self.toast = [[UIImageView alloc] initWithImage:self.toastPic];
-    self.toast.alpha = 1.0;
-    self.toast.tag = 9;
-    
-    CGPoint dasCenter = CGPointMake(self.navigationController.navigationBar.bounds.size.width/2, 24);
-    
-    [self.toast setCenter:dasCenter];
-    
-    [self.navigationController.navigationBar addSubview:self.toast];
-    
+        
+        if ([UIScreen mainScreen].bounds.size.height <= 568.0) {
+            self.toastPic = [UIImage imageNamed:@"toastThreeSmall"];
+        }
+        else {
+            self.toastPic = [UIImage imageNamed:@"toastThree"];
+        }
+        
+        self.toast = [[UIImageView alloc] initWithImage:self.toastPic];
+        self.toast.alpha = 1.0;
+        self.toast.tag = 9;
+        
+        CGPoint dasCenter = CGPointMake(self.navigationController.navigationBar.bounds.size.width/2, 24);
+        
+        [self.toast setCenter:dasCenter];
+        
+        [self.navigationController.navigationBar addSubview:self.toast];
+        
         [UIView animateWithDuration:0.07 animations:^{
             
             [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasRanApp3"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             self.toast.alpha = 1.0;
-
+            
             self.toast.transform = CGAffineTransformMakeScale(1.045, 1.045);
             
         } completion:^(BOOL finished) {
             self.toast.transform = CGAffineTransformMakeScale(1.0, 1.0);
-
+            
         }];
     }
 }
@@ -619,7 +639,7 @@
             //NSLog(@"Order: %@", self.order);
         }
     }];
-
+    
 }
 
 @end

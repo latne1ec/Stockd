@@ -174,7 +174,7 @@
         NSLog(@"package name %@", self.packages);
         
         
-        for (NSString* keyPackageName in cvc.items){
+        for (NSString* keyPackageName in cvc.packages){
             if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
                 [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
                 for (PFObject* itemPFObj in [cvc.items valueForKey:keyPackageName]){

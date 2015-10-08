@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "ProgressHUD.h"
 #import "CartTableCell.h"
+#import "ExtraItemTableCell.h"
 #import "SubtotalTableCell.h"
 #import "EditPackageTableViewController.h"
 #import "PaymentTableViewController.h"
@@ -18,10 +19,7 @@
 #import "PickSizeViewController.h"
 #import "SlideNavigationController.h"
 
-
-
 @interface CartTableViewController : UITableViewController <TSMessageViewProtocol, SlideNavigationControllerDelegate>
-
 
 @property (nonatomic, strong) NSArray *packages;
 @property (nonatomic, strong) NSDictionary *items;

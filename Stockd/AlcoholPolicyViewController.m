@@ -51,6 +51,8 @@
     
     [self showPopup];
     
+    self.textview.contentInset = UIEdgeInsetsMake(2.0,0.0,0,0.0);
+    
 }
 
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {

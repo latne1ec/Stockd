@@ -14,6 +14,7 @@
 
 - (IBAction)continueButtonTapped:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UITextView *textview;
 
 -(void)showPopup;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="RWw-Ga-uI3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="RWw-Ga-uI3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -8,6 +8,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BELLABOO-Regular.ttf">
+            <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
@@ -1416,7 +1417,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXK-Ex-tOh">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXK-Ex-tOh">
                                             <rect key="frame" x="187" y="24" width="29" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="29" id="QUp-SR-dri"/>
@@ -1517,7 +1518,7 @@
                         <sections>
                             <tableViewSection id="cIy-6k-io1">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="Kb3-cz-zxa">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="210" id="Kb3-cz-zxa">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kb3-cz-zxa" id="FQy-xM-SEV">
@@ -1553,7 +1554,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="94" id="cc7-Ns-2zZ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="94" id="cc7-Ns-2zZ">
                                         <rect key="frame" x="0.0" y="210" width="320" height="94"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cc7-Ns-2zZ" id="2V2-Ah-dW9">
@@ -1582,7 +1583,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="68" id="uuZ-mA-qLC">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="68" id="uuZ-mA-qLC">
                                         <rect key="frame" x="0.0" y="304" width="320" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uuZ-mA-qLC" id="1k2-Sb-xK2">
@@ -1605,7 +1606,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="84" id="ngT-Aw-hGp">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="ngT-Aw-hGp">
                                         <rect key="frame" x="0.0" y="372" width="320" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ngT-Aw-hGp" id="iGg-xn-2jm">
@@ -1613,26 +1614,43 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKi-Qs-pCh">
-                                                    <rect key="frame" x="57" y="18" width="206" height="48"/>
+                                                    <rect key="frame" x="50" y="84" width="220" height="46"/>
                                                     <color key="backgroundColor" red="0.32941177490000001" green="0.90980398650000005" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="MRV-pr-6Mj"/>
-                                                        <constraint firstAttribute="width" constant="206" id="bZT-4k-QFj"/>
+                                                        <constraint firstAttribute="height" constant="46" id="N5C-R9-VRC"/>
+                                                        <constraint firstAttribute="width" constant="220" id="Upl-Ok-H1q"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="20"/>
                                                     <state key="normal" title="Home">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="homeButtonTapped:" destination="yy8-br-Lwi" eventType="touchUpInside" id="VmH-BF-RFd"/>
-                                                        <action selector="updateCartTapped:" destination="TVb-Hv-xD7" eventType="touchUpInside" id="Fx9-Z3-Tqx"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8I-lT-KZZ">
+                                                    <rect key="frame" x="50" y="24" width="220" height="46"/>
+                                                    <color key="backgroundColor" red="0.32941177490000001" green="0.90980398650000005" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="220" id="DEf-Vd-10o"/>
+                                                        <constraint firstAttribute="height" constant="46" id="XaF-O2-aV7"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="14"/>
+                                                    <state key="normal" title="Tell Your Friends, Earn Discount">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="inviteFriendsTapped:" destination="yy8-br-Lwi" eventType="touchUpInside" id="ppg-VL-N76"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="LKi-Qs-pCh" firstAttribute="top" secondItem="iGg-xn-2jm" secondAttribute="topMargin" constant="10" id="mZd-fm-Fw5"/>
-                                                <constraint firstItem="LKi-Qs-pCh" firstAttribute="centerX" secondItem="iGg-xn-2jm" secondAttribute="centerX" id="uIQ-tU-7gl"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="LKi-Qs-pCh" secondAttribute="bottom" constant="11.5" id="6yS-2W-Efc"/>
+                                                <constraint firstItem="LKi-Qs-pCh" firstAttribute="centerX" secondItem="iGg-xn-2jm" secondAttribute="centerX" id="7lk-IE-2Gh"/>
+                                                <constraint firstItem="LKi-Qs-pCh" firstAttribute="leading" secondItem="M8I-lT-KZZ" secondAttribute="leading" id="gcF-u3-LtS"/>
+                                                <constraint firstItem="LKi-Qs-pCh" firstAttribute="top" secondItem="M8I-lT-KZZ" secondAttribute="bottom" constant="14" id="nQd-oV-iwB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1650,6 +1668,7 @@
                         <outlet property="firstCell" destination="Kb3-cz-zxa" id="xlw-T2-yA4"/>
                         <outlet property="fourthCell" destination="ngT-Aw-hGp" id="j1F-26-2PB"/>
                         <outlet property="homeButton" destination="LKi-Qs-pCh" id="1Tz-b3-Tgx"/>
+                        <outlet property="inviteFriendsButton" destination="M8I-lT-KZZ" id="4YW-9I-Oij"/>
                         <outlet property="secondCell" destination="cc7-Ns-2zZ" id="ya5-zr-Hle"/>
                         <outlet property="streetNameLabel" destination="6Pd-en-GAo" id="M1A-S9-2Nc"/>
                         <outlet property="thirdCell" destination="uuZ-mA-qLC" id="qSD-8k-5Z0"/>
@@ -3088,6 +3107,7 @@ ATTN: Matt Mason
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="JBA-mn-pk8" id="KEV-Ll-wEc"/>
+                        <outlet property="textview" destination="Va6-na-MCC" id="Je3-Sx-Zz2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFh-YE-sP0" userLabel="First Responder" sceneMemberID="firstResponder"/>

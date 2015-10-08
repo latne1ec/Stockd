@@ -65,6 +65,7 @@
 		203FFD0E1BC5B0B7008B4CED /* cancelWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203FFD0D1BC5B0B7008B4CED /* cancelWhite@2x.png */; };
 		203FFD101BC5B0FA008B4CED /* addPhotoPink@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 203FFD0F1BC5B0FA008B4CED /* addPhotoPink@2x.png */; };
 		203FFD121BC5DAD9008B4CED /* ItemTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 203FFD111BC5DAD9008B4CED /* ItemTableHeaderView.xib */; };
+		203FFD151BC6E2E7008B4CED /* ExtraItemTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 203FFD141BC6E2E7008B4CED /* ExtraItemTableCell.m */; };
 		20497DD81B5C33D3004A2950 /* Apple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DD71B5C33D3004A2950 /* Apple@2x.png */; };
 		20497DDD1B5C34A0004A2950 /* Bread@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DD91B5C34A0004A2950 /* Bread@2x.png */; };
 		20497DDE1B5C34A0004A2950 /* Chicken@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20497DDA1B5C34A0004A2950 /* Chicken@2x.png */; };
@@ -257,6 +258,8 @@
 		203FFD0D1BC5B0B7008B4CED /* cancelWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelWhite@2x.png"; sourceTree = "<group>"; };
 		203FFD0F1BC5B0FA008B4CED /* addPhotoPink@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addPhotoPink@2x.png"; sourceTree = "<group>"; };
 		203FFD111BC5DAD9008B4CED /* ItemTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemTableHeaderView.xib; sourceTree = "<group>"; };
+		203FFD131BC6E2E7008B4CED /* ExtraItemTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtraItemTableCell.h; sourceTree = "<group>"; };
+		203FFD141BC6E2E7008B4CED /* ExtraItemTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtraItemTableCell.m; sourceTree = "<group>"; };
 		20497DD71B5C33D3004A2950 /* Apple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Apple@2x.png"; sourceTree = "<group>"; };
 		20497DD91B5C34A0004A2950 /* Bread@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bread@2x.png"; sourceTree = "<group>"; };
 		20497DDA1B5C34A0004A2950 /* Chicken@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chicken@2x.png"; sourceTree = "<group>"; };
@@ -833,6 +836,8 @@
 			children = (
 				2067F8EE1B4C2989001F5478 /* CartTableCell.h */,
 				2067F8EF1B4C2989001F5478 /* CartTableCell.m */,
+				203FFD131BC6E2E7008B4CED /* ExtraItemTableCell.h */,
+				203FFD141BC6E2E7008B4CED /* ExtraItemTableCell.m */,
 				2067F8F21B4C2C3E001F5478 /* SubtotalTableCell.h */,
 				2067F8F31B4C2C3E001F5478 /* SubtotalTableCell.m */,
 				2067F8EB1B4C28C6001F5478 /* CartTableViewController.h */,
@@ -1185,6 +1190,7 @@
 				2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */,
 				20D52CC41B44D4E300A1C60B /* TourViewController.m in Sources */,
 				201186291B41C16200A59D55 /* AppDelegate.m in Sources */,
+				203FFD151BC6E2E7008B4CED /* ExtraItemTableCell.m in Sources */,
 				2037DDDD1B43044E0076B0F2 /* EmailTableViewController.m in Sources */,
 				201186881B41F32C00A59D55 /* PasswordResetViewController.m in Sources */,
 				2067F8CC1B4B33EB001F5478 /* BoozeTableCell.m in Sources */,

@@ -151,7 +151,7 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    NSLog(@"Scroll: %f", scrollView.contentOffset.y);
+    //NSLog(@"Scroll: %f", scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < 0) {
         self.headerview.backgroundColor = [UIColor clearColor];
     }
@@ -188,8 +188,6 @@
     }];
 }
 
-
-
 - (IBAction)incrementQuantityButtonTapped:(id)sender {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     ItemTableCell *cell = (ItemTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -199,10 +197,13 @@
     if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
         [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject:[NSNumber numberWithInt:1] forKey:itemNameLabel];
     }else{
-        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] integerValue] + 1;
+        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] intValue] + 1;
         
         [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject: [NSNumber numberWithInt: value] forKey:itemNameLabel];
     }
+    
+    NSLog(@"Test: %@", [_appDelegate extraPackage_itemsDictionary]);
+    
     
     cell.itemQuantityLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] stringValue];
 }
@@ -214,7 +215,7 @@
     NSString *itemNameLabel = cell.itemNameLabel.text;
     
     if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
-        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] integerValue] - 1;
+        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] intValue] - 1;
         
         if (value < 1){
             [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] removeObjectForKey:itemNameLabel];

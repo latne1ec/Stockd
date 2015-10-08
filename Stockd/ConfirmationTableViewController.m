@@ -12,6 +12,9 @@
 
 @interface ConfirmationTableViewController ()
 
+@property (nonatomic, strong) NSString *shareMessage;
+
+
 @end
 
 @implementation ConfirmationTableViewController
@@ -60,6 +63,11 @@
     [btn setMasksToBounds:YES];
     [btn setCornerRadius:5.0f];
     
+    CALayer *btn2 = [self.inviteFriendsButton layer];
+    [btn2 setMasksToBounds:YES];
+    [btn2 setCornerRadius:5.0f];
+    
+    
     NSString *streetName = [[PFUser currentUser] objectForKey:@"streetName"];
     NSString *cityName = [[PFUser currentUser] objectForKey:@"userCity"];
     NSString *zipCode = [[PFUser currentUser] objectForKey:@"zipCode"];
@@ -67,7 +75,26 @@
     self.streetNameLabel.text = streetName;
     self.cityStateZipLabel.text = [NSString stringWithFormat:@"%@, %@", cityName, zipCode];
     self.totalPriceLabel.text = [NSString stringWithFormat:@"$%.02f", _subtotal];
+
     
+    [self getShareMessage];
+    
+}
+
+-(void)getShareMessage {
+    
+    [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+        
+        if (error) {
+            
+            [ProgressHUD showError:@"Network Error"];
+        }
+        else {
+            [ProgressHUD dismiss];
+            self.shareMessage = config[@"shareMessage"];
+            NSLog(@"Yay! The message is %@!",self.shareMessage);
+        }
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -114,9 +141,65 @@
     return nil;
 }
 
+- (IBAction)inviteFriendsTapped:(id)sender {
+    
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    if([MFMessageComposeViewController canSendText]) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            controller.body = self.shareMessage;
+            controller.messageComposeDelegate = self;
+            //[controller.navigationBar setTintColor:[UIColor blackColor]];
+            [[controller navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+            
+            [self presentViewController:controller animated:YES completion:^{
+                
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+                
+            }];
+        });
+    }
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    
+    if (result == MessageComposeResultCancelled) {
+        
+        [PFAnalytics trackEvent:@"SMSInviteCancelled"];
+        NSLog(@"Canceled");
+        
+        
+    } else if (result == MessageComposeResultSent) {
+        
+        if ([[[PFUser currentUser] objectForKey:@"invitedFriends"] isEqualToString:@"YES"]) {
+            NSLog(@"Already Shared");
+        }
+        else {
+            NSLog(@"Update Score");
+            [PFAnalytics trackEvent:@"SMSInviteSent"];
+            [[PFUser currentUser] setObject:@"YES" forKey:@"invitedFriends"];
+            [[PFUser currentUser] incrementKey:@"karmaScore" byAmount:[NSNumber numberWithInt:5]];
+            [[PFUser currentUser] saveInBackground];
+            
+            NSNumber *score = [[PFUser currentUser] objectForKey:@"karmaScore"];
+            
+            if ([score intValue] >=5) {
+                NSLog(@"HERERER");
+                [[PFUser currentUser] incrementKey:@"karmaCash" byAmount:[NSNumber numberWithInt:10]];
+                [[PFUser currentUser] saveInBackground];
+            }
+            
+        }
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 - (IBAction)homeButtonTapped:(id)sender {
 
-    ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Camera"];
+    ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     CATransition *transition = [CATransition animation];

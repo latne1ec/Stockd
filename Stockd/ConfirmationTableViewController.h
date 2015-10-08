@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "MessageUI/MessageUI.h"
 
-@interface ConfirmationTableViewController : UITableViewController
+
+@interface ConfirmationTableViewController : UITableViewController <MFMessageComposeViewControllerDelegate>
+
 
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *firstCell;
@@ -21,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *cityStateZipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *homeButton;
+@property (weak, nonatomic) IBOutlet UIButton *inviteFriendsButton;
+
+- (IBAction)inviteFriendsTapped:(id)sender;
 
 - (IBAction)homeButtonTapped:(id)sender;
 

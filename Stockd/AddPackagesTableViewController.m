@@ -368,9 +368,12 @@
     
     PackageTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
+    
     CALayer *btn = [cell.greenBkgView layer];
-    [btn setMasksToBounds:YES];
-    [btn setCornerRadius:5.0f];
+    if (btn.cornerRadius !=5.0f) {
+        [btn setMasksToBounds:YES];
+        [btn setCornerRadius:5.0f];
+    }
     
     if (indexPath.section == 0) {
         
@@ -378,16 +381,16 @@
         NSString *packageName = [object objectForKey:@"packageName"];
         cell.packageNameLabel.text = [NSString stringWithFormat:@"+ %@", packageName];
         
-        if (![self.packages containsObject:packageName]) {
-            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-            
-            
-        } else {
-            
-            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
-        }
+//        if (![self.packages containsObject:packageName]) {
+//            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+//            
+//            
+//        } else {
+//            
+//            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+//        }
         
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
                 
@@ -412,16 +415,16 @@
         NSString *packageName = [object objectForKey:@"packageName"];
         cell.packageNameLabel.text = [NSString stringWithFormat:@"+ %@", packageName];
         
-        if (![self.packages containsObject:packageName]) {
-            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-            
-            
-        } else {
-            
-            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
-        }
+//        if (![self.packages containsObject:packageName]) {
+//            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+//            
+//            
+//        } else {
+//            
+//            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+//        }
        
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             
@@ -444,16 +447,16 @@
         NSString *packageName = [object objectForKey:@"packageName"];
         cell.packageNameLabel.text = [NSString stringWithFormat:@"+ %@", packageName];
         
-        if (![self.packages containsObject:packageName]) {
-            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-            
-            
-        } else {
-            
-            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
-        }
+//        if (![self.packages containsObject:packageName]) {
+//            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+//            
+//            
+//        } else {
+//            
+//            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+//        }
         
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             
@@ -509,7 +512,6 @@
                 [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
             }
         
-        
     }
     
     else if (indexPath.section == 2) {
@@ -564,7 +566,6 @@
         else {
             [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
         }
-
         
     }
     

@@ -14,6 +14,9 @@
 @property (nonatomic, strong) PFRelation *itemRelation;
 @property (nonatomic, strong) NSArray *items;
 
+@property (nonatomic, strong) UIView *headerview;
+
+
 
 
 @end
@@ -68,6 +71,9 @@
       
     [self queryForItems];
     
+    self.headerview = [[[NSBundle mainBundle] loadNibNamed:@"ItemTableHeaderView" owner:self options:nil] objectAtIndex:0];
+
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -82,6 +88,14 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    self.headerview.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+    return self.headerview;
+}
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.items.count;
@@ -103,10 +117,27 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
+    return 46;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+        
     return 70;
     
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    NSLog(@"Scroll: %f", scrollView.contentOffset.y);
+    if (scrollView.contentOffset.y < 0) {
+        self.headerview.backgroundColor = [UIColor clearColor];
+    }
+    else {
+        
+        self.headerview.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+    }
 }
 
 -(void)queryForItems {

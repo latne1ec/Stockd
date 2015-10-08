@@ -34,17 +34,27 @@
     
     
 
-    UIImage *image1 = [UIImage imageNamed:@""];
-    UIImage *image2 = [UIImage imageNamed:@""];
-    UIImage *image3 = [UIImage imageNamed:@""];
-    UIImage *image4 = [UIImage imageNamed:@""];
+//    UIImage *image1 = [UIImage imageNamed:@""];
+//    UIImage *image2 = [UIImage imageNamed:@""];
+//    UIImage *image3 = [UIImage imageNamed:@""];
+//    UIImage *image4 = [UIImage imageNamed:@""];
+    
+    
     
     UIButton *pickButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-165, 100, 100)];
     [pickButton setImage:[UIImage imageNamed:@"pickButton"] forState:UIControlStateNormal];
     [pickButton addTarget:self action:@selector(setPackageSize) forControlEvents:UIControlEventTouchUpInside];
     [pickButton.layer setCornerRadius:20.0];
     [self.view addSubview:pickButton];
-
+    
+    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-165, 100, 100)];
+    
+    priceLabel.text = @"Price: $100";
+    priceLabel.textColor = [UIColor whiteColor];
+    priceLabel.font = [UIFont fontWithName:@"BELLABOO-Regular" size:20];
+    [self.view addSubview:priceLabel];
+    
+    
 
     UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(captionDrag:)];
     [self.view addGestureRecognizer:drag];

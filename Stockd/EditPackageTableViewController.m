@@ -205,7 +205,9 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     EditItemsTableCell *cell = (EditItemsTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 
-    [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] increaseQuantity];
+    if ([_packageName isEqual:@"Beer"] && [self checkValidBeerLimit]){
+        [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] increaseQuantity];
+    }
     
     cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
 }
@@ -218,6 +220,19 @@
     [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] decreaseQuantity];
     
     cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
+}
+
+-(BOOL) checkValidBeerLimit{
+    if ([_packageName isEqual:@"Beer"]){
+        int maxNumOfBeers = 6;
+        int totalBeers = 0;
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
+            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:itemNameKey];
+            totalBeers += cartItem.itemQuantity;
+        }
+        return totalBeers < maxNumOfBeers;
+    }
+    return YES;
 }
 
 

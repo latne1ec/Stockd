@@ -12,13 +12,10 @@
 
 -(id) initItem: (NSString*)name_ detail:(NSString*)detail_ quantity:(int)quantity_ price:(float)price_{
     if (self = [super init]){
-        NSLog(@"HEREeE");
         _itemName = name_;
         _itemDetail = detail_;
         _itemQuantity = quantity_;
         _itemPrice = price_;
-        
-        NSLog(@"DEBUG: %@ %@ %ul %f", _itemName, _itemDetail, _itemQuantity, _itemPrice);
     }
     return self;
 }

@@ -29,7 +29,8 @@
 - (IBAction)decrementQuantity:(id)sender;
 - (IBAction)incrementQuantity:(id)sender;
 
-
 - (IBAction)updateCartTapped:(id)sender;
+
+-(BOOL) checkValidBeerLimit;
 
 @end

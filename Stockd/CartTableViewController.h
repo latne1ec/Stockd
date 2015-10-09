@@ -21,8 +21,7 @@
 
 @interface CartTableViewController : UITableViewController <TSMessageViewProtocol, SlideNavigationControllerDelegate>
 
-@property (nonatomic, strong) NSArray *packages;
-@property (nonatomic, strong) NSDictionary *items;
+//@property (nonatomic, strong) NSDictionary *items;
 @property (nonatomic, strong) NSString *orderNumber;
 @property (nonatomic, strong) PFObject *order;
 @property (nonatomic, strong) NSString *beerItem;
@@ -36,6 +35,5 @@
 
 
 - (IBAction)getStockedTapped:(id)sender;
--(void)updateQuantitiesFor:(NSString*)packageName with:(NSMutableArray*)edited;
 
 @end

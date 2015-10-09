@@ -9,18 +9,21 @@
 #import "CartTableViewController.h"
 #import "AddressTableViewController.h"
 #import "AlcoholPolicyViewController.h"
+#import "AppDelegate.h"
 
 @interface CartTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *itemsToEdit;
-@property (nonatomic, strong) NSMutableDictionary *updatedItemList;
-@property (nonatomic) NSMutableDictionary *updatedPrice;
-@property (nonatomic) NSDictionary *updatedPriceDic;
+//@property (nonatomic, strong) NSMutableArray *itemsToEdit;
+//@property (nonatomic, strong) NSMutableDictionary *updatedItemList;
+//@property (nonatomic) NSMutableDictionary *updatedPrice;
+//@property (nonatomic) NSDictionary *updatedPriceDic;
 @property (nonatomic) float subtotal;
 @property (nonatomic) float taxes;
 @property (nonatomic) int discount;
 @property (nonatomic) float finalTotal;
 @property (nonatomic) int BOOZE;
+@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) NSArray* packageKeys;
 
 @end
 
@@ -28,21 +31,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    _packageKeys = [_appDelegate package_itemsDictionary].allKeys;
+    
     //_updatedPrice = -1;
     
     _BOOZE = 0;
-    
-    NSLog(@"packages: %@", self.packages);
     
     [self checkForBooze];
     
     [self setNavTitle];
     
-    _updatedPrice = [[NSMutableDictionary alloc] init];
-    _updatedItemList = [[NSMutableDictionary alloc] init];
+    //_updatedPrice = [[NSMutableDictionary alloc] init];
+    //_updatedItemList = [[NSMutableDictionary alloc] init];
     
     self.tableView.tableFooterView = [UIView new];
-    self.itemsToEdit = [[NSMutableArray alloc] init];
     
     
     //Nav Bar Back Button Color
@@ -108,27 +113,22 @@
         [self getStockedTapped:self];
     }
     else {
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Zipcodes"];
-    [query whereKey:@"zipcode" equalTo:zipCode];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (object == nil) {
-            NSLog(@"Not in that area");
-        }
-        else {
-            
+        
+        PFQuery *query = [PFQuery queryWithClassName:@"Zipcodes"];
+        [query whereKey:@"zipcode" equalTo:zipCode];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object == nil) {
+                NSLog(@"Not in that area");
+            }
+            else {
+                
             }
         }];
     }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-
-    if (self.itemsToEdit != nil) {
-        
-        [self.itemsToEdit removeAllObjects];
-    }
-    
+    [self updateTotal];
     [self.tableView reloadData];
 }
 
@@ -136,14 +136,14 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0) {
-        return self.packages.count;
+        return _packageKeys.count;
     }
     if (section == 1) {
         
@@ -156,25 +156,14 @@
 {
     id strings = [@[] mutableCopy];
     
-    for(int i=0; i<[self.packages count]; i++){
-        NSString *packageName = [self.packages objectAtIndex:i];
-        
-        if (_updatedItemList[packageName] != nil) {
-            [strings addObject:_updatedItemList[packageName]];
-        } else {
+    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
             NSMutableString *result = [[NSMutableString alloc] init];
-            for(int j=0; j<[self.items[packageName] count]; j++){
-                NSDictionary  *item = self.items[packageName][j];
-                if(j==[self.items[packageName] count]-1){
-                    [result appendString:[NSString stringWithFormat:@"%@ x%d", item[@"itemName"],self.packageSize]];
-                } else {
-                    [result appendString:[NSString stringWithFormat:@"%@ x%d, ", item[@"itemName"],self.packageSize]];
-                }
-            }
+            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey];
+            [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
             [strings addObject:result];
         }
     }
-    
     return [strings componentsJoinedByString:@"; "];
 }
 
@@ -183,91 +172,23 @@
     CartTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     SubtotalTableCell *cell2 = [tableView dequeueReusableCellWithIdentifier:@"Cell2"];
     
-    if (indexPath.section == 0) {
-    
-    NSString *packageName = [self.packages objectAtIndex:indexPath.row];
-    cell.packageNameLabel.text = [NSString stringWithFormat:@"%@ Package", packageName];
-        
-        
+    if (indexPath.section == 0){
+        NSString *packageName = [_packageKeys objectAtIndex:indexPath.row];
         NSMutableString *result = [[NSMutableString alloc] init];
-
-            for(int j=0; j<[self.items[packageName] count]; j++){
-                NSDictionary  *item = self.items[packageName][j];
-                
-                if([[packageName lowercaseString] isEqualToString:@"liquor"]){
-                    
-                    if([[item[@"itemName"] lowercaseString] isEqualToString:@"absolut"]){
-                        if(j==[self.items[packageName] count]-1){
-                            [result appendString:[NSString stringWithFormat:@"%@ x%d", item[@"itemName"],self.packageSize]];
-                        } else {
-                            [result appendString:[NSString stringWithFormat:@"%@ x%d, ", item[@"itemName"],self.packageSize]];
-                        }
-                    } else {
-                        if(j==[self.items[packageName] count]-1){
-                            [result appendString:[NSString stringWithFormat:@"%@ x0", item[@"itemName"]]];
-                        } else {
-                            [result appendString:[NSString stringWithFormat:@"%@ x0, ", item[@"itemName"]]];
-                        }
-                        
-                    }
-                    
-                } else if([[packageName lowercaseString] isEqualToString:@"beer"]){
-                
-                    int maxBeers = self.packageSize;
-                    if(maxBeers>2){
-                        maxBeers = 2;
-                    }
-                    
-                if([[item[@"itemName"] lowercaseString] isEqualToString:self.beerItem]){
-                    if(j==[self.items[packageName] count]-1){
-                        [result appendString:[NSString stringWithFormat:@"%@ x%d", item[@"itemName"], maxBeers]];
-                    } else {
-                        [result appendString:[NSString stringWithFormat:@"%@ x%d, ", item[@"itemName"], maxBeers]];
-                    }
-                } else {
-                    if(j==[self.items[packageName] count]-1){
-                        [result appendString:[NSString stringWithFormat:@"%@ x0", item[@"itemName"]]];
-                    } else {
-                        [result appendString:[NSString stringWithFormat:@"%@ x0, ", item[@"itemName"]]];
-                    }
-                }
-                    
-                } else {
-                
-                if(j==[self.items[packageName] count]-1){
-                    [result appendString:[NSString stringWithFormat:@"%@ x%d", item[@"itemName"],self.packageSize]];
-                } else {
-                    [result appendString:[NSString stringWithFormat:@"%@ x%d, ", item[@"itemName"],self.packageSize]];
-                }
-                    
-                }
-                
-                if (_updatedItemList[packageName] != nil) {
-                    cell.packageItems.text = _updatedItemList[packageName];
-                }
-                else {
-                    cell.packageItems.text = result;
-            
-                }
-            }
-        NSLog(@"CFRAIP: %@", result);
         
-        
-        if (_updatedPrice[packageName] != nil) {
-            NSString *priceString = [NSString stringWithFormat:@"$%0.2f", [_updatedPrice[packageName] floatValue]];
-            cell.packagePriceLabel.text = priceString;
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+            [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
         }
-        else {
+        cell.packageNameLabel.text = [NSString stringWithFormat:@"%@ Package", packageName];
+        cell.packageItems.text = result;
         float firstPrice = [self firstPriceFor:packageName];
-        NSLog(@"Price: %0.2f", firstPrice);
-            
         NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
         cell.packagePriceLabel.text = priceString;
-        }
         
-    return cell;
-        
+        return cell;
     }
+    
     
     if (indexPath.section == 1) {
         
@@ -284,9 +205,9 @@
         
         cell2.totalPriceLabel.text = [NSString stringWithFormat:@"$%.02f", _subtotal+_discount];
         if(_discount>0){
-        cell2.discountLabel.text = [NSString stringWithFormat:@"-$%d.00", _discount];
+            cell2.discountLabel.text = [NSString stringWithFormat:@"-$%d.00", _discount];
         } else {
-        cell2.discountLabel.text = [NSString stringWithFormat:@"$%d.00", _discount];
+            cell2.discountLabel.text = [NSString stringWithFormat:@"$%d.00", _discount];
         }
         cell2.taxesLabel.text = [NSString stringWithFormat:@"$%.02f", _taxes];
         cell2.finalTotalLabel.text = [NSString stringWithFormat:@"$%.02f", _finalTotal];
@@ -300,38 +221,12 @@
 -(float)firstPriceFor:(NSString*)packageName {
     
     float price = 0;
-    for(int j=0; j<[self.items[packageName] count]; j++){
-        NSDictionary  *item = self.items[packageName][j];
-        
-        if([[packageName lowercaseString] isEqualToString:@"liquor"]){
-            if([[item[@"itemName"] lowercaseString] isEqualToString:@"absolut"]){
-                float ppu = [item[@"itemPrice"] floatValue];
-                float quantity = 1.0f*self.packageSize;
-                price += ppu*quantity;
-            }
-            
-        } else if([[packageName lowercaseString] isEqualToString:@"beer"]){
-            
-            if([[item[@"itemName"] lowercaseString] isEqualToString:self.beerItem]){
-            float ppu = [item[@"itemPrice"] floatValue];
-                
-                int maxBeers = self.packageSize;
-                if(maxBeers>2){
-                    maxBeers = 2;
-                }
-                
-            float quantity = 1.0f*maxBeers;
-            price += ppu*quantity;
-            }
-            
-        } else {
-        
-        float ppu = [item[@"itemPrice"] floatValue];
-        float quantity = 1.0f*self.packageSize;
-        price += ppu*quantity;
-            
-        }
+    
+    for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+        CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+        price += cartItem.itemQuantity*cartItem.itemPrice;
     }
+    
     return price;
 }
 
@@ -341,17 +236,12 @@
     _taxes = 0;
     _finalTotal = 0;
     
-    for(int i=0; i<self.packages.count; i++){
+    for(int i=0; i<[_appDelegate package_itemsDictionary].count; i++){
         
-        NSString *packageName = self.packages[i];
+        NSString *packageName = _packageKeys[i];
         
-        if (_updatedPrice[packageName] != nil) {
-            _subtotal += [_updatedPrice[packageName] floatValue];
-        }
-        else {
-            float firstPrice = [self firstPriceFor:packageName];
-            _subtotal += firstPrice;
-        }
+        float firstPrice = [self firstPriceFor:packageName];
+        _subtotal += firstPrice;
     }
     
     
@@ -371,14 +261,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     if (indexPath.section == 0) {
         
-        NSString *packageName = [self.packages objectAtIndex:indexPath.row];
-        for(int j=0; j<[self.items[packageName] count]; j++){
-            NSDictionary  *item = self.items[packageName][j];
-            [self.itemsToEdit addObject:item];
-        }
+        NSString *packageName = [_packageKeys objectAtIndex:indexPath.row];
         
         EditPackageTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPackage"];
         destViewController.packageSize = self.packageSize;
@@ -398,7 +284,7 @@
         [self.navigationController presentViewController:navigationController animated:YES completion:^{
             
             [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+            
         }];
     }
     
@@ -436,28 +322,28 @@
     
     if (_BOOZE !=0) {
         
-    NSString *birthDate = [[PFUser currentUser] objectForKey:@"userDOB"];
-    NSDate *todayDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-    int time = [todayDate timeIntervalSinceDate:[dateFormatter dateFromString:birthDate]];
-    int allDays = (((time/60)/60)/24);
-    
-    NSLog(@"User BDAY: %@", birthDate);
+        NSString *birthDate = [[PFUser currentUser] objectForKey:@"userDOB"];
+        NSDate *todayDate = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+        int time = [todayDate timeIntervalSinceDate:[dateFormatter dateFromString:birthDate]];
+        int allDays = (((time/60)/60)/24);
         
-    if (allDays >= 7670) {
-        NSLog(@"User is over 21");
-    }
-    else {
+        NSLog(@"User BDAY: %@", birthDate);
         
-        NSLog(@"User is NOT 21");
-        [self showBoozeTerms];
-        return;
+        if (allDays >= 7670) {
+            NSLog(@"User is over 21");
+        }
+        else {
+            
+            NSLog(@"User is NOT 21");
+            [self showBoozeTerms];
+            return;
         }
     }
     
     if (_finalTotal<=.5) {
-    
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $0.50" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         
         [alert show];
@@ -476,65 +362,65 @@
         
     }
     else {
-    
-    NSString *userStripeToken = [[PFUser currentUser] objectForKey:@"stripeToken"];
-    
-    if ([[PFUser currentUser] objectForKey:@"streetName"] == nil) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
+        NSString *userStripeToken = [[PFUser currentUser] objectForKey:@"stripeToken"];
         
-        AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
-        destViewController.parent = self;
-        UINavigationController *navigationController =
-        [[UINavigationController alloc] initWithRootViewController:destViewController];
-        UIBarButtonItem *newBackButton =
-        [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
-                                         style:UIBarButtonItemStylePlain
-                                        target:nil
-                                        action:nil];
-        [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
-        [self.navigationController presentViewController:navigationController animated:YES completion:^{
-        }];
-
-    }
-    
-    else if (userStripeToken == nil) {
-
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Payment Method" message:@"Before making any purchases on Stockd, you must first enter a payment method." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-
-        PaymentTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Payment"];
-        destViewController.parent = self;
-        UINavigationController *navigationController =
-        [[UINavigationController alloc] initWithRootViewController:destViewController];
-        UIBarButtonItem *newBackButton =
-        [[UIBarButtonItem alloc] initWithTitle:@"Payment Info"
-                                         style:UIBarButtonItemStylePlain
-                                        target:nil
-                                        action:nil];
-        [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
-        [self.navigationController presentViewController:navigationController animated:YES completion:^{
-        }];
-    }
-    else {
+        if ([[PFUser currentUser] objectForKey:@"streetName"] == nil) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            
+            AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
+            destViewController.parent = self;
+            UINavigationController *navigationController =
+            [[UINavigationController alloc] initWithRootViewController:destViewController];
+            UIBarButtonItem *newBackButton =
+            [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
+                                             style:UIBarButtonItemStylePlain
+                                            target:nil
+                                            action:nil];
+            [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+            [self.navigationController presentViewController:navigationController animated:YES completion:^{
+            }];
+            
+        }
         
-        [ProgressHUD show:nil Interaction:NO];
-        
-        NSString *customerID = [[PFUser currentUser] objectForKey:@"customerID"];
-        float amountInCents = _finalTotal*100;
-        int roundedTotal = (int)roundf(amountInCents);
-        NSNumber *amount = [NSNumber numberWithFloat:roundedTotal];
-        
-        [self chargeCustomer:customerID amount:amount completion:^(id object, NSError *error) {
-            if (error) {
-                [ProgressHUD dismiss];
-                [self showError:error];
-            }
-            else {
-                NSLog(@"Charging Customer: %@", object);
-            }
-        }];
+        else if (userStripeToken == nil) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Payment Method" message:@"Before making any purchases on Stockd, you must first enter a payment method." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            
+            PaymentTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Payment"];
+            destViewController.parent = self;
+            UINavigationController *navigationController =
+            [[UINavigationController alloc] initWithRootViewController:destViewController];
+            UIBarButtonItem *newBackButton =
+            [[UIBarButtonItem alloc] initWithTitle:@"Payment Info"
+                                             style:UIBarButtonItemStylePlain
+                                            target:nil
+                                            action:nil];
+            [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+            [self.navigationController presentViewController:navigationController animated:YES completion:^{
+            }];
+        }
+        else {
+            
+            [ProgressHUD show:nil Interaction:NO];
+            
+            NSString *customerID = [[PFUser currentUser] objectForKey:@"customerID"];
+            float amountInCents = _finalTotal*100;
+            int roundedTotal = (int)roundf(amountInCents);
+            NSNumber *amount = [NSNumber numberWithFloat:roundedTotal];
+            
+            [self chargeCustomer:customerID amount:amount completion:^(id object, NSError *error) {
+                if (error) {
+                    [ProgressHUD dismiss];
+                    [self showError:error];
+                }
+                else {
+                    NSLog(@"Charging Customer: %@", object);
+                }
+            }];
         }
     }
 }
@@ -559,8 +445,8 @@
                                         [[PFUser currentUser] saveInBackground];
                                         [self getOrder];
                                         [self showConfirmation];
-                                }
-                    }];
+                                    }
+                                }];
 }
 
 -(void)updateOrderInParse:(PFObject *)order {
@@ -616,7 +502,7 @@
 
 
 -(void)showError:(NSError *)error {
-
+    
     NSLog(@"Error: %@", error);
     [TSMessage showNotificationInViewController:self.navigationController
                                           title:@"Error"
@@ -635,19 +521,20 @@
 
 -(void)checkForBooze {
     
-    if ([self.packages containsObject:@"Liquor"]) {
+    /*if ([[_appDelegate package_itemsDictionary] valueForKey:@"Liquor"]) {
         
         _BOOZE = 150;
         [self showBoozeTerms];
     }
-    else if ([self.packages containsObject:@"Beer"]) {
-                _BOOZE = 150;
+    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Beer"]) {
+        _BOOZE = 150;
         [self showBoozeTerms];
     }
-    else if ([self.packages containsObject:@"Wine"]) {
-                _BOOZE = 150;
+    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Wine"]) {
+        _BOOZE = 150;
         [self showBoozeTerms];
-    }
+    }*/
+    
 }
 -(void)showBoozeTerms {
     
@@ -662,25 +549,25 @@
     [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
     [self.navigationController presentViewController:navigationController animated:YES completion:^{
     }];
-
+    
 }
 
 -(void)setNavTitle {
     
     self.title = @"Basket";
     
-//    if (self.packageSize == 1) {
-//        self.title = @"Small Basket";
-//    }
-//    else if (self.packageSize == 2) {
-//        self.title = @"Medium Basket";
-//    }
-//    else if (self.packageSize == 3) {
-//        self.title = @"Large Basket";
-//    }
-//    else if (self.packageSize == 4) {
-//        self.title = @"XL Basket";
-//    }
+    //    if (self.packageSize == 1) {
+    //        self.title = @"Small Basket";
+    //    }
+    //    else if (self.packageSize == 2) {
+    //        self.title = @"Medium Basket";
+    //    }
+    //    else if (self.packageSize == 3) {
+    //        self.title = @"Large Basket";
+    //    }
+    //    else if (self.packageSize == 4) {
+    //        self.title = @"XL Basket";
+    //    }
 }
 
 

@@ -205,7 +205,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     EditItemsTableCell *cell = (EditItemsTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 
-    if ([_packageName isEqual:@"Beer"] && [self checkValidBeerLimit]){
+    if (([_packageName isEqual:@"Beer"] && [self checkValidBeerLimit]) || ![_packageName isEqual:@"Beer"]){
         [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] increaseQuantity];
     }
     

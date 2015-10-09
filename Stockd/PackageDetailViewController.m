@@ -88,7 +88,9 @@
 
 
 -(void)viewWillDisappear:(BOOL)animated {
-    
+    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] count] < 1){
+        [[_appDelegate extraPackage_itemsDictionary] removeObjectForKey:_packageType];
+    }
     [ProgressHUD dismiss];
     //self.navigationItem.hidesBackButton = YES;
 }
@@ -123,7 +125,7 @@
     cell.itemDetailLabel.text = [object objectForKey:@"itemQuantity"];
     
     if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:[object objectForKey:@"itemName"]]){
-        cell.itemQuantityLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:[object objectForKey:@"itemName"]] stringValue];
+        cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:self.items[indexPath.row][@"itemName"]] itemQuantity]];
     }else{
         cell.itemQuantityLabel.text = @"0";
     }
@@ -183,7 +185,7 @@
 
 
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-        
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
     }];
 }
@@ -195,17 +197,15 @@
     NSString *itemNameLabel = cell.itemNameLabel.text;
     
     if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
-        [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject:[NSNumber numberWithInt:1] forKey:itemNameLabel];
+        [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue]] forKey:self.items[indexPath.row][@"itemName"]];
     }else{
-        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] intValue] + 1;
-        
-        [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject: [NSNumber numberWithInt: value] forKey:itemNameLabel];
+        [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] increaseQuantity];
     }
     
     NSLog(@"Test: %@", [_appDelegate extraPackage_itemsDictionary]);
     
     
-    cell.itemQuantityLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] stringValue];
+    cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] itemQuantity]];
 }
 
 - (IBAction)decrementQuantityButtonTapped:(id)sender {
@@ -215,12 +215,12 @@
     NSString *itemNameLabel = cell.itemNameLabel.text;
     
     if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
-        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] intValue] - 1;
+        int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] itemQuantity] - 1;
         
         if (value < 1){
             [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] removeObjectForKey:itemNameLabel];
         }else{
-            [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] setObject: [NSNumber numberWithInt: value] forKey:itemNameLabel];
+            [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] decreaseQuantity];
         }
     }
     
@@ -228,7 +228,7 @@
     cell.incrementButton.tag = indexPath.row;
     
     if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
-        cell.itemQuantityLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] stringValue];
+        cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] itemQuantity]];
     }else{
         cell.itemQuantityLabel.text = @"0";
     }

@@ -24,6 +24,7 @@
 @property (nonatomic) int BOOZE;
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSArray* packageKeys;
+@property (nonatomic, strong) NSArray* extraKeys;
 
 @end
 
@@ -35,6 +36,7 @@
     _appDelegate = [[UIApplication sharedApplication] delegate];
     
     _packageKeys = [_appDelegate package_itemsDictionary].allKeys;
+    _extraKeys = [_appDelegate extraPackage_itemsDictionary].allKeys;
     
     //_updatedPrice = -1;
     
@@ -130,6 +132,13 @@
 -(void)viewWillAppear:(BOOL)animated {
     [self updateTotal];
     [self.tableView reloadData];
+    
+}
+
+-(void)this {
+    
+    NSLog(@"Here dude");
+    [self.tableView reloadData];
 }
 
 
@@ -137,7 +146,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -145,7 +154,12 @@
     if (section == 0) {
         return _packageKeys.count;
     }
+    
     if (section == 1) {
+        return _extraKeys.count;
+    }
+    
+    if (section == 2) {
         
         return 1;
     }
@@ -189,8 +203,24 @@
         return cell;
     }
     
+    if (indexPath.section == 1){
+        NSString *packageName = [_extraKeys objectAtIndex:indexPath.row];
+        NSMutableString *result = [[NSMutableString alloc] init];
+        
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName]){
+            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+            [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
+        }
+        cell.packageNameLabel.text = [NSString stringWithFormat:@"%@ Package", packageName];
+        cell.packageItems.text = result;
+        float firstPrice = [self firstPriceFor:packageName];
+        NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
+        cell.packagePriceLabel.text = priceString;
+        
+        return cell;
+    }
     
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         
         if (indexPath.row == 0) {
             cell2.separatorInset = UIEdgeInsetsMake(0.f, 10000.0f, 0.f, 0.0f);
@@ -222,9 +252,16 @@
     
     float price = 0;
     
-    for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-        CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
-        price += cartItem.itemQuantity*cartItem.itemPrice;
+    if ([[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+            price += cartItem.itemQuantity*cartItem.itemPrice;
+        }
+    }else{
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName]){
+            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+            price += cartItem.itemQuantity*cartItem.itemPrice;
+        }
     }
     
     return price;
@@ -244,6 +281,13 @@
         _subtotal += firstPrice;
     }
     
+    for(int i=0; i<[_appDelegate extraPackage_itemsDictionary].count; i++){
+        
+        NSString *packageName = _extraKeys[i];
+        
+        float firstPrice = [self firstPriceFor:packageName];
+        _subtotal += firstPrice;
+    }
     
     
     //_subtotal = _subtotal * self.packageSize;
@@ -262,9 +306,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 || indexPath.section == 1) {
+        NSString *packageName = [[NSString alloc] init];
         
-        NSString *packageName = [_packageKeys objectAtIndex:indexPath.row];
+        if (indexPath.section == 0){
+            packageName = [_packageKeys objectAtIndex:indexPath.row];
+        }else if (indexPath.section == 1){
+            packageName = [_extraKeys objectAtIndex:indexPath.row];
+        }
         
         EditPackageTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPackage"];
         destViewController.packageSize = self.packageSize;
@@ -292,10 +341,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 || indexPath.section == 1) {
         return 118;
     }
-    if (indexPath.section == 1) {
+    if (indexPath.section == 2) {
         return 250;
     }
     return 0;

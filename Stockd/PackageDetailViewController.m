@@ -82,7 +82,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    
+    [self updateCartAnimated];
     //self.navigationItem.hidesBackButton = YES;
 }
 
@@ -198,6 +198,16 @@
     
     if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
         [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue]] forKey:self.items[indexPath.row][@"itemName"]];
+        
+        int totalNumber = 0;
+        for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+            totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
+        }
+        for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
+            totalNumber += [[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] count];
+        }
+        
+        [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
     }else{
         [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] increaseQuantity];
     }
@@ -219,6 +229,8 @@
         
         if (value < 1){
             [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] removeObjectForKey:itemNameLabel];
+            
+            [self updateCartAnimated];
         }else{
             [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] decreaseQuantity];
         }
@@ -235,6 +247,17 @@
 }
 
 
+-(void) updateCartAnimated{
+    int totalNumber = 0;
+    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+        totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
+    }
+    for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
+        totalNumber += [[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] count];
+    }
+    
+    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
+}
 
 -(void)goToCartScreen {
     

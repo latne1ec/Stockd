@@ -218,7 +218,7 @@
     [headerView setNeedsDisplay];
     [headerView setNeedsLayout];
     
-    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:(int)[[_appDelegate package_itemsDictionary] count]];
+    [self updateCartAnimated];
     
 }
 
@@ -548,7 +548,7 @@
         
     }
     
-    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:(int)[[_appDelegate package_itemsDictionary] count]];
+    [self updateCartAnimated];
 }
 
 -(void)queryForFoodPackages {
@@ -699,6 +699,18 @@
             
         }];
     }
+}
+
+-(void) updateCartAnimated{
+    int totalNumber = 0;
+    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+        totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
+    }
+    for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
+        totalNumber += [[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] count];
+    }
+    
+    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
 }
 
 -(void)queryForOrderNumber {

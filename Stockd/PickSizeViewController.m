@@ -7,8 +7,12 @@
 //
 
 #import "PickSizeViewController.h"
+#import "CartTableViewController.h"
 
 @interface PickSizeViewController ()
+
+@property (nonatomic, strong) UILabel *priceLabel;
+
 
 @end
 
@@ -21,6 +25,8 @@
     [super viewDidLoad];
     
     self.title = @"select size";
+    
+    
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                                                  style:UIBarButtonItemStylePlain
@@ -41,18 +47,18 @@
     
     
     
-    UIButton *pickButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-165, 100, 100)];
+    UIButton *pickButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-210, 100, 100)];
     [pickButton setImage:[UIImage imageNamed:@"pickButton"] forState:UIControlStateNormal];
     [pickButton addTarget:self action:@selector(setPackageSize) forControlEvents:UIControlEventTouchUpInside];
     [pickButton.layer setCornerRadius:20.0];
     [self.view addSubview:pickButton];
     
-    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-50, CGRectGetHeight(self.view.bounds)-165, 100, 100)];
+    self.priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-60, CGRectGetHeight(self.view.bounds)-145, 200, 100)];
     
-    priceLabel.text = @"Price: $100";
-    priceLabel.textColor = [UIColor whiteColor];
-    priceLabel.font = [UIFont fontWithName:@"BELLABOO-Regular" size:20];
-    [self.view addSubview:priceLabel];
+    self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice];
+    self.priceLabel.textColor = [UIColor whiteColor];
+    self.priceLabel.font = [UIFont fontWithName:@"BELLABOO-Regular" size:20];
+    [self.view addSubview:self.priceLabel];
     
     
 
@@ -127,15 +133,19 @@
         
         if (yPosition/height > 0) {
             caption.text = @"Extra Large";
+            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*4];
         }
         if (yPosition/height > 0.2) {
             caption.text = @"Large";
+            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*3];
         }
         if (yPosition/height > 0.45) {
             caption.text = @"Medium";
+            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*2];
         }
         if (yPosition/height > 0.65f) {
             caption.text = @"Small";
+            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice];
         }
     }
 }
@@ -196,15 +206,20 @@
 
 -(void)setPackageSize {
     
-    
+    [self closeTheController];
     
 }
 
 -(void)closeTheController {
     
+    CartTableViewController *cart  = [self.storyboard instantiateViewControllerWithIdentifier:@"Cart"];
+    NSString *stringWithoutSpaces = [self.priceLabel.text
+                                     stringByReplacingOccurrencesOfString:@"Price: $" withString:@""];
+    
+    cart.finalTotal = [stringWithoutSpaces floatValue];
+    NSLog(@"Final Price: %0.2f", [stringWithoutSpaces floatValue]);
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
     }];
-    
 }
 
 

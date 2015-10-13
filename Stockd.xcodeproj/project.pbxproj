@@ -77,6 +77,7 @@
 		20497E701B73EED8004A2950 /* AlcoholPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E6F1B73EED8004A2950 /* AlcoholPolicyViewController.m */; };
 		20497E751B7BE4CD004A2950 /* KAProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E721B7BE4CD004A2950 /* KAProgressLabel.m */; };
 		20497E761B7BE4CD004A2950 /* TPPropertyAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E741B7BE4CD004A2950 /* TPPropertyAnimation.m */; };
+		205D85851BCC261700A7518D /* UserAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 205D85841BCC261700A7518D /* UserAddressTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */; };
 		2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B91B4ACC50001F5478 /* FoodTableCell.m */; };
 		2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8BC1B4B0132001F5478 /* DrinksTableViewController.m */; };
@@ -277,6 +278,8 @@
 		20497E721B7BE4CD004A2950 /* KAProgressLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KAProgressLabel.m; sourceTree = "<group>"; };
 		20497E731B7BE4CD004A2950 /* TPPropertyAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPPropertyAnimation.h; sourceTree = "<group>"; };
 		20497E741B7BE4CD004A2950 /* TPPropertyAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPropertyAnimation.m; sourceTree = "<group>"; };
+		205D85831BCC261700A7518D /* UserAddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAddressTableViewController.h; sourceTree = "<group>"; };
+		205D85841BCC261700A7518D /* UserAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAddressTableViewController.m; sourceTree = "<group>"; };
 		2067F8B41B4ACA5E001F5478 /* FoodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewController.h; sourceTree = "<group>"; };
 		2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableViewController.m; sourceTree = "<group>"; };
 		2067F8B81B4ACC50001F5478 /* FoodTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableCell.h; sourceTree = "<group>"; };
@@ -504,6 +507,8 @@
 				201186271B41C16200A59D55 /* AppDelegate.h */,
 				201186281B41C16200A59D55 /* AppDelegate.m */,
 				2011862D1B41C16200A59D55 /* Main.storyboard */,
+				205D85831BCC261700A7518D /* UserAddressTableViewController.h */,
+				205D85841BCC261700A7518D /* UserAddressTableViewController.m */,
 				203FFD111BC5DAD9008B4CED /* ItemTableHeaderView.xib */,
 				20F94E0B1B7FB0B9004828B8 /* Todo */,
 				2067F8AD1B4A05A4001F5478 /* Menu */,
@@ -1192,6 +1197,7 @@
 				20D52D221B45B86C00A1C60B /* SCAudioTools.m in Sources */,
 				20F5A2EC1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m in Sources */,
 				20D52D321B45B86C00A1C60B /* SCVideoPlayerView.m in Sources */,
+				205D85851BCC261700A7518D /* UserAddressTableViewController.m in Sources */,
 				201186841B41F13200A59D55 /* HexColor.m in Sources */,
 				2067F8F01B4C2989001F5478 /* CartTableCell.m in Sources */,
 				20E2EC0C1B4727BD002E317A /* SVProgressHUD.m in Sources */,

@@ -26,6 +26,8 @@
 @property (nonatomic, strong) PFObject *order;
 @property (nonatomic, strong) NSString *beerItem;
 @property (nonatomic, strong) NSString *liquorItem;
+@property (nonatomic) float finalTotal;
+
 
 
 @property (nonatomic) int packageSize;

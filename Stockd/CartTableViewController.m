@@ -20,7 +20,6 @@
 @property (nonatomic) float subtotal;
 @property (nonatomic) float taxes;
 @property (nonatomic) int discount;
-@property (nonatomic) float finalTotal;
 @property (nonatomic) int BOOZE;
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSArray* packageKeys;
@@ -149,6 +148,7 @@
     return 3;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0) {
@@ -211,7 +211,7 @@
             CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
             [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
         }
-        cell.packageNameLabel.text = [NSString stringWithFormat:@"%@ Package", packageName];
+        cell.packageNameLabel.text = [NSString stringWithFormat:@"Extra %@ Items", packageName];
         cell.packageItems.text = result;
         float firstPrice = [self firstPriceFor:packageName];
         NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
@@ -350,10 +350,12 @@
     return 0;
 }
 
+
+
 - (IBAction)sizeButtonTapped:(id)sender {
     
     PickSizeViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PickSize"];
-    
+    destViewController.currentCartPrice = _finalTotal;
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:destViewController];
     UIBarButtonItem *newBackButton =

@@ -18,6 +18,9 @@
 @property (nonatomic, strong) NSMutableDictionary *package_itemsDictionary;
 @property (nonatomic, strong) NSMutableDictionary *extraPackage_itemsDictionary;
 
+@property (nonatomic) int packageSize;
+
+
 
 -(void)showAnimation;
 

@@ -15,5 +15,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *pickButton;
 @property (nonatomic, strong) UITextField *caption;
 
+@property (nonatomic) float currentCartPrice;
+
+
 
 @end

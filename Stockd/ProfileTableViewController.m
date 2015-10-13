@@ -9,6 +9,7 @@
 #import "ProfileTableViewController.h"
 #import "JGActionSheet.h"
 #import "AppDelegate.h"
+#import "UserAddressTableViewController.h"
 
 #define SOURCETYPE UIImagePickerControllerSourceTypeCamera
 
@@ -21,6 +22,9 @@
 }
 
 @property (nonatomic, strong) NSString *shareMessage;
+
+@property (nonatomic, strong) AddressTableViewController *atvc;
+
 
 
 @end
@@ -136,6 +140,7 @@
         NSLog(@"User is NOT 21");
     }
     
+    
 }
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
@@ -221,7 +226,7 @@
         
         AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
         
-        destViewController.parent = self;
+        //destViewController.parent = self;
         NSLog(@"Tapped Address");
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];
@@ -231,9 +236,12 @@
                                         target:nil
                                         action:nil];
         [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+        NSLog(@"Here");
         [self.navigationController presentViewController:navigationController animated:YES completion:^{
             NSLog(@"Presenting");
         }];
+        
+        
     }
     
     if (indexPath.row == 2) {

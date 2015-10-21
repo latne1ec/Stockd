@@ -1152,7 +1152,7 @@
                                 <rect key="frame" x="0.0" y="48" width="320" height="118"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pqX-9L-ud3" id="g76-fs-CQf">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="117.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Package Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eym-ej-WXN">
@@ -1186,6 +1186,10 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" alpha="0.93999999999999995" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOh-bC-HrD">
+                                            <rect key="frame" x="268" y="12" width="24" height="24"/>
+                                            <state key="normal" image="lockIcon.png"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="Eym-ej-WXN" secondAttribute="trailing" constant="68" id="5WX-ZH-4ZD"/>
@@ -1193,17 +1197,22 @@
                                         <constraint firstItem="wGg-ci-rdT" firstAttribute="leading" secondItem="Pys-6i-1Ag" secondAttribute="trailing" constant="-1" id="6Gt-Ix-6xP"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="wGg-ci-rdT" secondAttribute="trailing" constant="20" id="Bcy-m0-eez"/>
                                         <constraint firstItem="Eym-ej-WXN" firstAttribute="leading" secondItem="g76-fs-CQf" secondAttribute="leadingMargin" constant="16" id="JQ2-mp-TJe"/>
+                                        <constraint firstItem="zOh-bC-HrD" firstAttribute="bottom" secondItem="Eym-ej-WXN" secondAttribute="bottom" id="LZM-zq-1sW"/>
                                         <constraint firstItem="WYg-eJ-mKI" firstAttribute="top" secondItem="Pys-6i-1Ag" secondAttribute="bottom" constant="8" symbolic="YES" id="Oz7-yX-BuI"/>
+                                        <constraint firstItem="zOh-bC-HrD" firstAttribute="top" secondItem="g76-fs-CQf" secondAttribute="topMargin" constant="4" id="Q6A-OW-8Jq"/>
+                                        <constraint firstItem="zOh-bC-HrD" firstAttribute="trailing" secondItem="wGg-ci-rdT" secondAttribute="trailing" id="R1O-Hi-jCY"/>
                                         <constraint firstItem="Pys-6i-1Ag" firstAttribute="top" secondItem="Eym-ej-WXN" secondAttribute="bottom" constant="4" id="bgq-De-Ddq"/>
                                         <constraint firstItem="wGg-ci-rdT" firstAttribute="centerY" secondItem="Pys-6i-1Ag" secondAttribute="centerY" id="cxa-Pm-NXB"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="wGg-ci-rdT" secondAttribute="bottom" constant="39.5" id="dkX-HQ-f0v"/>
                                         <constraint firstItem="WYg-eJ-mKI" firstAttribute="leading" secondItem="Pys-6i-1Ag" secondAttribute="leading" id="gtI-9I-Sm4"/>
                                         <constraint firstItem="wGg-ci-rdT" firstAttribute="top" secondItem="Eym-ej-WXN" secondAttribute="bottom" constant="13" id="lf4-0Q-eCw"/>
+                                        <constraint firstItem="zOh-bC-HrD" firstAttribute="leading" secondItem="Eym-ej-WXN" secondAttribute="trailing" constant="24" id="y2P-Vk-JFz"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="WYg-eJ-mKI" secondAttribute="bottom" constant="3.5" id="yFR-xV-qPf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="lockIconButton" destination="zOh-bC-HrD" id="O67-68-W5M"/>
                                     <outlet property="packageItems" destination="Pys-6i-1Ag" id="2sc-e0-rfb"/>
                                     <outlet property="packageNameLabel" destination="Eym-ej-WXN" id="bmq-a1-OoX"/>
                                     <outlet property="packagePriceLabel" destination="wGg-ci-rdT" id="bTM-rS-Sov"/>
@@ -3367,6 +3376,7 @@ ATTN: Matt Mason
         <image name="facebookLogin.png" width="208" height="50"/>
         <image name="fruits.png" width="312" height="100"/>
         <image name="initialBkg.png" width="412" height="730"/>
+        <image name="lockIcon.png" width="50" height="54"/>
         <image name="stockdMenu.png" width="25" height="25"/>
         <image name="toastOne.png" width="250" height="120"/>
         <image name="toastTwo.png" width="250" height="120"/>

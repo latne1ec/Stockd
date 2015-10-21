@@ -17,4 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *packagePriceLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *lockIconButton;
+
+
+
 @end

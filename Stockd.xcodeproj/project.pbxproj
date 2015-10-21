@@ -78,6 +78,7 @@
 		20497E751B7BE4CD004A2950 /* KAProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E721B7BE4CD004A2950 /* KAProgressLabel.m */; };
 		20497E761B7BE4CD004A2950 /* TPPropertyAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20497E741B7BE4CD004A2950 /* TPPropertyAnimation.m */; };
 		205D85851BCC261700A7518D /* UserAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 205D85841BCC261700A7518D /* UserAddressTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		205D86881BD711B100A7518D /* lockIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 205D86871BD711B100A7518D /* lockIcon@2x.png */; settings = {ASSET_TAGS = (); }; };
 		2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */; };
 		2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B91B4ACC50001F5478 /* FoodTableCell.m */; };
 		2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8BC1B4B0132001F5478 /* DrinksTableViewController.m */; };
@@ -280,6 +281,7 @@
 		20497E741B7BE4CD004A2950 /* TPPropertyAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPPropertyAnimation.m; sourceTree = "<group>"; };
 		205D85831BCC261700A7518D /* UserAddressTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAddressTableViewController.h; sourceTree = "<group>"; };
 		205D85841BCC261700A7518D /* UserAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAddressTableViewController.m; sourceTree = "<group>"; };
+		205D86871BD711B100A7518D /* lockIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockIcon@2x.png"; sourceTree = "<group>"; };
 		2067F8B41B4ACA5E001F5478 /* FoodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewController.h; sourceTree = "<group>"; };
 		2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableViewController.m; sourceTree = "<group>"; };
 		2067F8B81B4ACC50001F5478 /* FoodTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableCell.h; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 		201186891B42021900A59D55 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				205D86871BD711B100A7518D /* lockIcon@2x.png */,
 				203FFD0F1BC5B0FA008B4CED /* addPhotoPink@2x.png */,
 				203FFD0D1BC5B0B7008B4CED /* cancelWhite@2x.png */,
 				203FFD0B1BC5B0AB008B4CED /* stockdMenu@2x.png */,
@@ -1148,6 +1151,7 @@
 				203FFD121BC5DAD9008B4CED /* ItemTableHeaderView.xib in Resources */,
 				203FFD0A1BC5B099008B4CED /* YapHolderTwo@2x.png in Resources */,
 				20D52CB51B4453A000A1C60B /* cancelPhoto@2x.png in Resources */,
+				205D86881BD711B100A7518D /* lockIcon@2x.png in Resources */,
 				20F5A2F21B84FC4900FC7BA5 /* tourTresNew.png in Resources */,
 				20F5A2F41B85448D00FC7BA5 /* toastTwo@2x.png in Resources */,
 				2037DDF21B442CE20076B0F2 /* PKImageBundle.bundle in Resources */,

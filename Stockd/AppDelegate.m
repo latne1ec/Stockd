@@ -65,6 +65,7 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     
     _package_itemsDictionary = [[NSMutableDictionary alloc] init];
     _extraPackage_itemsDictionary = [[NSMutableDictionary alloc] init];
+    _packageSize = 1;
     
     
     return YES;

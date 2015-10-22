@@ -703,9 +703,12 @@
 
 -(void) updateCartAnimated{
     int totalNumber = 0;
-    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+    /*for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
         totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
-    }
+    }*/
+    
+    totalNumber += [_appDelegate package_itemsDictionary].count;
+    
     for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
         totalNumber += [[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] count];
     }

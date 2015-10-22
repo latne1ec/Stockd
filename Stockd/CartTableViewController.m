@@ -200,6 +200,19 @@
         NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
         cell.packagePriceLabel.text = priceString;
         
+        Boolean modifiedFlag = false;
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true){
+                modifiedFlag = true;
+                break;
+            }
+        }
+        if (modifiedFlag){
+            cell.lockIconButton.hidden = false;
+        }else{
+            cell.lockIconButton.hidden = true;
+        }
+        
         return cell;
     }
     
@@ -216,6 +229,7 @@
         float firstPrice = [self firstPriceFor:packageName];
         NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
         cell.packagePriceLabel.text = priceString;
+        cell.lockIconButton.hidden = true;
         
         return cell;
     }

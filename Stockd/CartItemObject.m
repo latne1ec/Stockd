@@ -7,6 +7,7 @@
 //
 
 #import "CartItemObject.h"
+#import "AppDelegate.h"
 
 @implementation CartItemObject
 
@@ -16,18 +17,41 @@
         _itemDetail = detail_;
         _itemQuantity = quantity_;
         _itemPrice = price_;
+        _hasBeenModified = false;
     }
     return self;
 }
 
 -(void)increaseQuantity{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
     _itemQuantity++;
+    if (_itemQuantity == appDelegate.packageSize){
+        _hasBeenModified = false;
+    }else{
+        _hasBeenModified = true;
+    }
+    
 }
 
 -(void)decreaseQuantity{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
     if (_itemQuantity > 0){
         _itemQuantity--;
+        _hasBeenModified = true;
     }
+    
+    if (_itemQuantity == appDelegate.packageSize){
+        _hasBeenModified = false;
+    }else{
+        _hasBeenModified = true;
+    }
+}
+
+-(void) resetQuantity:(int) newQuantity{
+    _itemQuantity = newQuantity;
+    _hasBeenModified = false;
 }
 
 @end

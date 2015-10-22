@@ -199,17 +199,10 @@
     if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
         [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue]] forKey:self.items[indexPath.row][@"itemName"]];
         
-        int totalNumber = 0;
-        for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
-            totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
-        }
-        for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
-            totalNumber += [[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] count];
-        }
-        
-        [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
+        [self updateCartAnimated];
     }else{
         [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] increaseQuantity];
+        [self updateCartAnimated];
     }
     
     NSLog(@"Test: %@", [_appDelegate extraPackage_itemsDictionary]);
@@ -233,6 +226,7 @@
             [self updateCartAnimated];
         }else{
             [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] decreaseQuantity];
+            [self updateCartAnimated];
         }
     }
     
@@ -249,11 +243,15 @@
 
 -(void) updateCartAnimated{
     int totalNumber = 0;
-    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+    /*for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
         totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
-    }
+    }*/
+    totalNumber += [_appDelegate package_itemsDictionary].count;
+    
     for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
-        totalNumber += [[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] count];
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey]){
+            totalNumber += [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] valueForKey:itemNameKey] itemQuantity];
+        }
     }
     
     [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];

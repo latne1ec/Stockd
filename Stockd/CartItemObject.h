@@ -14,10 +14,12 @@
 @property (nonatomic, strong) NSString *itemDetail;
 @property int itemQuantity;
 @property float itemPrice;
+@property Boolean hasBeenModified;
 
 -(id) initItem: (NSString*)name_ detail:(NSString*)detail_ quantity:(int)quantity_ price:(float)price_;
 
 -(void)increaseQuantity;
 -(void)decreaseQuantity;
+-(void) resetQuantity:(int) newQuantity;
 
 @end

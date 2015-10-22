@@ -8,11 +8,13 @@
 
 #import "PickSizeViewController.h"
 #import "CartTableViewController.h"
+#import "AppDelegate.h"
 
 @interface PickSizeViewController ()
 
+@property (nonatomic) int packageSize;
 @property (nonatomic, strong) UILabel *priceLabel;
-
+@property (nonatomic, strong) AppDelegate *appDelegate;
 
 @end
 
@@ -24,9 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _appDelegate = [[UIApplication sharedApplication] delegate];
+    _packageSize = _appDelegate.packageSize;
+    
     self.title = @"select size";
-    
-    
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                                                  style:UIBarButtonItemStylePlain
@@ -128,28 +131,33 @@
         caption.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2,  yPosition);
         
         
+        [self updatePackageSize: yPosition];
         
-        float height = self.view.bounds.size.height;
-        
-        if (yPosition/height > 0) {
-            caption.text = @"Extra Large";
-            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*4];
-        }
-        if (yPosition/height > 0.2) {
-            caption.text = @"Large";
-            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*3];
-        }
-        if (yPosition/height > 0.45) {
-            caption.text = @"Medium";
-            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*2];
-        }
-        if (yPosition/height > 0.65f) {
-            caption.text = @"Small";
-            self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice];
-        }
     }
 }
 
+-(void) updatePackageSize: (float) yPosition{
+    NSLog(@"yPosition: %f", yPosition);
+    float height = self.view.bounds.size.height;
+    
+    if (yPosition/height > 0.65f) {
+        caption.text = @"Small";
+        _packageSize = 1;
+        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice];
+    }else if (yPosition/height > 0.45) {
+        caption.text = @"Medium";
+        _packageSize = 2;
+        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*2];
+    }else if (yPosition/height > 0.2) {
+        caption.text = @"Large";
+        _packageSize = 3;
+        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*3];
+    }else if (yPosition/height >= 0) {
+        caption.text = @"Extra Large";
+        _packageSize = 4;
+        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*4];
+    }
+}
 
 - (void) initCaption{
     
@@ -194,10 +202,16 @@
     caption.tintColor = [UIColor whiteColor];
     caption.delegate = self;
     caption.font = [UIFont fontWithName:@"BELLABOO-Regular" size:18];
-    caption.text = @"Small";
+    caption.text = @"C";
     [caption setEnabled:NO];
     caption.allowsEditingTextAttributes = NO;
     caption.layer.cornerRadius = 15;
+    
+    CGRect frame = caption.layer.frame;
+    frame.origin.y = self.view.bounds.size.height-(self.view.bounds.size.height * _appDelegate.packageSize/4);
+    caption.layer.frame = frame;
+    
+    [self updatePackageSize:caption.layer.frame.origin.y];
     
     [self.view addSubview:caption];
     
@@ -205,6 +219,24 @@
 
 
 -(void)setPackageSize {
+    _appDelegate.packageSize = _packageSize;
+    
+    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+        Boolean modifiedFlag = false;
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
+            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] hasBeenModified] == true){
+                modifiedFlag = true;
+                break;
+            }
+        }
+        if (modifiedFlag){
+            continue;
+        }
+        
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
+            [[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] setItemQuantity:[_appDelegate packageSize]];
+        }
+    }
     
     [self closeTheController];
     

@@ -61,7 +61,7 @@
     
     self.priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.view.bounds)/2-60, CGRectGetHeight(self.view.bounds)-145, 200, 100)];
     
-    self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice];
+    self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", [self getTotal]];
     self.priceLabel.textColor = [UIColor whiteColor];
     self.priceLabel.font = [UIFont fontWithName:@"BELLABOO-Regular" size:20];
     [self.view addSubview:self.priceLabel];
@@ -139,6 +139,68 @@
     }
 }
 
+-(float) getTotal {
+    
+    float subtotal = 0;
+    float taxes = 0;
+    float finalTotal = 0;
+    
+    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+        float firstPrice = [self firstPriceFor:packagesKey];
+        subtotal += firstPrice;
+    }
+    
+    for (NSString* packagesKey in [_appDelegate extraPackage_itemsDictionary]){
+        float firstPrice = [self firstPriceFor:packagesKey];
+        subtotal += firstPrice;
+    }
+    
+    
+    //_subtotal = _subtotal * self.packageSize;
+    
+    taxes = (subtotal) * 0.06;
+    
+    finalTotal = (subtotal) + taxes;
+    
+    NSLog(@"SUBTOTAL: %f TAXES: %f TOTAL: %f",subtotal, taxes, finalTotal);
+    
+    return finalTotal;
+    
+}
+
+-(float)firstPriceFor:(NSString*)packageName {
+    
+    float price = 0;
+    Boolean modifiedFlag = false;
+    
+    if ([[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true){
+                modifiedFlag = true;
+                break;
+            }
+        }
+        if (modifiedFlag){
+            for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+                CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+                price += cartItem.itemQuantity*cartItem.itemPrice;
+            }
+        }else{
+            for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+                CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+                price += _packageSize*cartItem.itemPrice;
+            }
+        }
+    }else{
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName]){
+            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+            price += cartItem.itemQuantity*cartItem.itemPrice;
+        }
+    }
+    
+    return price;
+}
+
 -(void) updatePackageSize: (float) yPosition{
     NSLog(@"yPosition: %f", yPosition);
     float height = self.view.bounds.size.height - _additionalOffset;
@@ -146,7 +208,6 @@
     if (yPosition/height > 0.65f) {
         caption.text = @"Small";
         _packageSize = 1;
-        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice];
         
         [UIView animateWithDuration:0.25 animations:^{
             _packageImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
@@ -158,7 +219,6 @@
     }else if (yPosition/height > 0.45) {
         caption.text = @"Medium";
         _packageSize = 2;
-        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*2];
         
         [UIView animateWithDuration:0.25 animations:^{
             _packageImage.transform = CGAffineTransformMakeScale(1.2, 1.2);
@@ -169,7 +229,6 @@
     }else if (yPosition/height > 0.2) {
         caption.text = @"Large";
         _packageSize = 3;
-        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*3];
         
         [UIView animateWithDuration:0.25 animations:^{
             _packageImage.transform = CGAffineTransformMakeScale(1.4, 1.4);
@@ -180,7 +239,6 @@
     }else if (yPosition/height >= 0) {
         caption.text = @"Extra Large";
         _packageSize = 4;
-        self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*4];
         
         [UIView animateWithDuration:0.25 animations:^{
             _packageImage.transform = CGAffineTransformMakeScale(1.6, 1.6);
@@ -188,6 +246,8 @@
         completion:^(BOOL finished) {
         }];
     }
+    
+    self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", [self getTotal]];
 }
 
 - (void) initCaption{

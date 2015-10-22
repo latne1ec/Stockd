@@ -17,6 +17,7 @@
 
 @property (nonatomic) float currentCartPrice;
 
+@property (weak, nonatomic) IBOutlet UIImageView *packageImage;
 
 
 @end

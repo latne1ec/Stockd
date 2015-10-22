@@ -15,6 +15,7 @@
 @property (nonatomic) int packageSize;
 @property (nonatomic, strong) UILabel *priceLabel;
 @property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic) int additionalOffset;
 
 @end
 
@@ -25,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _additionalOffset = 160;
     
     _appDelegate = [[UIApplication sharedApplication] delegate];
     _packageSize = _appDelegate.packageSize;
@@ -115,7 +118,7 @@
     
     float yPosition = translation.y;
     float upperLimit = 16;
-    float lowerLimit = self.view.frame.size.height-110-caption.frame.size.height/2;
+    float lowerLimit = self.view.frame.size.height-_additionalOffset-caption.frame.size.height/2;
     
     if(yPosition<upperLimit){
         yPosition = upperLimit;
@@ -138,24 +141,52 @@
 
 -(void) updatePackageSize: (float) yPosition{
     NSLog(@"yPosition: %f", yPosition);
-    float height = self.view.bounds.size.height;
+    float height = self.view.bounds.size.height - _additionalOffset;
     
     if (yPosition/height > 0.65f) {
         caption.text = @"Small";
         _packageSize = 1;
         self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            _packageImage.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }
+        completion:^(BOOL finished) {
+        }];
+
+        
     }else if (yPosition/height > 0.45) {
         caption.text = @"Medium";
         _packageSize = 2;
         self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*2];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            _packageImage.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        }
+        completion:^(BOOL finished) {
+        }];
+        
     }else if (yPosition/height > 0.2) {
         caption.text = @"Large";
         _packageSize = 3;
         self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*3];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            _packageImage.transform = CGAffineTransformMakeScale(1.4, 1.4);
+        }
+                         completion:^(BOOL finished) {
+                         }];
+        
     }else if (yPosition/height >= 0) {
         caption.text = @"Extra Large";
         _packageSize = 4;
         self.priceLabel.text = [NSString stringWithFormat:@"Price: $%0.2f", _currentCartPrice*4];
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            _packageImage.transform = CGAffineTransformMakeScale(1.6, 1.6);
+        }
+        completion:^(BOOL finished) {
+        }];
     }
 }
 
@@ -208,13 +239,12 @@
     caption.layer.cornerRadius = 15;
     
     CGRect frame = caption.layer.frame;
-    frame.origin.y = self.view.bounds.size.height-(self.view.bounds.size.height * _appDelegate.packageSize/4);
+    frame.origin.y = self.view.bounds.size.height-((self.view.bounds.size.height - _additionalOffset) * _appDelegate.packageSize/4)-_additionalOffset;
     caption.layer.frame = frame;
     
     [self updatePackageSize:caption.layer.frame.origin.y];
     
-    [self.view addSubview:caption];
-    
+    [self.view addSubview:caption];    
 }
 
 

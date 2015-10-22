@@ -45,7 +45,12 @@
                                                                             target:self
                                                                             action:@selector(dismissViewControllerAnimated:completion:)];
     
-    self.title = [NSString stringWithFormat:@"Edit %@ Package", self.packageName];
+    
+    if ([[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
+        self.title = [NSString stringWithFormat:@"Edit %@ Package", self.packageName];
+    }else {
+        self.title = [NSString stringWithFormat:@"Edit Extra %@ Item", self.packageName];
+    }
     self.tableView.tableFooterView = [UIView new];
     
     //Nav Bar Back Button Color

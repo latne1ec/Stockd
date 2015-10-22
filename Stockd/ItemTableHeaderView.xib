@@ -21,18 +21,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwU-PO-sd4">
-                    <rect key="frame" x="178" y="12" width="71" height="21"/>
+                    <rect key="frame" x="145" y="12" width="71" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="71" id="pY4-tT-vhx"/>
+                        <constraint firstAttribute="width" constant="71" id="0JJ-FO-d9i"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jM4-EN-uco">
-                    <rect key="frame" x="256" y="12" width="49" height="21"/>
+                    <rect key="frame" x="249" y="12" width="49" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="49" id="RtI-wo-Zgq"/>
+                        <constraint firstAttribute="width" constant="49" id="uUg-pw-Y4q"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,7 +41,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZW-Di-Fl8">
                     <rect key="frame" x="8" y="12" width="44" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="eQ9-n6-MSK"/>
+                        <constraint firstAttribute="width" constant="44" id="khU-yE-flk"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,15 +50,15 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="jM4-EN-uco" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="02U-Dl-4z5"/>
-                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="0X1-M5-pdZ"/>
-                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="firstBaseline" secondItem="rwU-PO-sd4" secondAttribute="firstBaseline" id="IIa-jt-5Ip"/>
-                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="baseline" secondItem="rwU-PO-sd4" secondAttribute="baseline" id="P8T-Uf-w5X"/>
-                <constraint firstItem="jM4-EN-uco" firstAttribute="firstBaseline" secondItem="rwU-PO-sd4" secondAttribute="firstBaseline" id="Vkf-Lx-K3N"/>
-                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="a7M-I4-wzU"/>
-                <constraint firstItem="jM4-EN-uco" firstAttribute="baseline" secondItem="rwU-PO-sd4" secondAttribute="baseline" id="h7B-Bm-FCR"/>
-                <constraint firstAttribute="trailing" secondItem="jM4-EN-uco" secondAttribute="trailing" constant="15" id="xFe-Xf-5LY"/>
-                <constraint firstItem="jM4-EN-uco" firstAttribute="leading" secondItem="rwU-PO-sd4" secondAttribute="trailing" constant="7" id="zEb-FA-2r1"/>
+                <constraint firstItem="rwU-PO-sd4" firstAttribute="baseline" secondItem="8ZW-Di-Fl8" secondAttribute="baseline" id="AyF-vW-edR"/>
+                <constraint firstItem="rwU-PO-sd4" firstAttribute="firstBaseline" secondItem="8ZW-Di-Fl8" secondAttribute="firstBaseline" id="FZA-It-Nh3"/>
+                <constraint firstItem="jM4-EN-uco" firstAttribute="leading" secondItem="rwU-PO-sd4" secondAttribute="trailing" constant="33" id="NB3-iR-KCT"/>
+                <constraint firstAttribute="trailing" secondItem="jM4-EN-uco" secondAttribute="trailing" constant="22" id="SUB-jn-fpR"/>
+                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="Wyv-kQ-eFP"/>
+                <constraint firstItem="rwU-PO-sd4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z06-hn-bul"/>
+                <constraint firstItem="rwU-PO-sd4" firstAttribute="baseline" secondItem="jM4-EN-uco" secondAttribute="baseline" id="Z7t-Uz-0rX"/>
+                <constraint firstItem="jM4-EN-uco" firstAttribute="firstBaseline" secondItem="rwU-PO-sd4" secondAttribute="firstBaseline" id="jY4-Yw-hHc"/>
+                <constraint firstItem="8ZW-Di-Fl8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="mZM-Px-0hj"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -92,6 +92,10 @@
     
     NSLog(@"Order numbaaa 2: %@", self.orderNumber);
     
+   // [[PFUser currentUser] setObject:[NSNumber numberWithInt:10] forKey:@"karmaCash"];
+    //[[PFUser currentUser] saveInBackground];
+    
+    
 }
 
 

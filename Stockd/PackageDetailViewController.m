@@ -259,21 +259,16 @@
 
 -(void)goToCartScreen {
     
-//    if (self.packages.count == 0) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cart Empty" message:@"Your cart is empty. Add a package or two before checking out!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//        [alert show];
-//    }
-//    else {
-    
+    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] count] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cart Empty" message:@"Your cart is empty. Add a package or two before checking out!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+                
+    }
+    else {
+
         CartTableViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Cart"];
-//        cvc.packages = self.packages;
-//        cvc.items = _itemsDictionary;
-//        //cvc.packageSize = self.packageSize;
-//        cvc.packageSize = 1;
-//        cvc.orderNumber = _orderNumber;
-//        cvc.beerItem = self.beerItem;
-//        cvc.liquorItem = self.liquorItem;
         [self.navigationController pushViewController:cvc animated:YES];
+    }
     
     //}
     

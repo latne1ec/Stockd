@@ -14,12 +14,10 @@
 
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) NSMutableDictionary *editedCells;
-
 @property (nonatomic, strong) UIView *headerview;
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSArray *itemKeys;
 @property (nonatomic, strong) NSArray *extraKeys;
-
 
 @end
 
@@ -49,7 +47,7 @@
     if ([[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
         self.title = [NSString stringWithFormat:@"Edit %@ Package", self.packageName];
     }else {
-        self.title = [NSString stringWithFormat:@"Edit Extra %@ Item", self.packageName];
+        self.title = [NSString stringWithFormat:@"Edit Extra %@ Items", self.packageName];
     }
     self.tableView.tableFooterView = [UIView new];
     
@@ -213,6 +211,8 @@
     EditItemsTableCell *cell = (EditItemsTableCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     
     if (([_packageName isEqual:@"Beer"] && [self checkValidBeerLimit]) || ![_packageName isEqual:@"Beer"]){
+        NSLog(@"Beer dude");
+        
         if ([[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
             [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] increaseQuantity];
             cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];

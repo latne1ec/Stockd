@@ -80,6 +80,9 @@
 		205D85851BCC261700A7518D /* UserAddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 205D85841BCC261700A7518D /* UserAddressTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		205D86881BD711B100A7518D /* lockIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 205D86871BD711B100A7518D /* lockIcon@2x.png */; settings = {ASSET_TAGS = (); }; };
 		205D86961BD94A1800A7518D /* stockdPackage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 205D86951BD94A1800A7518D /* stockdPackage@2x.png */; settings = {ASSET_TAGS = (); }; };
+		205D86A21BDA8BBF00A7518D /* tourv2Dos.png in Resources */ = {isa = PBXBuildFile; fileRef = 205D869F1BDA8BBF00A7518D /* tourv2Dos.png */; settings = {ASSET_TAGS = (); }; };
+		205D86A31BDA8BBF00A7518D /* tourv2Tres.png in Resources */ = {isa = PBXBuildFile; fileRef = 205D86A01BDA8BBF00A7518D /* tourv2Tres.png */; settings = {ASSET_TAGS = (); }; };
+		205D86A41BDA8BBF00A7518D /* tourv2Uno.png in Resources */ = {isa = PBXBuildFile; fileRef = 205D86A11BDA8BBF00A7518D /* tourv2Uno.png */; settings = {ASSET_TAGS = (); }; };
 		2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */; };
 		2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8B91B4ACC50001F5478 /* FoodTableCell.m */; };
 		2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2067F8BC1B4B0132001F5478 /* DrinksTableViewController.m */; };
@@ -284,6 +287,9 @@
 		205D85841BCC261700A7518D /* UserAddressTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAddressTableViewController.m; sourceTree = "<group>"; };
 		205D86871BD711B100A7518D /* lockIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lockIcon@2x.png"; sourceTree = "<group>"; };
 		205D86951BD94A1800A7518D /* stockdPackage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stockdPackage@2x.png"; sourceTree = "<group>"; };
+		205D869F1BDA8BBF00A7518D /* tourv2Dos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourv2Dos.png; sourceTree = "<group>"; };
+		205D86A01BDA8BBF00A7518D /* tourv2Tres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourv2Tres.png; sourceTree = "<group>"; };
+		205D86A11BDA8BBF00A7518D /* tourv2Uno.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourv2Uno.png; sourceTree = "<group>"; };
 		2067F8B41B4ACA5E001F5478 /* FoodTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewController.h; sourceTree = "<group>"; };
 		2067F8B51B4ACA5E001F5478 /* FoodTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableViewController.m; sourceTree = "<group>"; };
 		2067F8B81B4ACC50001F5478 /* FoodTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableCell.h; sourceTree = "<group>"; };
@@ -968,6 +974,9 @@
 		20D52D371B45F7D300A1C60B /* Tour */ = {
 			isa = PBXGroup;
 			children = (
+				205D869F1BDA8BBF00A7518D /* tourv2Dos.png */,
+				205D86A01BDA8BBF00A7518D /* tourv2Tres.png */,
+				205D86A11BDA8BBF00A7518D /* tourv2Uno.png */,
 				20F94E0D1B801458004828B8 /* tourUno.png */,
 				20F94E0F1B8014D1004828B8 /* tourDos.png */,
 				20F94E171B8016FE004828B8 /* tourTres.png */,
@@ -1153,7 +1162,9 @@
 				2011862F1B41C16200A59D55 /* Main.storyboard in Resources */,
 				203FFD121BC5DAD9008B4CED /* ItemTableHeaderView.xib in Resources */,
 				203FFD0A1BC5B099008B4CED /* YapHolderTwo@2x.png in Resources */,
+				205D86A41BDA8BBF00A7518D /* tourv2Uno.png in Resources */,
 				20D52CB51B4453A000A1C60B /* cancelPhoto@2x.png in Resources */,
+				205D86A21BDA8BBF00A7518D /* tourv2Dos.png in Resources */,
 				205D86881BD711B100A7518D /* lockIcon@2x.png in Resources */,
 				20F5A2F21B84FC4900FC7BA5 /* tourTresNew.png in Resources */,
 				20F5A2F41B85448D00FC7BA5 /* toastTwo@2x.png in Resources */,
@@ -1176,6 +1187,7 @@
 				205D86961BD94A1800A7518D /* stockdPackage@2x.png in Resources */,
 				20497DEE1B657E26004A2950 /* cartIconYo@2x.png in Resources */,
 				20E2EC0B1B4727BD002E317A /* SVProgressHUD.bundle in Resources */,
+				205D86A31BDA8BBF00A7518D /* tourv2Tres.png in Resources */,
 				20F94E0C1B7FB0B9004828B8 /* Todo in Resources */,
 				20D52CEA1B45A7A700A1C60B /* menu-button.png in Resources */,
 				203FFD0C1BC5B0AB008B4CED /* stockdMenu@2x.png in Resources */,

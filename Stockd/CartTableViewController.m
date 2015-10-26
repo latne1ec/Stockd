@@ -24,6 +24,9 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSArray* packageKeys;
 @property (nonatomic, strong) NSArray* extraKeys;
+@property (nonatomic, strong) NSString *packageSizeString;
+
+
 
 @end
 
@@ -95,6 +98,11 @@
    // [[PFUser currentUser] setObject:[NSNumber numberWithInt:10] forKey:@"karmaCash"];
     //[[PFUser currentUser] saveInBackground];
     
+    NSString *uuidStr = [[NSUUID UUID] UUIDString];
+    self.orderNumber = uuidStr;
+    
+    
+     NSLog(@"All Items: %@ and Package size: %d",[self getAllItems], _appDelegate.packageSize);
     
 }
 
@@ -172,6 +180,7 @@
 
 -(NSString*)getAllItems
 {
+   
     id strings = [@[] mutableCopy];
     
     for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
@@ -182,6 +191,29 @@
             [strings addObject:result];
         }
     }
+    
+    for (NSString* packagesKey in [_appDelegate extraPackage_itemsDictionary]){
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packagesKey]){
+            NSMutableString *result = [[NSMutableString alloc] init];
+            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey];
+            [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
+            [strings addObject:result];
+        }
+    }
+
+    if (_appDelegate.packageSize == 1) {
+        self.packageSizeString = @"small";
+    }
+    if (_appDelegate.packageSize == 2) {
+        self.packageSizeString = @"medium";
+    }
+    if (_appDelegate.packageSize == 3) {
+        self.packageSizeString = @"large";
+    }
+    if (_appDelegate.packageSize == 4) {
+        self.packageSizeString = @"extra large";
+    }
+    
     return [strings componentsJoinedByString:@"; "];
 }
 
@@ -212,9 +244,9 @@
             }
         }
         if (modifiedFlag){
-            cell.lockIconButton.hidden = false;
+            cell.lockIconButton.hidden = NO;
         }else{
-            cell.lockIconButton.hidden = true;
+            cell.lockIconButton.hidden = YES;
         }
         
         return cell;
@@ -496,6 +528,7 @@
 
 -(void)chargeCustomer:(NSString *)customerId amount:(NSNumber *)amountInCents completion:(PFIdResultBlock)handler {
     
+    NSLog(@"Made it here");
     [PFCloud callFunctionInBackground:@"chargeCustomer"
                        withParameters:@{
                                         @"amount":amountInCents,
@@ -512,44 +545,55 @@
                                         [[PFUser currentUser] incrementKey:@"karmaScore"];
                                         [[PFUser currentUser] removeObjectForKey:@"karmaCash"];
                                         [[PFUser currentUser] saveInBackground];
-                                        [self getOrder];
-                                        [self showConfirmation];
+                                        //[self getOrder];
+                                        [self updateOrderInParse];
+                                        
+                                        //[self showConfirmation];
                                     }
                                 }];
 }
 
--(void)updateOrderInParse:(PFObject *)order {
+-(void)updateOrderInParse {
     
-    [ProgressHUD show:nil];
+    [ProgressHUD show:nil Interaction:NO];
+    
+    PFObject *order = [PFObject objectWithClassName:@"Orders"];
     NSString *orderString = [self getAllItems];
+    [order setObject:self.orderNumber forKey:@"orderNumber"];
+    [order setObject:[PFUser currentUser] forKey:@"user"];
     [order setObject:orderString forKey:@"orderItems"];
+    [order setObject:self.packageSizeString forKey:@"orderSize"];
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
-            [ProgressHUD dismiss];
+            [ProgressHUD showError:@"Network Error"];
         }
         else {
             [ProgressHUD dismiss];
+            [self showConfirmation];
         }
     }];
 }
 
--(void)getOrder {
-    
-    [ProgressHUD show:nil];
-    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
-    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (error) {
-            [ProgressHUD dismiss];
-        }
-        else {
-            self.order = object;
-            NSLog(@"Order: %@", self.order);
-            [self updateOrderInParse:self.order];
-            
-        }
-    }];
-}
+//-(void)getOrder {
+//    
+//    NSLog(@"Get Order");
+//    [ProgressHUD show:nil];
+//    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
+//    [query whereKey:@"orderNumber" equalTo:self.orderNumber];
+//    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//        if (error) {
+//            NSLog(@"Error here dude");
+//            [ProgressHUD dismiss];
+//        }
+//        else {
+//            
+//            self.order = object;
+//            NSLog(@"Order: %@", self.order);
+//            [self updateOrderInParse:self.order];
+//            
+//        }
+//    }];
+//}
 
 
 -(void)showConfirmation {
@@ -568,7 +612,6 @@
     [self.navigationController pushViewController:cvc animated:YES];
     
 }
-
 
 -(void)showError:(NSError *)error {
     

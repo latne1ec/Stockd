@@ -9,10 +9,13 @@
 #import "ConfirmationTableViewController.h"
 #import "ProfileTableViewController.h"
 #import "InitialViewController.h"
+#import "AppDelegate.h"
 
 @interface ConfirmationTableViewController ()
 
 @property (nonatomic, strong) NSString *shareMessage;
+@property (nonatomic, strong) AppDelegate *appDelegate;
+
 
 
 @end
@@ -24,6 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _appDelegate = [[UIApplication sharedApplication] delegate];
     
     
     self.title = @"Stockd";
@@ -198,6 +203,15 @@
 
 
 - (IBAction)homeButtonTapped:(id)sender {
+    
+    if ([_appDelegate package_itemsDictionary] !=nil) {
+        [[_appDelegate package_itemsDictionary] removeAllObjects];
+    }
+    
+    if ([_appDelegate extraPackage_itemsDictionary] !=nil) {
+        [[_appDelegate extraPackage_itemsDictionary] removeAllObjects];
+    }
+    
 
     ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
     [CATransaction begin];

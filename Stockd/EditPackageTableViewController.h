@@ -24,8 +24,6 @@
 @property (nonatomic, strong) NSString *beerItem;
 @property (nonatomic, strong) NSString *liquorItem;
 
-
-
 - (IBAction)decrementQuantity:(id)sender;
 - (IBAction)incrementQuantity:(id)sender;
 

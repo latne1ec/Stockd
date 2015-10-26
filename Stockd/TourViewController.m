@@ -23,10 +23,7 @@ alpha:1.0]
 
 @implementation TourViewController
 
-
-
--(void)viewDidLoad
-{
+-(void)viewDidLoad {
     
     [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasRanApp"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -52,14 +49,14 @@ alpha:1.0]
     [self.view addSubview:_pagedTour];
     
     UIFont *font = [UIFont fontWithName:@"BELLABOO" size:26];
-    NSString *message1 = @"SNAP A PHOTO OF WHAT YOU WANT STOCKED";
-    NSString *message2 = @"SELECT A PACKAGE SIZE";
-    NSString *message3 = @"PICK FROM YUMMY PRESELECTED FOODS";
+    NSString *message1 = @"PICK FROM YUMMY PRESELECTED PACKAGES";
+    NSString *message2 = @"ADD EXTRA GOODIES TO YOUR PACKAGE";
+    NSString *message3 = @"CHOOSE A PACKAGE SIZE";
     NSString *message4 = @"THAT'S IT!\n#GETSTOCKD";
     
-    UIImage *image1 = [UIImage imageNamed:@"tourUno.png"];
-    UIImage *image2 = [UIImage imageNamed:@"tourDos.png"];
-    UIImage *image3 = [UIImage imageNamed:@"tourTresNew.png"];
+    UIImage *image1 = [UIImage imageNamed:@"tourv2Uno.png"];
+    UIImage *image2 = [UIImage imageNamed:@"tourv2Dos.png"];
+    UIImage *image3 = [UIImage imageNamed:@"tourv2Tres.png"];
     UIImage *image4 = [UIImage imageNamed:@"tourTresiPhone4"];
     
     NSString *thankYouMessage = @"THANK YOU!\nYOU'LL BE NOTIFIED WHEN YOUR DELIVERY IS ON THE WAY!";
@@ -130,9 +127,7 @@ alpha:1.0]
         imageView3.backgroundColor = [UIColor clearColor];
         imageView3.image = image3;
         [page3 addSubview:imageView3];
-        
     }
-    
     
     whiteSquare = [[UIView alloc] initWithFrame:CGRectMake(0, _h/2.0f, _w, _h/2.0f)];
     whiteSquare.backgroundColor = [UIColor whiteColor];

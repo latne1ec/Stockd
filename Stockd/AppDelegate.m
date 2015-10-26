@@ -68,6 +68,10 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     _packageSize = 1;
     
     
+   // [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"karmaCash"];
+    //[[PFUser currentUser] saveInBackground];
+    
+    
     return YES;
     
 }

@@ -180,7 +180,7 @@
                 break;
             }
         }
-        if (modifiedFlag){
+        if (modifiedFlag || [packageName isEqual:@"Beer"]){
             for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
                 CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
                 price += cartItem.itemQuantity*cartItem.itemPrice;
@@ -314,7 +314,7 @@
     for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
         Boolean modifiedFlag = false;
         for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
-            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] hasBeenModified] == true){
+            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] hasBeenModified] == true || [packagesKey isEqual:@"Beer"]){
                 modifiedFlag = true;
                 break;
             }

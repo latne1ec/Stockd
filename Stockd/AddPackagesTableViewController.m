@@ -465,6 +465,24 @@
     return cell;
 }
 
+-(BOOL) checkValidBeerLimit{
+    int maxNumOfBeers = 6;
+    int totalBeers = 0;
+    for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:@"Beer"]){
+        CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:@"Beer"] valueForKey:itemNameKey];
+        totalBeers += cartItem.itemQuantity;
+    }
+    
+    for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"]){
+        CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"] valueForKey:itemNameKey];
+        if ([[_appDelegate beerItemsDictionary] valueForKey:itemNameKey]){
+            totalBeers += cartItem.itemQuantity;
+        }
+    }
+    
+    return totalBeers < maxNumOfBeers;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
@@ -495,32 +513,44 @@
     }
     
     else if (indexPath.section == 2) {
-        PFObject *object = [self.booze objectAtIndex:indexPath.row];
-        NSString *packageName = [object objectForKey:@"packageName"];
-        
-        if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-            [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
-            NSLog(@"PackageName: %@", packageName);
-            if ([packageName isEqual:@"Beer"] || [packageName isEqual:@"Liquor"] || [packageName isEqual:@"Wine"]){
-                for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                    int t_qt = 0;
-                    if ([itemPFObj[@"itemName"] isEqual:@"Bud Light"] || [itemPFObj[@"itemName"] isEqual:@"Absolut"]){
-                        t_qt = 1;
+        if ([cell.packageNameLabel isEqual:@"+ Beer"] && [self checkValidBeerLimit]){
+            PFObject *object = [self.booze objectAtIndex:indexPath.row];
+            NSString *packageName = [object objectForKey:@"packageName"];
+            
+            if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
+                NSLog(@"PackageName: %@", packageName);
+                if ([packageName isEqual:@"Beer"] || [packageName isEqual:@"Liquor"] || [packageName isEqual:@"Wine"]){
+                    for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
+                        int t_qt = 0;
+                        if ([itemPFObj[@"itemName"] isEqual:@"Bud Light"] || [itemPFObj[@"itemName"] isEqual:@"Absolut"]){
+                            t_qt = 1;
+                        }
+                        [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: t_qt price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
                     }
-                    [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: t_qt price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
+                }else{
+                    for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
+                        [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
+                    }
                 }
-            }else{
-                for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                    [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
-                }
+                cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+                cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
             }
-            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
-        }
-        else {
-            [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
-            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+            else {
+                [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
+                cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+                cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+            }
+        }else{
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
+                                                                           message:@"This is an alert."
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                  handler:^(UIAlertAction * action) {}];
+            
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
         }
         
     }
@@ -635,6 +665,8 @@
     }];
 }
 
+
+
 -(void)getPreselectedBeerItem {
     
     [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
@@ -710,7 +742,9 @@
     totalNumber += [_appDelegate package_itemsDictionary].count;
     
     for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
-        totalNumber += [[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] count];
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey]){
+            totalNumber += [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] valueForKey:itemNameKey] itemQuantity];
+        }
     }
     
     [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];

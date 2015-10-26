@@ -65,8 +65,10 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     
     _package_itemsDictionary = [[NSMutableDictionary alloc] init];
     _extraPackage_itemsDictionary = [[NSMutableDictionary alloc] init];
+    _beerItemsDictionary = [[NSMutableDictionary alloc] init];
     _packageSize = 1;
     
+    [self queryForBeerItems];
     
    // [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"karmaCash"];
     //[[PFUser currentUser] saveInBackground];
@@ -94,6 +96,23 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
                                                           openURL:url
                                                 sourceApplication:sourceApplication
                                                 annotation:annotation];
+}
+
+-(void)queryForBeerItems {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Items"];
+    [query whereKey:@"itemPackage" equalTo:@"Beer"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (error) {
+        } else {
+            for (int i = 0; i < objects.count; i++){
+                id item = objects[i];
+                NSLog(@"Item Name: %@", item[@"itemName"]);
+                [_beerItemsDictionary setObject:item[@"itemName"] forKey:item[@"itemName"]];
+            }
+        }
+    }];
 }
 
 -(void)showAnimation {

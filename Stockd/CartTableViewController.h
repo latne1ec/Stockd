@@ -38,4 +38,6 @@
 
 - (IBAction)getStockedTapped:(id)sender;
 
+-(void) removeEmptyPackages;
+
 @end

@@ -198,6 +198,14 @@
             CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:itemNameKey];
             totalBeers += cartItem.itemQuantity;
         }
+        
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"]){
+            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"] valueForKey:itemNameKey];
+            if ([[_appDelegate beerItemsDictionary] valueForKey:itemNameKey]){
+                totalBeers += cartItem.itemQuantity;
+            }
+        }
+        
         return totalBeers < maxNumOfBeers;
     }
     return YES;
@@ -211,12 +219,16 @@
     NSString *itemNameLabel = cell.itemNameLabel.text;
 
     if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
-        [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue]] forKey:self.items[indexPath.row][@"itemName"]];
-        
-        [self updateCartAnimated];
+        if ([self checkValidBeerLimit]){
+            [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue]] forKey:self.items[indexPath.row][@"itemName"]];
+            
+            [self updateCartAnimated];
+        }
     }else{
-        [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] increaseQuantity];
-        [self updateCartAnimated];
+        if ([self checkValidBeerLimit]){
+            [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] valueForKey:self.items[indexPath.row][@"itemName"]] increaseQuantity];
+            [self updateCartAnimated];
+        }
     }
     
     cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel] itemQuantity]];

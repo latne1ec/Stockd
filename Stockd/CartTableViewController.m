@@ -143,7 +143,6 @@
 -(void)viewWillAppear:(BOOL)animated {
     [self updateTotal];
     [self.tableView reloadData];
-    
 }
 
 -(void)this {
@@ -176,6 +175,18 @@
         return 1;
     }
     return 0;
+}
+
+-(void) removeEmptyPackages{
+    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+        int totalQt = 0;
+        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
+            totalQt += [[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] itemQuantity];
+        }
+        if (totalQt == 0){
+            [[_appDelegate package_itemsDictionary] removeObjectForKey:packagesKey];
+        }
+    }
 }
 
 -(NSString*)getAllItems
@@ -238,7 +249,7 @@
         
         Boolean modifiedFlag = false;
         for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true){
+            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true || [packageName isEqual:@"Beer"]){
                 modifiedFlag = true;
                 break;
             }

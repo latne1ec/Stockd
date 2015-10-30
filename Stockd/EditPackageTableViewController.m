@@ -43,6 +43,13 @@
                                                                             target:self
                                                                             action:@selector(dismissViewControllerAnimated:completion:)];
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"updateButton"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(dismissViewControllerAnimated:completion:)];
+    
+    
+    
     
     if ([[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
         self.title = [NSString stringWithFormat:@"Edit %@ Package", self.packageName];

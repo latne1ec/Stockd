@@ -14,6 +14,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.itemPriceLabel.minimumScaleFactor = 0.5;
+    self.itemPriceLabel.adjustsFontSizeToFitWidth = YES;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

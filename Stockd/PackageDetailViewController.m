@@ -283,7 +283,7 @@
 
 -(void)goToCartScreen {
     
-    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] count] == 0) {
+    if ([_appDelegate package_itemsDictionary].count + [_appDelegate extraPackage_itemsDictionary].count == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cart Empty" message:@"Your cart is empty. Add a package or two before checking out!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
                 

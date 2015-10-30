@@ -139,13 +139,13 @@
             cell.itemDetailLabel.text = [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemDetail];
             cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d",[[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
             
-            cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f",[[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
+            cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity] * [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
         }else{
             cell.itemNameLabel.text = [_extraKeys objectAtIndex:indexPath.row];
             cell.itemDetailLabel.text = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemDetail];
             cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d",[[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
             
-            cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f",[[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
+            cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity] * [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
         }
         
         //NSLog(@"Price: %.02f", price);
@@ -220,6 +220,7 @@
     if (([_packageName isEqual:@"Beer"] && [self checkValidBeerLimit]) || (![_packageName isEqual:@"Beer"] && ![_packageName isEqual:@"21+"])){
         if ([[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
             [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] increaseQuantity];
+            cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity] * [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
             cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
         }else{
             if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageName] valueForKey:cell.itemNameLabel.text]){
@@ -228,6 +229,7 @@
                 [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] increaseQuantity];
             }
             
+            cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity] * [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
             cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
         }
     }
@@ -240,14 +242,17 @@
     
     if ([[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
         [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] decreaseQuantity];
+        cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity] * [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
         cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
     }else{
         int value = [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity] - 1;
         if (value < 1){
-            [[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageName] removeObjectForKey:cell.itemNameLabel.text];
+            [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageName] valueForKey:cell.itemNameLabel.text] setItemQuantity:0];
+            //[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageName] removeObjectForKey:cell.itemNameLabel.text];
         }else{
             [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] decreaseQuantity];
         }
+        cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity] * [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemPrice]];
         cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
     }
 }
@@ -281,10 +286,31 @@
     }];
 }
 
+-(void)removeEmptyExtraItems{
+    NSMutableArray* arr = [[NSMutableArray alloc] init];
+    
+    for (NSString* packagesKey in [_appDelegate extraPackage_itemsDictionary]){
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packagesKey]){
+            if ([[[[_appDelegate extraPackage_itemsDictionary] valueForKey: packagesKey] valueForKey:itemNameKey] itemQuantity] == 0){
+                [arr addObject:itemNameKey];
+            }
+        }
+        
+        for (int i = 0; i < [arr count]; i++){
+            [[[_appDelegate extraPackage_itemsDictionary] valueForKey: packagesKey] removeObjectForKey:[arr objectAtIndex:i]];
+        }
+        
+        [arr removeAllObjects];
+    }
+    
+    
+}
+
 -(void) viewWillDisappear:(BOOL)animated{
     if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageName] count] < 1){
         [[_appDelegate extraPackage_itemsDictionary] removeObjectForKey:_packageName];
     }
+    [self removeEmptyExtraItems];
     [parent removeEmptyPackages];
     [parent viewDidLoad];
 }

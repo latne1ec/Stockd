@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -21,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwU-PO-sd4">
-                    <rect key="frame" x="145" y="12" width="71" height="21"/>
+                    <rect key="frame" x="136" y="12" width="71" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="71" id="0JJ-FO-d9i"/>
                     </constraints>
@@ -30,7 +29,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jM4-EN-uco">
-                    <rect key="frame" x="249" y="12" width="49" height="21"/>
+                    <rect key="frame" x="240" y="12" width="49" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="49" id="uUg-pw-Y4q"/>
                     </constraints>
@@ -53,7 +52,7 @@
                 <constraint firstItem="rwU-PO-sd4" firstAttribute="baseline" secondItem="8ZW-Di-Fl8" secondAttribute="baseline" id="AyF-vW-edR"/>
                 <constraint firstItem="rwU-PO-sd4" firstAttribute="firstBaseline" secondItem="8ZW-Di-Fl8" secondAttribute="firstBaseline" id="FZA-It-Nh3"/>
                 <constraint firstItem="jM4-EN-uco" firstAttribute="leading" secondItem="rwU-PO-sd4" secondAttribute="trailing" constant="33" id="NB3-iR-KCT"/>
-                <constraint firstAttribute="trailing" secondItem="jM4-EN-uco" secondAttribute="trailing" constant="22" id="SUB-jn-fpR"/>
+                <constraint firstAttribute="trailing" secondItem="jM4-EN-uco" secondAttribute="trailing" constant="31" id="SUB-jn-fpR"/>
                 <constraint firstItem="8ZW-Di-Fl8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="Wyv-kQ-eFP"/>
                 <constraint firstItem="rwU-PO-sd4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z06-hn-bul"/>
                 <constraint firstItem="rwU-PO-sd4" firstAttribute="baseline" secondItem="jM4-EN-uco" secondAttribute="baseline" id="Z7t-Uz-0rX"/>
@@ -65,4 +64,9 @@
             <point key="canvasLocation" x="426" y="390"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

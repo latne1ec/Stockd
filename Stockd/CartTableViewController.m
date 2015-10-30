@@ -141,8 +141,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
     [self updateTotal];
     [self.tableView reloadData];
+    [self setNavTitle];
+    
 }
 
 -(void)this {
@@ -644,21 +647,62 @@
 
 -(void)checkForBooze {
     
-    /*if ([[_appDelegate package_itemsDictionary] valueForKey:@"Liquor"]) {
-        
-        _BOOZE = 150;
-        [self showBoozeTerms];
-    }
-    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Beer"]) {
-        _BOOZE = 150;
-        [self showBoozeTerms];
-    }
-    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Wine"]) {
-        _BOOZE = 150;
-        [self showBoozeTerms];
-    }*/
+    NSLog(@"Here ya go: %@", [_appDelegate extraPackage_itemsDictionary]);
     
+    if ([[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"]) {
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
+            NSLog(@"hi");
+        }
+        else {
+            _BOOZE = 150;
+            [self showBoozeTerms];
+            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasShownBoozeTerms"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+    
+    if ([[_appDelegate package_itemsDictionary] valueForKey:@"Liquor"]) {
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
+            NSLog(@"hi");
+        }
+        else {
+            _BOOZE = 150;
+            [self showBoozeTerms];
+            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasShownBoozeTerms"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+    
+    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Beer"]) {
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
+            NSLog(@"hi");
+        }
+        else {
+            _BOOZE = 150;
+            [self showBoozeTerms];
+            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasShownBoozeTerms"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+    
+    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Wine"]) {
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
+            NSLog(@"hi");
+        }
+        else {
+            _BOOZE = 150;
+            [self showBoozeTerms];
+            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasShownBoozeTerms"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
 }
+
+
 -(void)showBoozeTerms {
     
     AlcoholPolicyViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"AlcoholPolicy"];
@@ -675,22 +719,23 @@
     
 }
 
+
 -(void)setNavTitle {
     
     self.title = @"Basket";
     
-    //    if (self.packageSize == 1) {
-    //        self.title = @"Small Basket";
-    //    }
-    //    else if (self.packageSize == 2) {
-    //        self.title = @"Medium Basket";
-    //    }
-    //    else if (self.packageSize == 3) {
-    //        self.title = @"Large Basket";
-    //    }
-    //    else if (self.packageSize == 4) {
-    //        self.title = @"XL Basket";
-    //    }
+    if (_appDelegate.packageSize == 1) {
+        self.title = @"Small Basket";
+    }
+    else if (_appDelegate.packageSize == 2) {
+        self.title = @"Medium Basket";
+    }
+    else if (_appDelegate.packageSize == 3) {
+        self.title = @"Large Basket";
+    }
+    else if (_appDelegate.packageSize == 4) {
+        self.title = @"XL Basket";
+    }
 }
 
 

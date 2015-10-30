@@ -513,9 +513,10 @@
     }
     
     else if (indexPath.section == 2) {
-        if ([cell.packageNameLabel isEqual:@"+ Beer"] && [self checkValidBeerLimit]){
-            PFObject *object = [self.booze objectAtIndex:indexPath.row];
-            NSString *packageName = [object objectForKey:@"packageName"];
+        PFObject *object = [self.booze objectAtIndex:indexPath.row];
+        NSString *packageName = [object objectForKey:@"packageName"];
+        
+        if (([packageName isEqual:@"Beer"] && [self checkValidBeerLimit]) || ![packageName isEqual:@"Beer"]){
             
             if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
                 [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
@@ -542,8 +543,8 @@
                 cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
             }
         }else{
-            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
-                                                                           message:@"This is an alert."
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                           message:@"You already have the maximum amount of beer in your cart."
                                                                     preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault

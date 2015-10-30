@@ -171,22 +171,13 @@
     }
     else {
         NSLog(@"FACEBOOK LOGIN");
-        //Navigation Bar Title Properties
-        NSShadow *shadow = [[NSShadow alloc] init];
-        shadow.shadowColor = [UIColor clearColor];
-        shadow.shadowOffset = CGSizeMake(0, .0);
-//        [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                                         [UIColor whiteColor], NSForegroundColorAttributeName,
-//                                                                         shadow, NSShadowAttributeName,
-//                                                                         [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
-        
         NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont
                                                                                fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName,
                                     [UIColor whiteColor], NSForegroundColorAttributeName, nil];
         [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+        self.navigationController.navigationBarHidden = NO;
     }
     
-    [self.avPlayer pause];
 }
 
 
@@ -244,28 +235,29 @@
     [currentInstallation saveInBackground];
     
     /////Pop To Main View Controller
+
     ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
-//    UINavigationController *navigationController =
-//    [[UINavigationController alloc] initWithRootViewController:destViewController];
-//    UIBarButtonItem *newBackButton =
-//    [[UIBarButtonItem alloc] initWithTitle:@""
-//                                     style:UIBarButtonItemStyleBordered
-//                                    target:nil
-//                                    action:nil];
-//    
-//    [CATransaction begin];
-//    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
-//    CATransition *transition = [CATransition animation];
-//    [transition setType:kCATransitionFade];
-//    [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
-//    
-//    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+    UINavigationController *navigationController =
+    [[UINavigationController alloc] initWithRootViewController:destViewController];
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
     
+    [CATransaction begin];
+    [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+    CATransition *transition = [CATransition animation];
+    [transition setType:kCATransitionFade];
+    [self.navigationController.view.layer addAnimation:transition forKey:@"someAnimation"];
+    
+    
+    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
     [self.navigationController pushViewController:destViewController animated:NO];
     
-    //[CATransaction commit];
-    
-    [ProgressHUD dismiss];
+    [CATransaction commit];
+
+       [ProgressHUD dismiss];
 }
 
 

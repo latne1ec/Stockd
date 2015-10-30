@@ -260,7 +260,7 @@
                 [[UINavigationController alloc] initWithRootViewController:destViewController];
                 UIBarButtonItem *newBackButton =
                 [[UIBarButtonItem alloc] initWithTitle:@""
-                                                 style:UIBarButtonItemStyleBordered
+                                                 style:UIBarButtonItemStylePlain
                                                 target:nil
                                                 action:nil];
                 
@@ -287,7 +287,7 @@
     [[UINavigationController alloc] initWithRootViewController:destViewController];
     UIBarButtonItem *newBackButton =
     [[UIBarButtonItem alloc] initWithTitle:@""
-                                     style:UIBarButtonItemStyleBordered
+                                     style:UIBarButtonItemStylePlain
                                     target:nil
                                     action:nil];
     

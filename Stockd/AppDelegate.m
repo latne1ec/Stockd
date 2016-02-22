@@ -31,11 +31,13 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     _alreadyShowed = 0;
+    
     //Parse Keys
     [Parse setApplicationId:@"CYM8KYF8jzPvy9usbmgAZouY1X1t3WbWLErZzxgc"
                   clientKey:@"56dirzgs3IEhiIrV6AWu898rTmNIyUBf79vWwbE8"];
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFImageView class];
+    
     
     //Stripe Keys
     [Stripe setDefaultPublishableKey:StripePublishableKey];
@@ -70,9 +72,8 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     
     [self queryForBeerItems];
     
-   // [[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"karmaCash"];
+    //[[PFUser currentUser] setObject:[NSNumber numberWithInt:0] forKey:@"karmaCash"];
     //[[PFUser currentUser] saveInBackground];
-    
     
     return YES;
     

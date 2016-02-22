@@ -36,7 +36,6 @@
     [self.dayTextField setValue:white forKeyPath:@"_placeholderLabel.textColor"];
     [self.yearTextField setValue:white forKeyPath:@"_placeholderLabel.textColor"];
     
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated {

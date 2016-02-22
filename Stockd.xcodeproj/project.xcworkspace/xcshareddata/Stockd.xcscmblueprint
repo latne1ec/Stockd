@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D1F187D7BA64E701EF69C6EE57E151099542784E" : 0,
+    "826871FB24AEC3E2D3414585A54C63DF2EAFA4E9" : 0,
+    "D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6" : 0,
+    "5F878E0FE993FDB67E77801EA9D0BC94089CC211" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E02E0C1B-BC22-44AC-813D-3679A47131C3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D1F187D7BA64E701EF69C6EE57E151099542784E" : "Level%20Labs\/Clients\/Adena%20Data\/AdenaData",
+    "826871FB24AEC3E2D3414585A54C63DF2EAFA4E9" : "Evan\/Yapster",
+    "D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6" : "Stockd",
+    "5F878E0FE993FDB67E77801EA9D0BC94089CC211" : "Spotshot\/Spotshot"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Stockd",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Stockd.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/latne1ec\/Stories.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5F878E0FE993FDB67E77801EA9D0BC94089CC211"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/latne1ec\/Yapster.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "826871FB24AEC3E2D3414585A54C63DF2EAFA4E9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/latne1ec\/ADClientProject.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D1F187D7BA64E701EF69C6EE57E151099542784E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/rogelioRuiz\/stockd.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D99AABDF210A8BE62D4D97D44B7BFED5FDA81EE6"
+    }
+  ]
+}

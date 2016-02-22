@@ -153,6 +153,7 @@
 		20E2EC121B485095002E317A /* SVBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC0F1B485095002E317A /* SVBlurView.m */; };
 		20E2EC131B485095002E317A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC111B485095002E317A /* UIImage+ImageEffects.m */; };
 		20E2EC171B486107002E317A /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC161B486107002E317A /* FXBlurView.m */; };
+		20EDE0411C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20EDE0401C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m */; };
 		20F5A2EB1B84CF1F00FC7BA5 /* JWBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A2E81B84CF1F00FC7BA5 /* JWBlurView.m */; };
 		20F5A2EC1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A2EA1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m */; };
 		20F5A2F01B84D6C000FC7BA5 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F5A2EF1B84D6C000FC7BA5 /* PopupViewController.m */; };
@@ -160,7 +161,7 @@
 		20F5A2F41B85448D00FC7BA5 /* toastTwo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F5A2F31B85448D00FC7BA5 /* toastTwo@2x.png */; };
 		20F5A3061B8A46AF00FC7BA5 /* toastThreeSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F5A3051B8A46AF00FC7BA5 /* toastThreeSmall@2x.png */; };
 		20F5A30A1B8A4CD600FC7BA5 /* toastThree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F5A3091B8A4CD600FC7BA5 /* toastThree@2x.png */; };
-		20F6D9821BE3F02D00F54739 /* updateButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F6D9811BE3F02D00F54739 /* updateButton@2x.png */; };
+		20F6D9861BE4123F00F54739 /* updateButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F6D9851BE4123F00F54739 /* updateButton@2x.png */; };
 		20F94E0C1B7FB0B9004828B8 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E0B1B7FB0B9004828B8 /* Todo */; };
 		20F94E0E1B801458004828B8 /* tourUno.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E0D1B801458004828B8 /* tourUno.png */; };
 		20F94E101B8014D1004828B8 /* tourDos.png in Resources */ = {isa = PBXBuildFile; fileRef = 20F94E0F1B8014D1004828B8 /* tourDos.png */; };
@@ -419,6 +420,8 @@
 		20E2EC111B485095002E317A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		20E2EC151B486107002E317A /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
 		20E2EC161B486107002E317A /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		20EDE03F1C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryInstructionsPopupViewController.h; sourceTree = "<group>"; };
+		20EDE0401C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryInstructionsPopupViewController.m; sourceTree = "<group>"; };
 		20F5A2E71B84CF1F00FC7BA5 /* JWBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWBlurView.h; sourceTree = "<group>"; };
 		20F5A2E81B84CF1F00FC7BA5 /* JWBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWBlurView.m; sourceTree = "<group>"; };
 		20F5A2E91B84CF1F00FC7BA5 /* UIViewController+ENPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ENPopUp.h"; sourceTree = "<group>"; };
@@ -429,7 +432,7 @@
 		20F5A2F31B85448D00FC7BA5 /* toastTwo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastTwo@2x.png"; sourceTree = "<group>"; };
 		20F5A3051B8A46AF00FC7BA5 /* toastThreeSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastThreeSmall@2x.png"; sourceTree = "<group>"; };
 		20F5A3091B8A4CD600FC7BA5 /* toastThree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastThree@2x.png"; sourceTree = "<group>"; };
-		20F6D9811BE3F02D00F54739 /* updateButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "updateButton@2x.png"; sourceTree = "<group>"; };
+		20F6D9851BE4123F00F54739 /* updateButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "updateButton@2x.png"; sourceTree = "<group>"; };
 		20F94E0B1B7FB0B9004828B8 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 		20F94E0D1B801458004828B8 /* tourUno.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourUno.png; sourceTree = "<group>"; };
 		20F94E0F1B8014D1004828B8 /* tourDos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tourDos.png; sourceTree = "<group>"; };
@@ -669,7 +672,7 @@
 		201186891B42021900A59D55 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				20F6D9811BE3F02D00F54739 /* updateButton@2x.png */,
+				20F6D9851BE4123F00F54739 /* updateButton@2x.png */,
 				205D86951BD94A1800A7518D /* stockdPackage@2x.png */,
 				205D86871BD711B100A7518D /* lockIcon@2x.png */,
 				203FFD0F1BC5B0FA008B4CED /* addPhotoPink@2x.png */,
@@ -1005,6 +1008,8 @@
 				20497E6F1B73EED8004A2950 /* AlcoholPolicyViewController.m */,
 				20F5A2EE1B84D6C000FC7BA5 /* PopupViewController.h */,
 				20F5A2EF1B84D6C000FC7BA5 /* PopupViewController.m */,
+				20EDE03F1C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.h */,
+				20EDE0401C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m */,
 			);
 			name = Help;
 			sourceTree = "<group>";
@@ -1145,7 +1150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20D52CAF1B443D8000A1C60B /* cancel@2x.png in Resources */,
-				20F6D9821BE3F02D00F54739 /* updateButton@2x.png in Resources */,
+				20F6D9861BE4123F00F54739 /* updateButton@2x.png in Resources */,
 				20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */,
 				2067F8E01B4B7B74001F5478 /* cartIcon@2x.png in Resources */,
 				2068E8471B4EC2CA0005CA27 /* fruits@2x.png in Resources */,
@@ -1255,6 +1260,7 @@
 				20D52D2D1B45B86C00A1C60B /* SCRecorderTools.m in Sources */,
 				20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */,
 				20D52D2C1B45B86C00A1C60B /* SCRecorderFocusView.m in Sources */,
+				20EDE0411C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m in Sources */,
 				201186751B41F08F00A59D55 /* ProgressHUD.m in Sources */,
 				2037DDD11B42E5950076B0F2 /* AddressTableViewController.m in Sources */,
 				20E2EC0A1B4727BD002E317A /* SVIndefiniteAnimatedView.m in Sources */,

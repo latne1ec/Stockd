@@ -330,7 +330,7 @@
             if (error) {
                 [ProgressHUD dismiss];
                 [TSMessage showNotificationInViewController:self.navigationController
-                                                      title:@"Eror"
+                                                      title:@"Error"
                                                    subtitle:@"There was an issue saving your address information"
                                                       image:nil
                                                        type:TSMessageNotificationTypeSuccess

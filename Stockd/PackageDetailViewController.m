@@ -31,6 +31,9 @@
         [[_appDelegate extraPackage_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey: _packageType];
     }
     
+    self.navigationItem.backBarButtonItem.title = @"";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     self.tableView.tableFooterView = [UIView new];
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]

@@ -68,6 +68,8 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"initialBkg"]];
     [self.tableView setBackgroundView:imageView];
     
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
     //Navigation Bar Title Properties
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [UIColor clearColor];
@@ -106,10 +108,9 @@
     
 }
 
-
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
 {
-    return YES;
+    return NO;
 }
 
 - (BOOL)slideNavigationControllerShouldDisplayRightMenu
@@ -141,7 +142,6 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    
     [self updateTotal];
     [self.tableView reloadData];
     [self setNavTitle];
@@ -263,6 +263,13 @@
             cell.lockIconButton.hidden = YES;
         }
         
+        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
+            _packageKeys = [_appDelegate package_itemsDictionary].allKeys;
+            [tableView reloadData];
+            return true;
+        }]];
+        
         return cell;
     }
     
@@ -280,6 +287,13 @@
         NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
         cell.packagePriceLabel.text = priceString;
         cell.lockIconButton.hidden = true;
+        
+        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            [[_appDelegate extraPackage_itemsDictionary] removeObjectForKey:packageName];
+            _extraKeys = [_appDelegate extraPackage_itemsDictionary].allKeys;
+            [tableView reloadData];
+            return true;
+        }]];
         
         return cell;
     }
@@ -403,6 +417,7 @@
     
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0 || indexPath.section == 1) {
@@ -431,6 +446,12 @@
     [self.navigationController presentViewController:navigationController animated:YES completion:^{
     }];
     
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ((indexPath.section == 0 || indexPath.section == 1) && editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+    }
 }
 
 - (IBAction)getStockedTapped:(id)sender {

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MGSwipeTableCell/MGSwipeTableCell.h"
+#import "MGSwipeTableCell/MGSwipeButton.h"
 
-@interface CartTableCell : UITableViewCell
+@interface CartTableCell : MGSwipeTableCell
 
 
 @property (weak, nonatomic) IBOutlet UILabel *packageNameLabel;

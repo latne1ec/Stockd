@@ -171,6 +171,12 @@
 		FABBCABE1BC5B1C90058A201 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */; };
 		FABBCAC01BC5B2960058A201 /* BELLABOO-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */; };
 		FABBCAC41BC6EF240058A201 /* CartItemObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FABBCAC31BC6EF240058A201 /* CartItemObject.m */; };
+		FAE88E951C7B80320010DE79 /* rightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAE88E941C7B80320010DE79 /* rightArrow@2x.png */; };
+		FAE88E9C1C7B84C40010DE79 /* PreviousOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88E9B1C7B84C40010DE79 /* PreviousOrdersViewController.m */; };
+		FAE88E9F1C7B85020010DE79 /* PreviousOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88E9E1C7B85020010DE79 /* PreviousOrderCell.m */; };
+		FAE88EA21C7B8C030010DE79 /* PreviousOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88EA11C7B8C030010DE79 /* PreviousOrder.m */; };
+		FAE88EA81C7BA7730010DE79 /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88EA51C7BA7730010DE79 /* MGSwipeButton.m */; };
+		FAE88EA91C7BA7730010DE79 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88EA71C7BA7730010DE79 /* MGSwipeTableCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -443,6 +449,17 @@
 		FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BELLABOO-Regular.ttf"; sourceTree = "<group>"; };
 		FABBCAC21BC6EF240058A201 /* CartItemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartItemObject.h; sourceTree = "<group>"; };
 		FABBCAC31BC6EF240058A201 /* CartItemObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartItemObject.m; sourceTree = "<group>"; };
+		FAE88E941C7B80320010DE79 /* rightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightArrow@2x.png"; sourceTree = "<group>"; };
+		FAE88E9A1C7B84C40010DE79 /* PreviousOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousOrdersViewController.h; sourceTree = "<group>"; };
+		FAE88E9B1C7B84C40010DE79 /* PreviousOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousOrdersViewController.m; sourceTree = "<group>"; };
+		FAE88E9D1C7B85020010DE79 /* PreviousOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousOrderCell.h; sourceTree = "<group>"; };
+		FAE88E9E1C7B85020010DE79 /* PreviousOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousOrderCell.m; sourceTree = "<group>"; };
+		FAE88EA01C7B8C030010DE79 /* PreviousOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousOrder.h; sourceTree = "<group>"; };
+		FAE88EA11C7B8C030010DE79 /* PreviousOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousOrder.m; sourceTree = "<group>"; };
+		FAE88EA41C7BA7730010DE79 /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MGSwipeButton.h; path = MGSwipeTableCell/MGSwipeButton.h; sourceTree = "<group>"; };
+		FAE88EA51C7BA7730010DE79 /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGSwipeButton.m; path = MGSwipeTableCell/MGSwipeButton.m; sourceTree = "<group>"; };
+		FAE88EA61C7BA7730010DE79 /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MGSwipeTableCell.h; path = MGSwipeTableCell/MGSwipeTableCell.h; sourceTree = "<group>"; };
+		FAE88EA71C7BA7730010DE79 /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGSwipeTableCell.m; path = MGSwipeTableCell/MGSwipeTableCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -518,6 +535,7 @@
 		201186221B41C16200A59D55 /* Stockd */ = {
 			isa = PBXGroup;
 			children = (
+				FAE88EA31C7BA7600010DE79 /* MGSwipableCell */,
 				FABBCAC11BC6EE880058A201 /* Model */,
 				201186271B41C16200A59D55 /* AppDelegate.h */,
 				201186281B41C16200A59D55 /* AppDelegate.m */,
@@ -526,6 +544,7 @@
 				205D85841BCC261700A7518D /* UserAddressTableViewController.m */,
 				203FFD111BC5DAD9008B4CED /* ItemTableHeaderView.xib */,
 				20F94E0B1B7FB0B9004828B8 /* Todo */,
+				FAE88E961C7B836F0010DE79 /* Previous Orders */,
 				2067F8AD1B4A05A4001F5478 /* Menu */,
 				20D52D371B45F7D300A1C60B /* Tour */,
 				201186491B41EC8100A59D55 /* Login/Signup */,
@@ -672,6 +691,7 @@
 		201186891B42021900A59D55 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FAE88E941C7B80320010DE79 /* rightArrow@2x.png */,
 				20F6D9851BE4123F00F54739 /* updateButton@2x.png */,
 				205D86951BD94A1800A7518D /* stockdPackage@2x.png */,
 				205D86871BD711B100A7518D /* lockIcon@2x.png */,
@@ -1067,6 +1087,30 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		FAE88E961C7B836F0010DE79 /* Previous Orders */ = {
+			isa = PBXGroup;
+			children = (
+				FAE88E9A1C7B84C40010DE79 /* PreviousOrdersViewController.h */,
+				FAE88E9B1C7B84C40010DE79 /* PreviousOrdersViewController.m */,
+				FAE88E9D1C7B85020010DE79 /* PreviousOrderCell.h */,
+				FAE88E9E1C7B85020010DE79 /* PreviousOrderCell.m */,
+				FAE88EA01C7B8C030010DE79 /* PreviousOrder.h */,
+				FAE88EA11C7B8C030010DE79 /* PreviousOrder.m */,
+			);
+			name = "Previous Orders";
+			sourceTree = "<group>";
+		};
+		FAE88EA31C7BA7600010DE79 /* MGSwipableCell */ = {
+			isa = PBXGroup;
+			children = (
+				FAE88EA41C7BA7730010DE79 /* MGSwipeButton.h */,
+				FAE88EA51C7BA7730010DE79 /* MGSwipeButton.m */,
+				FAE88EA61C7BA7730010DE79 /* MGSwipeTableCell.h */,
+				FAE88EA71C7BA7730010DE79 /* MGSwipeTableCell.m */,
+			);
+			name = MGSwipableCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1116,7 +1160,7 @@
 				TargetAttributes = {
 					2011861F1B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = WTC7TJVBL2;
+						DevelopmentTeam = 48CPZ333EP;
 					};
 					201186381B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
@@ -1151,6 +1195,7 @@
 			files = (
 				20D52CAF1B443D8000A1C60B /* cancel@2x.png in Resources */,
 				20F6D9861BE4123F00F54739 /* updateButton@2x.png in Resources */,
+				FAE88E951C7B80320010DE79 /* rightArrow@2x.png in Resources */,
 				20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */,
 				2067F8E01B4B7B74001F5478 /* cartIcon@2x.png in Resources */,
 				2068E8471B4EC2CA0005CA27 /* fruits@2x.png in Resources */,
@@ -1232,6 +1277,7 @@
 				20E2EC0C1B4727BD002E317A /* SVProgressHUD.m in Sources */,
 				20D52CE91B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
 				20D52CE71B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
+				FAE88EA81C7BA7730010DE79 /* MGSwipeButton.m in Sources */,
 				20E2EC131B485095002E317A /* UIImage+ImageEffects.m in Sources */,
 				2067F8FA1B4C5683001F5478 /* EditItemsTableCell.m in Sources */,
 				2067F8C71B4B05A8001F5478 /* ItemTableCell.m in Sources */,
@@ -1259,6 +1305,7 @@
 				20D52D311B45B86C00A1C60B /* SCVideoConfiguration.m in Sources */,
 				20D52D2D1B45B86C00A1C60B /* SCRecorderTools.m in Sources */,
 				20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */,
+				FAE88E9C1C7B84C40010DE79 /* PreviousOrdersViewController.m in Sources */,
 				20D52D2C1B45B86C00A1C60B /* SCRecorderFocusView.m in Sources */,
 				20EDE0411C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m in Sources */,
 				201186751B41F08F00A59D55 /* ProgressHUD.m in Sources */,
@@ -1274,6 +1321,7 @@
 				2067F8C01B4B0152001F5478 /* DrinksTableCell.m in Sources */,
 				20D52D271B45B86C00A1C60B /* SCMediaTypeConfiguration.m in Sources */,
 				2067F8EA1B4C1BC2001F5478 /* BBBadgeBarButtonItem.m in Sources */,
+				FAE88E9F1C7B85020010DE79 /* PreviousOrderCell.m in Sources */,
 				20D52D211B45B86C00A1C60B /* SCAudioConfiguration.m in Sources */,
 				20D52D241B45B86C00A1C60B /* SCFilterGroup.m in Sources */,
 				2067F8D21B4B3CBC001F5478 /* AddPackagesTableViewController.m in Sources */,
@@ -1290,6 +1338,7 @@
 				20D52CEF1B45A7B200A1C60B /* LeftMenuViewController.m in Sources */,
 				20D52D2B1B45B86C00A1C60B /* SCRecorderFocusTargetView.m in Sources */,
 				20D52CE81B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlide.m in Sources */,
+				FAE88EA91C7BA7730010DE79 /* MGSwipeTableCell.m in Sources */,
 				20D52D2A1B45B86C00A1C60B /* SCRecorder.m in Sources */,
 				20D52CE61B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScale.m in Sources */,
 				20497DE61B6457B5004A2950 /* CartButton.m in Sources */,
@@ -1302,6 +1351,7 @@
 				2067F8F41B4C2C3E001F5478 /* SubtotalTableCell.m in Sources */,
 				2010B7DC1B4D712E00F897CF /* ConfirmationTableViewController.m in Sources */,
 				20D52D251B45B86C00A1C60B /* SCFilterSelectorView.m in Sources */,
+				FAE88EA21C7B8C030010DE79 /* PreviousOrder.m in Sources */,
 				20497E701B73EED8004A2950 /* AlcoholPolicyViewController.m in Sources */,
 				20497E751B7BE4CD004A2950 /* KAProgressLabel.m in Sources */,
 				2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */,
@@ -1443,6 +1493,7 @@
 				INFOPLIST_FILE = Stockd/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockdi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1464,6 +1515,7 @@
 				INFOPLIST_FILE = Stockd/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockdi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

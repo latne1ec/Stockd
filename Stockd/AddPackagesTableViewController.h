@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSString *orderNumber;
 @property (nonatomic, strong) PFObject *order;
 
-@property (nonatomic, strong) NSArray *food;
+@property (nonatomic, strong) NSMutableArray *food;
 @property (nonatomic, strong) NSArray *drinks;
 
 @property (nonatomic) int packageSize;

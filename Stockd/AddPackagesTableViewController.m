@@ -595,7 +595,20 @@
         }
         else {
             [ProgressHUD dismiss];
-            self.food = objects;
+            self.food = [NSMutableArray arrayWithArray:objects];
+            
+            PFObject* tempObj = self.food[0];
+            self.food[0] = self.food[1];
+            self.food[1] = tempObj;
+            
+            tempObj = self.food[1];
+            self.food[1] = self.food[5];
+            self.food[5] = tempObj;
+            
+            tempObj = self.food[2];
+            self.food[2] = self.food[3];
+            self.food[3] = tempObj;
+            
             [self.tableView reloadData];
         }
     }];

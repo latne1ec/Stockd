@@ -49,6 +49,17 @@
 		201186A11B422EA400A59D55 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201186A01B422EA400A59D55 /* AVFoundation.framework */; };
 		20268B381B5C282400B711B5 /* toastOne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20268B371B5C282400B711B5 /* toastOne@2x.png */; };
 		20268B3B1B5C2AB100B711B5 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20268B3A1B5C2AB100B711B5 /* Animation.m */; };
+		202C278B1C7E22E10050ED47 /* rightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C278A1C7E22E10050ED47 /* rightArrow@2x.png */; };
+		202C278D1C7E23DF0050ED47 /* cartIconBig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C278C1C7E23DF0050ED47 /* cartIconBig@2x.png */; };
+		202C278F1C7E23F00050ED47 /* toastThreeBig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C278E1C7E23F00050ED47 /* toastThreeBig@2x.png */; };
+		202C279F1C80A34B0050ED47 /* OrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C279E1C80A34B0050ED47 /* OrdersTableViewController.m */; };
+		202C27B01C80ADDD0050ED47 /* DateTools.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 202C27A11C80ADDD0050ED47 /* DateTools.bundle */; };
+		202C27B11C80ADDD0050ED47 /* DTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C27A51C80ADDD0050ED47 /* DTError.m */; };
+		202C27B21C80ADDD0050ED47 /* DTTimePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C27A71C80ADDD0050ED47 /* DTTimePeriod.m */; };
+		202C27B31C80ADDD0050ED47 /* DTTimePeriodChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C27A91C80ADDD0050ED47 /* DTTimePeriodChain.m */; };
+		202C27B41C80ADDD0050ED47 /* DTTimePeriodCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C27AB1C80ADDD0050ED47 /* DTTimePeriodCollection.m */; };
+		202C27B51C80ADDD0050ED47 /* DTTimePeriodGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C27AD1C80ADDD0050ED47 /* DTTimePeriodGroup.m */; };
+		202C27B61C80ADDD0050ED47 /* NSDate+DateTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 202C27AF1C80ADDD0050ED47 /* NSDate+DateTools.m */; };
 		2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDC31B4237200076B0F2 /* InitialViewController.m */; };
 		2037DDCD1B42DF900076B0F2 /* ProfileTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDCC1B42DF900076B0F2 /* ProfileTableViewController.m */; };
 		2037DDD11B42E5950076B0F2 /* AddressTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2037DDD01B42E5950076B0F2 /* AddressTableViewController.m */; };
@@ -248,6 +259,26 @@
 		20268B371B5C282400B711B5 /* toastOne@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastOne@2x.png"; sourceTree = "<group>"; };
 		20268B391B5C2AB100B711B5 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		20268B3A1B5C2AB100B711B5 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
+		202C278A1C7E22E10050ED47 /* rightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightArrow@2x.png"; sourceTree = "<group>"; };
+		202C278C1C7E23DF0050ED47 /* cartIconBig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cartIconBig@2x.png"; sourceTree = "<group>"; };
+		202C278E1C7E23F00050ED47 /* toastThreeBig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastThreeBig@2x.png"; sourceTree = "<group>"; };
+		202C279D1C80A34B0050ED47 /* OrdersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewController.h; sourceTree = "<group>"; };
+		202C279E1C80A34B0050ED47 /* OrdersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewController.m; sourceTree = "<group>"; };
+		202C27A11C80ADDD0050ED47 /* DateTools.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateTools.bundle; sourceTree = "<group>"; };
+		202C27A21C80ADDD0050ED47 /* DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateTools.h; sourceTree = "<group>"; };
+		202C27A31C80ADDD0050ED47 /* DTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTConstants.h; sourceTree = "<group>"; };
+		202C27A41C80ADDD0050ED47 /* DTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTError.h; sourceTree = "<group>"; };
+		202C27A51C80ADDD0050ED47 /* DTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTError.m; sourceTree = "<group>"; };
+		202C27A61C80ADDD0050ED47 /* DTTimePeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriod.h; sourceTree = "<group>"; };
+		202C27A71C80ADDD0050ED47 /* DTTimePeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriod.m; sourceTree = "<group>"; };
+		202C27A81C80ADDD0050ED47 /* DTTimePeriodChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodChain.h; sourceTree = "<group>"; };
+		202C27A91C80ADDD0050ED47 /* DTTimePeriodChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodChain.m; sourceTree = "<group>"; };
+		202C27AA1C80ADDD0050ED47 /* DTTimePeriodCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodCollection.h; sourceTree = "<group>"; };
+		202C27AB1C80ADDD0050ED47 /* DTTimePeriodCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodCollection.m; sourceTree = "<group>"; };
+		202C27AC1C80ADDD0050ED47 /* DTTimePeriodGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTimePeriodGroup.h; sourceTree = "<group>"; };
+		202C27AD1C80ADDD0050ED47 /* DTTimePeriodGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTimePeriodGroup.m; sourceTree = "<group>"; };
+		202C27AE1C80ADDD0050ED47 /* NSDate+DateTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateTools.h"; sourceTree = "<group>"; };
+		202C27AF1C80ADDD0050ED47 /* NSDate+DateTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateTools.m"; sourceTree = "<group>"; };
 		2037DDC21B4237200076B0F2 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
 		2037DDC31B4237200076B0F2 /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
 		2037DDCB1B42DF900076B0F2 /* ProfileTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewController.h; sourceTree = "<group>"; };
@@ -535,7 +566,6 @@
 		201186221B41C16200A59D55 /* Stockd */ = {
 			isa = PBXGroup;
 			children = (
-				FAE88EA31C7BA7600010DE79 /* MGSwipableCell */,
 				FABBCAC11BC6EE880058A201 /* Model */,
 				201186271B41C16200A59D55 /* AppDelegate.h */,
 				201186281B41C16200A59D55 /* AppDelegate.m */,
@@ -558,6 +588,7 @@
 				2067F8C11B4B04B0001F5478 /* Drink Choices */,
 				2067F8C91B4B33AB001F5478 /* 21+ */,
 				2067F8C81B4B05AD001F5478 /* Package Details */,
+				202C27A01C80A34F0050ED47 /* Previous Orders */,
 				2037DDCE1B42DF9A0076B0F2 /* Profile */,
 				20D52D3B1B46201000A1C60B /* Help */,
 				201186301B41C16200A59D55 /* Images.xcassets */,
@@ -644,6 +675,8 @@
 		201186701B41F07D00A59D55 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				202C27B71C80ADE30050ED47 /* DateTools */,
+				FAE88EA31C7BA7600010DE79 /* MGSwipableCell */,
 				20F5A2ED1B84CF2500FC7BA5 /* ENPopup */,
 				20497E771B7BE4E7004A2950 /* CircleView */,
 				20497DE31B5ED1C0004A2950 /* Initial Anime */,
@@ -691,6 +724,9 @@
 		201186891B42021900A59D55 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				202C278E1C7E23F00050ED47 /* toastThreeBig@2x.png */,
+				202C278C1C7E23DF0050ED47 /* cartIconBig@2x.png */,
+				202C278A1C7E22E10050ED47 /* rightArrow@2x.png */,
 				FAE88E941C7B80320010DE79 /* rightArrow@2x.png */,
 				20F6D9851BE4123F00F54739 /* updateButton@2x.png */,
 				205D86951BD94A1800A7518D /* stockdPackage@2x.png */,
@@ -734,6 +770,37 @@
 				201186961B421F2900A59D55 /* JGActionSheet.m */,
 			);
 			name = JGActionSheet;
+			sourceTree = "<group>";
+		};
+		202C27A01C80A34F0050ED47 /* Previous Orders */ = {
+			isa = PBXGroup;
+			children = (
+				202C279D1C80A34B0050ED47 /* OrdersTableViewController.h */,
+				202C279E1C80A34B0050ED47 /* OrdersTableViewController.m */,
+			);
+			name = "Previous Orders";
+			sourceTree = "<group>";
+		};
+		202C27B71C80ADE30050ED47 /* DateTools */ = {
+			isa = PBXGroup;
+			children = (
+				202C27A11C80ADDD0050ED47 /* DateTools.bundle */,
+				202C27A21C80ADDD0050ED47 /* DateTools.h */,
+				202C27A31C80ADDD0050ED47 /* DTConstants.h */,
+				202C27A41C80ADDD0050ED47 /* DTError.h */,
+				202C27A51C80ADDD0050ED47 /* DTError.m */,
+				202C27A61C80ADDD0050ED47 /* DTTimePeriod.h */,
+				202C27A71C80ADDD0050ED47 /* DTTimePeriod.m */,
+				202C27A81C80ADDD0050ED47 /* DTTimePeriodChain.h */,
+				202C27A91C80ADDD0050ED47 /* DTTimePeriodChain.m */,
+				202C27AA1C80ADDD0050ED47 /* DTTimePeriodCollection.h */,
+				202C27AB1C80ADDD0050ED47 /* DTTimePeriodCollection.m */,
+				202C27AC1C80ADDD0050ED47 /* DTTimePeriodGroup.h */,
+				202C27AD1C80ADDD0050ED47 /* DTTimePeriodGroup.m */,
+				202C27AE1C80ADDD0050ED47 /* NSDate+DateTools.h */,
+				202C27AF1C80ADDD0050ED47 /* NSDate+DateTools.m */,
+			);
+			name = DateTools;
 			sourceTree = "<group>";
 		};
 		2037DDCE1B42DF9A0076B0F2 /* Profile */ = {
@@ -889,6 +956,8 @@
 				2067F8F31B4C2C3E001F5478 /* SubtotalTableCell.m */,
 				2067F8EB1B4C28C6001F5478 /* CartTableViewController.h */,
 				2067F8EC1B4C28C6001F5478 /* CartTableViewController.m */,
+				20EDE03F1C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.h */,
+				20EDE0401C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m */,
 			);
 			name = Cart;
 			sourceTree = "<group>";
@@ -1028,8 +1097,6 @@
 				20497E6F1B73EED8004A2950 /* AlcoholPolicyViewController.m */,
 				20F5A2EE1B84D6C000FC7BA5 /* PopupViewController.h */,
 				20F5A2EF1B84D6C000FC7BA5 /* PopupViewController.m */,
-				20EDE03F1C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.h */,
-				20EDE0401C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m */,
 			);
 			name = Help;
 			sourceTree = "<group>";
@@ -1160,7 +1227,6 @@
 				TargetAttributes = {
 					2011861F1B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 48CPZ333EP;
 					};
 					201186381B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
@@ -1208,6 +1274,8 @@
 				20D52CC21B44D4E300A1C60B /* TourImage2.png in Resources */,
 				20268B381B5C282400B711B5 /* toastOne@2x.png in Resources */,
 				20D52CB91B4481A000A1C60B /* initialBkg@2x.png in Resources */,
+				202C278D1C7E23DF0050ED47 /* cartIconBig@2x.png in Resources */,
+				202C278B1C7E22E10050ED47 /* rightArrow@2x.png in Resources */,
 				20D52CBB1B44865500A1C60B /* cancelPink@2x.png in Resources */,
 				20497DE01B5C34A0004A2950 /* Fish@2x.png in Resources */,
 				20D52CD21B45956B00A1C60B /* whiteBkg@2x.png in Resources */,
@@ -1217,6 +1285,7 @@
 				203FFD121BC5DAD9008B4CED /* ItemTableHeaderView.xib in Resources */,
 				203FFD0A1BC5B099008B4CED /* YapHolderTwo@2x.png in Resources */,
 				205D86A41BDA8BBF00A7518D /* tourv2Uno.png in Resources */,
+				202C278F1C7E23F00050ED47 /* toastThreeBig@2x.png in Resources */,
 				20D52CB51B4453A000A1C60B /* cancelPhoto@2x.png in Resources */,
 				205D86A21BDA8BBF00A7518D /* tourv2Dos.png in Resources */,
 				205D86881BD711B100A7518D /* lockIcon@2x.png in Resources */,
@@ -1226,6 +1295,7 @@
 				20D52CD01B4590BE00A1C60B /* saveButton@2x.png in Resources */,
 				20D52CB31B444DC900A1C60B /* flashSelected@2x.png in Resources */,
 				FABBCAC01BC5B2960058A201 /* BELLABOO-Regular.ttf in Resources */,
+				202C27B01C80ADDD0050ED47 /* DateTools.bundle in Resources */,
 				20497DDD1B5C34A0004A2950 /* Bread@2x.png in Resources */,
 				20D52CEB1B45A7A700A1C60B /* menu-button@2x.png in Resources */,
 				20D52CAB1B4436B200A1C60B /* flash@2x.png in Resources */,
@@ -1271,17 +1341,20 @@
 				20D52D221B45B86C00A1C60B /* SCAudioTools.m in Sources */,
 				20F5A2EC1B84CF1F00FC7BA5 /* UIViewController+ENPopUp.m in Sources */,
 				20D52D321B45B86C00A1C60B /* SCVideoPlayerView.m in Sources */,
+				202C27B11C80ADDD0050ED47 /* DTError.m in Sources */,
 				205D85851BCC261700A7518D /* UserAddressTableViewController.m in Sources */,
 				201186841B41F13200A59D55 /* HexColor.m in Sources */,
 				2067F8F01B4C2989001F5478 /* CartTableCell.m in Sources */,
 				20E2EC0C1B4727BD002E317A /* SVProgressHUD.m in Sources */,
 				20D52CE91B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				202C27B61C80ADDD0050ED47 /* NSDate+DateTools.m in Sources */,
 				20D52CE71B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
 				FAE88EA81C7BA7730010DE79 /* MGSwipeButton.m in Sources */,
 				20E2EC131B485095002E317A /* UIImage+ImageEffects.m in Sources */,
 				2067F8FA1B4C5683001F5478 /* EditItemsTableCell.m in Sources */,
 				2067F8C71B4B05A8001F5478 /* ItemTableCell.m in Sources */,
 				2037DDC41B4237200076B0F2 /* InitialViewController.m in Sources */,
+				202C27B31C80ADDD0050ED47 /* DTTimePeriodChain.m in Sources */,
 				20D52CC41B44D4E300A1C60B /* TourViewController.m in Sources */,
 				FABBCAC41BC6EF240058A201 /* CartItemObject.m in Sources */,
 				201186291B41C16200A59D55 /* AppDelegate.m in Sources */,
@@ -1291,7 +1364,9 @@
 				2067F8CC1B4B33EB001F5478 /* BoozeTableCell.m in Sources */,
 				20D52D1F1B45B86C00A1C60B /* SCArchivedVector.m in Sources */,
 				2037DDD71B42F34D0076B0F2 /* PhoneTableViewController.m in Sources */,
+				202C27B21C80ADDD0050ED47 /* DTTimePeriod.m in Sources */,
 				20D52D2E1B45B86C00A1C60B /* SCRecordSession.m in Sources */,
+				202C27B51C80ADDD0050ED47 /* DTTimePeriodGroup.m in Sources */,
 				2067F8CF1B4B33F9001F5478 /* BoozeTableViewController.m in Sources */,
 				20E2EC121B485095002E317A /* SVBlurView.m in Sources */,
 				2011867E1B41F12200A59D55 /* TSBlurView.m in Sources */,
@@ -1321,6 +1396,7 @@
 				2067F8C01B4B0152001F5478 /* DrinksTableCell.m in Sources */,
 				20D52D271B45B86C00A1C60B /* SCMediaTypeConfiguration.m in Sources */,
 				2067F8EA1B4C1BC2001F5478 /* BBBadgeBarButtonItem.m in Sources */,
+				202C279F1C80A34B0050ED47 /* OrdersTableViewController.m in Sources */,
 				FAE88E9F1C7B85020010DE79 /* PreviousOrderCell.m in Sources */,
 				20D52D211B45B86C00A1C60B /* SCAudioConfiguration.m in Sources */,
 				20D52D241B45B86C00A1C60B /* SCFilterGroup.m in Sources */,
@@ -1334,6 +1410,7 @@
 				201186261B41C16200A59D55 /* main.m in Sources */,
 				20497E761B7BE4CD004A2950 /* TPPropertyAnimation.m in Sources */,
 				2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */,
+				202C27B41C80ADDD0050ED47 /* DTTimePeriodCollection.m in Sources */,
 				20D52CEC1B45A7A700A1C60B /* SlideNavigationController.m in Sources */,
 				20D52CEF1B45A7B200A1C60B /* LeftMenuViewController.m in Sources */,
 				20D52D2B1B45B86C00A1C60B /* SCRecorderFocusTargetView.m in Sources */,
@@ -1493,7 +1570,7 @@
 				INFOPLIST_FILE = Stockd/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockdi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1515,7 +1592,7 @@
 				INFOPLIST_FILE = Stockd/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockdi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

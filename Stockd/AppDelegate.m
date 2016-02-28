@@ -109,7 +109,7 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
         } else {
             for (int i = 0; i < objects.count; i++){
                 id item = objects[i];
-                NSLog(@"Item Name: %@", item[@"itemName"]);
+               // NSLog(@"Item Name: %@", item[@"itemName"]);
                 [_beerItemsDictionary setObject:item[@"itemName"] forKey:item[@"itemName"]];
             }
         }

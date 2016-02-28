@@ -17,96 +17,91 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.title = @"Past Orders";
+    
+    self.tableView.layer.masksToBounds = YES;
+    self.tableView.clipsToBounds = YES;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"initialBkg"]];
+    [self.tableView setBackgroundView:imageView];
+    
+    
+    self.tableView.tableFooterView = [UIView new];
     
     if ([PFUser currentUser]) {
         _currentUserID = [PFUser currentUser].objectId;
         [self getAllPreviousOrders];
     }
-    
 }
 
--(void) getAllPreviousOrders{
-    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
-    [query whereKey:@"user" equalTo:_currentUserID];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-            // Do something with the found objects
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
-            }
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+{
+    return YES;
+}
+
+- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+{
+    return NO;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.allPreviousOrders.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    static NSString *CellIdentifier = @"Cell";
+    PreviousOrderCell *cell = (PreviousOrderCell *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+    PFObject *object = [self.allPreviousOrders objectAtIndex:indexPath.row];
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.dateFormat = @"MM'-'dd'-'yyyy'";
+    NSDate *date = [df stringFromDate:object.createdAt];
+    
+    cell.deliveryDateLabel.tag = indexPath.row;
+    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"Delivered %@", date];
+
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void)getAllPreviousOrders{
+    
+    [ProgressHUD show:nil];
+    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            if (objects.count == 0) {
+                self.noPreviousOrders = [[UILabel alloc] init];
+                self.noPreviousOrders.frame = CGRectMake(0, self.view.frame.size.height/3, self.view.frame.size.width, 100);
+                self.noPreviousOrders.textAlignment = NSTextAlignmentCenter;
+                //label.center = self.view.center;
+                self.noPreviousOrders.text = @"no previous orders";
+                self.noPreviousOrders.backgroundColor = [UIColor clearColor];
+                self.noPreviousOrders.textColor = [UIColor colorWithWhite:1.0 alpha:0.9];
+                self.noPreviousOrders.font = [UIFont fontWithName:@"BELLABOO-Regular" size:18];
+                [self.view addSubview:self.noPreviousOrders];
+            } else {
+                self.noPreviousOrders.hidden = YES;
+                [self.noPreviousOrders removeFromSuperview];
+            }
+            [ProgressHUD dismiss];
+            self.allPreviousOrders = [objects mutableCopy];
+            [self.tableView reloadData];
+            
+        } else {
+            [ProgressHUD showError:@"Network Error"];
+        }
+    }];
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

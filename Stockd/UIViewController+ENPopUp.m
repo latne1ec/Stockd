@@ -13,7 +13,7 @@
 
 static void * ENPopupViewControllerPropertyKey = &ENPopupViewControllerPropertyKey;
 
-static CGFloat const kAnimationDuration = .34f;
+static CGFloat const kAnimationDuration = .24f;
 static CGFloat const kRotationAngle = 70.f;
 
 static NSInteger const kENPopUpOverlayViewTag   = 351301;
@@ -36,7 +36,6 @@ static NSInteger const kENPopUpBluredViewTag    = 351303;
 
 - (void)dismissPopUpViewController
 {
-    NSLog(@"CALLED HERE");
      UIView *sourceView = [self topView];
     UIView *overlayView = [sourceView viewWithTag:kENPopUpOverlayViewTag];
     [overlayView  removeFromSuperview];

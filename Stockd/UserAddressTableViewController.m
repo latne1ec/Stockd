@@ -378,8 +378,6 @@
             [self dismissViewControllerAnimated:YES completion:^{
                 [parent addressMessage];
             }];
-            
-            
         }
     }];
 }
@@ -403,8 +401,6 @@
     }
 }
 
-
-
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
     
     [self dismissKeyboard];
@@ -421,6 +417,5 @@
     [self.instructionsTextfield resignFirstResponder];
     
 }
-
 
 @end

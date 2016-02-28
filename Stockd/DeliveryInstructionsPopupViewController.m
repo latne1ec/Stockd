@@ -7,6 +7,7 @@
 //
 
 #import "DeliveryInstructionsPopupViewController.h"
+#import "CartTableViewController.h"
 
 @interface DeliveryInstructionsPopupViewController ()
 
@@ -16,22 +17,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+ 
+    self.instructionsTextField.delegate = self;
+    self.instructionsTextField.layer.cornerRadius = 4;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"currentDeliveryInstructions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    NSString *instruct = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentDeliveryInstructions"];
+    
+    NSLog(@"view did load instruct: %@", instruct);
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    self.instructionsTextField.text = @"";
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UIView*)topView {
+    UIViewController *recentView = self;
+    while (recentView.parentViewController != nil) {
+        recentView = recentView.parentViewController;
+    }
+    return recentView.view;
 }
-*/
+
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    if ([self.instructionsTextField.text containsString:@"Add any special delivery"]) {
+        
+    } else {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.instructionsTextField.text forKey:@"currentDeliveryInstructions"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSString *instruct = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentDeliveryInstructions"];
+        
+        NSLog(@"instruct: %@", instruct);
+   
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"hasShownDeliveryInstructions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
+
+- (IBAction)fallBackButtonTapped:(id)sender {
+        
+}
 
 @end

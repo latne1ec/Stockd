@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DeliveryInstructionsPopupViewController : UIViewController
+@interface DeliveryInstructionsPopupViewController : UIViewController <UITextViewDelegate>
+
+
+@property (weak, nonatomic) IBOutlet UIButton *continueButton;
+@property (weak, nonatomic) IBOutlet UITextView *instructionsTextField;
+
 
 @end

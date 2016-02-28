@@ -44,7 +44,7 @@
 -(void)load{
     
     UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 54/2.0f, 51/2.0f)];
-    img.image = [UIImage imageNamed:@"cartIconYo"];
+    img.image = [UIImage imageNamed:@"cartIconBig"];
     img.backgroundColor = [UIColor clearColor];
     [self addSubview:img];
     

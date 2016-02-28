@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "SlideNavigationController.h"
+#import "ProgressHUD.h"
+#import "DateTools.h"
+#import "PreviousOrderCell.h"
 
-@interface PreviousOrdersViewController : UITableViewController
+
+@interface PreviousOrdersViewController : UITableViewController <SlideNavigationControllerDelegate>
+
+@property (nonatomic, strong) UILabel *noPreviousOrders;
+
 
 @end

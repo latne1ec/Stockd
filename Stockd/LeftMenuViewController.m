@@ -52,6 +52,7 @@
               @{@"text":@"Food",@"viewC":@"Food"},
               @{@"text":@"Drinks",@"viewC":@"Drinks"},
               @{@"text":@"21+",@"viewC":@"21+"},
+              @{@"text":@"Orders",@"viewC":@"PreviousOrder"},
               @{@"text":@"Profile",@"viewC":@"Profile"},
                @{@"text":@"Help",@"viewC":@"Help"}
               ];

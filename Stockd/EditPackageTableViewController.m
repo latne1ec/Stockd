@@ -196,7 +196,7 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    NSLog(@"Scroll: %f", scrollView.contentOffset.y);
+    //NSLog(@"Scroll: %f", scrollView.contentOffset.y);
     if (scrollView.contentOffset.y < 0) {
         self.headerview.backgroundColor = [UIColor clearColor];
     }

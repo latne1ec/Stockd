@@ -309,24 +309,43 @@
 
 
 -(void)inviteFriends {
+    
+    
+    NSArray *objectsToShare = @[self.shareMessage];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectsToShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypeAirDrop,
+                                   UIActivityTypePrint,
+                                   UIActivityTypeCopyToPasteboard,
+                                   UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,
+                                   UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,
+                                   UIActivityTypePostToVimeo];
+    
+    activityVC.excludedActivityTypes = excludeActivities;
+    [self presentViewController:activityVC animated:YES completion:^{
+    }];
+
         
-    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-    if([MFMessageComposeViewController canSendText]) {
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            controller.body = self.shareMessage;
-            controller.messageComposeDelegate = self;
-            //[controller.navigationBar setTintColor:[UIColor blackColor]];
-            [[controller navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
-            
-            [self presentViewController:controller animated:YES completion:^{
-                
-                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-                
-            }];
-        });
-    }
+//    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+//    if([MFMessageComposeViewController canSendText]) {
+//        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            
+//            controller.body = self.shareMessage;
+//            controller.messageComposeDelegate = self;
+//            //[controller.navigationBar setTintColor:[UIColor blackColor]];
+//            [[controller navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
+//            
+//            [self presentViewController:controller animated:YES completion:^{
+//                
+//                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//                
+//            }];
+//        });
+//    }
+    
 }
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {

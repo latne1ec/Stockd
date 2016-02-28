@@ -35,6 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hasShownDeliveryInstructions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
     _appDelegate = [[UIApplication sharedApplication] delegate];
     
     _packageKeys = [_appDelegate package_itemsDictionary].allKeys;
@@ -92,10 +96,10 @@
     [self updateTotal];
     [self checkIfParticipatingArea];
     
-    NSLog(@"Das Beer Item is: %@", self.beerItem);
-    NSLog(@"Das Liquor Item is: %@", self.liquorItem);
+    //NSLog(@"Das Beer Item is: %@", self.beerItem);
+    //NSLog(@"Das Liquor Item is: %@", self.liquorItem);
     
-    NSLog(@"Order numbaaa 2: %@", self.orderNumber);
+    //NSLog(@"Order numbaaa 2: %@", self.orderNumber);
     
    // [[PFUser currentUser] setObject:[NSNumber numberWithInt:10] forKey:@"karmaCash"];
     //[[PFUser currentUser] saveInBackground];
@@ -104,8 +108,14 @@
     self.orderNumber = uuidStr;
     
     
-     NSLog(@"All Items: %@ and Package size: %d",[self getAllItems], _appDelegate.packageSize);
+    // NSLog(@"All Items: %@ and Package size: %d",[self getAllItems], _appDelegate.packageSize);
     
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    
+    NSLog(@"Appear");
+    [self updateTotal];
 }
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
@@ -123,8 +133,10 @@
     NSString *zipCode = [[PFUser currentUser] objectForKey:@"zipCode"];
     
     if (zipCode == nil) {
-        NSLog(@"BIG FAT NIL: POOPPP LOCK IT");
-        [self getStockedTapped:self];
+
+        //[self getStockedTapped:self];
+        [self showAddressAlert];
+        
     }
     else {
         
@@ -266,6 +278,7 @@
         cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
             [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
             _packageKeys = [_appDelegate package_itemsDictionary].allKeys;
+            [self updateTotal];
             [tableView reloadData];
             return true;
         }]];
@@ -291,6 +304,7 @@
         cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
             [[_appDelegate extraPackage_itemsDictionary] removeObjectForKey:packageName];
             _extraKeys = [_appDelegate extraPackage_itemsDictionary].allKeys;
+            [self updateTotal];
             [tableView reloadData];
             return true;
         }]];
@@ -376,9 +390,11 @@
     
     _finalTotal = (_subtotal) + _taxes;
     
+    NSLog(@"Final Total: %f", _finalTotal);
+    
     [self.tableView reloadData];
     
-    NSLog(@"SUBTOTAL: %f TAXES: %f TOTAL: %f Discount: %d",_subtotal, _taxes, _finalTotal, _discount);
+    //NSLog(@"SUBTOTAL: %f TAXES: %f TOTAL: %f Discount: %d",_subtotal, _taxes, _finalTotal, _discount);
     
 }
 
@@ -424,7 +440,7 @@
         return 118;
     }
     if (indexPath.section == 2) {
-        return 250;
+        return 272;
     }
     return 0;
 }
@@ -456,114 +472,131 @@
 
 - (IBAction)getStockedTapped:(id)sender {
     
-    if (_BOOZE !=0) {
+    NSString *hasShownDeliveryInstructions = [[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownDeliveryInstructions"];
+    
+    if (![hasShownDeliveryInstructions isEqualToString:@"YES"]) {
         
-        NSString *birthDate = [[PFUser currentUser] objectForKey:@"userDOB"];
-        NSDate *todayDate = [NSDate date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-        int time = [todayDate timeIntervalSinceDate:[dateFormatter dateFromString:birthDate]];
-        int allDays = (((time/60)/60)/24);
+        [self showDeliveryInstructionsPopup];
         
-        NSLog(@"User BDAY: %@", birthDate);
-        
-        if (allDays >= 7670) {
-            NSLog(@"User is over 21");
-        }
-        else {
+    } else {
+        //do das below
+        NSLog(@"Do das below");
+    
+        if (_BOOZE !=0) {
             
-            NSLog(@"User is NOT 21");
-            [self showBoozeTerms];
+            NSString *birthDate = [[PFUser currentUser] objectForKey:@"userDOB"];
+            NSDate *todayDate = [NSDate date];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+            int time = [todayDate timeIntervalSinceDate:[dateFormatter dateFromString:birthDate]];
+            int allDays = (((time/60)/60)/24);
+            
+            NSLog(@"User BDAY: %@", birthDate);
+            
+            if (allDays >= 7670) {
+                NSLog(@"User is over 21");
+            }
+            else {
+                
+                NSLog(@"User is NOT 21");
+                [self showBoozeTerms];
+                return;
+            }
+        }
+        
+        if (_finalTotal<=.5) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $0.50" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            
+            [alert show];
+            
             return;
         }
-    }
-    
-    if (_finalTotal<=.5) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $0.50" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        NSString *canOrder = [[PFUser currentUser] objectForKey:@"canOrder"];
         
-        [alert show];
-        
-        return;
-    }
-    
-    NSString *canOrder = [[PFUser currentUser] objectForKey:@"canOrder"];
-    
-    if ([canOrder isEqualToString:@"NO"]) {
-        NSLog(@"Not in your area yet HOLMESS!!");
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Unfortunately we won't be able to process your order until we start serving your area. We'll notify you as soon as we do!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        
-        [alert show];
-        
-    }
-    else {
-        
-        NSString *userStripeToken = [[PFUser currentUser] objectForKey:@"stripeToken"];
-        
-        if ([[PFUser currentUser] objectForKey:@"streetName"] == nil) {
+        if ([canOrder isEqualToString:@"NO"]) {
+            NSLog(@"Not in your area yet HOLMESS!!");
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Unfortunately we won't be able to process your order until we start serving your area. We'll notify you as soon as we do!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            
             [alert show];
             
-            AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
-            destViewController.parent = self;
-            UINavigationController *navigationController =
-            [[UINavigationController alloc] initWithRootViewController:destViewController];
-            UIBarButtonItem *newBackButton =
-            [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
-                                             style:UIBarButtonItemStylePlain
-                                            target:nil
-                                            action:nil];
-            [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
-            [self.navigationController presentViewController:navigationController animated:YES completion:^{
-            }];
-            
-        }
-        
-        else if (userStripeToken == nil) {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Payment Method" message:@"Before making any purchases on Stockd, you must first enter a payment method." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alert show];
-            
-            PaymentTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Payment"];
-            destViewController.parent = self;
-            UINavigationController *navigationController =
-            [[UINavigationController alloc] initWithRootViewController:destViewController];
-            UIBarButtonItem *newBackButton =
-            [[UIBarButtonItem alloc] initWithTitle:@"Payment Info"
-                                             style:UIBarButtonItemStylePlain
-                                            target:nil
-                                            action:nil];
-            [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
-            [self.navigationController presentViewController:navigationController animated:YES completion:^{
-            }];
         }
         else {
             
-            [ProgressHUD show:nil Interaction:NO];
+            NSString *userStripeToken = [[PFUser currentUser] objectForKey:@"stripeToken"];
             
-            NSString *customerID = [[PFUser currentUser] objectForKey:@"customerID"];
-            float amountInCents = _finalTotal*100;
-            int roundedTotal = (int)roundf(amountInCents);
-            NSNumber *amount = [NSNumber numberWithFloat:roundedTotal];
+            if ([[PFUser currentUser] objectForKey:@"streetName"] == nil) {
+                
+                [self showAddressAlert];
+                return;
+            }
             
-            [self chargeCustomer:customerID amount:amount completion:^(id object, NSError *error) {
-                if (error) {
-                    [ProgressHUD dismiss];
-                    [self showError:error];
-                }
-                else {
-                    NSLog(@"Charging Customer: %@", object);
-                }
-            }];
+            else if (userStripeToken == nil) {
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Payment Method" message:@"Before making any purchases on Stockd, you must first enter a payment method." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                
+                PaymentTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Payment"];
+                destViewController.parent = self;
+                UINavigationController *navigationController =
+                [[UINavigationController alloc] initWithRootViewController:destViewController];
+                UIBarButtonItem *newBackButton =
+                [[UIBarButtonItem alloc] initWithTitle:@"Payment Info"
+                                                 style:UIBarButtonItemStylePlain
+                                                target:nil
+                                                action:nil];
+                [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+                [self.navigationController presentViewController:navigationController animated:YES completion:^{
+                }];
+            }
+            else {
+                
+                [ProgressHUD show:nil Interaction:NO];
+                
+                NSString *customerID = [[PFUser currentUser] objectForKey:@"customerID"];
+                float amountInCents = _finalTotal*100;
+                int roundedTotal = (int)roundf(amountInCents);
+                NSNumber *amount = [NSNumber numberWithFloat:roundedTotal];
+                
+                [self chargeCustomer:customerID amount:amount completion:^(id object, NSError *error) {
+                    if (error) {
+                        [ProgressHUD dismiss];
+                        [self showError:error];
+                    }
+                    else {
+                        NSLog(@"Charging Customer: %@", object);
+                    }
+                }];
+            }
         }
     }
 }
 
+-(void)showAddressAlert {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    
+    AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
+    destViewController.parent = self;
+    UINavigationController *navigationController =
+    [[UINavigationController alloc] initWithRootViewController:destViewController];
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+    [self.navigationController presentViewController:navigationController animated:YES completion:^{
+    }];
+}
+
+
 -(void)chargeCustomer:(NSString *)customerId amount:(NSNumber *)amountInCents completion:(PFIdResultBlock)handler {
     
-    NSLog(@"Made it here");
+    //NSLog(@"Made it here");
     [PFCloud callFunctionInBackground:@"chargeCustomer"
                        withParameters:@{
                                         @"amount":amountInCents,
@@ -573,10 +606,10 @@
                                     handler(object,error);
                                     if (error) {
                                         [ProgressHUD dismiss];
-                                        NSLog(@"Error: %@", error);
+                                        //NSLog(@"Error: %@", error);
                                     }
                                     else {
-                                        NSLog(@"Success: %@", object);
+                                        //NSLog(@"Success: %@", object);
                                         [[PFUser currentUser] incrementKey:@"karmaScore"];
                                         [[PFUser currentUser] removeObjectForKey:@"karmaCash"];
                                         [[PFUser currentUser] saveInBackground];
@@ -590,19 +623,24 @@
 
 -(void)updateOrderInParse {
     
-    [ProgressHUD show:nil Interaction:NO];
+    NSString *deliveryInstructions = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentDeliveryInstructions"];
     
+    [ProgressHUD show:nil Interaction:NO];
     PFObject *order = [PFObject objectWithClassName:@"Orders"];
     NSString *orderString = [self getAllItems];
     [order setObject:self.orderNumber forKey:@"orderNumber"];
     [order setObject:[PFUser currentUser] forKey:@"user"];
     [order setObject:orderString forKey:@"orderItems"];
+    [order setObject:deliveryInstructions forKey:@"deliveryInstructions"];
     [order setObject:self.packageSizeString forKey:@"orderSize"];
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             [ProgressHUD showError:@"Network Error"];
         }
         else {
+            
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentDeliveryInstructions"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [ProgressHUD dismiss];
             [self showConfirmation];
         }
@@ -650,7 +688,7 @@
 
 -(void)showError:(NSError *)error {
     
-    NSLog(@"Error: %@", error);
+    //NSLog(@"Error: %@", error);
     [TSMessage showNotificationInViewController:self.navigationController
                                           title:@"Error"
                                        subtitle:[error.userInfo objectForKey:@"error"]
@@ -668,12 +706,12 @@
 
 -(void)checkForBooze {
     
-    NSLog(@"Here ya go: %@", [_appDelegate extraPackage_itemsDictionary]);
+    //NSLog(@"Here ya go: %@", [_appDelegate extraPackage_itemsDictionary]);
     
     if ([[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
-            NSLog(@"hi");
+            //NSLog(@"hi");
         }
         else {
             _BOOZE = 150;
@@ -686,7 +724,7 @@
     if ([[_appDelegate package_itemsDictionary] valueForKey:@"Liquor"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
-            NSLog(@"hi");
+            //NSLog(@"hi");
         }
         else {
             _BOOZE = 150;
@@ -699,7 +737,7 @@
     else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Beer"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
-            NSLog(@"hi");
+            //NSLog(@"hi");
         }
         else {
             _BOOZE = 150;
@@ -712,7 +750,7 @@
     else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Wine"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
-            NSLog(@"hi");
+            //NSLog(@"hi");
         }
         else {
             _BOOZE = 150;
@@ -723,6 +761,17 @@
     }
 }
 
+
+-(void)showDeliveryInstructionsPopup {
+    
+    DeliveryInstructionsPopupViewController *dvc = [self.storyboard instantiateViewControllerWithIdentifier:@"PopupTwo"];
+    dvc.view.frame = CGRectMake(0, 0, 270.0f, 190.0f);
+    [self presentPopUpViewController:dvc];
+    
+    [dvc.continueButton addTarget:self action:@selector(dismissPopUpViewController) forControlEvents:UIControlEventTouchUpInside];
+    [dvc.continueButton addTarget:self action:@selector(getStockedTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
 
 -(void)showBoozeTerms {
     

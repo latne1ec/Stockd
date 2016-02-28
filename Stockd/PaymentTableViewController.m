@@ -45,7 +45,7 @@
     
     self.tableView.tableFooterView = [UIView new];
     
-    self.title = @"Payment Info";
+    self.title = @"Add a Card";
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"initialBkg"]];
     [self.tableView setBackgroundView:imageView];

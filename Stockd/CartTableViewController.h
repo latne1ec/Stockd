@@ -18,6 +18,8 @@
 #import "ConfirmationTableViewController.h"
 #import "PickSizeViewController.h"
 #import "SlideNavigationController.h"
+#import "UIViewController+ENPopUp.h"
+#import "DeliveryInstructionsPopupViewController.h"
 
 @interface CartTableViewController : UITableViewController <TSMessageViewProtocol, SlideNavigationControllerDelegate>
 
@@ -34,10 +36,11 @@
 
 
 - (IBAction)sizeButtonTapped:(id)sender;
-
-
 - (IBAction)getStockedTapped:(id)sender;
-
 -(void) removeEmptyPackages;
+
+
+-(void)dismissViewAndGetStocked;
+
 
 @end

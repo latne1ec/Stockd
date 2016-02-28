@@ -723,9 +723,9 @@
                 NSMutableArray* itemIdsArray = [[NSMutableArray alloc]init];
                 NSMutableArray* itemQtsArray = [[NSMutableArray alloc]init];
                 
-                for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packagesKey]){
+                for (NSString* itemNameKey in [_theExtraPackage_itemsDictionary valueForKey:packagesKey]){
                     NSMutableString *result = [[NSMutableString alloc] init];
-                    CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey];
+                    CartItemObject* cartItem = [[_theExtraPackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey];
                     [itemIdsArray addObject:[cartItem itemName]];
                     [itemQtsArray addObject:[NSNumber numberWithInteger:[cartItem itemQuantity]]];
                     [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];

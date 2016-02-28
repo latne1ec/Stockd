@@ -61,6 +61,11 @@
                     _itemsDictionary[item[@"itemPackage"]] = [[NSMutableDictionary alloc] init];
                 }
                 [_itemsDictionary[item[@"itemPackage"]] setObject:item forKey:item[@"itemName"]];
+                
+                if(!_itemsDictionary[item[@"itemCategory"]]){
+                    _itemsDictionary[item[@"itemCategory"]] = [[NSMutableDictionary alloc] init];
+                }
+                [_itemsDictionary[item[@"itemCategory"]] setObject:item forKey:item[@"itemName"]];
             }
             
             if ([PFUser currentUser]) {

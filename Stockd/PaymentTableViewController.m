@@ -349,7 +349,7 @@
                                               } else {
                                                   [ProgressHUD dismiss];
                                                   NSString *theToken = [NSString stringWithFormat:@"%@",token];
-                                                  NSString *formattedToken = [theToken stringByReplacingOccurrencesOfString:@" (live mode)" withString:@""];
+                                                  NSString *formattedToken = [theToken stringByReplacingOccurrencesOfString:@" (test mode)" withString:@""];
                                                   
                                                   [self saveUserTokenToParse:formattedToken];
                                                   [PaymentTableViewController createCustomerFromCard:token completion:^(id object, NSError *error) {
@@ -366,7 +366,9 @@ typedef void (^STPCardCompletionBlock)(STPCard *card,NSError *error);
 +(void)createCustomerFromCard:(STPToken *)tokenId completion:(PFIdResultBlock)handler {
     
     NSString *theToken = [NSString stringWithFormat:@"%@",tokenId];
-    NSString *formattedToken = [theToken stringByReplacingOccurrencesOfString:@" (live mode)" withString:@""];
+    NSLog(@"HEY");
+    NSLog(theToken);
+    NSString *formattedToken = [theToken stringByReplacingOccurrencesOfString:@" (test mode)" withString:@""];
     
     [PFCloud callFunctionInBackground:@"createCustomer"
                        withParameters:@{

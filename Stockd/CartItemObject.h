@@ -10,6 +10,7 @@
 
 @interface CartItemObject : NSObject
 
+//@property (nonatomic, strong) NSString *itemID;
 @property (nonatomic, strong) NSString *itemName;
 @property (nonatomic, strong) NSString *itemDetail;
 @property int itemQuantity;

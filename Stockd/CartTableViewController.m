@@ -20,11 +20,13 @@
 @property (nonatomic) float subtotal;
 @property (nonatomic) float taxes;
 @property (nonatomic) int discount;
+@property (nonatomic) int theZeroSignal;
 @property (nonatomic) int BOOZE;
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSArray* packageKeys;
 @property (nonatomic, strong) NSArray* extraKeys;
 @property (nonatomic, strong) NSString *packageSizeString;
+@property (nonatomic) BOOL isPastOrder;
 
 
 
@@ -41,8 +43,20 @@
     
     _appDelegate = [[UIApplication sharedApplication] delegate];
     
-    _packageKeys = [_appDelegate package_itemsDictionary].allKeys;
-    _extraKeys = [_appDelegate extraPackage_itemsDictionary].allKeys;
+    _isPastOrder = true;
+    
+    if (_thePackage_itemsDictionary == NULL){
+        _isPastOrder = false;
+        _thePackage_itemsDictionary = [_appDelegate package_itemsDictionary];
+    }
+    
+    if (_theExtraPackage_itemsDictionary == NULL){
+        _isPastOrder = _isPastOrder && false;
+        _theExtraPackage_itemsDictionary = [_appDelegate extraPackage_itemsDictionary];
+    }
+    
+    _packageKeys = _thePackage_itemsDictionary.allKeys;
+    _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
     
     //_updatedPrice = -1;
     
@@ -193,13 +207,13 @@
 }
 
 -(void) removeEmptyPackages{
-    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+    for (NSString* packagesKey in _thePackage_itemsDictionary){
         int totalQt = 0;
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
-            totalQt += [[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] itemQuantity];
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packagesKey]){
+            totalQt += [[[_thePackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey] itemQuantity];
         }
         if (totalQt == 0){
-            [[_appDelegate package_itemsDictionary] removeObjectForKey:packagesKey];
+            [_thePackage_itemsDictionary removeObjectForKey:packagesKey];
         }
     }
 }
@@ -209,19 +223,19 @@
    
     id strings = [@[] mutableCopy];
     
-    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
+    for (NSString* packagesKey in _thePackage_itemsDictionary){
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packagesKey]){
             NSMutableString *result = [[NSMutableString alloc] init];
-            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey];
+            CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey];
             [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
             [strings addObject:result];
         }
     }
     
-    for (NSString* packagesKey in [_appDelegate extraPackage_itemsDictionary]){
-        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packagesKey]){
+    for (NSString* packagesKey in _theExtraPackage_itemsDictionary){
+        for (NSString* itemNameKey in [_theExtraPackage_itemsDictionary valueForKey:packagesKey]){
             NSMutableString *result = [[NSMutableString alloc] init];
-            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey];
+            CartItemObject* cartItem = [[_theExtraPackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey];
             [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
             [strings addObject:result];
         }
@@ -243,6 +257,22 @@
     return [strings componentsJoinedByString:@"; "];
 }
 
+-(NSString*)getAllPackagesString
+{
+    
+    id strings = [@[] mutableCopy];
+    
+    for (NSString* packagesKey in _thePackage_itemsDictionary){
+        [strings addObject:packagesKey];
+    }
+    
+    for (NSString* packagesKey in _theExtraPackage_itemsDictionary){
+        [strings addObject:packagesKey];
+    }
+    
+    return [strings componentsJoinedByString:@"; "];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CartTableCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -252,8 +282,8 @@
         NSString *packageName = [_packageKeys objectAtIndex:indexPath.row];
         NSMutableString *result = [[NSMutableString alloc] init];
         
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
+            CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
             [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
         }
         cell.packageNameLabel.text = [NSString stringWithFormat:@"%@ Package", packageName];
@@ -263,8 +293,8 @@
         cell.packagePriceLabel.text = priceString;
         
         Boolean modifiedFlag = false;
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true || [packageName isEqual:@"Beer"]){
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
+            if ([[[_thePackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true || [packageName isEqual:@"Beer"]){
                 modifiedFlag = true;
                 break;
             }
@@ -276,8 +306,8 @@
         }
         
         cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
-            [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
-            _packageKeys = [_appDelegate package_itemsDictionary].allKeys;
+            [_thePackage_itemsDictionary removeObjectForKey:packageName];
+            _packageKeys = _thePackage_itemsDictionary.allKeys;
             [self updateTotal];
             [tableView reloadData];
             return true;
@@ -290,8 +320,8 @@
         NSString *packageName = [_extraKeys objectAtIndex:indexPath.row];
         NSMutableString *result = [[NSMutableString alloc] init];
         
-        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName]){
-            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+        for (NSString* itemNameKey in [_theExtraPackage_itemsDictionary valueForKey:packageName]){
+            CartItemObject* cartItem = [[_theExtraPackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
             [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
         }
         cell.packageNameLabel.text = [NSString stringWithFormat:@"Extra %@ Items", packageName];
@@ -302,8 +332,8 @@
         cell.lockIconButton.hidden = true;
         
         cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
-            [[_appDelegate extraPackage_itemsDictionary] removeObjectForKey:packageName];
-            _extraKeys = [_appDelegate extraPackage_itemsDictionary].allKeys;
+            [_theExtraPackage_itemsDictionary removeObjectForKey:packageName];
+            _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
             [self updateTotal];
             [tableView reloadData];
             return true;
@@ -321,6 +351,10 @@
         CALayer *btn = [cell2.getStockdButton layer];
         [btn setMasksToBounds:YES];
         [btn setCornerRadius:5.0f];
+        
+        if (_isPastOrder){
+            [cell2.getStockdButton setTitle:@"Get ReStockd" forState:UIControlStateNormal];
+        }
         
         cell2.sizeButton.layer.cornerRadius = 5.0;
         
@@ -344,14 +378,14 @@
     
     float price = 0;
     
-    if ([[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+    if ([_thePackage_itemsDictionary valueForKey:packageName]){
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
+            CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
             price += cartItem.itemQuantity*cartItem.itemPrice;
         }
     }else{
-        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName]){
-            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+        for (NSString* itemNameKey in [_theExtraPackage_itemsDictionary valueForKey:packageName]){
+            CartItemObject* cartItem = [[_theExtraPackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
             price += cartItem.itemQuantity*cartItem.itemPrice;
         }
     }
@@ -365,7 +399,7 @@
     _taxes = 0;
     _finalTotal = 0;
     
-    for(int i=0; i<[_appDelegate package_itemsDictionary].count; i++){
+    for(int i=0; i<_thePackage_itemsDictionary.count; i++){
         
         NSString *packageName = _packageKeys[i];
         
@@ -373,7 +407,7 @@
         _subtotal += firstPrice;
     }
     
-    for(int i=0; i<[_appDelegate extraPackage_itemsDictionary].count; i++){
+    for(int i=0; i<_theExtraPackage_itemsDictionary.count; i++){
         
         NSString *packageName = _extraKeys[i];
         
@@ -410,6 +444,8 @@
         }
         
         EditPackageTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPackage"];
+        destViewController.thePackage_itemsDictionary = _thePackage_itemsDictionary;
+        destViewController.theExtraPackage_itemsDictionary = _theExtraPackage_itemsDictionary;
         destViewController.packageSize = self.packageSize;
         destViewController.packageName = packageName;
         destViewController.beerItem = self.beerItem;
@@ -606,10 +642,10 @@
                                     handler(object,error);
                                     if (error) {
                                         [ProgressHUD dismiss];
-                                        //NSLog(@"Error: %@", error);
+                                    NSLog(@"Error: %@", error);
                                     }
                                     else {
-                                        //NSLog(@"Success: %@", object);
+                                        NSLog(@"Success: %@", object);
                                         [[PFUser currentUser] incrementKey:@"karmaScore"];
                                         [[PFUser currentUser] removeObjectForKey:@"karmaCash"];
                                         [[PFUser currentUser] saveInBackground];
@@ -628,27 +664,110 @@
     [ProgressHUD show:nil Interaction:NO];
     PFObject *order = [PFObject objectWithClassName:@"Orders"];
     NSString *orderString = [self getAllItems];
-    [order setObject:self.orderNumber forKey:@"orderNumber"];
     [order setObject:[PFUser currentUser] forKey:@"user"];
     [order setObject:orderString forKey:@"orderItems"];
+    [order setObject:[self getAllPackagesString] forKey:@"orderPackages"];
+    [order setObject:[NSNumber numberWithFloat: _finalTotal] forKey:@"price"];
     [order setObject:deliveryInstructions forKey:@"deliveryInstructions"];
     [order setObject:self.packageSizeString forKey:@"orderSize"];
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (error) {
             [ProgressHUD showError:@"Network Error"];
+            NSLog(@"Error: %@", error);
         }
         else {
+            NSLog(@"Success UPDT");
             
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentDeliveryInstructions"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [ProgressHUD dismiss];
-            [self showConfirmation];
+            _theZeroSignal = _thePackage_itemsDictionary.count + _theExtraPackage_itemsDictionary.count;
+            
+            for (NSString* packagesKey in _thePackage_itemsDictionary){
+                
+                NSMutableArray* itemIdsArray = [[NSMutableArray alloc]init];
+                NSMutableArray* itemQtsArray = [[NSMutableArray alloc]init];
+                
+                for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packagesKey]){
+                    NSMutableString *result = [[NSMutableString alloc] init];
+                    CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey];
+                    [itemIdsArray addObject:[cartItem itemName]];
+                    [itemQtsArray addObject:[NSNumber numberWithInteger:[cartItem itemQuantity]]];
+                    [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
+                    //[strings addObject:result];
+                }
+                
+                PFObject *packageOrder = [PFObject objectWithClassName:@"PackageOrder"];
+                [packageOrder setObject:order.objectId forKey:@"orderID"];
+                [packageOrder addObjectsFromArray:[itemIdsArray copy] forKey:@"itemsID"];
+                [packageOrder addObjectsFromArray: [itemQtsArray copy] forKey:@"itemsQt"];
+                [packageOrder setObject: packagesKey forKey:@"packageName"];
+                [packageOrder setObject:@(YES) forKey:@"isPackage"];
+                [packageOrder saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (error) {
+                        [ProgressHUD showError:@"Network Error"];
+                        NSLog(@"Error: %@", error);
+                    }
+                    else {
+                        NSLog(@"Success");
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            _theZeroSignal -= 1;
+                            NSLog(@"Zero Signal %d", _theZeroSignal);
+                            if (_theZeroSignal == 0){
+                                [self endUploadingOrder];
+                            }
+                        });
+                    }
+                }];
+            }
+            
+            for (NSString* packagesKey in _theExtraPackage_itemsDictionary){
+                
+                NSMutableArray* itemIdsArray = [[NSMutableArray alloc]init];
+                NSMutableArray* itemQtsArray = [[NSMutableArray alloc]init];
+                
+                for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packagesKey]){
+                    NSMutableString *result = [[NSMutableString alloc] init];
+                    CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey];
+                    [itemIdsArray addObject:[cartItem itemName]];
+                    [itemQtsArray addObject:[NSNumber numberWithInteger:[cartItem itemQuantity]]];
+                    [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
+                    //[strings addObject:result];
+                }
+                
+                PFObject *packageOrder = [PFObject objectWithClassName:@"PackageOrder"];
+                [packageOrder setObject:order.objectId forKey:@"orderID"];
+                [packageOrder addObjectsFromArray:[itemIdsArray copy] forKey:@"itemsID"];
+                [packageOrder addObjectsFromArray: [itemQtsArray copy] forKey:@"itemsQt"];
+                [packageOrder setObject: packagesKey forKey:@"packageName"];
+                [packageOrder setObject: @(NO) forKey:@"isPackage"];
+                [packageOrder saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (error) {
+                        [ProgressHUD showError:@"Network Error"];
+                        NSLog(@"Error: %@", error);
+                    }
+                    else {
+                        NSLog(@"Success");
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            _theZeroSignal -= 1;
+                            NSLog(@"Zero Signal %d", _theZeroSignal);
+                            if (_theZeroSignal == 0){
+                                [self endUploadingOrder];
+                            }
+                        });
+                    }
+                }];
+            }
         }
     }];
 }
 
+-(void) endUploadingOrder{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"currentDeliveryInstructions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [ProgressHUD dismiss];
+    [self showConfirmation];
+}
+
 //-(void)getOrder {
-//    
+//
 //    NSLog(@"Get Order");
 //    [ProgressHUD show:nil];
 //    PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
@@ -706,9 +825,9 @@
 
 -(void)checkForBooze {
     
-    //NSLog(@"Here ya go: %@", [_appDelegate extraPackage_itemsDictionary]);
+    //NSLog(@"Here ya go: %@", _theExtraPackage_itemsDictionary);
     
-    if ([[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"]) {
+    if ([_theExtraPackage_itemsDictionary valueForKey:@"21+"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
             //NSLog(@"hi");
@@ -721,7 +840,7 @@
         }
     }
     
-    if ([[_appDelegate package_itemsDictionary] valueForKey:@"Liquor"]) {
+    if ([_thePackage_itemsDictionary valueForKey:@"Liquor"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
             //NSLog(@"hi");
@@ -734,7 +853,7 @@
         }
     }
     
-    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Beer"]) {
+    else if ([_thePackage_itemsDictionary valueForKey:@"Beer"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
             //NSLog(@"hi");
@@ -747,7 +866,7 @@
         }
     }
     
-    else if ([[_appDelegate package_itemsDictionary] valueForKey:@"Wine"]) {
+    else if ([_thePackage_itemsDictionary valueForKey:@"Wine"]) {
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownBoozeTerms"] isEqualToString:@"yes"]) {
             //NSLog(@"hi");

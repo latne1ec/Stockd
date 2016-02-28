@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSString *beerItem;
 @property (nonatomic, strong) NSString *liquorItem;
 @property (nonatomic) float finalTotal;
+@property (nonatomic, strong) NSMutableDictionary *thePackage_itemsDictionary;
+@property (nonatomic, strong) NSMutableDictionary *theExtraPackage_itemsDictionary;
 
 
 

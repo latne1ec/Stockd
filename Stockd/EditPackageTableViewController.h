@@ -24,6 +24,9 @@
 @property (nonatomic, strong) NSString *beerItem;
 @property (nonatomic, strong) NSString *liquorItem;
 
+@property (nonatomic, strong) NSMutableDictionary *thePackage_itemsDictionary;
+@property (nonatomic, strong) NSMutableDictionary *theExtraPackage_itemsDictionary;
+
 - (IBAction)decrementQuantity:(id)sender;
 - (IBAction)incrementQuantity:(id)sender;
 

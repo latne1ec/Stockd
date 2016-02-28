@@ -131,7 +131,7 @@
     [self queryForBoozePackages];
     [self queryForPackageItems];
     [self getPreselectedBeerItem];
-        //[self queryForOrderNumber];
+    //[self queryForOrderNumber];
     
     
     NSString *uuidStr = [[NSUUID UUID] UUIDString];
@@ -139,7 +139,7 @@
     
     //NSLog(@"dic: %@", [_appDelegate package_itemsDictionary]);
     
-
+    
 }
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu
@@ -171,27 +171,27 @@
         //cvc.items = _itemsDictionary;
         
         
-//        for (NSString* keyPackageName in cvc.packages){
-//            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
-//                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
-//                for (PFObject* itemPFObj in [cvc.items valueForKey:keyPackageName]){
-//                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
-//                }
-//            }
-//        }
+        //        for (NSString* keyPackageName in cvc.packages){
+        //            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
+        //                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
+        //                for (PFObject* itemPFObj in [cvc.items valueForKey:keyPackageName]){
+        //                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+        //                }
+        //            }
+        //        }
         
-//        for (NSString* keyPackageName in self.packages){
-//            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
-//                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
-//                for (PFObject* itemPFObj in [_itemsDictionary valueForKey:keyPackageName]){
-//                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
-//                }
-//            }
-//        }
-
+        //        for (NSString* keyPackageName in self.packages){
+        //            if (![[_appDelegate package_itemsDictionary] valueForKey:keyPackageName]){
+        //                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:keyPackageName];
+        //                for (PFObject* itemPFObj in [_itemsDictionary valueForKey:keyPackageName]){
+        //                    [[[_appDelegate package_itemsDictionary] valueForKey:keyPackageName] setObject:[NSNumber numberWithInt:1] forKey:itemPFObj[@"itemName"]];
+        //                }
+        //            }
+        //        }
         
         
-       // NSLog(@"packageDictionary: %@", [_appDelegate package_itemsDictionary]);
+        
+        // NSLog(@"packageDictionary: %@", [_appDelegate package_itemsDictionary]);
         
         //cvc.packageSize = self.packageSize;
         cvc.packageSize = 1;
@@ -253,39 +253,39 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-
+    
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont fontWithName:@"BELLABOO-Regular" size:22]];
     
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextAlignment:NSTextAlignmentCenter];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor whiteColor]];
     [[UIButton appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTintColor:[UIColor blackColor]];
-
+    
     //UIView *view = [UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil];
-
+    
     
     //[[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
     
     if (section == 0) {
         
-//        if(_position<0){
-//            //[[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
-//        } else {
-//            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
-//        }
+        //        if(_position<0){
+        //            //[[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+        //        } else {
+        //            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
+        //        }
         
         return @"Food";
         
     }
     
     if (section == 1) {
-//        if(_position>=1){
-//            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
-//            
-//        } else {
-//            NSLog(@"HEre");
-//            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
-//            
-//        }
+        //        if(_position>=1){
+        //            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
+        //
+        //        } else {
+        //            NSLog(@"HEre");
+        //            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+        //
+        //        }
         return @"Drinks";
     }
     
@@ -315,7 +315,7 @@
     UITableViewHeaderFooterView *v = (UITableViewHeaderFooterView *)view;
     if (self.tableView.indexPathsForVisibleRows.count > 0) {
         NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
-
+        
         if (firstVisibleIndexPath.section == 0) {
             if (section == 0) {
                 v.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
@@ -341,25 +341,25 @@
     NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
     //NSLog(@"Here: %ld", (long)firstVisibleIndexPath.section);
     
-//    float height = self.view.frame.size.height;
-      float offsetY = scrollView.contentOffset.y;
-//    float this = offsetY*height;
+    //    float height = self.view.frame.size.height;
+    float offsetY = scrollView.contentOffset.y;
+    //    float this = offsetY*height;
     
     //NSLog(@"Position: %f", offsetY);
     
     
-   // NSLog(@"Scroll: %f", offsetY);
+    // NSLog(@"Scroll: %f", offsetY);
     
     if (offsetY < 0) {
-     //   NSLog(@"yup");
+        //   NSLog(@"yup");
         [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
     }
     
     _position = 0;
-
+    
     
     if (firstVisibleIndexPath.section == 0) {
-
+        
     }
     if (firstVisibleIndexPath.section == 1) {
         _position = 1;
@@ -368,21 +368,21 @@
     // NSLog(@"Position: %d", _position);
     
     
-//    if(offsetY<0){
-//        _position = 0;
-//    }
-//    
-//    if(offsetY>605.0f){
-//        _position = 1;
-//    }
-//    if(offsetY>918.0f){
-//        _position = 2;
-//    }
-//    
-//    if(_position!=_oldPosition){
-//        _oldPosition = _position;
-//        [self.tableView reloadData];
-//    }
+    //    if(offsetY<0){
+    //        _position = 0;
+    //    }
+    //
+    //    if(offsetY>605.0f){
+    //        _position = 1;
+    //    }
+    //    if(offsetY>918.0f){
+    //        _position = 2;
+    //    }
+    //
+    //    if(_position!=_oldPosition){
+    //        _oldPosition = _position;
+    //        [self.tableView reloadData];
+    //    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -424,29 +424,29 @@
         NSString *packageName = [object objectForKey:@"packageName"];
         cell.packageNameLabel.text = [NSString stringWithFormat:@"+ %@", packageName];
         
-//        if (![self.packages containsObject:packageName]) {
-//            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-//            
-//            
-//        } else {
-//            
-//            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
-//        }
+        //        if (![self.packages containsObject:packageName]) {
+        //            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+        //            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+        //
+        //
+        //        } else {
+        //
+        //            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+        //            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        //        }
         
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-                
+            
             cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-
-            }
             
+        }
+        
         else {
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
-
+        
         
         
         return cell;
@@ -458,17 +458,17 @@
         NSString *packageName = [object objectForKey:@"packageName"];
         cell.packageNameLabel.text = [NSString stringWithFormat:@"+ %@", packageName];
         
-//        if (![self.packages containsObject:packageName]) {
-//            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-//            
-//            
-//        } else {
-//            
-//            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
-//        }
-       
+        //        if (![self.packages containsObject:packageName]) {
+        //            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+        //            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+        //
+        //
+        //        } else {
+        //
+        //            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+        //            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        //        }
+        
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             
             cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
@@ -480,7 +480,7 @@
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
-
+        
         
         return cell;
     }
@@ -490,16 +490,16 @@
         NSString *packageName = [object objectForKey:@"packageName"];
         cell.packageNameLabel.text = [NSString stringWithFormat:@"+ %@", packageName];
         
-//        if (![self.packages containsObject:packageName]) {
-//            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-//            
-//            
-//        } else {
-//            
-//            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-//            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
-//        }
+        //        if (![self.packages containsObject:packageName]) {
+        //            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+        //            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+        //
+        //
+        //        } else {
+        //
+        //            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+        //            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        //        }
         
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             
@@ -515,7 +515,7 @@
         
         return cell;
     }
-
+    
     
     return cell;
 }
@@ -551,19 +551,19 @@
     if (indexPath.section == 0) {
         PFObject *object = [self.food objectAtIndex:indexPath.row];
         NSString *packageName = [object objectForKey:@"packageName"];
-            if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-                [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
-                for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                    [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
-                }
-                cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
-                cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
+            [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
+            for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
+                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
             }
-            else {
-                [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
-                cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
-                cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
-            }
+            cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
+        }
+        else {
+            [[_appDelegate package_itemsDictionary] removeObjectForKey:packageName];
+            cell.greenBkgView.backgroundColor = [UIColor colorWithRed:0.314 green:0.89 blue:0.761 alpha:1];
+            cell.packageNameLabel.text = [ NSString stringWithFormat:@"+ %@", packageName];
+        }
         
     }
     
@@ -622,7 +622,7 @@
             for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
                 [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
             }
-
+            
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
         }
@@ -663,11 +663,11 @@
             tempObj = self.food[2];
             self.food[2] = self.food[3];
             self.food[3] = tempObj;
-
+            
             tempObj = self.food[4];
             self.food[4] = self.food[5];
             self.food[5] = tempObj;
-
+            
             
             [self.tableView reloadData];
         }
@@ -810,8 +810,8 @@
 -(void) updateCartAnimated{
     int totalNumber = 0;
     /*for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
-        totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
-    }*/
+     totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
+     }*/
     
     totalNumber += [_appDelegate package_itemsDictionary].count;
     

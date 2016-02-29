@@ -18,6 +18,7 @@
 @property (nonatomic) float currentCartPrice;
 
 @property (weak, nonatomic) IBOutlet UIImageView *packageImage;
+@property (nonatomic, strong) NSMutableDictionary *thePackage_itemsDictionary;
 
 
 @end

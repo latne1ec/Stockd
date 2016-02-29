@@ -33,6 +33,10 @@
     _appDelegate = [[UIApplication sharedApplication] delegate];
     _packageSize = _appDelegate.packageSize;
     
+    if (_thePackage_itemsDictionary == NULL){
+        _thePackage_itemsDictionary = [_appDelegate package_itemsDictionary];
+    }
+    
     self.title = @"select size";
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:(UIImage *) [[UIImage imageNamed:@"cancelWhite"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
@@ -147,7 +151,7 @@
     float finalTotal = 0;
     
     
-    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+    for (NSString* packagesKey in _thePackage_itemsDictionary){
         float firstPrice = [self firstPriceFor:packagesKey];
         subtotal += firstPrice;
     }
@@ -175,21 +179,21 @@
     float price = 0;
     Boolean modifiedFlag = false;
     
-    if ([[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true){
+    if ([_thePackage_itemsDictionary valueForKey:packageName]){
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
+            if ([[[_thePackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey] hasBeenModified] == true){
                 modifiedFlag = true;
                 break;
             }
         }
         if (modifiedFlag || [packageName isEqual:@"Beer"]){
-            for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-                CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+            for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
+                CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
                 price += cartItem.itemQuantity*cartItem.itemPrice;
             }
         }else{
-            for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packageName]){
-                CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:packageName] valueForKey:itemNameKey];
+            for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
+                CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
                 price += _packageSize*cartItem.itemPrice;
             }
         }
@@ -313,10 +317,10 @@
 -(void)setPackageSize {
     _appDelegate.packageSize = _packageSize;
     
-    for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+    for (NSString* packagesKey in _thePackage_itemsDictionary){
         Boolean modifiedFlag = false;
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
-            if ([[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] hasBeenModified] == true || [packagesKey isEqual:@"Beer"]){
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packagesKey]){
+            if ([[[_thePackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey] hasBeenModified] == true || [packagesKey isEqual:@"Beer"]){
                 modifiedFlag = true;
                 break;
             }
@@ -325,8 +329,8 @@
             continue;
         }
         
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:packagesKey]){
-            [[[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] valueForKey:itemNameKey] setItemQuantity:[_appDelegate packageSize]];
+        for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packagesKey]){
+            [[[_thePackage_itemsDictionary valueForKey:packagesKey] valueForKey:itemNameKey] setItemQuantity:[_appDelegate packageSize]];
         }
     }
     

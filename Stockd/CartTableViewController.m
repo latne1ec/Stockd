@@ -486,6 +486,7 @@
 - (IBAction)sizeButtonTapped:(id)sender {
     
     PickSizeViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PickSize"];
+    destViewController.thePackage_itemsDictionary = _thePackage_itemsDictionary;
     destViewController.currentCartPrice = _finalTotal;
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:destViewController];

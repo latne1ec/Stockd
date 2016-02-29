@@ -41,10 +41,15 @@
     self.tableView.tableFooterView = [UIView new];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    [ProgressHUD dismiss];
+}
+
 -(void)queryForPackageItems {
     
     _itemsDictionary = [[NSMutableDictionary alloc] init];
-    
+    [ProgressHUD show:nil];
     PFQuery *query = [PFQuery queryWithClassName:@"Items"];
     [query setLimit:1000];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -106,14 +111,20 @@
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateFormat = @"MM'-'dd'-'yyyy'";
-    NSDate *date = [df stringFromDate:object.createdAt];
+    //NSDate *date = [df stringFromDate:object.createdAt];
     
     cell.orderNameLabel.text = object[@"orderPackages"];
     
     cell.priceLabel.text = [NSString stringWithFormat:@"$%.02f", [object[@"price"] floatValue]];
     
     cell.deliveryDateLabel.tag = indexPath.row;
-    cell.deliveryDateLabel.text = [NSString stringWithFormat:@"Delivered %@", date];
+    
+    NSString *deliveryDate = [object objectForKey:@"deliveryDate"];
+    if ([deliveryDate isEqualToString:@"Order in Process"]) {
+        cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", deliveryDate];
+    } else {
+     cell.deliveryDateLabel.text = [NSString stringWithFormat:@"Delivered %@", deliveryDate];
+    }
 
     return cell;
 }
@@ -124,7 +135,6 @@
     _appDelegate.pastOrderPackage_itemsDictionary = [[NSMutableDictionary alloc] init];
     _appDelegate.pastOrderExtraPackage_itemsDictionary = [[NSMutableDictionary alloc] init];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:true];
     PFQuery *query = [PFQuery queryWithClassName:@"PackageOrder"];
     [query whereKey:@"orderID" equalTo:order.objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -164,6 +174,8 @@
                     }
                 }
             }
+            
+            [tableView deselectRowAtIndexPath:indexPath animated:true];
             CartTableViewController *cvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Cart"];
             cvc.thePackage_itemsDictionary = [_appDelegate pastOrderPackage_itemsDictionary];
             cvc.theExtraPackage_itemsDictionary = [_appDelegate pastOrderExtraPackage_itemsDictionary];
@@ -176,9 +188,11 @@
 
 -(void)getAllPreviousOrders{
     
-    [ProgressHUD show:nil];
+    //[ProgressHUD show:nil];
     PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query whereKeyExists:@"deliveryDate"];
+    [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             

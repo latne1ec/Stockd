@@ -353,7 +353,7 @@
         [btn setCornerRadius:5.0f];
         
         if (_isPastOrder){
-            [cell2.getStockdButton setTitle:@"Get ReStockd" forState:UIControlStateNormal];
+            [cell2.getStockdButton setTitle:@"Get Stockd Again" forState:UIControlStateNormal];
         }
         
         cell2.sizeButton.layer.cornerRadius = 5.0;
@@ -668,6 +668,7 @@
     [order setObject:orderString forKey:@"orderItems"];
     [order setObject:[self getAllPackagesString] forKey:@"orderPackages"];
     [order setObject:[NSNumber numberWithFloat: _finalTotal] forKey:@"price"];
+    [order setObject:@"Order in Process" forKey:@"deliveryDate"];
     [order setObject:deliveryInstructions forKey:@"deliveryInstructions"];
     [order setObject:self.packageSizeString forKey:@"orderSize"];
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -887,6 +888,7 @@
     dvc.view.frame = CGRectMake(0, 0, 270.0f, 190.0f);
     [self presentPopUpViewController:dvc];
     
+    [dvc.cancelButton addTarget:self action:@selector(dismissPopUpViewController) forControlEvents:UIControlEventTouchUpInside];
     [dvc.continueButton addTarget:self action:@selector(dismissPopUpViewController) forControlEvents:UIControlEventTouchUpInside];
     [dvc.continueButton addTarget:self action:@selector(getStockedTapped:) forControlEvents:UIControlEventTouchUpInside];
     

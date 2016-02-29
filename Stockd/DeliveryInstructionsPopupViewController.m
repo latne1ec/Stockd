@@ -45,7 +45,10 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     
-    if ([self.instructionsTextField.text containsString:@"Add any special delivery"]) {
+    if ([self.instructionsTextField.text containsString:@"Add any delivery instructions here. If none, leave blank and tap continue to complete purchase."]) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"n/a" forKey:@"currentDeliveryInstructions"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
     } else {
         
@@ -54,7 +57,6 @@
         
         NSString *instruct = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentDeliveryInstructions"];
         
-        NSLog(@"instruct: %@", instruct);
    
     }
     

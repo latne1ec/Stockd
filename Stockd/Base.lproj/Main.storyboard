@@ -3471,7 +3471,7 @@ ATTN: Matt Mason
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Add special delivery instructions here. If none, leave blank and tap continue to complete purchase." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xZS-6s-6Z2">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Add any delivery instructions here. If none, leave blank and tap continue to complete purchase." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xZS-6s-6Z2">
                                 <rect key="frame" x="15" y="58" width="240" height="79"/>
                                 <color key="backgroundColor" red="0.46274513010000001" green="0.90588241820000004" blue="0.83529418710000003" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -3518,11 +3518,11 @@ ATTN: Matt Mason
                                 <rect key="frame" x="0.0" y="112" width="320" height="109"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f7H-bk-Rgq" id="IqF-i5-51E">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="108.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Package Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NAR-Fk-8nb">
-                                            <rect key="frame" x="82" y="24" width="189" height="24"/>
+                                            <rect key="frame" x="82" y="24" width="182" height="24"/>
                                             <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -3566,7 +3566,7 @@ ATTN: Matt Mason
                                         <constraint firstItem="3V0-4G-U8Y" firstAttribute="top" secondItem="4g4-EZ-dPh" secondAttribute="top" id="UbY-Mg-xu3"/>
                                         <constraint firstItem="NAR-Fk-8nb" firstAttribute="leading" secondItem="3V0-4G-U8Y" secondAttribute="leading" id="WOe-ih-Yfz"/>
                                         <constraint firstItem="qkg-P7-L42" firstAttribute="top" secondItem="IqF-i5-51E" secondAttribute="topMargin" constant="16" id="YN7-yW-tET"/>
-                                        <constraint firstItem="uic-h3-9Sd" firstAttribute="leading" secondItem="NAR-Fk-8nb" secondAttribute="trailing" constant="14" id="bzN-D6-Ikj"/>
+                                        <constraint firstItem="uic-h3-9Sd" firstAttribute="leading" secondItem="NAR-Fk-8nb" secondAttribute="trailing" constant="21" id="bzN-D6-Ikj"/>
                                         <constraint firstItem="NAR-Fk-8nb" firstAttribute="leading" secondItem="qkg-P7-L42" secondAttribute="trailing" constant="8" symbolic="YES" id="had-9e-Tb7"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="uic-h3-9Sd" secondAttribute="trailing" constant="3" id="k6a-Sd-X0l"/>
                                         <constraint firstItem="qkg-P7-L42" firstAttribute="leading" secondItem="IqF-i5-51E" secondAttribute="leadingMargin" constant="6" id="lUf-hx-hfD"/>

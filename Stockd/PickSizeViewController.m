@@ -17,6 +17,7 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic) int additionalOffset;
 
+
 @end
 
 @implementation PickSizeViewController
@@ -71,7 +72,7 @@
     UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(captionDrag:)];
     [self.view addGestureRecognizer:drag];
     
-    
+    NSLog(@"Price: %f", _currentCartPrice);
     [self showSlider];
     
 }
@@ -144,6 +145,7 @@
     float subtotal = 0;
     float taxes = 0;
     float finalTotal = 0;
+    
     
     for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
         float firstPrice = [self firstPriceFor:packagesKey];

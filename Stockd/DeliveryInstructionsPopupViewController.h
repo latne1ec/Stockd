@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UITextView *instructionsTextField;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 
 @end

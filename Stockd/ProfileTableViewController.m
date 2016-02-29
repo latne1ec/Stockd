@@ -324,29 +324,53 @@
                                    UIActivityTypePostToVimeo];
     
     activityVC.excludedActivityTypes = excludeActivities;
-    [self presentViewController:activityVC animated:YES completion:^{
-    }];
-
-        
-//    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
-//    if([MFMessageComposeViewController canSendText]) {
-//        
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            
-//            controller.body = self.shareMessage;
-//            controller.messageComposeDelegate = self;
-//            //[controller.navigationBar setTintColor:[UIColor blackColor]];
-//            [[controller navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName]];
-//            
-//            [self presentViewController:controller animated:YES completion:^{
-//                
-//                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-//                
-//            }];
-//        });
-//    }
     
+    [self presentViewController:activityVC animated:YES completion:^{
+        
+        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont
+                                                                               fontWithName:@"BELLABOO-Regular" size:17], NSFontAttributeName,
+                                    [UIColor blackColor], NSForegroundColorAttributeName, nil];
+        
+        
+        [[UINavigationBar appearance] setTintColor:[UIColor blueColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+        
+    }];
+    
+    [activityVC setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+        
+        if (completed) {
+            [self updateUserKarmaScore];
+        }
+    }];
 }
+
+
+-(void)updateUserKarmaScore {
+    
+    if ([[[PFUser currentUser] objectForKey:@"invitedFriends"] isEqualToString:@"YES"]) {
+        //ALREADY SHARED
+        NSLog(@"already shared");
+    }
+    else {
+        //UPDATE SCORE
+        NSLog(@"updated score!");
+        [PFAnalytics trackEvent:@"SMSInviteSent"];
+        [[PFUser currentUser] setObject:@"YES" forKey:@"invitedFriends"];
+        [[PFUser currentUser] incrementKey:@"karmaScore" byAmount:[NSNumber numberWithInt:5]];
+        [[PFUser currentUser] saveInBackground];
+        
+        NSNumber *score = [[PFUser currentUser] objectForKey:@"karmaScore"];
+        
+        if ([score intValue] >=5) {
+            [[PFUser currentUser] incrementKey:@"karmaCash" byAmount:[NSNumber numberWithInt:10]];
+            [[PFUser currentUser] saveInBackground];
+        }
+        
+        [self performSelector:@selector(selectAnimate:) withObject:nil afterDelay:0.5];
+    }
+}
+
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
     

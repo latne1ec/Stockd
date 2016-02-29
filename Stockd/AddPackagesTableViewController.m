@@ -23,13 +23,11 @@
 @property (nonatomic, strong) NSMutableDictionary *itemsDictionary;
 @property (nonatomic, strong) NSString *beerItem;
 @property (nonatomic, strong) NSString *liquorItem;
-
 @property (nonatomic, strong) UIImageView *toast;
 @property (nonatomic, strong) UIImage *toastPic;
-
 @property (nonatomic, strong) AppDelegate *appDelegate;
-
-
+@property (nonatomic, strong) UITableViewHeaderFooterView *headerView;
+@property (nonatomic) float offsetY;
 
 
 @end
@@ -210,8 +208,6 @@
     
     self.navigationItem.hidesBackButton = YES;
     
-    
-    
     [self.tableView reloadData];
     
     UIView *headerView = [self.tableView headerViewForSection:0];
@@ -260,15 +256,12 @@
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[UIColor whiteColor]];
     [[UIButton appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTintColor:[UIColor blackColor]];
     
-    //UIView *view = [UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil];
-    
-    
-    //[[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
     
     if (section == 0) {
         
         //        if(_position<0){
-        //            //[[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+        //
+        //           [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
         //        } else {
         //            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
         //        }
@@ -282,7 +275,6 @@
         //            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
         //
         //        } else {
-        //            NSLog(@"HEre");
         //            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
         //
         //        }
@@ -290,45 +282,73 @@
     }
     
     if (section == 2) {
-        if(_position>=2){
-            //[[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
-            
-            [[UITableViewHeaderFooterView appearance] setTintColor:[UIColor redColor]];
-            
-        } else {
-            
-            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
-        }
+        //        if(_position>=2){
+        //            [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1]];
+        //
+        //        } else {
+        //           [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
+        //        }
         
         return @"21+";
     }
+    
     return nil;
 }
 
-
-
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     
-    //NSLog(@"Section: %ld", (long)section);
+    UITableViewHeaderFooterView *first = (UITableViewHeaderFooterView *)view;
+    first.backgroundView.backgroundColor = [UIColor clearColor];
     
+    self.headerView = (UITableViewHeaderFooterView *)view;
+    self.headerView.tag = 101;
     
-    UITableViewHeaderFooterView *v = (UITableViewHeaderFooterView *)view;
     if (self.tableView.indexPathsForVisibleRows.count > 0) {
         NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
         
         if (firstVisibleIndexPath.section == 0) {
-            if (section == 0) {
-                v.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+            
+            if(_position<0) {
+                
+                self.headerView.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
             } else {
-                v.backgroundView.backgroundColor = [UIColor clearColor];
+                self.headerView.backgroundView.backgroundColor = [UIColor clearColor];
+            }
+            
+            if (section == 0) {
+                self.headerView.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+            }
+            
+            if (section == 1) {
+                self.headerView.backgroundView.backgroundColor = [UIColor clearColor];
             }
         }
         
         if (_position == 1) {
             if (section == 1) {
-                v.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+                self.headerView.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
             } else {
-                v.backgroundView.backgroundColor = [UIColor clearColor];
+                if (section == 0) {
+                    self.headerView.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+                } else {
+                    self.headerView.backgroundView.backgroundColor = [UIColor clearColor];
+                }
+            }
+        }
+        
+        if(_position>=2){
+            
+            if (section == 2) {
+                
+                self.headerView.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+                
+            } else {
+                
+                if (section == 1) {
+                    self.headerView.backgroundView.backgroundColor = [UIColor colorWithRed:0.937 green:0.349 blue:0.639 alpha:1];
+                } else {
+                    self.headerView.backgroundView.backgroundColor = [UIColor clearColor];
+                }
             }
         }
     }
@@ -336,60 +356,47 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    //    NSLog(@"Position: %d", _position);
-    
-    NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
-    //NSLog(@"Here: %ld", (long)firstVisibleIndexPath.section);
-    
-    //    float height = self.view.frame.size.height;
-    float offsetY = scrollView.contentOffset.y;
-    //    float this = offsetY*height;
-    
-    //NSLog(@"Position: %f", offsetY);
-    
-    
-    // NSLog(@"Scroll: %f", offsetY);
-    
-    if (offsetY < 0) {
-        //   NSLog(@"yup");
-        [[UIView appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setBackgroundColor:[UIColor clearColor]];
-    }
-    
-    _position = 0;
-    
-    
-    if (firstVisibleIndexPath.section == 0) {
+    if (self.tableView.visibleCells.count > 0) {
         
+        NSIndexPath *firstVisibleIndexPath = [[self.tableView indexPathsForVisibleRows] objectAtIndex:0];
+        self.offsetY = scrollView.contentOffset.y;
+        
+        _position = 0;
+        
+        if (firstVisibleIndexPath.section == 0) {
+            
+        }
+        if (firstVisibleIndexPath.section == 1) {
+            _position = 1;
+        }
+        
+        if(self.offsetY<0){
+            _position = 0;
+        }
+        
+        if(self.offsetY>605.0f){
+            _position = 1;
+        }
+        if(self.offsetY>918.0f){
+            _position = 2;
+        }
+        
+        if(_position!=_oldPosition){
+            _oldPosition = _position;
+            [self.tableView reloadData];
+        }
+        
+        if (self.offsetY < 0) {
+            //NSLog(@"hey");
+            //self.headerView.backgroundView.backgroundColor = [UIColor clearColor];
+        }
     }
-    if (firstVisibleIndexPath.section == 1) {
-        _position = 1;
-    }
-    
-    // NSLog(@"Position: %d", _position);
-    
-    
-    //    if(offsetY<0){
-    //        _position = 0;
-    //    }
-    //
-    //    if(offsetY>605.0f){
-    //        _position = 1;
-    //    }
-    //    if(offsetY>918.0f){
-    //        _position = 2;
-    //    }
-    //
-    //    if(_position!=_oldPosition){
-    //        _oldPosition = _position;
-    //        [self.tableView reloadData];
-    //    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return 42;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -405,7 +412,6 @@
     
     return 0;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     

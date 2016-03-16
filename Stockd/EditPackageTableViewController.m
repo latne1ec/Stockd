@@ -320,7 +320,7 @@
     }
     [self removeEmptyExtraItems];
     [parent removeEmptyPackages];
-    [parent viewDidLoad];
+    [parent initializeViewController];
 }
 
 @end

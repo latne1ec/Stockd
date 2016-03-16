@@ -47,6 +47,8 @@
 		2011869D1B422E1900A59D55 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2011869C1B422E1900A59D55 /* Social.framework */; };
 		2011869F1B422E3800A59D55 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2011869E1B422E3800A59D55 /* Accounts.framework */; };
 		201186A11B422EA400A59D55 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201186A01B422EA400A59D55 /* AVFoundation.framework */; };
+		201C3CA91C84E6F000558EA4 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201C3CA81C84E6F000558EA4 /* cancel@2x.png */; };
+		201C3CAB1C84E72000558EA4 /* cancelD@2x@.png in Resources */ = {isa = PBXBuildFile; fileRef = 201C3CAA1C84E72000558EA4 /* cancelD@2x@.png */; };
 		20268B381B5C282400B711B5 /* toastOne@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20268B371B5C282400B711B5 /* toastOne@2x.png */; };
 		20268B3B1B5C2AB100B711B5 /* Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 20268B3A1B5C2AB100B711B5 /* Animation.m */; };
 		202C278B1C7E22E10050ED47 /* rightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 202C278A1C7E22E10050ED47 /* rightArrow@2x.png */; };
@@ -108,7 +110,6 @@
 		20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */; };
 		20D52CAB1B4436B200A1C60B /* flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CAA1B4436B200A1C60B /* flash@2x.png */; };
 		20D52CAD1B4438BA00A1C60B /* fillButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */; };
-		20D52CAF1B443D8000A1C60B /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CAE1B443D8000A1C60B /* cancel@2x.png */; };
 		20D52CB31B444DC900A1C60B /* flashSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CB21B444DC900A1C60B /* flashSelected@2x.png */; };
 		20D52CB51B4453A000A1C60B /* cancelPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CB41B4453A000A1C60B /* cancelPhoto@2x.png */; };
 		20D52CB91B4481A000A1C60B /* initialBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20D52CB81B4481A000A1C60B /* initialBkg@2x.png */; };
@@ -248,6 +249,8 @@
 		2011869C1B422E1900A59D55 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		2011869E1B422E3800A59D55 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		201186A01B422EA400A59D55 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		201C3CA81C84E6F000558EA4 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
+		201C3CAA1C84E72000558EA4 /* cancelD@2x@.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelD@2x@.png"; sourceTree = "<group>"; };
 		20268B371B5C282400B711B5 /* toastOne@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toastOne@2x.png"; sourceTree = "<group>"; };
 		20268B391B5C2AB100B711B5 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		20268B3A1B5C2AB100B711B5 /* Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation.m; sourceTree = "<group>"; };
@@ -343,7 +346,6 @@
 		20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snapPhoto@2x.png"; sourceTree = "<group>"; };
 		20D52CAA1B4436B200A1C60B /* flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash@2x.png"; sourceTree = "<group>"; };
 		20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fillButton@2x.png"; sourceTree = "<group>"; };
-		20D52CAE1B443D8000A1C60B /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
 		20D52CB21B444DC900A1C60B /* flashSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flashSelected@2x.png"; sourceTree = "<group>"; };
 		20D52CB41B4453A000A1C60B /* cancelPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelPhoto@2x.png"; sourceTree = "<group>"; };
 		20D52CB81B4481A000A1C60B /* initialBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "initialBkg@2x.png"; sourceTree = "<group>"; };
@@ -549,7 +551,6 @@
 				205D85841BCC261700A7518D /* UserAddressTableViewController.m */,
 				203FFD111BC5DAD9008B4CED /* ItemTableHeaderView.xib */,
 				20F94E0B1B7FB0B9004828B8 /* Todo */,
-				FAE88E961C7B836F0010DE79 /* Previous Orders */,
 				2067F8AD1B4A05A4001F5478 /* Menu */,
 				20D52D371B45F7D300A1C60B /* Tour */,
 				201186491B41EC8100A59D55 /* Login/Signup */,
@@ -563,6 +564,7 @@
 				2067F8C11B4B04B0001F5478 /* Drink Choices */,
 				2067F8C91B4B33AB001F5478 /* 21+ */,
 				2067F8C81B4B05AD001F5478 /* Package Details */,
+				FAE88E961C7B836F0010DE79 /* Previous Orders */,
 				2037DDCE1B42DF9A0076B0F2 /* Profile */,
 				20D52D3B1B46201000A1C60B /* Help */,
 				201186301B41C16200A59D55 /* Images.xcassets */,
@@ -713,9 +715,11 @@
 				20F5A3051B8A46AF00FC7BA5 /* toastThreeSmall@2x.png */,
 				20F5A2F31B85448D00FC7BA5 /* toastTwo@2x.png */,
 				20497DED1B657E26004A2950 /* cartIconYo@2x.png */,
+				201C3CAA1C84E72000558EA4 /* cancelD@2x@.png */,
 				20497DD91B5C34A0004A2950 /* Bread@2x.png */,
 				20497DDA1B5C34A0004A2950 /* Chicken@2x.png */,
 				20497DDB1B5C34A0004A2950 /* Donut@2x.png */,
+				201C3CA81C84E6F000558EA4 /* cancel@2x.png */,
 				20497DDC1B5C34A0004A2950 /* Fish@2x.png */,
 				20497DD71B5C33D3004A2950 /* Apple@2x.png */,
 				20268B371B5C282400B711B5 /* toastOne@2x.png */,
@@ -727,7 +731,6 @@
 				20D52CB81B4481A000A1C60B /* initialBkg@2x.png */,
 				20D52CB41B4453A000A1C60B /* cancelPhoto@2x.png */,
 				20D52CB21B444DC900A1C60B /* flashSelected@2x.png */,
-				20D52CAE1B443D8000A1C60B /* cancel@2x.png */,
 				20D52CAC1B4438BA00A1C60B /* fillButton@2x.png */,
 				20D52CAA1B4436B200A1C60B /* flash@2x.png */,
 				20D52CA81B4435D300A1C60B /* snapPhoto@2x.png */,
@@ -1201,7 +1204,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20D52CAF1B443D8000A1C60B /* cancel@2x.png in Resources */,
 				20F6D9861BE4123F00F54739 /* updateButton@2x.png in Resources */,
 				FAE88E951C7B80320010DE79 /* rightArrow@2x.png in Resources */,
 				20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */,
@@ -1226,6 +1228,7 @@
 				2011862F1B41C16200A59D55 /* Main.storyboard in Resources */,
 				203FFD121BC5DAD9008B4CED /* ItemTableHeaderView.xib in Resources */,
 				203FFD0A1BC5B099008B4CED /* YapHolderTwo@2x.png in Resources */,
+				201C3CAB1C84E72000558EA4 /* cancelD@2x@.png in Resources */,
 				205D86A41BDA8BBF00A7518D /* tourv2Uno.png in Resources */,
 				202C278F1C7E23F00050ED47 /* toastThreeBig@2x.png in Resources */,
 				20D52CB51B4453A000A1C60B /* cancelPhoto@2x.png in Resources */,
@@ -1248,6 +1251,7 @@
 				203FFCF91BC5856C008B4CED /* pickButton@2x.png in Resources */,
 				2011868B1B42022600A59D55 /* facebookLogin@2x.png in Resources */,
 				20497DDF1B5C34A0004A2950 /* Donut@2x.png in Resources */,
+				201C3CA91C84E6F000558EA4 /* cancel@2x.png in Resources */,
 				201186311B41C16200A59D55 /* Images.xcassets in Resources */,
 				205D86961BD94A1800A7518D /* stockdPackage@2x.png in Resources */,
 				20497DEE1B657E26004A2950 /* cartIconYo@2x.png in Resources */,

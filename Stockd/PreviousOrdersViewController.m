@@ -120,7 +120,7 @@
     cell.deliveryDateLabel.tag = indexPath.row;
     
     NSString *deliveryDate = [object objectForKey:@"deliveryDate"];
-    if ([deliveryDate isEqualToString:@"Order in Process"]) {
+    if ([deliveryDate isEqualToString:@"Order in Progress"]) {
         cell.deliveryDateLabel.text = [NSString stringWithFormat:@"%@", deliveryDate];
     } else {
      cell.deliveryDateLabel.text = [NSString stringWithFormat:@"Delivered %@", deliveryDate];

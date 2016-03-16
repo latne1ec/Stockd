@@ -39,6 +39,8 @@
 
 - (IBAction)sizeButtonTapped:(id)sender;
 - (IBAction)getStockedTapped:(id)sender;
+-(void)initializeViewController;
+
 -(void) removeEmptyPackages;
 
 

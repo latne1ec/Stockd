@@ -368,7 +368,7 @@ typedef void (^STPCardCompletionBlock)(STPCard *card,NSError *error);
     NSString *theToken = [NSString stringWithFormat:@"%@",tokenId];
     NSLog(@"HEY");
     NSLog(theToken);
-    NSString *formattedToken = [theToken stringByReplacingOccurrencesOfString:@" (test mode)" withString:@""];
+    NSString *formattedToken = [theToken stringByReplacingOccurrencesOfString:@" (live mode)" withString:@""];
     
     [PFCloud callFunctionInBackground:@"createCustomer"
                        withParameters:@{

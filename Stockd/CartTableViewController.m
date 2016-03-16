@@ -10,6 +10,7 @@
 #import "AddressTableViewController.h"
 #import "AlcoholPolicyViewController.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CartTableViewController ()
 
@@ -37,12 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hasShownDeliveryInstructions"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
     _appDelegate = [[UIApplication sharedApplication] delegate];
-    
+
     _isPastOrder = true;
     
     if (_thePackage_itemsDictionary == NULL){
@@ -54,6 +51,14 @@
         _isPastOrder = _isPastOrder && false;
         _theExtraPackage_itemsDictionary = [_appDelegate extraPackage_itemsDictionary];
     }
+    
+    [self initializeViewController];
+}
+
+-(void) initializeViewController {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"hasShownDeliveryInstructions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     _packageKeys = _thePackage_itemsDictionary.allKeys;
     _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
@@ -115,7 +120,7 @@
     
     //NSLog(@"Order numbaaa 2: %@", self.orderNumber);
     
-   // [[PFUser currentUser] setObject:[NSNumber numberWithInt:10] forKey:@"karmaCash"];
+    // [[PFUser currentUser] setObject:[NSNumber numberWithInt:10] forKey:@"karmaCash"];
     //[[PFUser currentUser] saveInBackground];
     
     NSString *uuidStr = [[NSUUID UUID] UUIDString];
@@ -123,7 +128,7 @@
     
     
     // NSLog(@"All Items: %@ and Package size: %d",[self getAllItems], _appDelegate.packageSize);
-    
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -171,6 +176,8 @@
     [self updateTotal];
     [self.tableView reloadData];
     [self setNavTitle];
+    
+    NSLog(@"appear");
     
 }
 
@@ -354,6 +361,12 @@
         
         if (_isPastOrder){
             [cell2.getStockdButton setTitle:@"Get Stockd Again" forState:UIControlStateNormal];
+            [cell2.sizeButton setHidden:YES];
+            [cell2.getStockdButton setHidden:YES];
+            cell2.getStockdAgainButton.layer.cornerRadius = 5;
+            [cell2.getStockdAgainButton setHidden:NO];
+            //[cell2.getStockdAgainButton setFrame:CGRectMake(0, 200, 180, 40)];
+            
         }
         
         cell2.sizeButton.layer.cornerRadius = 5.0;
@@ -669,7 +682,7 @@
     [order setObject:orderString forKey:@"orderItems"];
     [order setObject:[self getAllPackagesString] forKey:@"orderPackages"];
     [order setObject:[NSNumber numberWithFloat: _finalTotal] forKey:@"price"];
-    [order setObject:@"Order in Process" forKey:@"deliveryDate"];
+    [order setObject:@"Order in Progress" forKey:@"deliveryDate"];
     [order setObject:deliveryInstructions forKey:@"deliveryInstructions"];
     [order setObject:self.packageSizeString forKey:@"orderSize"];
     [order saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -892,7 +905,14 @@
     [dvc.cancelButton addTarget:self action:@selector(dismissPopUpViewController) forControlEvents:UIControlEventTouchUpInside];
     [dvc.continueButton addTarget:self action:@selector(dismissPopUpViewController) forControlEvents:UIControlEventTouchUpInside];
     [dvc.continueButton addTarget:self action:@selector(getStockedTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [dvc.cancelButton addTarget:self action:@selector(cancelButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
+}
+
+-(void)cancelButtonTapped {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"hasShownDeliveryInstructions"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)showBoozeTerms {

@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *getStockdButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *getStockdAgainButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *sizeButton;
 
 

@@ -93,6 +93,7 @@
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1338,6 +1339,22 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7h-CA-jN0">
+                                            <rect key="frame" x="80" y="214" width="161" height="39"/>
+                                            <color key="backgroundColor" red="0.32941177490000001" green="0.90980398650000005" blue="0.74117648599999997" alpha="1" colorSpace="deviceRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="39" id="05S-X4-m9i"/>
+                                                <constraint firstAttribute="width" constant="161" id="Wzj-Dv-e6O"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
+                                            <state key="normal" title="Get Stockd Again">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="getStockedTapped:" destination="ie3-bJ-6jF" eventType="touchUpInside" id="xNK-mS-fFm"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xTT-Ze-wMl" firstAttribute="top" secondItem="DZ3-bs-vxK" secondAttribute="bottom" constant="15" id="0d9-Bm-kEM"/>
@@ -1365,8 +1382,10 @@
                                         <constraint firstItem="w96-dF-TQ5" firstAttribute="top" secondItem="xTT-Ze-wMl" secondAttribute="bottom" constant="37" id="V61-1K-vUP"/>
                                         <constraint firstItem="71i-Jq-vEg" firstAttribute="leading" secondItem="gxl-vI-rC2" secondAttribute="leadingMargin" constant="18" id="XEi-nL-BLw"/>
                                         <constraint firstItem="Su6-Ko-VQc" firstAttribute="top" secondItem="P9Z-28-JbX" secondAttribute="top" id="YBA-QW-R0M"/>
+                                        <constraint firstItem="S7h-CA-jN0" firstAttribute="baseline" secondItem="jBy-zu-fGh" secondAttribute="baseline" id="ZD4-cR-LDA"/>
                                         <constraint firstItem="Ml0-E8-mpg" firstAttribute="leading" secondItem="P9Z-28-JbX" secondAttribute="leading" id="ZqT-kn-ThS"/>
                                         <constraint firstItem="IWD-j4-lGM" firstAttribute="trailing" secondItem="OTl-Vv-Vyz" secondAttribute="trailing" id="aLV-eE-l3d"/>
+                                        <constraint firstItem="S7h-CA-jN0" firstAttribute="centerX" secondItem="gxl-vI-rC2" secondAttribute="centerX" id="bLi-2L-oH2"/>
                                         <constraint firstItem="DZ3-bs-vxK" firstAttribute="top" secondItem="I2i-dj-1Ob" secondAttribute="bottom" constant="14" id="bge-C9-EOI"/>
                                         <constraint firstItem="OTl-Vv-Vyz" firstAttribute="trailing" secondItem="jBy-zu-fGh" secondAttribute="trailing" id="dhS-Dd-1JB"/>
                                         <constraint firstItem="I2i-dj-1Ob" firstAttribute="leading" secondItem="Su6-Ko-VQc" secondAttribute="leading" id="iMJ-1s-GCL"/>
@@ -1388,6 +1407,7 @@
                                 <connections>
                                     <outlet property="discountLabel" destination="1Wq-nt-xtd" id="kxd-Xs-uJR"/>
                                     <outlet property="finalTotalLabel" destination="OTl-Vv-Vyz" id="fkH-hs-Ygm"/>
+                                    <outlet property="getStockdAgainButton" destination="S7h-CA-jN0" id="5sL-Ht-sJI"/>
                                     <outlet property="getStockdButton" destination="jBy-zu-fGh" id="UdM-TO-IdV"/>
                                     <outlet property="sizeButton" destination="w96-dF-TQ5" id="myc-WF-1Ru"/>
                                     <outlet property="taxesLabel" destination="IWD-j4-lGM" id="OOu-rr-EUK"/>
@@ -3466,8 +3486,8 @@ ATTN: Matt Mason
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Special Delivery Instructions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8m-Lw-1By">
-                                <rect key="frame" x="13" y="11" width="245" height="38"/>
-                                <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="18"/>
+                                <rect key="frame" x="33" y="11" width="204" height="38"/>
+                                <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="16.5"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -3486,19 +3506,26 @@ ATTN: Matt Mason
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbS-pJ-uqw">
+                                <rect key="frame" x="7" y="19" width="24" height="24"/>
+                                <state key="normal" image="cancelD@2x@.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.68627452850000004" green="0.56078433989999998" blue="0.90196084980000002" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="270" height="190"/>
                     <connections>
+                        <outlet property="cancelButton" destination="dbS-pJ-uqw" id="JrM-xU-rtG"/>
                         <outlet property="continueButton" destination="6PR-lK-A92" id="oSS-j9-fWu"/>
                         <outlet property="instructionsTextField" destination="xZS-6s-6Z2" id="Br4-H5-I9S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKj-ft-bzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3548" y="2721"/>
+            <point key="canvasLocation" x="3551" y="2726"/>
         </scene>
         <!--Previous Orders View Controller-->
         <scene sceneID="8Dg-sq-YwG">
@@ -3632,6 +3659,7 @@ ATTN: Matt Mason
     </scenes>
     <resources>
         <image name="addPhotoPink.png" width="140" height="140"/>
+        <image name="cancelD@2x@.png" width="64" height="64"/>
         <image name="facebookLogin.png" width="208" height="50"/>
         <image name="fruits.png" width="312" height="100"/>
         <image name="initialBkg.png" width="412" height="730"/>

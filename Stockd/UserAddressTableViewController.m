@@ -79,7 +79,6 @@
     
     [TSMessage setDefaultViewController:self];
     [TSMessage setDelegate:self];
-
     
 }
 

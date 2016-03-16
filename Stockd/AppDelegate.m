@@ -17,8 +17,8 @@
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-//NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
-NSString * const StripeTestKey = @"pk_test_1XlR8FPawvZRP6PIvVL7B0en";
+NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
+//NSString * const StripeTestKey = @"pk_test_1XlR8FPawvZRP6PIvVL7B0en";
 
 
 @interface AppDelegate ()
@@ -41,7 +41,7 @@ NSString * const StripeTestKey = @"pk_test_1XlR8FPawvZRP6PIvVL7B0en";
     
     
     //Stripe Keys
-    [Stripe setDefaultPublishableKey:StripeTestKey];
+    [Stripe setDefaultPublishableKey:StripePublishableKey];
     
     LeftMenuViewController *leftMenu = [[LeftMenuViewController alloc] init];
     

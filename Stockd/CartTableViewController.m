@@ -8,6 +8,7 @@
 
 #import "CartTableViewController.h"
 #import "AddressTableViewController.h"
+#import "PhoneTableViewController.h"
 #import "AlcoholPolicyViewController.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
@@ -554,6 +555,12 @@
             }
         }
         
+        if ([[PFUser currentUser] objectForKey:@"mobileNumber"] == nil) {
+            
+            [self showAddPhoneNumberAlert];
+            return;
+        }
+        
         if (_finalTotal<=.5) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $0.50" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
@@ -641,6 +648,26 @@
     [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
     [self.navigationController presentViewController:navigationController animated:YES completion:^{
     }];
+}
+
+-(void)showAddPhoneNumberAlert {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Phone Number" message:@"Before making any purchases on Stockd, you must first add your mobile phone number." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    
+    PhoneTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Phone"];
+    destViewController.parent = self;
+    UINavigationController *navigationController =
+    [[UINavigationController alloc] initWithRootViewController:destViewController];
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"Phone Info"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+    [self.navigationController presentViewController:navigationController animated:YES completion:^{
+    }];
+
 }
 
 

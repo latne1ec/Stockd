@@ -35,11 +35,6 @@
                                                                             target:self
                                                                             action:@selector(saveButton:)];
     
-    
-
-    
-    
-    
     self.streetTextfield.delegate = self;
     self.cityTextField.delegate = self;
     self.stateTextField.delegate = self;
@@ -73,6 +68,7 @@
                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
                                                           shadow, NSShadowAttributeName,
                                                           [UIFont fontWithName:@"BELLABOO-Regular" size:22], NSFontAttributeName, nil]];
+    
     
     if ([[[PFUser currentUser] objectForKey:@"deliveryInstructions"] length] <= 2) {
         self.instructionsPlaceholder.hidden = NO;

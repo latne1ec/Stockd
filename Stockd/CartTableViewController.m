@@ -29,7 +29,8 @@
 @property (nonatomic, strong) NSArray* extraKeys;
 @property (nonatomic, strong) NSString *packageSizeString;
 @property (nonatomic) BOOL isPastOrder;
-
+@property (nonatomic, strong) NSMutableArray *zipcodes;
+@property (nonatomic) BOOL canOrder;
 
 
 @end
@@ -53,7 +54,11 @@
         _theExtraPackage_itemsDictionary = [_appDelegate extraPackage_itemsDictionary];
     }
     
+    _canOrder = false;
+    
+    
     [self initializeViewController];
+    
 }
 
 -(void) initializeViewController {
@@ -134,7 +139,6 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     
-    NSLog(@"Appear");
     [self updateTotal];
 }
 
@@ -177,14 +181,40 @@
     [self updateTotal];
     [self.tableView reloadData];
     [self setNavTitle];
+    _canOrder = false;
+    [self getCurrentZips];
     
-    NSLog(@"appear");
+}
+
+-(void)getCurrentZips {
     
+    self.zipcodes = [[NSMutableArray alloc] init];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Zipcodes"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            
+        } else {
+            
+            for (PFObject *object in objects) {
+                NSString *zip = [object objectForKey:@"zipcode"];
+                [self.zipcodes addObject:zip];
+            }
+            NSString *userZip = [[PFUser currentUser] objectForKey:@"zipCode"];
+            if ([self.zipcodes containsObject:userZip]) {
+                NSLog(@"We can deliver");
+                _canOrder = true;
+            } else {
+                
+                NSLog(@"we can't deliver!");
+                _canOrder = false;
+            }
+        }
+    }];
 }
 
 -(void)this {
     
-    NSLog(@"Here dude");
     [self.tableView reloadData];
 }
 
@@ -195,7 +225,6 @@
     
     return 3;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -438,7 +467,7 @@
     
     _finalTotal = (_subtotal) + _taxes;
     
-    NSLog(@"Final Total: %f", _finalTotal);
+    //NSLog(@"Final Total: %f", _finalTotal);
     
     [self.tableView reloadData];
     
@@ -531,7 +560,7 @@
         
     } else {
         //do das below
-        NSLog(@"Do das below");
+        //NSLog(@"Do das below");
     
         if (_BOOZE !=0) {
             
@@ -570,16 +599,26 @@
             return;
         }
         
-        NSString *canOrder = [[PFUser currentUser] objectForKey:@"canOrder"];
-        
-        if ([canOrder isEqualToString:@"NO"]) {
-            NSLog(@"Not in your area yet HOLMESS!!");
+        if (!_canOrder) {
             
+            //NSLog(@"Not in your area yet HOLMESS!!");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Unfortunately we won't be able to process your order until we start serving your area. We'll notify you as soon as we do!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             
             [alert show];
-            
+            return;
         }
+        
+//        NSString *canOrder = [[PFUser currentUser] objectForKey:@"canOrder"];
+//        
+//        if ([canOrder isEqualToString:@"NO"]) {
+//            NSLog(@"Not in your area yet HOLMESS!!");
+//            
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Unfortunately we won't be able to process your order until we start serving your area. We'll notify you as soon as we do!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//            
+//            [alert show];
+//            
+//        }
+        
         else {
             
             NSString *userStripeToken = [[PFUser currentUser] objectForKey:@"stripeToken"];

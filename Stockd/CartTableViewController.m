@@ -8,6 +8,7 @@
 
 #import "CartTableViewController.h"
 #import "AddressTableViewController.h"
+#import "AddressViewController.h"
 #import "PhoneTableViewController.h"
 #import "AlcoholPolicyViewController.h"
 #import "AppDelegate.h"
@@ -675,7 +676,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     
-    AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
+    AddressViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddressVC"];
     destViewController.parent = self;
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:destViewController];

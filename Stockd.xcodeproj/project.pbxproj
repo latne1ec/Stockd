@@ -175,6 +175,16 @@
 		FABBCABE1BC5B1C90058A201 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */; };
 		FABBCAC01BC5B2960058A201 /* BELLABOO-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */; };
 		FABBCAC41BC6EF240058A201 /* CartItemObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FABBCAC31BC6EF240058A201 /* CartItemObject.m */; };
+		FADAC3F81CA30C680077A4D5 /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAC3F71CA30C680077A4D5 /* AddressViewController.m */; };
+		FADAC3FA1CA3199B0077A4D5 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC3F91CA3199B0077A4D5 /* GoogleMaps.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		FADAC3FE1CA350230077A4D5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC3FD1CA350230077A4D5 /* CoreData.framework */; };
+		FADAC4001CA3503C0077A4D5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC3FF1CA3503C0077A4D5 /* GLKit.framework */; };
+		FADAC4021CA350930077A4D5 /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC4011CA350930077A4D5 /* libc++.1.tbd */; };
+		FADAC4041CA350A10077A4D5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC4031CA350A10077A4D5 /* libicucore.tbd */; };
+		FADAC4061CA350B50077A4D5 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC4051CA350B50077A4D5 /* CoreText.framework */; };
+		FADAC4081CA350E30077A4D5 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC4071CA350E30077A4D5 /* OpenGLES.framework */; };
+		FADAC40A1CA351020077A4D5 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC4091CA351020077A4D5 /* ImageIO.framework */; };
+		FADAC40C1CA351CF0077A4D5 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FADAC40B1CA351CF0077A4D5 /* GoogleMaps.bundle */; };
 		FAE88E951C7B80320010DE79 /* rightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FAE88E941C7B80320010DE79 /* rightArrow@2x.png */; };
 		FAE88E9C1C7B84C40010DE79 /* PreviousOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88E9B1C7B84C40010DE79 /* PreviousOrdersViewController.m */; };
 		FAE88E9F1C7B85020010DE79 /* PreviousOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE88E9E1C7B85020010DE79 /* PreviousOrderCell.m */; };
@@ -457,6 +467,17 @@
 		FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BELLABOO-Regular.ttf"; sourceTree = "<group>"; };
 		FABBCAC21BC6EF240058A201 /* CartItemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartItemObject.h; sourceTree = "<group>"; };
 		FABBCAC31BC6EF240058A201 /* CartItemObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartItemObject.m; sourceTree = "<group>"; };
+		FADAC3F61CA30C680077A4D5 /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
+		FADAC3F71CA30C680077A4D5 /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
+		FADAC3F91CA3199B0077A4D5 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		FADAC3FD1CA350230077A4D5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FADAC3FF1CA3503C0077A4D5 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		FADAC4011CA350930077A4D5 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		FADAC4031CA350A10077A4D5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		FADAC4051CA350B50077A4D5 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		FADAC4071CA350E30077A4D5 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FADAC4091CA351020077A4D5 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		FADAC40B1CA351CF0077A4D5 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		FAE88E941C7B80320010DE79 /* rightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightArrow@2x.png"; sourceTree = "<group>"; };
 		FAE88E9A1C7B84C40010DE79 /* PreviousOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviousOrdersViewController.h; sourceTree = "<group>"; };
 		FAE88E9B1C7B84C40010DE79 /* PreviousOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviousOrdersViewController.m; sourceTree = "<group>"; };
@@ -475,6 +496,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADAC40A1CA351020077A4D5 /* ImageIO.framework in Frameworks */,
+				FADAC4001CA3503C0077A4D5 /* GLKit.framework in Frameworks */,
+				FADAC4081CA350E30077A4D5 /* OpenGLES.framework in Frameworks */,
+				FADAC4061CA350B50077A4D5 /* CoreText.framework in Frameworks */,
+				FADAC4041CA350A10077A4D5 /* libicucore.tbd in Frameworks */,
+				FADAC4021CA350930077A4D5 /* libc++.1.tbd in Frameworks */,
+				2011866C1B41EED500A59D55 /* QuartzCore.framework in Frameworks */,
+				FADAC3FE1CA350230077A4D5 /* CoreData.framework in Frameworks */,
+				FADAC3FA1CA3199B0077A4D5 /* GoogleMaps.framework in Frameworks */,
 				201186A11B422EA400A59D55 /* AVFoundation.framework in Frameworks */,
 				2011869F1B422E3800A59D55 /* Accounts.framework in Frameworks */,
 				2011869D1B422E1900A59D55 /* Social.framework in Frameworks */,
@@ -488,7 +518,6 @@
 				201186691B41EED400A59D55 /* libsqlite3.dylib in Frameworks */,
 				2011866A1B41EED400A59D55 /* libz.dylib in Frameworks */,
 				2011866B1B41EED400A59D55 /* MobileCoreServices.framework in Frameworks */,
-				2011866C1B41EED500A59D55 /* QuartzCore.framework in Frameworks */,
 				2011866D1B41EED500A59D55 /* Security.framework in Frameworks */,
 				2011866E1B41EED500A59D55 /* StoreKit.framework in Frameworks */,
 				2011866F1B41EED500A59D55 /* SystemConfiguration.framework in Frameworks */,
@@ -578,6 +607,7 @@
 		201186231B41C16200A59D55 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FADAC40B1CA351CF0077A4D5 /* GoogleMaps.bundle */,
 				FABBCABF1BC5B2960058A201 /* BELLABOO-Regular.ttf */,
 				201186241B41C16200A59D55 /* Info.plist */,
 				201186251B41C16200A59D55 /* main.m */,
@@ -620,6 +650,14 @@
 		2011864D1B41ED7E00A59D55 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FADAC4091CA351020077A4D5 /* ImageIO.framework */,
+				FADAC4071CA350E30077A4D5 /* OpenGLES.framework */,
+				FADAC4051CA350B50077A4D5 /* CoreText.framework */,
+				FADAC4031CA350A10077A4D5 /* libicucore.tbd */,
+				FADAC4011CA350930077A4D5 /* libc++.1.tbd */,
+				FADAC3FF1CA3503C0077A4D5 /* GLKit.framework */,
+				FADAC3FD1CA350230077A4D5 /* CoreData.framework */,
+				FADAC3F91CA3199B0077A4D5 /* GoogleMaps.framework */,
 				FABBCABB1BC5B1C90058A201 /* FBSDKCoreKit.framework */,
 				FABBCABC1BC5B1C90058A201 /* FBSDKLoginKit.framework */,
 				201186A01B422EA400A59D55 /* AVFoundation.framework */,
@@ -761,6 +799,8 @@
 				2037DDD61B42F34D0076B0F2 /* PhoneTableViewController.m */,
 				2037DDDB1B43044E0076B0F2 /* EmailTableViewController.h */,
 				2037DDDC1B43044E0076B0F2 /* EmailTableViewController.m */,
+				FADAC3F61CA30C680077A4D5 /* AddressViewController.h */,
+				FADAC3F71CA30C680077A4D5 /* AddressViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1172,6 +1212,7 @@
 				TargetAttributes = {
 					2011861F1B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = BH3CW23SL9;
 					};
 					201186381B41C16200A59D55 = {
 						CreatedOnToolsVersion = 6.2;
@@ -1243,6 +1284,7 @@
 				20497DDD1B5C34A0004A2950 /* Bread@2x.png in Resources */,
 				20D52CEB1B45A7A700A1C60B /* menu-button@2x.png in Resources */,
 				20D52CAB1B4436B200A1C60B /* flash@2x.png in Resources */,
+				FADAC40C1CA351CF0077A4D5 /* GoogleMaps.bundle in Resources */,
 				20F5A3061B8A46AF00FC7BA5 /* toastThreeSmall@2x.png in Resources */,
 				20D52CC31B44D4E300A1C60B /* TourImage3.png in Resources */,
 				201186801B41F12200A59D55 /* TSMessagesDefaultDesign.json in Resources */,
@@ -1371,6 +1413,7 @@
 				20497E751B7BE4CD004A2950 /* KAProgressLabel.m in Sources */,
 				2037DDF31B442CE20076B0F2 /* PKImagePickerViewController.m in Sources */,
 				20E2EC171B486107002E317A /* FXBlurView.m in Sources */,
+				FADAC3F81CA30C680077A4D5 /* AddressViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1497,8 +1540,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beacon Mobile, LLC (WTC7TJVBL2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beacon Mobile, LLC (WTC7TJVBL2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1509,7 +1552,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c1cb699a-f911-4a1b-9647-e27854480f66";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1518,8 +1562,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beacon Mobile, LLC (WTC7TJVBL2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beacon Mobile, LLC (WTC7TJVBL2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1530,7 +1574,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stockd.Stockd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c1cb699a-f911-4a1b-9647-e27854480f66";
+				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};

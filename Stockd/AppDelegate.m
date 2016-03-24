@@ -11,6 +11,7 @@
 #import <ParseUI/ParseUI.h>
 #import <Stripe/Stripe.h>
 #import "Animation.h"
+@import GoogleMaps;
 
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -29,6 +30,8 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [GMSServices provideAPIKey:@"AIzaSyAad9RFS_EIocXRoDp95dikrbekzaBE3gg"];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     _alreadyShowed = 0;

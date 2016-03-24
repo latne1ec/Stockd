@@ -10,6 +10,7 @@
 #import "JGActionSheet.h"
 #import "AppDelegate.h"
 #import "UserAddressTableViewController.h"
+#import "AddressViewController.h"
 
 #define SOURCETYPE UIImagePickerControllerSourceTypeCamera
 
@@ -23,7 +24,7 @@
 
 @property (nonatomic, strong) NSString *shareMessage;
 
-@property (nonatomic, strong) AddressTableViewController *atvc;
+@property (nonatomic, strong) AddressViewController *avc;
 
 
 
@@ -224,7 +225,7 @@
     
     if (indexPath.row == 1) {
         
-        AddressTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Address"];
+        AddressViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddressVC"];
         
         //destViewController.parent = self;
         NSLog(@"Tapped Address");

@@ -12,6 +12,9 @@
 #import "TSMessage.h"
 #import "ProfileTableViewController.h"
 
-@interface AddressViewController : UIViewController
+@interface AddressViewController : UIViewController <UIAlertViewDelegate>
+
 @property(nonatomic,strong) id parent;
+@property (nonatomic) BOOL comingFromCart;
+
 @end

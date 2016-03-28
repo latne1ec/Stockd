@@ -75,6 +75,14 @@
         
     }
     
+//    [[PFUser currentUser] setObject:@"1532 Waverly Rd" forKey:@"streetName"];
+//    [[PFUser currentUser] setObject:@"Gladwyne" forKey:@"userCity"];
+//    [[PFUser currentUser] setObject:@"19035" forKey:@"zipCode"];
+//    [[PFUser currentUser] setObject:@"Pa" forKey:@"userState"];
+//    [[PFUser currentUser] saveInBackground];
+//    [[PFUser currentUser] removeObjectForKey:@"userLocation"];
+//    [[PFUser currentUser] saveInBackground];
+
     
     self.title = @"Add Packages";
     self.navigationItem.backBarButtonItem.title = @"";

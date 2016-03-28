@@ -42,7 +42,6 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFImageView class];
     
-    
     //Stripe Keys
     [Stripe setDefaultPublishableKey:StripePublishableKey];
     

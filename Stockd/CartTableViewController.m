@@ -525,7 +525,6 @@
             
         }];
     }
-    
 }
 
 
@@ -539,8 +538,6 @@
     }
     return 0;
 }
-
-
 
 - (IBAction)sizeButtonTapped:(id)sender {
     
@@ -612,9 +609,9 @@
             return;
         }
         
-        if (_finalTotal<=.5) {
+        if (_finalTotal<=10.00) {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $0.50" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $10.00" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             
             [alert show];
             

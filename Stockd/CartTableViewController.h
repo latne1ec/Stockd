@@ -44,7 +44,7 @@
 -(void) removeEmptyPackages;
 
 
--(void)dismissViewAndGetStocked;
+//-(void)dismissViewAndGetStocked;
 
 
 @end

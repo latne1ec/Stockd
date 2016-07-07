@@ -17,14 +17,11 @@
 
 @property (nonatomic, strong) NSMutableDictionary *package_itemsDictionary;
 @property (nonatomic, strong) NSMutableDictionary *extraPackage_itemsDictionary;
-
 @property (nonatomic, strong) NSMutableDictionary *pastOrderPackage_itemsDictionary;
 @property (nonatomic, strong) NSMutableDictionary *pastOrderExtraPackage_itemsDictionary;
-
 @property (nonatomic, strong) NSMutableDictionary *beerItemsDictionary;
-
 @property (nonatomic) int packageSize;
-
+@property (nonatomic, strong) NSArray *packageTypes;
 
 
 

@@ -75,6 +75,16 @@
         
     }
     
+    PFUser *user = [PFUser currentUser];
+    user.password = @"test";
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"error");
+        } else {
+            NSLog(@"success");
+        }
+    }];
+    
 //    [[PFUser currentUser] setObject:@"1532 Waverly Rd" forKey:@"streetName"];
 //    [[PFUser currentUser] setObject:@"Gladwyne" forKey:@"userCity"];
 //    [[PFUser currentUser] setObject:@"19035" forKey:@"zipCode"];

@@ -151,6 +151,7 @@
 		20D52D311B45B86C00A1C60B /* SCVideoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D1B1B45B86C00A1C60B /* SCVideoConfiguration.m */; };
 		20D52D321B45B86C00A1C60B /* SCVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D1D1B45B86C00A1C60B /* SCVideoPlayerView.m */; };
 		20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D52D3D1B46208000A1C60B /* HelpTableViewController.m */; };
+		20D97B841D2EA3E20003F402 /* AddPackagesCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D97B831D2EA3E20003F402 /* AddPackagesCollectionViewController.m */; };
 		20DB61D21CA5AF2600B6FFF5 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 20DB61D11CA5AF2600B6FFF5 /* GoogleMaps.bundle */; };
 		20DB61D61CA5AF6300B6FFF5 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20DB61D51CA5AF6300B6FFF5 /* GoogleMaps.framework */; };
 		20E2EC0A1B4727BD002E317A /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E2EC051B4727BD002E317A /* SVIndefiniteAnimatedView.m */; };
@@ -432,6 +433,8 @@
 		20D52D1D1B45B86C00A1C60B /* SCVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCVideoPlayerView.m; sourceTree = "<group>"; };
 		20D52D3C1B46208000A1C60B /* HelpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpTableViewController.h; sourceTree = "<group>"; };
 		20D52D3D1B46208000A1C60B /* HelpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpTableViewController.m; sourceTree = "<group>"; };
+		20D97B821D2EA3E20003F402 /* AddPackagesCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPackagesCollectionViewController.h; sourceTree = "<group>"; };
+		20D97B831D2EA3E20003F402 /* AddPackagesCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPackagesCollectionViewController.m; sourceTree = "<group>"; };
 		20DB61D11CA5AF2600B6FFF5 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
 		20DB61D51CA5AF6300B6FFF5 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		20E2EC041B4727BD002E317A /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
@@ -917,6 +920,8 @@
 				2067F8D11B4B3CBC001F5478 /* AddPackagesTableViewController.m */,
 				20497DE41B6457B5004A2950 /* CartButton.h */,
 				20497DE51B6457B5004A2950 /* CartButton.m */,
+				20D97B821D2EA3E20003F402 /* AddPackagesCollectionViewController.h */,
+				20D97B831D2EA3E20003F402 /* AddPackagesCollectionViewController.m */,
 			);
 			name = "Add To Cart";
 			sourceTree = "<group>";
@@ -1404,6 +1409,7 @@
 				201186811B41F12200A59D55 /* TSMessageView.m in Sources */,
 				20D52D2F1B45B86C00A1C60B /* SCSampleBufferHolder.m in Sources */,
 				20D52D301B45B86C00A1C60B /* SCSwipeableFilterView.m in Sources */,
+				20D97B841D2EA3E20003F402 /* AddPackagesCollectionViewController.m in Sources */,
 				2067F8FE1B4C7085001F5478 /* UpdateCartTableCell.m in Sources */,
 				2067F8F41B4C2C3E001F5478 /* SubtotalTableCell.m in Sources */,
 				2010B7DC1B4D712E00F897CF /* ConfirmationTableViewController.m in Sources */,

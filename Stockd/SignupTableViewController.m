@@ -142,7 +142,6 @@
     [nameField resignFirstResponder];
     [emailField resignFirstResponder];
     [passwordField resignFirstResponder];
-    
     [TSMessage dismissActiveNotification];
     
 }
@@ -507,9 +506,9 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
                 
             }
             else {
-                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-                [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
-                [currentInstallation saveInBackground];
+//                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//                [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+//                [currentInstallation saveInBackground];
                 
                 [ProgressHUD dismiss];
                 ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];

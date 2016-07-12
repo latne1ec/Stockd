@@ -250,9 +250,9 @@
             else {
                 
                 [ProgressHUD dismiss];
-                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-                [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
-                [currentInstallation saveInBackground];
+//                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//                [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+//                [currentInstallation saveInBackground];
                 
                 /////Pop To Main View Controller
                 ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];

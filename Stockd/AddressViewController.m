@@ -12,7 +12,7 @@
 
 @interface AddressViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
-@property (weak, nonatomic) IBOutlet UITextField *appartmentNumberTextField;
+@property (weak, nonatomic) IBOutlet UITextField *apartmentNumberTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeight;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -22,6 +22,10 @@
 @property (strong, nonatomic) NSMutableArray* places;
 @property (strong, nonatomic) NSMutableArray* searchResults;
 @property (strong, nonatomic) UITapGestureRecognizer* tapGesture;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+
+@property (nonatomic, strong) NSString *oldUserAddress;
+
 
 @property (strong, nonatomic) GMSPlace* thePlace;
 
@@ -39,12 +43,20 @@
     _tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:_tapGesture];
     
+    
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    swipe.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipe];
+    
+    //self.title = @"Address Info";
+    
     _tableView.dataSource = self;
     _tableView.delegate = self;
     
     _validEntry = NO;
     
     _addressTextField.delegate = self;
+    _apartmentNumberTextField.delegate = self;
     
     _placesClient = [[GMSPlacesClient alloc] init];
     
@@ -57,17 +69,126 @@
     [self.view addSubview:imageView];
     [self.view sendSubviewToBack:imageView];
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"initialBkg"]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
+    
     if ([[PFUser currentUser] objectForKey:@"address"]){
         _addressTextField.text = [[PFUser currentUser] objectForKey:@"address"];
         _validEntry = YES;
+        
     }
     
-    if ([[PFUser currentUser] objectForKey:@"appartmentNumber"]){
-        _appartmentNumberTextField.text = [[PFUser currentUser] objectForKey:@"appartmentNumber"];
+    if ([[PFUser currentUser] objectForKey:@"apartmentNumber"]){
+        _apartmentNumberTextField.text = [[PFUser currentUser] objectForKey:@"apartmentNumber"];
     }
     
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
+    
+    self.saveButton.layer.cornerRadius = 3.5;
+    self.saveButton.backgroundColor = [UIColor colorWithRed:0.333 green:0.812 blue:0.478 alpha:1];
+    //self.saveButton.titleLabel.font = [UIFont fontWithName:@"BELLABOO" size:18];
+    
+    
+    NSString *oldUserStreet = [[PFUser currentUser] objectForKey:@"streetName"];
+    NSString *oldUserCity = [[PFUser currentUser] objectForKey:@"userCity"];
+    NSString *oldUserState = [[PFUser currentUser] objectForKey:@"userState"];
+    NSString *oldUserZip = [[PFUser currentUser] objectForKey:@"zipCode"];
+    NSString *oldUserApartmentNumber = [[PFUser currentUser] objectForKey:@"aptDormNumber"];
+    self.oldUserAddress = [NSString stringWithFormat:@"%@, %@, %@, %@",oldUserStreet, oldUserCity, oldUserState, oldUserZip];
+    
+    NSLog(@"Old user address: %@", self.oldUserAddress);
+    
+    if (oldUserStreet != nil) {
+     
+        _addressTextField.text = self.oldUserAddress;
+        _apartmentNumberTextField.text = oldUserApartmentNumber;
+        
+        [_placesClient autocompleteQuery:self.oldUserAddress bounds:nil filter:nil callback:^(NSArray * _Nullable results, NSError * _Nullable error) {
+            if (error){
+                NSLog(@"Autocomplete error \(error)");
+            }
+            
+            if (results.count == 0) {
+                
+            } else {
+            
+            
+            _searchResults = [results mutableCopy];
+            NSLog(@"search results %@", self.searchResults);
+            NSString* placeID = [[self.searchResults objectAtIndex:0] placeID];
+            
+            [_placesClient lookUpPlaceID:placeID callback:^(GMSPlace *place, NSError *error) {
+                if (error != nil) {
+                    NSLog(@"Place Details error %@", [error localizedDescription]);
+                    return;
+                }
+                
+                if (place != nil) {
+                    self.validEntry = YES;
+                    
+                    _thePlace = place;
+                    NSLog(@"Place name %@", place.name);
+                    NSLog(@"Place address %@", place.formattedAddress);
+                    NSLog(@"Place placeID %@", place.placeID);
+                    NSLog(@"Place attributions %@", place.attributions);
+
+                }
+            }];
+            }
+        }];
+    }
+    
+    self.tableView.layer.cornerRadius = 4;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    if (_comingFromCart) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making a purchase on Stockd, please add your address information. If you previously added your address, please update it to continue with your order. We promise this will be the last time we ask." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        
+        alert.delegate = self;
+        alert.tag = 101;
+        [alert show];
+        
+        
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (alertView.tag == 101) {
+        //dismiss alert and show next alert if old user address exists
+        if (buttonIndex == 0) {
+            //show alert
+            NSLog(@"dismissed alert");
+            
+            NSString *oldUserStreet = [[PFUser currentUser] objectForKey:@"streetName"];
+            
+            if (oldUserStreet != nil) {
+             
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Does this look okay?" message:self.oldUserAddress delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Update", nil];
+                
+                alert.delegate = self;
+                alert.tag = 102;
+                [alert show];
+            }
+        }
+    }
+    
+    if (alertView.tag == 102) {
+        if (buttonIndex == 0) {
+            //Cancel
+        } else if (buttonIndex == 1) {
+            //User Tapped Update
+            UIButton *sender;
+            
+            [self onSave:sender];
+        }
+    }
 }
 
 -(void) dismissKeyboard{
@@ -87,6 +208,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell" forIndexPath:indexPath];
     
     NSAttributedString* address = [[_searchResults objectAtIndex:indexPath.row] attributedFullText];
@@ -147,38 +269,6 @@
     }
 }
 
--(void) startSearch: (NSString*)searchString{
-    MKCoordinateRegion newRegion;
-    
-    newRegion.span.latitudeDelta = 0.112872;
-    newRegion.span.longitudeDelta = 0.109863;
-    
-    
-    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
-    request.naturalLanguageQuery = searchString;
-    request.region = newRegion;
-    
-    
-
-    MKLocalSearchCompletionHandler handler  = ^(MKLocalSearchResponse *response, NSError *error){
-        if (error){
-            NSLog(@"ERROR MAP ADDRESS");
-        }else{
-            self.places = [response.mapItems mutableCopy];
-            
-            if (self.places.count > 0){
-                [self.tableView reloadData];
-            }
-        }
-    };
-    
-    if (self.localsearch) {
-        self.localsearch = nil;
-    }
-    
-    _localsearch = [[MKLocalSearch alloc] initWithRequest:request];
-    [_localsearch startWithCompletionHandler:handler];
-}
 
 -(void) placeAutocomplete: (NSString*) searchQuery{
     [_placesClient autocompleteQuery:searchQuery bounds:nil filter:nil callback:^(NSArray * _Nullable results, NSError * _Nullable error) {
@@ -201,9 +291,21 @@
     }];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if ([_addressTextField isFirstResponder]) {
+        [_addressTextField resignFirstResponder];
+    } else if ([_apartmentNumberTextField isFirstResponder]) {
+        
+        [_apartmentNumberTextField resignFirstResponder];
+    }
+
+    return YES;
+}
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (textField == _addressTextField){
-        if (_addressTextField.text.length > 0 && [string  isEqual: @" "]){
+        if (_addressTextField.text.length > 0){
             [self placeAutocomplete: _addressTextField.text];
         }else if (_addressTextField.text.length > 0 && [string  isEqual: @""]){
             if (self.tableViewHeight.constant == 175){
@@ -223,10 +325,67 @@
 }
 
 - (IBAction)onSave:(UIButton *)sender {
+    
+    [_addressTextField resignFirstResponder];
+    [_apartmentNumberTextField resignFirstResponder];
+    //NSLog(@"Place: %@", _thePlace.formattedAddress);
+    
+    NSString *userAddress = [[PFUser currentUser] objectForKey:@"address"];
+    NSString *userAptNumber = [[PFUser currentUser] objectForKey:@"apartmentNumber"];
+    NSString *userZip = [[PFUser currentUser] objectForKey:@"zipCode"];
+    
+    if ([userAddress isEqualToString:_addressTextField.text]) {
+        
+//        if ([userAptNumber isEqualToString:_apartmentNumberTextField.text]) {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Already Saved" message:@"Your address has already been saved, you're good to go!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//            
+//            [alert show];
+//            alert.tag = 55;
+//            alert.delegate = self;
+//            return;
+//        } else {
+//            
+//        }
+    }
+    
+//    if (_thePlace.formattedAddress == nil) {
+//        NSLog(@"gotcha");
+//        [TSMessage showNotificationInViewController:self.navigationController
+//                                              title:@"Error"
+//                                           subtitle:@"Invalid Address"
+//                                              image:nil
+//                                               type:TSMessageNotificationTypeError
+//                                           duration:TSMessageNotificationDurationAutomatic
+//                                           callback:nil
+//                                        buttonTitle:nil
+//                                     buttonCallback:^{}
+//                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+//                               canBeDismissedByUser:YES];
+//
+//
+//        return;
+//    }
+
+    if ([_addressTextField.text length] <1) {
+        [TSMessage showNotificationInViewController:self.navigationController
+                                              title:@"Error"
+                                           subtitle:@"Invalid Address"
+                                              image:nil
+                                               type:TSMessageNotificationTypeError
+                                           duration:TSMessageNotificationDurationAutomatic
+                                           callback:nil
+                                        buttonTitle:nil
+                                     buttonCallback:^{}
+                                         atPosition:TSMessageNotificationPositionNavBarOverlay
+                               canBeDismissedByUser:YES];
+        
+        return;
+    }
+    
     if (!_validEntry){
         [TSMessage showNotificationInViewController:self.navigationController
                                               title:@"Error"
-                                           subtitle:@"Invalid Address!"
+                                           subtitle:@"Invalid Address"
                                               image:nil
                                                type:TSMessageNotificationTypeError
                                            duration:TSMessageNotificationDurationAutomatic
@@ -236,23 +395,45 @@
                                          atPosition:TSMessageNotificationPositionNavBarOverlay
                                canBeDismissedByUser:YES];
     }else{
+        
         NSString *zipCode = @"";
-        NSArray* dic = [_thePlace valueForKey:@"addressComponents"];
-        NSLog(@"Diction CODE: %@", dic);
-        for (int i=0;i<[dic count];i++) {
-            if ([[[dic objectAtIndex:i] valueForKey:@"type"] isEqualToString:@"postal_code"]) {
-                zipCode = [[dic objectAtIndex:i] valueForKey:@"name"];
-                NSLog(@"ZipCode: %@",[[dic objectAtIndex:i] valueForKey:@"name"]);
-            }
-        }
-        NSLog(@"ZIP CODE: %@", zipCode);
         
         [ProgressHUD show:nil];
         PFGeoPoint *theLocation = [PFGeoPoint geoPointWithLatitude:_thePlace.coordinate.latitude longitude:_thePlace.coordinate.longitude];
+        
+        if (_thePlace){
+            NSArray* dic = [_thePlace valueForKey:@"addressComponents"];
+            NSLog(@"Diction CODE: %@", dic);
+            for (int i=0;i<[dic count];i++) {
+                if ([[[dic objectAtIndex:i] valueForKey:@"type"] isEqualToString:@"postal_code"]) {
+                    zipCode = [[dic objectAtIndex:i] valueForKey:@"name"];
+                    NSLog(@"ZipCode: %@",[[dic objectAtIndex:i] valueForKey:@"name"]);
+                }
+            }
+        }else if ([[PFUser currentUser] objectForKey:@"address"] != nil){
+            zipCode = [[PFUser currentUser] objectForKey:@"zipCode"];
+            theLocation = [[PFUser currentUser] objectForKey:@"userLocation"];
+        }
+        
+        if (!_thePlace) {
+            
+            if (_comingFromCart) {
+             
+                [ProgressHUD dismiss];
+                _addressTextField.text = @"";
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"We couldn't find that address. Please re-enter your address and tap save. " delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                
+                [alert show];
+                
+                return;
+            }
+        }
+        
+        
         PFUser *user = [PFUser currentUser];
         [user setObject:zipCode forKey:@"zipCode"];
-        [user setObject:_thePlace.formattedAddress forKey:@"address"];
-        [user setObject:_appartmentNumberTextField.text forKey:@"appartmentNumber"];
+        [user setObject:_addressTextField.text forKey:@"address"];
+        [user setObject:_apartmentNumberTextField.text forKey:@"apartmentNumber"];
         [user setObject:theLocation forKey:@"userLocation"];
         
         [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -275,7 +456,19 @@
             }
             else {
                 
-                [self checkIfParticipatingArea];
+                PFUser *user = [PFUser currentUser];
+                [user removeObjectForKey:@"aptDormNumber"];
+                [user removeObjectForKey:@"streetName"];
+                [user removeObjectForKey:@"userState"];
+                [user removeObjectForKey:@"userCity"];
+                [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error) {
+                        [ProgressHUD showError:@"Error"];
+                    } else {
+                    
+                        [self checkIfParticipatingArea];
+                    }
+                }];
                 
             }
         }];
@@ -283,6 +476,10 @@
 }
 
 -(void)checkIfParticipatingArea {
+    
+    NSString *userZip = [[PFUser currentUser] objectForKey:@"zipCode"];
+    
+    NSLog(@"user zip : %@", userZip);
     
     PFQuery *query = [PFQuery queryWithClassName:@"Zipcodes"];
     [query whereKey:@"zipcode" equalTo:[[PFUser currentUser] objectForKey:@"zipCode"]];
@@ -302,10 +499,12 @@
             [[PFUser currentUser] setObject:@"YES" forKey:@"canOrder"];
             [[PFUser currentUser] saveInBackground];
             [self dismissViewControllerAnimated:YES completion:^{
-                [parent addressMessage];
+                if (_comingFromCart) {
+                    
+                } else {
+                    [parent addressMessage];
+                }
             }];
-            
-            
         }
     }];
 }
@@ -317,12 +516,14 @@
     [alert show];
     alert.tag = 55;
     alert.delegate = self;
+    
+    [self onClose:self];
 }
 
 
 - (IBAction)onClose:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
-        [parent addressMessage];
+        //[parent addressMessage];
     }];
 }
 

@@ -36,12 +36,13 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     _alreadyShowed = 0;
     
+   
+    
     //Parse Keys
     [Parse setApplicationId:@"CYM8KYF8jzPvy9usbmgAZouY1X1t3WbWLErZzxgc"
                   clientKey:@"56dirzgs3IEhiIrV6AWu898rTmNIyUBf79vWwbE8"];
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
     [PFImageView class];
-    
     
     //Stripe Keys
     [Stripe setDefaultPublishableKey:StripePublishableKey];
@@ -72,6 +73,7 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     _package_itemsDictionary = [[NSMutableDictionary alloc] init];
     _extraPackage_itemsDictionary = [[NSMutableDictionary alloc] init];
     _beerItemsDictionary = [[NSMutableDictionary alloc] init];
+    _packageTypes = [[NSArray alloc] init];
     _packageSize = 1;
     
     [self queryForBeerItems];
@@ -101,6 +103,10 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
                                                           openURL:url
                                                 sourceApplication:sourceApplication
                                                 annotation:annotation];
+}
+
+-(void)getAllPackageTypes {
+        
 }
 
 -(void)queryForBeerItems {

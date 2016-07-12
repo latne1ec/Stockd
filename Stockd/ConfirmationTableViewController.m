@@ -77,8 +77,8 @@
     NSString *cityName = [[PFUser currentUser] objectForKey:@"userCity"];
     NSString *zipCode = [[PFUser currentUser] objectForKey:@"zipCode"];
     
-    self.streetNameLabel.text = streetName;
-    self.cityStateZipLabel.text = [NSString stringWithFormat:@"%@, %@", cityName, zipCode];
+    self.streetNameLabel.text = [[PFUser currentUser] objectForKey:@"address"];
+    //self.cityStateZipLabel.text = [NSString stringWithFormat:@"%@, %@", cityName, zipCode];
     self.totalPriceLabel.text = [NSString stringWithFormat:@"$%.02f", _subtotal];
 
     
@@ -194,7 +194,6 @@
                 [[PFUser currentUser] incrementKey:@"karmaCash" byAmount:[NSNumber numberWithInt:10]];
                 [[PFUser currentUser] saveInBackground];
             }
-            
         }
     }
     
@@ -211,7 +210,6 @@
     if ([_appDelegate extraPackage_itemsDictionary] !=nil) {
         [[_appDelegate extraPackage_itemsDictionary] removeAllObjects];
     }
-    
 
     ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
     [CATransaction begin];
@@ -222,9 +220,7 @@
     
     [self.navigationController pushViewController:destViewController animated:NO];
     
-    
     [CATransaction commit];
-
     
 }
 @end

@@ -155,14 +155,29 @@
 
 -(void)checkIfParticipatingArea {
     
+//    NSString *newUserAddress = [[PFUser currentUser] objectForKey:@"address"];
+//    
+//    if (newUserAddress == nil) {
+//        
+//    } else {
+//        
+//    }
+    
     NSString *zipCode = [[PFUser currentUser] objectForKey:@"zipCode"];
     
-    if (zipCode == nil) {
-
-        //[self getStockedTapped:self];
-        [self showAddressAlert];
-        
+    PFGeoPoint *userLocation = [[PFUser currentUser] objectForKey:@"userLocation"];
+    
+    if (userLocation == nil) {
+        ///
+        //S
+         [self showAddressAlert];
     }
+    
+//    if (zipCode == nil) {
+//
+//        [self showAddressAlert];
+//        
+//    }
     else {
         
         PFQuery *query = [PFQuery queryWithClassName:@"Zipcodes"];
@@ -510,7 +525,6 @@
             
         }];
     }
-    
 }
 
 
@@ -524,8 +538,6 @@
     }
     return 0;
 }
-
-
 
 - (IBAction)sizeButtonTapped:(id)sender {
     
@@ -553,6 +565,14 @@
 
 - (IBAction)getStockedTapped:(id)sender {
     
+    PFGeoPoint *userLocation = [[PFUser currentUser] objectForKey:@"userLocation"];
+    
+    if (userLocation == nil) {
+        
+        [self showAddressAlert];
+        return;
+    }
+    
     NSString *hasShownDeliveryInstructions = [[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownDeliveryInstructions"];
     
     if (![hasShownDeliveryInstructions isEqualToString:@"YES"]) {
@@ -560,8 +580,6 @@
         [self showDeliveryInstructionsPopup];
         
     } else {
-        //do das below
-        //NSLog(@"Do das below");
     
         if (_BOOZE !=0) {
             
@@ -591,9 +609,9 @@
             return;
         }
         
-        if (_finalTotal<=.5) {
+        if (_finalTotal<=10.00) {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $0.50" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $10.00" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             
             [alert show];
             
@@ -609,28 +627,17 @@
             return;
         }
         
-//        NSString *canOrder = [[PFUser currentUser] objectForKey:@"canOrder"];
-//        
-//        if ([canOrder isEqualToString:@"NO"]) {
-//            NSLog(@"Not in your area yet HOLMESS!!");
-//            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Unfortunately we won't be able to process your order until we start serving your area. We'll notify you as soon as we do!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-//            
-//            [alert show];
-//            
-//        }
-        
         else {
             
             NSString *userStripeToken = [[PFUser currentUser] objectForKey:@"stripeToken"];
             
-            if ([[PFUser currentUser] objectForKey:@"streetName"] == nil) {
-                
-                [self showAddressAlert];
-                return;
-            }
+//            if ([[PFUser currentUser] objectForKey:@"streetName"] == nil) {
+//                
+//                [self showAddressAlert];
+//                return;
+//            }
             
-            else if (userStripeToken == nil) {
+             if (userStripeToken == nil) {
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Payment Method" message:@"Before making any purchases on Stockd, you must first enter a payment method." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [alert show];
@@ -673,7 +680,27 @@
 
 -(void)showAddressAlert {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//    [alert show];
+    
+    AddressViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddressVC"];
+    destViewController.parent = self;
+    destViewController.comingFromCart = true;
+    UINavigationController *navigationController =
+    [[UINavigationController alloc] initWithRootViewController:destViewController];
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"Address Info"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+    [self.navigationController presentViewController:navigationController animated:YES completion:^{
+    }];
+}
+
+-(void)showNewAddressAlert {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Address Info" message:@"Before making any purchases on Stockd, you must first add your address information. If you previously saved your address information, you must update it now to continue with your order." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     
     AddressViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddressVC"];
@@ -688,6 +715,7 @@
     [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
     [self.navigationController presentViewController:navigationController animated:YES completion:^{
     }];
+    
 }
 
 -(void)showAddPhoneNumberAlert {

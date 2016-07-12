@@ -15,10 +15,6 @@
 @property (nonatomic, strong) NSString *customerID;
 @property (nonatomic, strong) NSString *ccNumber;
 
-
-
-
-
 @end
 
 @implementation PaymentTableViewController 

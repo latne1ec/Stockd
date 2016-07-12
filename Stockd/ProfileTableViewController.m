@@ -227,7 +227,7 @@
         
         AddressViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddressVC"];
         
-        //destViewController.parent = self;
+        destViewController.parent = self;
         NSLog(@"Tapped Address");
         UINavigationController *navigationController =
         [[UINavigationController alloc] initWithRootViewController:destViewController];

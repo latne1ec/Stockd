@@ -578,7 +578,7 @@
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
             for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
+                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue] imageURLString:itemPFObj[@"itemImageUrl"]] forKey:itemPFObj[@"itemName"]];
             }
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
             cell.packageNameLabel.text = [ NSString stringWithFormat:@"- %@", packageName];
@@ -606,11 +606,11 @@
                         if ([itemPFObj[@"itemName"] isEqual:@"Bud Light"] || [itemPFObj[@"itemName"] isEqual:@"Absolut"]){
                             t_qt = 1;
                         }
-                        [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: t_qt price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
+                        [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: t_qt price:[itemPFObj[@"itemPrice"] floatValue] imageURLString:itemPFObj[@"itemImageUrl"]] forKey:itemPFObj[@"itemName"]];
                     }
                 }else{
                     for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                        [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
+                        [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue] imageURLString:itemPFObj[@"itemImageUrl"]] forKey:itemPFObj[@"itemName"]];
                     }
                 }
                 cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];
@@ -644,7 +644,7 @@
         if (![[_appDelegate package_itemsDictionary] valueForKey:packageName]){
             [[_appDelegate package_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey:packageName];
             for (PFObject* itemPFObj in [_itemsDictionary valueForKey:packageName]){
-                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue]] forKey:itemPFObj[@"itemName"]];
+                [[[_appDelegate package_itemsDictionary] valueForKey:packageName] setObject:[[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity: 1 price:[itemPFObj[@"itemPrice"] floatValue] imageURLString:itemPFObj[@"itemImageUrl"]] forKey:itemPFObj[@"itemName"]];
             }
             
             cell.greenBkgView.backgroundColor = [UIColor lightGrayColor];

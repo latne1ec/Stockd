@@ -8,6 +8,7 @@
 
 #import "SignupTableViewController.h"
 #import "JGActionSheet.h"
+#import "AddPackagesCollectionViewController.h"
 #define SOURCETYPE UIImagePickerControllerSourceTypeCamera
 
 
@@ -511,7 +512,7 @@ UIImage* ResizeImage(UIImage *image, CGFloat width, CGFloat height) {
 //                [currentInstallation saveInBackground];
                 
                 [ProgressHUD dismiss];
-                ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
+                AddPackagesCollectionViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
                 UINavigationController *navigationController =
                 [[UINavigationController alloc] initWithRootViewController:destViewController];
                 UIBarButtonItem *newBackButton =

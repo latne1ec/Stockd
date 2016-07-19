@@ -7,6 +7,7 @@
 //
 
 #import "FoodTableViewController.h"
+#import "PackageDetailCollectionViewController.h"
 
 @interface FoodTableViewController ()
 
@@ -116,7 +117,7 @@
     NSString *packageName = [object objectForKey:@"packageName"];
     //NSLog(@"Package Name: %@", packageName);
     
-    PackageDetailViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PackageDetail"];
+    PackageDetailCollectionViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PackageDetail"];
     destViewController.packageName = packageName;
     destViewController.packageType = @"Food";
     

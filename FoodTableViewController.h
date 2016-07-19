@@ -14,8 +14,6 @@
 #import "SlideNavigationController.h"
 #import "PackageDetailViewController.h"
 
-
-
 @interface FoodTableViewController : UITableViewController <SlideNavigationControllerDelegate>
 {
     NSString *tappedMenu;

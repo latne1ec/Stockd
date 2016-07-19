@@ -232,7 +232,7 @@
             cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[_thePackage_itemsDictionary valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] itemQuantity]];
         }else{
             if (![[_theExtraPackage_itemsDictionary valueForKey: _packageName] valueForKey:cell.itemNameLabel.text]){
-                [[_theExtraPackage_itemsDictionary valueForKey:_packageName] setObject:[[CartItemObject alloc] initItem:cell.itemNameLabel.text detail:cell.itemDetailLabel.text quantity: 1 price:[cell.itemPriceLabel.text floatValue]] forKey:cell.itemNameLabel.text];
+                [[_theExtraPackage_itemsDictionary valueForKey:_packageName] setObject:[[CartItemObject alloc] initItem:cell.itemNameLabel.text detail:cell.itemDetailLabel.text quantity: 1 price:[cell.itemPriceLabel.text floatValue] imageURLString: @""] forKey:cell.itemNameLabel.text];
             }else{
                 [[[_theExtraPackage_itemsDictionary valueForKey:_packageName] valueForKey:cell.itemNameLabel.text] increaseQuantity];
             }

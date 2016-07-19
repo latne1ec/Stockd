@@ -16,8 +16,9 @@
 @property int itemQuantity;
 @property float itemPrice;
 @property Boolean hasBeenModified;
+@property NSString* imageURLString;
 
--(id) initItem: (NSString*)name_ detail:(NSString*)detail_ quantity:(int)quantity_ price:(float)price_;
+-(id) initItem: (NSString*)name_ detail:(NSString*)detail_ quantity:(int)quantity_ price:(float)price_ imageURLString:(NSString*)imageURLString_;
 
 -(void)increaseQuantity;
 -(void)decreaseQuantity;

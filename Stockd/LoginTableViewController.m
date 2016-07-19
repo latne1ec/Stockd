@@ -7,6 +7,7 @@
 //
 
 #import "LoginTableViewController.h"
+#import "AddPackagesCollectionViewController.h"
 
 @interface LoginTableViewController ()
 
@@ -255,7 +256,7 @@
 //                [currentInstallation saveInBackground];
                 
                 /////Pop To Main View Controller
-                ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
+                AddPackagesCollectionViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
                 UINavigationController *navigationController =
                 [[UINavigationController alloc] initWithRootViewController:destViewController];
                 UIBarButtonItem *newBackButton =

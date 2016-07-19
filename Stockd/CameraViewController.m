@@ -10,6 +10,7 @@
 #import "InitialViewController.h"
 #import "AppDelegate.h"
 #import "ConfirmationTableViewController.h"
+#import "AddPackagesCollectionViewController.h"
 
 @interface CameraViewController () {
     SCRecorder *_recorder;
@@ -531,7 +532,7 @@ UIImage* ResizeImage3(UIImage *image, CGFloat width, CGFloat height) {
         packageSize = 4;
     }
     
-    AddPackagesTableViewController *apvc = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
+    AddPackagesCollectionViewController *apvc = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
     apvc.picture = self.filePicture;
     apvc.orderNumber = orderNumber;
     apvc.food = self.food;

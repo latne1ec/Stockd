@@ -12,6 +12,7 @@
 #import "PhoneTableViewController.h"
 #import "AlcoholPolicyViewController.h"
 #import "AppDelegate.h"
+#import "EditPackageCollectionViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface CartTableViewController ()
@@ -194,6 +195,19 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    int totalNumber = 0;
+    for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
+        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey]){
+            totalNumber += [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] valueForKey:itemNameKey] itemQuantity];
+        }
+    }
+    
+    if ([_appDelegate package_itemsDictionary].count + totalNumber == 0) {
+        [self.navigationController popViewControllerAnimated:true];
+        return;
+    }
+    
+    
     [self updateTotal];
     [self.tableView reloadData];
     [self setNavTitle];
@@ -502,7 +516,7 @@
             packageName = [_extraKeys objectAtIndex:indexPath.row];
         }
         
-        EditPackageTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPackage"];
+        EditPackageCollectionViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"EditPackage"];
         destViewController.thePackage_itemsDictionary = _thePackage_itemsDictionary;
         destViewController.theExtraPackage_itemsDictionary = _theExtraPackage_itemsDictionary;
         destViewController.packageSize = self.packageSize;

@@ -153,7 +153,7 @@
                         for (int i = 0; i < allItemsName.count; i++){
                             PFObject* itemPFObj = [[_itemsDictionary valueForKey:thePackageName]valueForKey: allItemsName[i]];
                             
-                            id theItem = [[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity:[allItemsQt[i] integerValue] price:[itemPFObj[@"itemPrice"] floatValue]];
+                            id theItem = [[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity:[allItemsQt[i] integerValue] price:[itemPFObj[@"itemPrice"] floatValue] imageURLString:itemPFObj[@"itemImageUrl"]];
                             
                             [[[_appDelegate pastOrderPackage_itemsDictionary] valueForKey:thePackageName] setObject:theItem forKey:allItemsName[i]];
                         }
@@ -167,7 +167,7 @@
                         for (int i = 0; i < allItemsName.count; i++){
                             PFObject* itemPFObj = [[_itemsDictionary valueForKey:thePackageName]valueForKey: allItemsName[i]];
                             
-                            id theItem = [[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity:[allItemsQt[i] integerValue] price:[itemPFObj[@"itemPrice"] floatValue]];
+                            id theItem = [[CartItemObject alloc] initItem:itemPFObj[@"itemName"] detail:itemPFObj[@"itemQuantity"] quantity:[allItemsQt[i] integerValue] price:[itemPFObj[@"itemPrice"] floatValue] imageURLString:itemPFObj[@"itemImageUrl"]];
                             
                             [[[_appDelegate pastOrderExtraPackage_itemsDictionary] valueForKey:thePackageName] setObject:theItem forKey:allItemsName[i]];
                         }

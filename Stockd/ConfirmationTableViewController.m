@@ -10,6 +10,7 @@
 #import "ProfileTableViewController.h"
 #import "InitialViewController.h"
 #import "AppDelegate.h"
+#import "AddPackagesCollectionViewController.h"
 
 @interface ConfirmationTableViewController ()
 
@@ -211,7 +212,7 @@
         [[_appDelegate extraPackage_itemsDictionary] removeAllObjects];
     }
 
-    ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
+    AddPackagesCollectionViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
     CATransition *transition = [CATransition animation];

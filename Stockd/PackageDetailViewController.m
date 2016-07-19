@@ -223,7 +223,7 @@
 
     if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
         if ([self checkValidBeerLimit]){
-            [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue]] forKey:self.items[indexPath.row][@"itemName"]];
+            [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue] imageURLString:self.items[indexPath.row][@"itemImageUrl"]] forKey:self.items[indexPath.row][@"itemName"]];
             
             [self updateCartAnimated];
         }

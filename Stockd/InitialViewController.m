@@ -12,6 +12,8 @@
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "ProfileTableViewController.h"
+#import "AddPackagesCollectionViewController.h"
+
 
 
 @interface InitialViewController ()
@@ -236,7 +238,7 @@
     
     /////Pop To Main View Controller
 
-    ProfileTableViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
+    AddPackagesCollectionViewController *destViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AddPackages"];
     UINavigationController *navigationController =
     [[UINavigationController alloc] initWithRootViewController:destViewController];
     UIBarButtonItem *newBackButton =

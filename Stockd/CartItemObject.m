@@ -11,12 +11,13 @@
 
 @implementation CartItemObject
 
--(id) initItem: (NSString*)name_ detail:(NSString*)detail_ quantity:(int)quantity_ price:(float)price_{
+-(id) initItem: (NSString*)name_ detail:(NSString*)detail_ quantity:(int)quantity_ price:(float)price_ imageURLString:(NSString*)imageURLString_{
     if (self = [super init]){
         _itemName = name_;
         _itemDetail = detail_;
         _itemQuantity = quantity_;
         _itemPrice = price_;
+        _imageURLString = imageURLString_;
         _hasBeenModified = false;
     }
     return self;

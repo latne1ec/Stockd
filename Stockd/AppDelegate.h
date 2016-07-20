@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSMutableDictionary *beerItemsDictionary;
 @property (nonatomic) int packageSize;
 @property (nonatomic, strong) NSArray *packageTypes;
+@property (nonatomic) NSDate* deliveryDate;
+@property (nonatomic) NSString* deliveryDay;
 
 
 

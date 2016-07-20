@@ -15,6 +15,7 @@
 #import "PackageCollectionViewCell.h"
 #include "PackageCollectionViewLayout.h"
 #import "PackageDetailCollectionViewController.h"
+#include "OrderView.h"
 
 @interface FoodCollectionViewController ()
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSArray *food;
 @property (nonatomic, strong) NSArray *drinks;
 
+@property (nonatomic, strong) OrderView *orderView;
 
 @end
 
@@ -33,6 +35,7 @@
     [super viewDidLoad];
     
     self.collectionView.collectionViewLayout = [[PackageCollectionViewLayout alloc] init];
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     
     self.title = @"Food";
     
@@ -67,6 +70,14 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     self.navigationItem.hidesBackButton = YES;
+    
+    if (!_orderView){
+        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView.parentViewController = self;
+        [self.view addSubview:_orderView];
+    }
+    
+    [_orderView update];
     
 }
 

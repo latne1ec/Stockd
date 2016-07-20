@@ -15,7 +15,7 @@
 #import "CartTableViewController.h"
 #import "SlideNavigationController.h"
 
-@interface AddPackagesCollectionViewController : UICollectionViewController
+@interface AddPackagesCollectionViewController : UICollectionViewController <TSMessageViewProtocol>
 @property (nonatomic, strong) PFFile *picture;
 @property (nonatomic, strong) NSString *orderNumber;
 @property (nonatomic, strong) PFObject *order;

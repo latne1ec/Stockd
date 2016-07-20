@@ -37,6 +37,8 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
     _alreadyShowed = 0;
     
    
+    _deliveryDate = [NSDate date];
+    _deliveryDay = @"Now";
     
     //Parse Keys
     [Parse setApplicationId:@"CYM8KYF8jzPvy9usbmgAZouY1X1t3WbWLErZzxgc"

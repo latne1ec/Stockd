@@ -10,6 +10,7 @@
 #import "CartButton.h"
 #import "AppDelegate.h"
 #import "PackageCollectionViewLayout.h"
+#include "OrderView.h"
 
 @interface PackageDetailCollectionViewController ()
 
@@ -18,6 +19,8 @@
 
 @property (nonatomic, strong) UIView *headerview;
 @property (nonatomic, strong) AppDelegate *appDelegate;
+
+@property (nonatomic, strong) OrderView *orderView;
 
 @end
 
@@ -30,6 +33,7 @@
     
     PackageCollectionViewLayout* theLayout = [[PackageCollectionViewLayout alloc] init];
     theLayout.isEdit = YES;
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     
     self.collectionView.collectionViewLayout = theLayout;
     
@@ -42,13 +46,13 @@
     //                                                                            action:@selector(dismissViewControllerAnimated:completion:)];
     
     
-    CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
+    /*CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0,0,25,25);
     [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
     [btn load];
     UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
-    self.navigationItem.rightBarButtonItem = barBtn;
+    self.navigationItem.rightBarButtonItem = barBtn;*/
     
     
     self.title = [NSString stringWithFormat:@"%@ Items", self.packageName];
@@ -85,6 +89,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
     [self updateCartAnimated];
     [self.collectionView reloadData];
     
@@ -95,6 +100,18 @@
     //self.navigationItem.hidesBackButton = YES;
 }
 
+
+-(void)viewDidAppear:(BOOL)animated{
+    //VIEW WILL APPEAR NOT CALLED FOR SOME REASON...
+    
+    if (!_orderView){
+        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView.parentViewController = self;
+        [self.view addSubview:_orderView];
+    }
+    
+    [_orderView update];
+}
 
 -(void)viewWillDisappear:(BOOL)animated {
     if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] count] < 1){
@@ -260,11 +277,11 @@
 
 
 -(void) updateCartAnimated{
-    int totalNumber = 0;
+    //int totalNumber = 0;
     /*for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
      totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
      }*/
-    totalNumber += [_appDelegate package_itemsDictionary].count;
+    /*totalNumber += [_appDelegate package_itemsDictionary].count;
     
     for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
         for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey]){
@@ -273,6 +290,8 @@
     }
     
     [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
+    */
+    [_orderView update];
 }
 
 -(void)goToCartScreen {

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
+#import "TSMessage.h"
 
-@interface DrinksCollectionViewController : UICollectionViewController <SlideNavigationControllerDelegate>
+@interface DrinksCollectionViewController : UICollectionViewController <SlideNavigationControllerDelegate, TSMessageViewProtocol>
 
 - (BOOL)slideNavigationControllerShouldDisplayLeftMenu;
 - (BOOL)slideNavigationControllerShouldDisplayRightMenu;

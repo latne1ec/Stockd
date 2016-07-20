@@ -197,6 +197,22 @@
 		FAD95A2E1D3E339E00C9CCA5 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A1D1D3E339E00C9CCA5 /* UIImageView+WebCache.m */; };
 		FAD95A2F1D3E339E00C9CCA5 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A1F1D3E339E00C9CCA5 /* UIView+WebCacheOperation.m */; };
 		FAD95A361D3E4BD100C9CCA5 /* PackageDetailCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A351D3E4BD100C9CCA5 /* PackageDetailCollectionViewController.m */; };
+		FAD95A3E1D3ECE7900C9CCA5 /* OrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A3D1D3ECE7900C9CCA5 /* OrderView.m */; };
+		FAD95A4C1D3EFF0D00C9CCA5 /* OrderToCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A4B1D3EFF0D00C9CCA5 /* OrderToCell.xib */; };
+		FAD95A4F1D3F057700C9CCA5 /* OrderOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A4E1D3F057700C9CCA5 /* OrderOneTableViewCell.m */; };
+		FAD95A521D3F058800C9CCA5 /* OrderTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A511D3F058800C9CCA5 /* OrderTwoTableViewCell.m */; };
+		FAD95A551D3F05B300C9CCA5 /* OrderThreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A541D3F05B300C9CCA5 /* OrderThreeTableViewCell.m */; };
+		FAD95A581D3F05C800C9CCA5 /* OrderFourTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A571D3F05C800C9CCA5 /* OrderFourTableViewCell.m */; };
+		FAD95A5B1D3F05DF00C9CCA5 /* OrderFiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A5A1D3F05DF00C9CCA5 /* OrderFiveTableViewCell.m */; };
+		FAD95A5F1D3F102B00C9CCA5 /* NIBOrderOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A5E1D3F102B00C9CCA5 /* NIBOrderOneTableViewCell.xib */; };
+		FAD95A631D3F104F00C9CCA5 /* NIBOrderThreeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A621D3F104F00C9CCA5 /* NIBOrderThreeTableViewCell.xib */; };
+		FAD95A651D3F106800C9CCA5 /* NIBOrderFourTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A641D3F106800C9CCA5 /* NIBOrderFourTableViewCell.xib */; };
+		FAD95A671D3F108000C9CCA5 /* NIBOrderFiveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A661D3F108000C9CCA5 /* NIBOrderFiveTableViewCell.xib */; };
+		FAD95A691D3F4B4B00C9CCA5 /* NIBOrderTwoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A681D3F4B4B00C9CCA5 /* NIBOrderTwoTableViewCell.xib */; };
+		FAD95A6B1D3F934200C9CCA5 /* Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A6A1D3F934200C9CCA5 /* Checkmark.png */; };
+		FAD95A711D3F961700C9CCA5 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A6D1D3F961700C9CCA5 /* .gitkeep */; };
+		FAD95A721D3F961700C9CCA5 /* CZPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAD95A701D3F961700C9CCA5 /* CZPickerView.m */; };
+		FAD95A741D3FAF7100C9CCA5 /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = FAD95A731D3FAF7100C9CCA5 /* Water.png */; };
 		FADAC3F81CA30C680077A4D5 /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FADAC3F71CA30C680077A4D5 /* AddressViewController.m */; };
 		FADAC3FE1CA350230077A4D5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC3FD1CA350230077A4D5 /* CoreData.framework */; };
 		FADAC4001CA3503C0077A4D5 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADAC3FF1CA3503C0077A4D5 /* GLKit.framework */; };
@@ -550,6 +566,30 @@
 		FAD95A1F1D3E339E00C9CCA5 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+WebCacheOperation.m"; path = "../UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		FAD95A341D3E4BD100C9CCA5 /* PackageDetailCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageDetailCollectionViewController.h; sourceTree = "<group>"; };
 		FAD95A351D3E4BD100C9CCA5 /* PackageDetailCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageDetailCollectionViewController.m; sourceTree = "<group>"; };
+		FAD95A3C1D3ECE7900C9CCA5 /* OrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderView.h; sourceTree = "<group>"; };
+		FAD95A3D1D3ECE7900C9CCA5 /* OrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderView.m; sourceTree = "<group>"; };
+		FAD95A4B1D3EFF0D00C9CCA5 /* OrderToCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderToCell.xib; sourceTree = "<group>"; };
+		FAD95A4D1D3F057700C9CCA5 /* OrderOneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderOneTableViewCell.h; sourceTree = "<group>"; };
+		FAD95A4E1D3F057700C9CCA5 /* OrderOneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderOneTableViewCell.m; sourceTree = "<group>"; };
+		FAD95A501D3F058800C9CCA5 /* OrderTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTwoTableViewCell.h; sourceTree = "<group>"; };
+		FAD95A511D3F058800C9CCA5 /* OrderTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTwoTableViewCell.m; sourceTree = "<group>"; };
+		FAD95A531D3F05B300C9CCA5 /* OrderThreeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderThreeTableViewCell.h; sourceTree = "<group>"; };
+		FAD95A541D3F05B300C9CCA5 /* OrderThreeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderThreeTableViewCell.m; sourceTree = "<group>"; };
+		FAD95A561D3F05C800C9CCA5 /* OrderFourTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFourTableViewCell.h; sourceTree = "<group>"; };
+		FAD95A571D3F05C800C9CCA5 /* OrderFourTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFourTableViewCell.m; sourceTree = "<group>"; };
+		FAD95A591D3F05DF00C9CCA5 /* OrderFiveTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFiveTableViewCell.h; sourceTree = "<group>"; };
+		FAD95A5A1D3F05DF00C9CCA5 /* OrderFiveTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFiveTableViewCell.m; sourceTree = "<group>"; };
+		FAD95A5E1D3F102B00C9CCA5 /* NIBOrderOneTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NIBOrderOneTableViewCell.xib; sourceTree = "<group>"; };
+		FAD95A621D3F104F00C9CCA5 /* NIBOrderThreeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NIBOrderThreeTableViewCell.xib; sourceTree = "<group>"; };
+		FAD95A641D3F106800C9CCA5 /* NIBOrderFourTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NIBOrderFourTableViewCell.xib; sourceTree = "<group>"; };
+		FAD95A661D3F108000C9CCA5 /* NIBOrderFiveTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NIBOrderFiveTableViewCell.xib; sourceTree = "<group>"; };
+		FAD95A681D3F4B4B00C9CCA5 /* NIBOrderTwoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NIBOrderTwoTableViewCell.xib; sourceTree = "<group>"; };
+		FAD95A6A1D3F934200C9CCA5 /* Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Checkmark.png; path = Icons/Checkmark.png; sourceTree = "<group>"; };
+		FAD95A6D1D3F961700C9CCA5 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		FAD95A6E1D3F961700C9CCA5 /* CZPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZPicker.h; sourceTree = "<group>"; };
+		FAD95A6F1D3F961700C9CCA5 /* CZPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZPickerView.h; sourceTree = "<group>"; };
+		FAD95A701D3F961700C9CCA5 /* CZPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZPickerView.m; sourceTree = "<group>"; };
+		FAD95A731D3FAF7100C9CCA5 /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Water.png; path = Icons/Water.png; sourceTree = "<group>"; };
 		FADAC3F61CA30C680077A4D5 /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
 		FADAC3F71CA30C680077A4D5 /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
 		FADAC3FD1CA350230077A4D5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -675,6 +715,8 @@
 		201186221B41C16200A59D55 /* Stockd */ = {
 			isa = PBXGroup;
 			children = (
+				FAD95A6C1D3F961700C9CCA5 /* CZPicker */,
+				FAD95A3B1D3ECE6A00C9CCA5 /* OrderView */,
 				FAD95A301D3E34A600C9CCA5 /* WebImage */,
 				FABBCAC11BC6EE880058A201 /* Model */,
 				201186271B41C16200A59D55 /* AppDelegate.h */,
@@ -841,6 +883,8 @@
 		201186891B42021900A59D55 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FAD95A6A1D3F934200C9CCA5 /* Checkmark.png */,
+				FAD95A731D3FAF7100C9CCA5 /* Water.png */,
 				FAED6D5E1D3B02E200D4F343 /* Bread.png */,
 				FAED6D5F1D3B02E200D4F343 /* Breakfast.png */,
 				FAED6D601D3B02E200D4F343 /* Dessert.png */,
@@ -1316,6 +1360,42 @@
 			path = SDWebImage/WebImage;
 			sourceTree = "<group>";
 		};
+		FAD95A3B1D3ECE6A00C9CCA5 /* OrderView */ = {
+			isa = PBXGroup;
+			children = (
+				FAD95A3C1D3ECE7900C9CCA5 /* OrderView.h */,
+				FAD95A3D1D3ECE7900C9CCA5 /* OrderView.m */,
+				FAD95A4D1D3F057700C9CCA5 /* OrderOneTableViewCell.h */,
+				FAD95A4E1D3F057700C9CCA5 /* OrderOneTableViewCell.m */,
+				FAD95A501D3F058800C9CCA5 /* OrderTwoTableViewCell.h */,
+				FAD95A511D3F058800C9CCA5 /* OrderTwoTableViewCell.m */,
+				FAD95A531D3F05B300C9CCA5 /* OrderThreeTableViewCell.h */,
+				FAD95A541D3F05B300C9CCA5 /* OrderThreeTableViewCell.m */,
+				FAD95A561D3F05C800C9CCA5 /* OrderFourTableViewCell.h */,
+				FAD95A571D3F05C800C9CCA5 /* OrderFourTableViewCell.m */,
+				FAD95A591D3F05DF00C9CCA5 /* OrderFiveTableViewCell.h */,
+				FAD95A5A1D3F05DF00C9CCA5 /* OrderFiveTableViewCell.m */,
+				FAD95A4B1D3EFF0D00C9CCA5 /* OrderToCell.xib */,
+				FAD95A5E1D3F102B00C9CCA5 /* NIBOrderOneTableViewCell.xib */,
+				FAD95A681D3F4B4B00C9CCA5 /* NIBOrderTwoTableViewCell.xib */,
+				FAD95A621D3F104F00C9CCA5 /* NIBOrderThreeTableViewCell.xib */,
+				FAD95A641D3F106800C9CCA5 /* NIBOrderFourTableViewCell.xib */,
+				FAD95A661D3F108000C9CCA5 /* NIBOrderFiveTableViewCell.xib */,
+			);
+			name = OrderView;
+			sourceTree = "<group>";
+		};
+		FAD95A6C1D3F961700C9CCA5 /* CZPicker */ = {
+			isa = PBXGroup;
+			children = (
+				FAD95A6D1D3F961700C9CCA5 /* .gitkeep */,
+				FAD95A6E1D3F961700C9CCA5 /* CZPicker.h */,
+				FAD95A6F1D3F961700C9CCA5 /* CZPickerView.h */,
+				FAD95A701D3F961700C9CCA5 /* CZPickerView.m */,
+			);
+			path = CZPicker;
+			sourceTree = "<group>";
+		};
 		FAE88E961C7B836F0010DE79 /* Previous Orders */ = {
 			isa = PBXGroup;
 			children = (
@@ -1424,13 +1504,16 @@
 			files = (
 				20F6D9861BE4123F00F54739 /* updateButton@2x.png in Resources */,
 				FAE88E951C7B80320010DE79 /* rightArrow@2x.png in Resources */,
+				FAD95A4C1D3EFF0D00C9CCA5 /* OrderToCell.xib in Resources */,
 				20D52CA91B4435D300A1C60B /* snapPhoto@2x.png in Resources */,
+				FAD95A671D3F108000C9CCA5 /* NIBOrderFiveTableViewCell.xib in Resources */,
 				2067F8E01B4B7B74001F5478 /* cartIcon@2x.png in Resources */,
 				2068E8471B4EC2CA0005CA27 /* fruits@2x.png in Resources */,
 				20497DDE1B5C34A0004A2950 /* Chicken@2x.png in Resources */,
 				203FFD101BC5B0FA008B4CED /* addPhotoPink@2x.png in Resources */,
 				20F94E101B8014D1004828B8 /* tourDos.png in Resources */,
 				203FFD0E1BC5B0B7008B4CED /* cancelWhite@2x.png in Resources */,
+				FAD95A6B1D3F934200C9CCA5 /* Checkmark.png in Resources */,
 				201186741B41F08F00A59D55 /* ProgressHUD.bundle in Resources */,
 				20F5A30A1B8A4CD600FC7BA5 /* toastThree@2x.png in Resources */,
 				FAED6D701D3B02E200D4F343 /* Lunch.png in Resources */,
@@ -1448,10 +1531,12 @@
 				20D52CC11B44D4E300A1C60B /* TourImage1.png in Resources */,
 				FAED6D771D3B04EB00D4F343 /* Sports.png in Resources */,
 				2011862F1B41C16200A59D55 /* Main.storyboard in Resources */,
+				FAD95A631D3F104F00C9CCA5 /* NIBOrderThreeTableViewCell.xib in Resources */,
 				203FFD121BC5DAD9008B4CED /* ItemTableHeaderView.xib in Resources */,
 				203FFD0A1BC5B099008B4CED /* YapHolderTwo@2x.png in Resources */,
 				FAED6D6E1D3B02E200D4F343 /* Fruit.png in Resources */,
 				201C3CAB1C84E72000558EA4 /* cancelD@2x@.png in Resources */,
+				FAD95A651D3F106800C9CCA5 /* NIBOrderFourTableViewCell.xib in Resources */,
 				205D86A41BDA8BBF00A7518D /* tourv2Uno.png in Resources */,
 				202C278F1C7E23F00050ED47 /* toastThreeBig@2x.png in Resources */,
 				20D52CB51B4453A000A1C60B /* cancelPhoto@2x.png in Resources */,
@@ -1462,8 +1547,10 @@
 				20F5A2F41B85448D00FC7BA5 /* toastTwo@2x.png in Resources */,
 				2037DDF21B442CE20076B0F2 /* PKImageBundle.bundle in Resources */,
 				20D52CD01B4590BE00A1C60B /* saveButton@2x.png in Resources */,
+				FAD95A741D3FAF7100C9CCA5 /* Water.png in Resources */,
 				FAED6D751D3B02E200D4F343 /* Veggies.png in Resources */,
 				20D52CB31B444DC900A1C60B /* flashSelected@2x.png in Resources */,
+				FAD95A711D3F961700C9CCA5 /* .gitkeep in Resources */,
 				FABBCAC01BC5B2960058A201 /* BELLABOO-Regular.ttf in Resources */,
 				20497DDD1B5C34A0004A2950 /* Bread@2x.png in Resources */,
 				FAED6D6F1D3B02E200D4F343 /* Juice.png in Resources */,
@@ -1478,10 +1565,12 @@
 				201186341B41C16200A59D55 /* LaunchScreen.xib in Resources */,
 				20F94E1A1B8146A3004828B8 /* tourTresiPhone4.png in Resources */,
 				203FFCF91BC5856C008B4CED /* pickButton@2x.png in Resources */,
+				FAD95A5F1D3F102B00C9CCA5 /* NIBOrderOneTableViewCell.xib in Resources */,
 				2011868B1B42022600A59D55 /* facebookLogin@2x.png in Resources */,
 				FAED6D721D3B02E200D4F343 /* Soda.png in Resources */,
 				20497DDF1B5C34A0004A2950 /* Donut@2x.png in Resources */,
 				201C3CA91C84E6F000558EA4 /* cancel@2x.png in Resources */,
+				FAD95A691D3F4B4B00C9CCA5 /* NIBOrderTwoTableViewCell.xib in Resources */,
 				FAED6D711D3B02E200D4F343 /* Snacks.png in Resources */,
 				201186311B41C16200A59D55 /* Images.xcassets in Resources */,
 				205D86961BD94A1800A7518D /* stockdPackage@2x.png in Resources */,
@@ -1522,6 +1611,7 @@
 				2067F8F01B4C2989001F5478 /* CartTableCell.m in Sources */,
 				20E2EC0C1B4727BD002E317A /* SVProgressHUD.m in Sources */,
 				20D52CE91B45A7A700A1C60B /* SlideNavigationContorllerAnimatorSlideAndFade.m in Sources */,
+				FAD95A4F1D3F057700C9CCA5 /* OrderOneTableViewCell.m in Sources */,
 				FAD959FD1D3E211600C9CCA5 /* EditPackageCollectionViewController.m in Sources */,
 				20D52CE71B45A7A700A1C60B /* SlideNavigationContorllerAnimatorScaleAndFade.m in Sources */,
 				FAE88EA81C7BA7730010DE79 /* MGSwipeButton.m in Sources */,
@@ -1534,12 +1624,15 @@
 				FABBCAC41BC6EF240058A201 /* CartItemObject.m in Sources */,
 				201186291B41C16200A59D55 /* AppDelegate.m in Sources */,
 				203FFD151BC6E2E7008B4CED /* ExtraItemTableCell.m in Sources */,
+				FAD95A5B1D3F05DF00C9CCA5 /* OrderFiveTableViewCell.m in Sources */,
 				FAD95A2D1D3E339E00C9CCA5 /* UIImageView+HighlightedWebCache.m in Sources */,
 				FAD95A221D3E339E00C9CCA5 /* SDImageCache.m in Sources */,
 				FAD95A251D3E339E00C9CCA5 /* SDWebImageDownloader.m in Sources */,
 				FAD95A2E1D3E339E00C9CCA5 /* UIImageView+WebCache.m in Sources */,
 				2037DDDD1B43044E0076B0F2 /* EmailTableViewController.m in Sources */,
 				FAD95A2A1D3E339E00C9CCA5 /* UIImage+GIF.m in Sources */,
+				FAD95A3E1D3ECE7900C9CCA5 /* OrderView.m in Sources */,
+				FAD95A551D3F05B300C9CCA5 /* OrderThreeTableViewCell.m in Sources */,
 				201186881B41F32C00A59D55 /* PasswordResetViewController.m in Sources */,
 				2067F8CC1B4B33EB001F5478 /* BoozeTableCell.m in Sources */,
 				20D52D1F1B45B86C00A1C60B /* SCArchivedVector.m in Sources */,
@@ -1567,6 +1660,7 @@
 				20D52D3E1B46208000A1C60B /* HelpTableViewController.m in Sources */,
 				FAE88E9C1C7B84C40010DE79 /* PreviousOrdersViewController.m in Sources */,
 				FAD95A291D3E339E00C9CCA5 /* UIButton+WebCache.m in Sources */,
+				FAD95A721D3F961700C9CCA5 /* CZPickerView.m in Sources */,
 				20D52D2C1B45B86C00A1C60B /* SCRecorderFocusView.m in Sources */,
 				20EDE0411C7B652E00AD3E7D /* DeliveryInstructionsPopupViewController.m in Sources */,
 				201186751B41F08F00A59D55 /* ProgressHUD.m in Sources */,
@@ -1584,6 +1678,7 @@
 				20D52D271B45B86C00A1C60B /* SCMediaTypeConfiguration.m in Sources */,
 				2067F8EA1B4C1BC2001F5478 /* BBBadgeBarButtonItem.m in Sources */,
 				FAE88E9F1C7B85020010DE79 /* PreviousOrderCell.m in Sources */,
+				FAD95A581D3F05C800C9CCA5 /* OrderFourTableViewCell.m in Sources */,
 				20D52D211B45B86C00A1C60B /* SCAudioConfiguration.m in Sources */,
 				20D52D241B45B86C00A1C60B /* SCFilterGroup.m in Sources */,
 				FAD95A201D3E339E00C9CCA5 /* MKAnnotationView+WebCache.m in Sources */,
@@ -1595,6 +1690,7 @@
 				2037DDEC1B442BD90076B0F2 /* CameraViewController.m in Sources */,
 				2067F8B61B4ACA5E001F5478 /* FoodTableViewController.m in Sources */,
 				2067F8BA1B4ACC50001F5478 /* FoodTableCell.m in Sources */,
+				FAD95A521D3F058800C9CCA5 /* OrderTwoTableViewCell.m in Sources */,
 				201186261B41C16200A59D55 /* main.m in Sources */,
 				20497E761B7BE4CD004A2950 /* TPPropertyAnimation.m in Sources */,
 				2067F8BD1B4B0132001F5478 /* DrinksTableViewController.m in Sources */,

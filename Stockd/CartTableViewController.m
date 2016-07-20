@@ -196,15 +196,17 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     int totalNumber = 0;
-    for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
-        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey]){
-            totalNumber += [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] valueForKey:itemNameKey] itemQuantity];
+    for (NSString* extraPackageKey in _theExtraPackage_itemsDictionary){
+        for (NSString* itemNameKey in [_theExtraPackage_itemsDictionary valueForKey:extraPackageKey]){
+            totalNumber += [[[_theExtraPackage_itemsDictionary valueForKey:extraPackageKey] valueForKey:itemNameKey] itemQuantity];
         }
     }
     
-    if ([_appDelegate package_itemsDictionary].count + totalNumber == 0) {
-        [self.navigationController popViewControllerAnimated:true];
-        return;
+    if (!_isPastOrder){
+        if (_thePackage_itemsDictionary.count + totalNumber == 0) {
+            [self.navigationController popViewControllerAnimated:true];
+            return;
+        }
     }
     
     

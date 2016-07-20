@@ -15,6 +15,7 @@
 #include "CartItemObject.h"
 #include "PackageCollectionViewLayout.h"
 #include "PackageHeaderView.h"
+#include "OrderView.h"
 
 @interface AddPackagesCollectionViewController ()
 
@@ -30,6 +31,7 @@
 @property (nonatomic, strong) UITableViewHeaderFooterView *headerView;
 @property (nonatomic) float offsetY;
 
+@property (nonatomic, strong) OrderView *orderView;
 
 @end
 
@@ -45,6 +47,7 @@ static NSString * const reuseIdentifier = @"TheCell";
     theLayout.sectionHeadersPinToVisibleBounds = YES;
     
     self.collectionView.collectionViewLayout = theLayout;
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
     
     _appDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -148,6 +151,12 @@ static NSString * const reuseIdentifier = @"TheCell";
     self.navigationItem.hidesBackButton = YES;
     
     [self.collectionView reloadData];
+    
+    if (!_orderView){
+        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView.parentViewController = self;
+        [self.view addSubview:_orderView];
+    }
     
     [self updateCartAnimated];
 }
@@ -389,6 +398,8 @@ static NSString * const reuseIdentifier = @"TheCell";
     }
     
     [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
+    
+    [_orderView update];
 }
 
 -(void)queryForOrderNumber {

@@ -9,6 +9,7 @@
 #import "EditPackageTableViewController.h"
 #import "CartTableViewController.h"
 #import "AppDelegate.h"
+#import "OrderView.h"
 
 @interface EditPackageTableViewController ()
 
@@ -18,6 +19,8 @@
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSArray *itemKeys;
 @property (nonatomic, strong) NSArray *extraKeys;
+
+@property (nonatomic, strong) OrderView *orderView;
 
 @end
 
@@ -292,6 +295,8 @@
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+    
+    [_orderView update];
 }
 
 -(void)removeEmptyExtraItems{
@@ -312,6 +317,16 @@
     }
     
     
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    if (!_orderView){
+        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView.parentViewController = self;
+        [self.view addSubview:_orderView];
+    }
+    
+    [_orderView update];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{

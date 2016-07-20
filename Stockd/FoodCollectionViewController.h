@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SlideNavigationController.h"
+#import "TSMessage.h"
 
-@interface FoodCollectionViewController : UICollectionViewController <SlideNavigationControllerDelegate>
+@interface FoodCollectionViewController : UICollectionViewController <SlideNavigationControllerDelegate, TSMessageViewProtocol>
 {
     NSString *tappedMenu;
 }

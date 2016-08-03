@@ -11,6 +11,7 @@
 #import "MGSwipeTableCell/MGSwipeButton.h"
 
 @interface OrderTwoTableViewCell : MGSwipeTableCell
+@property (weak, nonatomic) IBOutlet UIImageView *sliderIconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *orderTitleLabel;
 
 @property (strong, nonatomic) CALayer *bottomBorder;

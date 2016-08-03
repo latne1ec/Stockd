@@ -18,4 +18,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelWidth;
 @property (strong, nonatomic) CALayer *bottomBorder;
 
+@property (weak, nonatomic) IBOutlet UILabel *tapToEditLabel;
+
 @end

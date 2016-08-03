@@ -112,13 +112,13 @@
     //                                                                            target:self
     //                                                                            action:@selector(closeTheController)];
     
-    CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0,0,25,25);
-    [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
-    [btn load];
-    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
-    self.navigationItem.rightBarButtonItem = barBtn;
+//    CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
+//    btn.frame = CGRectMake(0,0,25,25);
+//    [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
+//    [btn load];
+//    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    
+//    self.navigationItem.rightBarButtonItem = barBtn;
     
     //[[UIImage imageNamed:@"cartIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
     
@@ -565,12 +565,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:6];
+    //[(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:6];
     
     
     PackageTableCell *cell = (PackageTableCell *)[tableView cellForRowAtIndexPath:indexPath];
     
-    [self showToast];
+    //[self showToast];
     
     if (indexPath.section == 0) {
         PFObject *object = [self.food objectAtIndex:indexPath.row];

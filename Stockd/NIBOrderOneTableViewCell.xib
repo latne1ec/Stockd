@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,65 +8,77 @@
         <mutableArray key="BELLABOO-Regular.ttf">
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
-            <string>BELLABOO-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderOneTableViewCell" id="nOj-AX-hp4" customClass="OrderOneTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell clipsSubviews="YES" tag="1019" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderOneTableViewCell" id="nOj-AX-hp4" customClass="OrderOneTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nOj-AX-hp4" id="pSa-CV-a1R">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="51.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYl-7R-LrE">
-                        <rect key="frame" x="266" y="8" width="46" height="27"/>
+                        <rect key="frame" x="250" y="11" width="64" height="30"/>
                         <color key="backgroundColor" red="0.28946676850000003" green="0.90256166459999998" blue="0.68689429759999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="46" id="hxJ-TL-l1i"/>
+                            <constraint firstAttribute="width" constant="64" id="hxJ-TL-l1i"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="13"/>
                         <state key="normal" title="Order">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdD-um-7Gk">
-                        <rect key="frame" x="201" y="8" width="57" height="27"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdD-um-7Gk">
+                        <rect key="frame" x="184" y="13" width="57" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="57" id="keR-qZ-ukr"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgT-St-qdB">
-                        <rect key="frame" x="8" y="8" width="185" height="27"/>
-                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgT-St-qdB">
+                        <rect key="frame" x="13" y="12" width="168" height="27"/>
+                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SliderIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="jiy-Fa-0P7">
+                        <rect key="frame" x="138" y="4" width="44" height="7"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="Bd2-bu-sVm"/>
+                            <constraint firstAttribute="height" constant="7" id="kzx-fy-0i6"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="fYl-7R-LrE" firstAttribute="leading" secondItem="EdD-um-7Gk" secondAttribute="trailing" constant="8" id="5Mb-Ce-S8a"/>
-                    <constraint firstAttribute="bottom" secondItem="EdD-um-7Gk" secondAttribute="bottom" constant="8" id="IiA-33-43E"/>
-                    <constraint firstAttribute="bottom" secondItem="KgT-St-qdB" secondAttribute="bottom" constant="8" id="UFh-FJ-0p7"/>
-                    <constraint firstItem="fYl-7R-LrE" firstAttribute="top" secondItem="pSa-CV-a1R" secondAttribute="top" constant="8" id="fGO-QJ-nQ2"/>
-                    <constraint firstAttribute="bottom" secondItem="fYl-7R-LrE" secondAttribute="bottom" constant="8" id="fpu-Xh-aTt"/>
-                    <constraint firstAttribute="trailing" secondItem="fYl-7R-LrE" secondAttribute="trailing" constant="8" id="iLW-8J-v72"/>
-                    <constraint firstItem="KgT-St-qdB" firstAttribute="top" secondItem="pSa-CV-a1R" secondAttribute="top" constant="8" id="oar-kz-iDF"/>
-                    <constraint firstItem="KgT-St-qdB" firstAttribute="leading" secondItem="pSa-CV-a1R" secondAttribute="leading" constant="8" id="rTm-lX-034"/>
-                    <constraint firstItem="EdD-um-7Gk" firstAttribute="top" secondItem="pSa-CV-a1R" secondAttribute="top" constant="8" id="t24-Du-3a9"/>
-                    <constraint firstItem="EdD-um-7Gk" firstAttribute="leading" secondItem="KgT-St-qdB" secondAttribute="trailing" constant="8" id="zg9-Ad-okn"/>
+                    <constraint firstItem="KgT-St-qdB" firstAttribute="top" secondItem="jiy-Fa-0P7" secondAttribute="bottom" constant="1" id="4Cg-Y2-pmj"/>
+                    <constraint firstItem="fYl-7R-LrE" firstAttribute="leading" secondItem="EdD-um-7Gk" secondAttribute="trailing" constant="9" id="5Mb-Ce-S8a"/>
+                    <constraint firstAttribute="bottom" secondItem="EdD-um-7Gk" secondAttribute="bottom" constant="11.5" id="IiA-33-43E"/>
+                    <constraint firstAttribute="bottom" secondItem="KgT-St-qdB" secondAttribute="bottom" constant="12.5" id="UFh-FJ-0p7"/>
+                    <constraint firstItem="fYl-7R-LrE" firstAttribute="top" secondItem="pSa-CV-a1R" secondAttribute="top" constant="11" id="fGO-QJ-nQ2"/>
+                    <constraint firstAttribute="bottom" secondItem="fYl-7R-LrE" secondAttribute="bottom" constant="10.5" id="fpu-Xh-aTt"/>
+                    <constraint firstAttribute="trailing" secondItem="fYl-7R-LrE" secondAttribute="trailing" constant="6" id="iLW-8J-v72"/>
+                    <constraint firstItem="KgT-St-qdB" firstAttribute="top" secondItem="pSa-CV-a1R" secondAttribute="top" constant="12" id="oar-kz-iDF"/>
+                    <constraint firstItem="KgT-St-qdB" firstAttribute="leading" secondItem="pSa-CV-a1R" secondAttribute="leading" constant="13" id="rTm-lX-034"/>
+                    <constraint firstItem="EdD-um-7Gk" firstAttribute="top" secondItem="pSa-CV-a1R" secondAttribute="top" constant="13" id="t24-Du-3a9"/>
+                    <constraint firstItem="jiy-Fa-0P7" firstAttribute="centerX" secondItem="pSa-CV-a1R" secondAttribute="centerX" id="zQH-g8-Lat"/>
+                    <constraint firstItem="EdD-um-7Gk" firstAttribute="leading" secondItem="KgT-St-qdB" secondAttribute="trailing" constant="3" id="zg9-Ad-okn"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="orderButton" destination="fYl-7R-LrE" id="xDd-q6-7SR"/>
                 <outlet property="orderPriceLabel" destination="EdD-um-7Gk" id="bJW-Yt-s5i"/>
                 <outlet property="orderTitleLabel" destination="KgT-St-qdB" id="DaP-SH-t5D"/>
+                <outlet property="sliderIconImageView" destination="jiy-Fa-0P7" id="SEz-iz-U3d"/>
             </connections>
             <point key="canvasLocation" x="226" y="217"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="SliderIcon.png" width="180" height="18"/>
+    </resources>
 </document>

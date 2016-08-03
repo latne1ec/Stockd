@@ -35,7 +35,7 @@
     [super viewDidLoad];
     
     self.collectionView.collectionViewLayout = [[PackageCollectionViewLayout alloc] init];
-    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 48, 0);
     
     self.title = @"Food";
     
@@ -72,7 +72,7 @@
     self.navigationItem.hidesBackButton = YES;
     
     if (!_orderView){
-        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-48, self.view.frame.size.width, self.view.frame.size.height-100)];
         _orderView.parentViewController = self;
         [self.view addSubview:_orderView];
     }
@@ -126,6 +126,7 @@
     
     [cell layoutIfNeeded];
     
+    
     PFObject *object = [self.food objectAtIndex:indexPath.row];
     cell.packageLabel.text = [object objectForKey:@"packageName"];
     
@@ -133,6 +134,21 @@
 }
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    PackageCollectionViewCell *cell = (PackageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TheCell" forIndexPath:indexPath];
+    
+    [UIView animateWithDuration:0.06 animations:^{
+        cell.packageImageView.transform = CGAffineTransformMakeScale(0.92, 0.92);
+        cell.packageLabel.transform = CGAffineTransformMakeScale(0.92, 0.92);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.07 animations:^{
+            cell.packageImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            cell.packageLabel.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+
     
     //NSLog(@"Tapped Row %ld", (long)indexPath.row);
     PFObject *object = [self.food objectAtIndex:indexPath.row];
@@ -144,7 +160,7 @@
     destViewController.packageType = @"Food";
     
     [self.navigationController pushViewController:destViewController animated:YES];
-    [ProgressHUD show:nil];
+    //[ProgressHUD show:nil];
     
     //    UINavigationController *navigationController =
     //    [[UINavigationController alloc] initWithRootViewController:destViewController];

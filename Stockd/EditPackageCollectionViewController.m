@@ -99,6 +99,11 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [self.collectionView reloadData];
+}
+
 
 #pragma mark - Table view data source
 
@@ -123,10 +128,32 @@
     return 0;
 }
 
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+//    
+//    return CGSizeMake(collectionView.frame.size.width,250);
+//}
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TheCell" forIndexPath:indexPath];
+    
+    if([UIScreen mainScreen].bounds.size.height <= 568.0) {
+        //iPhone 5
+        CGRect dasFrame = CGRectMake(54, 17, 50, 50);
+        if (CGRectEqualToRect(cell.itemImageViewer.frame, dasFrame)) {
+            
+        } else {
+            cell.itemImageViewer.frame = CGRectMake(54, 17, 50, 50);
+            cell.itemImageViewer.alpha = 0.0;
+            [UIView animateWithDuration:0.2 delay:0.7 options:0 animations:^{
+                cell.itemImageViewer.alpha = 1.0;
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }
+
     cell.isEven = (indexPath.row % 2 == 0);
     cell.showTopLine = (indexPath.row < 2);
     
@@ -159,18 +186,32 @@
         //NSLog(@"Price: %.02f", price);
         
         
-        if(_editedCells[[NSString stringWithFormat:@"c%d",(int)indexPath.row]]!=nil){
-            cell.itemQuantityLabel.text = _editedCells[[NSString stringWithFormat:@"c%d",(int)indexPath.row]];
-            
-        }
+//        if(_editedCells[[NSString stringWithFormat:@"c%d",(int)indexPath.row]]!=nil){
+//            cell.itemQuantityLabel.text = _editedCells[[NSString stringWithFormat:@"c%d",(int)indexPath.row]];
+//            
+//        }
+        
+        cell.itemQuantityLabel.hidden = true;
         
         cell.decrementButton.tag = indexPath.row;
         cell.incrementButton.tag = indexPath.row;
     }
     
+    cell.itemNameLabel.minimumFontSize = 8;
+    cell.itemNameLabel.adjustsFontSizeToFitWidth = YES;
+    
     [cell layoutIfNeeded];
     
     return cell;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(16, 0, 0, 0);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    
+    return CGSizeMake(self.view.frame.size.width, 160);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -211,6 +252,18 @@
 }
 
 - (IBAction)incrementQuantity:(id)sender {
+    
+    UIButton *button = (UIButton *) sender;
+    [UIView animateWithDuration:0.074 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.24, 1.24);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.07 animations:^{
+            button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     ItemCollectionViewCell *cell = (ItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     
@@ -233,6 +286,18 @@
 }
 
 - (IBAction)decrementQuantity:(id)sender {
+    
+    UIButton *button = (UIButton *) sender;
+    [UIView animateWithDuration:0.074 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.24, 1.24);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.07 animations:^{
+            button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     ItemCollectionViewCell *cell = (ItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];

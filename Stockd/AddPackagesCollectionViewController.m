@@ -47,7 +47,7 @@ static NSString * const reuseIdentifier = @"TheCell";
     theLayout.sectionHeadersPinToVisibleBounds = YES;
     
     self.collectionView.collectionViewLayout = theLayout;
-    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 0, 48, 0);
     
     _appDelegate = [[UIApplication sharedApplication] delegate];
     
@@ -100,13 +100,13 @@ static NSString * const reuseIdentifier = @"TheCell";
     //                                                                            target:self
     //                                                                            action:@selector(closeTheController)];
     
-    CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0,0,25,25);
-    [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
-    [btn load];
-    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
-    self.navigationItem.rightBarButtonItem = barBtn;
+//    CartButton *btn =  [CartButton buttonWithType:UIButtonTypeCustom];
+//    btn.frame = CGRectMake(0,0,25,25);
+//    [btn addTarget:self action:@selector(goToCartScreen) forControlEvents:UIControlEventTouchUpInside];
+//    [btn load];
+//    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    
+//    self.navigationItem.rightBarButtonItem = barBtn;
     
     //[[UIImage imageNamed:@"cartIcon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
     
@@ -152,9 +152,37 @@ static NSString * const reuseIdentifier = @"TheCell";
     
     [self.collectionView reloadData];
     
+    if (ad.alreadyShowed == 1) {
+        NSLog(@"already showed");
+    } else {
+        NSLog(@"gotcha!");
+    }
+    
     if (!_orderView){
-        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, self.view.frame.size.height-100)];
+
+        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-48, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-100);
         _orderView.parentViewController = self;
+        _orderView.onAddPackagesScreen = true;
+        //_orderView.alpha = 0.0;
+        [UIView animateWithDuration:0.165 delay:1.62 options:0 animations:^{
+            _orderView.frame = CGRectMake(0, self.view.frame.size.height-52.5, self.view.frame.size.width, self.view.frame.size.height-100);
+            //_orderView.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.171 delay:0 options:0 animations:^{
+                
+                if([UIScreen mainScreen].bounds.size.height == 736) {
+                    NSLog(@"6 plus!!!");
+                    _orderView.frame = CGRectMake(0, self.view.frame.size.height-48, self.view.frame.size.width, self.view.frame.size.height-150);
+                } else {
+                    _orderView.frame = CGRectMake(0, self.view.frame.size.height-48, self.view.frame.size.width, self.view.frame.size.height-100);
+                }
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+        
         [self.view addSubview:_orderView];
     }
     
@@ -384,20 +412,20 @@ static NSString * const reuseIdentifier = @"TheCell";
 }
 
 -(void) updateCartAnimated{
-    int totalNumber = 0;
-    /*for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
-     totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
-     }*/
-    
-    totalNumber += [_appDelegate package_itemsDictionary].count;
-    
-    for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
-        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey]){
-            totalNumber += [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] valueForKey:itemNameKey] itemQuantity];
-        }
-    }
-    
-    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
+//    int totalNumber = 0;
+//    /*for (NSString* packagesKey in [_appDelegate package_itemsDictionary]){
+//     totalNumber += [[[_appDelegate package_itemsDictionary] valueForKey:packagesKey] count];
+//     }*/
+//    
+//    totalNumber += [_appDelegate package_itemsDictionary].count;
+//    
+//    for (NSString* extraPackageKey in [_appDelegate extraPackage_itemsDictionary]){
+//        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey]){
+//            totalNumber += [[[[_appDelegate extraPackage_itemsDictionary] valueForKey:extraPackageKey] valueForKey:itemNameKey] itemQuantity];
+//        }
+//    }
+//    
+//    [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:totalNumber];
     
     [_orderView update];
 }
@@ -657,10 +685,27 @@ static NSString * const reuseIdentifier = @"TheCell";
     return cell;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    
+    return CGSizeMake(self.view.frame.size.width, 42);
+}
+
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [(CartButton*)[self.navigationItem.rightBarButtonItem customView] changeNumber:6];
     
     PackageCollectionViewCell *cell = (PackageCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+
+    [UIView animateWithDuration:0.072 animations:^{
+        cell.packageImageView.transform = CGAffineTransformMakeScale(0.92, 0.92);
+        cell.packageLabel.transform = CGAffineTransformMakeScale(0.92, 0.92);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.084 animations:^{
+            cell.packageImageView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            cell.packageLabel.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
     
     [self showToast];
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,61 +9,73 @@
         <mutableArray key="BELLABOO-Regular.ttf">
             <string>BELLABOO-Regular</string>
             <string>BELLABOO-Regular</string>
-            <string>BELLABOO-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderThreeTableViewCell" id="qTD-3W-AeJ" customClass="OrderThreeTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTD-3W-AeJ" id="qQ0-Sf-SjL">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="53.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3O-dm-Gr3">
-                        <rect key="frame" x="146" y="8" width="101" height="27"/>
-                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="10"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.57999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3O-dm-Gr3">
+                        <rect key="frame" x="146" y="9" width="101" height="32"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10.5"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYg-75-NWb">
-                        <rect key="frame" x="255" y="8" width="57" height="27"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYg-75-NWb">
+                        <rect key="frame" x="255" y="12" width="57" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="57" id="PYp-KP-Ugn"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYj-Tg-CWc">
-                        <rect key="frame" x="8" y="8" width="130" height="27"/>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYj-Tg-CWc">
+                        <rect key="frame" x="12" y="8" width="126" height="27"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="130" id="U0b-RS-liS"/>
+                            <constraint firstAttribute="width" constant="126" id="U0b-RS-liS"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="20"/>
+                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.28000000000000003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5U-Zd-tZY">
+                        <rect key="frame" x="12" y="36" width="42" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="FB0-IU-N7f"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="6.5"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="o5U-Zd-tZY" firstAttribute="leading" secondItem="fYj-Tg-CWc" secondAttribute="leading" id="7Lu-jq-Db1"/>
                     <constraint firstItem="L3O-dm-Gr3" firstAttribute="leading" secondItem="fYj-Tg-CWc" secondAttribute="trailing" constant="8" id="83q-jf-KS7"/>
-                    <constraint firstItem="fYj-Tg-CWc" firstAttribute="leading" secondItem="qQ0-Sf-SjL" secondAttribute="leading" constant="8" id="NN5-YK-Zka"/>
-                    <constraint firstAttribute="bottom" secondItem="fYj-Tg-CWc" secondAttribute="bottom" constant="8" id="Nfi-ai-ypP"/>
+                    <constraint firstItem="fYj-Tg-CWc" firstAttribute="leading" secondItem="qQ0-Sf-SjL" secondAttribute="leading" constant="12" id="NN5-YK-Zka"/>
+                    <constraint firstAttribute="bottom" secondItem="fYj-Tg-CWc" secondAttribute="bottom" constant="18.5" id="Nfi-ai-ypP"/>
                     <constraint firstItem="IYg-75-NWb" firstAttribute="leading" secondItem="L3O-dm-Gr3" secondAttribute="trailing" constant="8" id="PfW-9B-bhS"/>
-                    <constraint firstAttribute="bottom" secondItem="L3O-dm-Gr3" secondAttribute="bottom" constant="8" id="QVi-2t-Vye"/>
+                    <constraint firstAttribute="bottom" secondItem="L3O-dm-Gr3" secondAttribute="bottom" constant="12.5" id="QVi-2t-Vye"/>
+                    <constraint firstItem="o5U-Zd-tZY" firstAttribute="top" secondItem="fYj-Tg-CWc" secondAttribute="bottom" constant="1" id="Scd-AN-vJf"/>
                     <constraint firstItem="IYg-75-NWb" firstAttribute="trailing" secondItem="qQ0-Sf-SjL" secondAttribute="trailingMargin" id="W2y-0Y-DLi"/>
-                    <constraint firstItem="IYg-75-NWb" firstAttribute="bottom" secondItem="qQ0-Sf-SjL" secondAttribute="bottomMargin" id="c0Y-m2-dQM"/>
+                    <constraint firstItem="IYg-75-NWb" firstAttribute="bottom" secondItem="qQ0-Sf-SjL" secondAttribute="bottomMargin" constant="-6.5" id="c0Y-m2-dQM"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="o5U-Zd-tZY" secondAttribute="bottom" constant="-4.5" id="dj3-qt-5BC"/>
                     <constraint firstItem="fYj-Tg-CWc" firstAttribute="top" secondItem="qQ0-Sf-SjL" secondAttribute="top" constant="8" id="dov-Ym-tBr"/>
-                    <constraint firstItem="L3O-dm-Gr3" firstAttribute="top" secondItem="qQ0-Sf-SjL" secondAttribute="top" constant="8" id="fWQ-Cm-sxu"/>
-                    <constraint firstItem="IYg-75-NWb" firstAttribute="top" secondItem="qQ0-Sf-SjL" secondAttribute="topMargin" id="hIx-NT-gjw"/>
+                    <constraint firstItem="L3O-dm-Gr3" firstAttribute="top" secondItem="qQ0-Sf-SjL" secondAttribute="top" constant="9" id="fWQ-Cm-sxu"/>
+                    <constraint firstItem="IYg-75-NWb" firstAttribute="top" secondItem="qQ0-Sf-SjL" secondAttribute="topMargin" constant="4" id="hIx-NT-gjw"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="orderDescriptionLabel" destination="L3O-dm-Gr3" id="j1g-s4-aHt"/>
                 <outlet property="orderPriceLabel" destination="IYg-75-NWb" id="keV-R4-PDb"/>
                 <outlet property="orderTitleLabel" destination="fYj-Tg-CWc" id="sVH-KM-ffU"/>
+                <outlet property="tapToEditLabel" destination="o5U-Zd-tZY" id="gSS-Ak-tNb"/>
                 <outlet property="titleLabelWidth" destination="U0b-RS-liS" id="JP4-v8-Gid"/>
             </connections>
             <point key="canvasLocation" x="226" y="404"/>

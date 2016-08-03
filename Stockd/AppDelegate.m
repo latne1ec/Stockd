@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Stockd. All rights reserved.
 //
 
+
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
@@ -23,7 +24,6 @@ NSString * const StripePublishableKey = @"pk_live_OudB0BOII1ZayE7nENWn3qpr";
 
 
 @interface AppDelegate ()
-@property(nonatomic) int alreadyShowed;
 
 @end
 

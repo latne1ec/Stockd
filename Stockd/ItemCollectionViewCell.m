@@ -18,7 +18,7 @@
     self.containerView.clipsToBounds = NO;
     self.clipsToBounds = NO;
     
-    double bottomBorderWidth = 4.0;
+    double bottomBorderWidth = 2.0;
     
     _bottomLabelConstraint.constant = bottomBorderWidth+5;
     

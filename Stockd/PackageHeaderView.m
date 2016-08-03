@@ -13,7 +13,7 @@
 -(void)layoutSubviews{
     [super layoutSubviews];
     
-    double bottomBorderWidth = 4.0;
+    double bottomBorderWidth = 2.0;
     
     if (_bottomBorder == nil){
         _bottomBorder = [CALayer layer];

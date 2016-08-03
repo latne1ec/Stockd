@@ -58,7 +58,6 @@
     
     _canOrder = false;
     
-    
     [self initializeViewController];
     
 }

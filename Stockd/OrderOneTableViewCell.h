@@ -11,10 +11,11 @@
 #import "MGSwipeTableCell/MGSwipeButton.h"
 
 @interface OrderOneTableViewCell : MGSwipeTableCell
+@property (weak, nonatomic) IBOutlet UIImageView *sliderIconImageView;
+
 @property (weak, nonatomic) IBOutlet UILabel *orderTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *orderButton;
-
 @property (strong, nonatomic) CALayer *bottomBorder;
 
 @end

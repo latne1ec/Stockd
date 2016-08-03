@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="BELLABOO-Regular.ttf">
+            <string>BELLABOO-Regular</string>
+            <string>BELLABOO-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeesTableViewCell" id="BWE-76-F2f" customClass="FeesTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BWE-76-F2f" id="kHi-TK-vzj">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.47999998927116394" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHv-cI-7kt">
+                        <rect key="frame" x="146" y="8" width="101" height="27"/>
+                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="9"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PtY-4f-IVe">
+                        <rect key="frame" x="255" y="10" width="57" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="57" id="TAg-U4-eAP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNZ-0I-lpw">
+                        <rect key="frame" x="8" y="8" width="130" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="130" id="OAv-16-TeT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="BELLABOO-Regular" family="BELLABOO" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hHv-cI-7kt" firstAttribute="top" secondItem="kHi-TK-vzj" secondAttribute="top" constant="8" id="3W1-KT-gJQ"/>
+                    <constraint firstAttribute="bottom" secondItem="CNZ-0I-lpw" secondAttribute="bottom" constant="14.5" id="405-LY-6KJ"/>
+                    <constraint firstItem="PtY-4f-IVe" firstAttribute="top" secondItem="kHi-TK-vzj" secondAttribute="topMargin" constant="2" id="6Le-Vs-9Fj"/>
+                    <constraint firstAttribute="bottom" secondItem="hHv-cI-7kt" secondAttribute="bottom" constant="14.5" id="F5M-Tk-hq2"/>
+                    <constraint firstItem="hHv-cI-7kt" firstAttribute="leading" secondItem="CNZ-0I-lpw" secondAttribute="trailing" constant="8" id="JlQ-0r-bXx"/>
+                    <constraint firstItem="PtY-4f-IVe" firstAttribute="leading" secondItem="hHv-cI-7kt" secondAttribute="trailing" constant="8" id="SzT-Ro-Fo8"/>
+                    <constraint firstItem="CNZ-0I-lpw" firstAttribute="leading" secondItem="kHi-TK-vzj" secondAttribute="leading" constant="8" id="l09-ll-nOb"/>
+                    <constraint firstItem="PtY-4f-IVe" firstAttribute="bottom" secondItem="kHi-TK-vzj" secondAttribute="bottomMargin" constant="-4.5" id="pOY-wG-qyS"/>
+                    <constraint firstItem="CNZ-0I-lpw" firstAttribute="top" secondItem="kHi-TK-vzj" secondAttribute="top" constant="8" id="wBn-CG-fVF"/>
+                    <constraint firstItem="PtY-4f-IVe" firstAttribute="trailing" secondItem="kHi-TK-vzj" secondAttribute="trailingMargin" id="xdZ-NZ-8nF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="priceFeeLabel" destination="PtY-4f-IVe" id="H2W-3N-qE8"/>
+                <outlet property="titleLabel" destination="CNZ-0I-lpw" id="z1k-r3-Wrt"/>
+            </connections>
+            <point key="canvasLocation" x="380" y="344"/>
+        </tableViewCell>
+    </objects>
+</document>

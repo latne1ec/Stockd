@@ -31,7 +31,6 @@
 
 @property (nonatomic, strong) NSString *packageType;
 
-
-
+-(void)updateCartAnimated;
 
 @end

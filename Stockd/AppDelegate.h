@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSArray *packageTypes;
 @property (nonatomic) NSDate* deliveryDate;
 @property (nonatomic) NSString* deliveryDay;
-
+@property(nonatomic) int alreadyShowed;
 
 
 -(void)showAnimation;

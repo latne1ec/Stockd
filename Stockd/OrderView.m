@@ -19,11 +19,22 @@
 
 @implementation OrderView
 
+typedef enum ScrollDirection {
+    ScrollDirectionNone,
+    ScrollDirectionRight,
+    ScrollDirectionLeft,
+    ScrollDirectionUp,
+    ScrollDirectionDown,
+    ScrollDirectionCrazy,
+} ScrollDirection;
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         _appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        [self queryForPackageItems];
         
         self.backgroundColor = [UIColor whiteColor];
         UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -58,12 +69,35 @@
         nib = [UINib nibWithNibName:@"NIBOrderFiveTableViewCell" bundle:nil];
         [[self tableView] registerNib:nib forCellReuseIdentifier:@"OrderFiveTableViewCell"];
         
+        nib = [UINib nibWithNibName:@"FeesTableViewCell" bundle:nil];
+        [[self tableView] registerNib:nib forCellReuseIdentifier:@"FeesTableViewCell"];
+        
+        nib = [UINib nibWithNibName:@"JustPlacedOrderViewCell" bundle:nil];
+        [[self tableView] registerNib:nib forCellReuseIdentifier:@"JustPlacedOrderViewCell"];
+
+        nib = [UINib nibWithNibName:@"PreviousOrderStatusCell" bundle:nil];
+        [[self tableView] registerNib:nib forCellReuseIdentifier:@"PreviousOrderStatusCell"];
+
         [_tableView reloadData];
         [self addSubview:_tableView];
         
-        _isUp = false;
+        UIBezierPath *maskPath;
+        maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds
+                                         byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)
+                                               cornerRadii:CGSizeMake(6.0, 6.0)];
         
-        _tableView.userInteractionEnabled = false;
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        maskLayer.frame = self.bounds;
+        maskLayer.path = maskPath.CGPath;
+        self.layer.mask = maskLayer;
+        
+        _isUp = false;
+        _justPlacedOrder = false;
+        
+        //_tableView.userInteractionEnabled = false;
+        _tableView.scrollEnabled = false;
+        
+        [_tableView setContentInset:UIEdgeInsetsMake(0, 0, 54, 0)];
         
         [TSMessage setDefaultViewController:_parentViewController];
         [TSMessage setDelegate:self];
@@ -74,14 +108,37 @@
             _discount = 0;
             
         }
+        
+        
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"hasShownDeliveryInstructions"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSLog(@"This: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownDeliveryInstructions"]);
     }
     return self;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+//    ScrollDirection scrollDirection;
+//    if (self.lastContentOffset > scrollView.contentOffset.y) {
+//         NSLog(@"Down");
+//        scrollDirection = ScrollDirectionRight;
+//    }
+//    else if (self.lastContentOffset < scrollView.contentOffset.y) {
+//        scrollDirection = ScrollDirectionLeft;
+//         NSLog(@"Up");
+//    }
+//    self.lastContentOffset = scrollView.contentOffset.x;
+//    
+    // do whatever you need to with scrollDirection here.
 }
 
 -(void)queryForPackageItems {
     
     _itemsDictionary = [[NSMutableDictionary alloc] init];
-    [ProgressHUD show:nil];
+    //[ProgressHUD show:nil];
     PFQuery *query = [PFQuery queryWithClassName:@"Items"];
     [query setLimit:1000];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -89,6 +146,7 @@
         //NSLog(@"objetos: %@",objects);
         
         if (error) {
+            [ProgressHUD showError:@"Unknown Error"];
             NSLog(@"Error: %@", error);
         }
         else {
@@ -113,11 +171,12 @@
     }];
 }
 
--(void) getMostRecentOrder{
+-(void) getMostRecentOrder {
     PFQuery *query = [PFQuery queryWithClassName:@"Orders"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query orderByDescending:@"createdAt"];
-    [query whereKey:@"deliveryFor" greaterThanOrEqualTo:[NSDate date]];
+    NSDate *yesterday = [NSDate dateWithTimeInterval:(-24*60*60) sinceDate:[NSDate date]];
+    [query whereKey:@"deliveryFor" greaterThanOrEqualTo:yesterday];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
             _previousOrder = object;
@@ -142,6 +201,8 @@
             if (objects.count == 0) {
                 
             } else {
+                
+                [ProgressHUD dismiss];
                 for (PFObject *object in objects){
                     if ([object[@"isPackage"] boolValue] == YES){
                         NSString *thePackageName = object[@"packageName"];
@@ -176,8 +237,8 @@
             }
             
             [self update];
-            
         } else {
+            [ProgressHUD showError:@"Unknown Error"];
             NSLog(@"%@", error);
         }
     }];
@@ -188,13 +249,14 @@
 }
 
 -(void) update{
-    if ([_appDelegate package_itemsDictionary] || [_appDelegate extraPackage_itemsDictionary]){
+    if ([_appDelegate package_itemsDictionary].count > 0 || [_appDelegate extraPackage_itemsDictionary].count >0){
         _thePackage_itemsDictionary = [_appDelegate package_itemsDictionary];
         _theExtraPackage_itemsDictionary = [_appDelegate extraPackage_itemsDictionary];
         _deliveryDate = [_appDelegate deliveryDate];
         _deliveryDay = [_appDelegate deliveryDay];
         _isPastOrder = false;
     }else if (_previousOrder){
+        NSLog(@"Past order????");
         _isPastOrder = true;
         _thePackage_itemsDictionary = _pastOrderPackage_itemsDictionary;
         _theExtraPackage_itemsDictionary = _pastOrderExtraPackage_itemsDictionary;
@@ -234,6 +296,9 @@
     [self.tableView reloadData];
     _canOrder = false;
     [self getCurrentZips];
+    
+    NSString *string = [self calculateBasketItemCount];
+    
 }
 
 
@@ -271,14 +336,18 @@
     
     if (section == 3) {
         
-        return 5;
+        return 6;
     }
     return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    if (indexPath.row == 3) {
+        return 57;
+    }
+    return 50;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -287,21 +356,59 @@
     switch (indexPath.section) {
         case 0:
         {
+
+            // CHANGE!
+            if (_justPlacedOrder && indexPath.row == 0) {
+                JustPlacedOrderViewCell *cell = (JustPlacedOrderViewCell *)[tableView dequeueReusableCellWithIdentifier:@"JustPlacedOrderViewCell" forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
             if (_isPastOrder && indexPath.row == 0){
-                OrderTwoTableViewCell *cell = (OrderTwoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderTwoTableViewCell" forIndexPath:indexPath];
-                theCell = cell;
-                theCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
-                cell.orderTitleLabel.text = [NSString stringWithFormat:@"Previous Order: %@", _previousOrder[@"deliveryDate"]];
+                PreviousOrderStatusCell *cell = (PreviousOrderStatusCell *)[tableView dequeueReusableCellWithIdentifier:@"PreviousOrderStatusCell" forIndexPath:indexPath];
+                theCell = cell;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.orderStatusLabel.text = [NSString stringWithFormat:@"Previous Order Status: %@", _previousOrder[@"deliveryDate"]];
+                cell.orderStatusLabel.alpha = 0.0;
+                [UIView animateWithDuration:0.12 animations:^{
+                    cell.orderStatusLabel.alpha = 0.7;
+                } completion:^(BOOL finished) {
+                    
+                }];
+                cell.orderStatusLabel.minimumFontSize = 8;
+                cell.orderStatusLabel.adjustsFontSizeToFitWidth = YES;
+                cell.sliderIconImageView.hidden = false;
+                //cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+//                OrderTwoTableViewCell *cell = (OrderTwoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderTwoTableViewCell" forIndexPath:indexPath];
+//                theCell = cell;
+//                theCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                cell.orderTitleLabel.alpha = 0.0;
+//                cell.sliderIconImageView.hidden = false;
+//                cell.orderTitleLabel.text = [NSString stringWithFormat:@"Previous Order Status: %@", _previousOrder[@"deliveryDate"]];
+//                [UIView animateWithDuration:0.28 animations:^{
+//                    cell.orderTitleLabel.alpha = 0.7;
+//                } completion:^(BOOL finished) {
+//                }];
+                
             } else if ((!_isPastOrder && indexPath.row == 0) || (_isPastOrder && indexPath.row == 1)){
                 OrderOneTableViewCell *cell = (OrderOneTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderOneTableViewCell" forIndexPath:indexPath];
                 theCell = cell;
                 theCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
+                if (_isPastOrder) {
+                    cell.sliderIconImageView.hidden = true;
+                } else {
+                    cell.sliderIconImageView.hidden = false;
+                }
+                
                 if (!_isPastOrder){
                     [cell.orderButton addTarget:self
                                  action:@selector(placeOrder)
                        forControlEvents:UIControlEventTouchUpInside];
+                    [cell.orderButton setEnabled:YES];
+                }else{
+                    [cell.orderButton setEnabled:NO];
                 }
                 
                 int totalNumber = 0;
@@ -312,16 +419,59 @@
                 }
                 
                 if (_thePackage_itemsDictionary.count + totalNumber == 0) {
-                    cell.orderTitleLabel.text = @"None";
+                    
+                    cell.orderTitleLabel.text = @"Basket Empty";
+                    cell.orderTitleLabel.alpha = 0.0;
+                    cell.orderPriceLabel.alpha = 0.0;
+                    cell.orderButton.alpha = 0.0;
+                    [UIView animateWithDuration:0.2 delay:0.2 options:0 animations:^{
+                        cell.orderTitleLabel.alpha = 0.7;
+                        cell.orderPriceLabel.alpha = 0.7;
+                        cell.orderButton.alpha = 1.0;
+
+                    } completion:^(BOOL finished) {
+                        
+                    }];
+                
                 }else{
                     if (_thePackage_itemsDictionary.count == 1 && totalNumber == 0){
                         cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@", [_packageKeys objectAtIndex:0]];
                     }else if (_theExtraPackage_itemsDictionary.count == 1 && _thePackage_itemsDictionary.count == 0){
-                        cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@", [_extraKeys objectAtIndex:0]];
+                        //cell.orderTitleLabel.text = [NSString stringWithFormat:@"Extra %@ Items", [_extraKeys objectAtIndex:0]];
+                       
+//                        __block NSString *packageName = [_extraKeys objectAtIndex:0];
+//                        NSMutableString *result = [[NSMutableString alloc] init];
+//                        
+//                        int i = 1;
+//                        
+//                        for (NSString* itemNameKey in [_theExtraPackage_itemsDictionary valueForKey:packageName]){
+//                            CartItemObject* cartItem = [[_theExtraPackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
+//                            if (i == 1) {
+//                                [result appendString:[NSString stringWithFormat:@"%@ ", [cartItem itemName]]];
+//                            }
+//                            i++;
+//                        }
+//                        NSArray *array = [_theExtraPackage_itemsDictionary objectForKey:@"Food"];
+//
+//                        
+//                        if (i == 1) {
+//                         cell.orderTitleLabel.text = result;
+//                        }
+//                        
+//                        
+//                        else if (i>1) {
+//                            cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@ and %lu More", result,(array.count - 1)];
+//                        }
+                        
+                        cell.orderTitleLabel.text = [self calculateBasketItemCount];
+                        
+                        
                     }else if (_thePackage_itemsDictionary.count >= 1){
-                        cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@ & %lu More", [_packageKeys objectAtIndex:0], (_thePackage_itemsDictionary.count + _theExtraPackage_itemsDictionary.count - 1)];
+//                        cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@ & %lu More", [_packageKeys objectAtIndex:0], (_thePackage_itemsDictionary.count + _theExtraPackage_itemsDictionary.count - 1)];
+                        cell.orderTitleLabel.text = [self calculateBasketItemCount];
                     }else if (_thePackage_itemsDictionary.count == 0 && _theExtraPackage_itemsDictionary.count > 1){
-                        cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@ & %lu More", [_extraKeys objectAtIndex:0], (_theExtraPackage_itemsDictionary.count - 1)];
+//                        cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@ & %lu More", [_extraKeys objectAtIndex:0], (_theExtraPackage_itemsDictionary.count - 1)];
+                        cell.orderTitleLabel.text = [self calculateBasketItemCount];
                     }
                 }
                 
@@ -331,7 +481,13 @@
                 theCell = cell;
                 theCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
+                cell.sliderIconImageView.hidden = true;
                 cell.orderTitleLabel.text = @"Order Details";
+//
+//                FeesTableViewCell *cell = (FeesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"FeesTableViewCell" forIndexPath:indexPath];
+//                cell.titleLabel.text = @"Order Details";
+//                cell.priceFeeLabel.text = @"";
+//                [cell layoutIfNeeded];
             }
             break;
         }
@@ -341,18 +497,19 @@
             theCell = cell;
             theCell.selectionStyle = UITableViewCellSelectionStyleGray;
             
-            NSString *packageName = [_packageKeys objectAtIndex:indexPath.row];
+            __block NSString *packageName = [_packageKeys objectAtIndex:indexPath.row];
             NSMutableString *result = [[NSMutableString alloc] init];
             
             for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
                 CartItemObject* cartItem = [[_thePackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
-                [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
+                [result appendString:[NSString stringWithFormat:@"%@ x%d, ", [cartItem itemName],[cartItem itemQuantity]]];
             }
             cell.orderTitleLabel.text = [NSString stringWithFormat:@"%@ Package", packageName];
             cell.orderDescriptionLabel.text = result;
             float firstPrice = [self firstPriceFor:packageName];
             NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
             cell.orderPriceLabel.text = priceString;
+            cell.tapToEditLabel.text = @"tap to edit";
             
             Boolean modifiedFlag = false;
             for (NSString* itemNameKey in [_thePackage_itemsDictionary valueForKey:packageName]){
@@ -361,20 +518,59 @@
                     break;
                 }
             }
-            /*if (modifiedFlag){
-                cell.lockIconButton.hidden = NO;
-            }else{
-                cell.lockIconButton.hidden = YES;
-            }*/
             
             cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+                
+                if (_isPastOrder) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to edit a previous order." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                } else {
+      
+                //[ProgressHUD show:nil];
+                NSString *oldPackageName = cell.orderTitleLabel.text;
+                NSString *dasPackage;
+                if ([oldPackageName containsString:@"Package"]) {
+                    dasPackage = [oldPackageName stringByReplacingOccurrencesOfString: @" Package" withString:@""];
+                    packageName = dasPackage;
+                    NSLog(@"package name here: %@", packageName);
+                } else {
+                    dasPackage = packageName;
+                    if ([cell.orderTitleLabel.text containsString:@"Food"]) {
+                        dasPackage = @"Food";
+                    } else {
+                    
+                        dasPackage = @"Drink";
+                    }
+                    
+                    NSLog(@"das package: %@", dasPackage);
+
+                    [_thePackage_itemsDictionary removeObjectForKey:dasPackage];
+                    [_theExtraPackage_itemsDictionary removeObjectForKey:dasPackage];
+                    _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
+                    _packageKeys = _thePackage_itemsDictionary.allKeys;
+
+                    [self updateTotal];
+                    [tableView reloadData];
+                    [ProgressHUD dismiss];
+                    [_parentViewController.collectionView reloadData];
+                    return true;
+                }
+                NSLog(@"Das Package: %@", dasPackage);
                 [_thePackage_itemsDictionary removeObjectForKey:packageName];
+                [_theExtraPackage_itemsDictionary removeObjectForKey:packageName];
+                _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
                 _packageKeys = _thePackage_itemsDictionary.allKeys;
+
                 [self updateTotal];
                 [tableView reloadData];
+                [ProgressHUD dismiss];
+                [_parentViewController.collectionView reloadData];
+                
                 return true;
+                }
+                return false;
             }]];
-            
+        
             break;
         }
         case 2:
@@ -383,12 +579,51 @@
             theCell = cell;
             theCell.selectionStyle = UITableViewCellSelectionStyleGray;
             
-            NSString *packageName = [_extraKeys objectAtIndex:indexPath.row];
+            __block NSString *packageName = [_extraKeys objectAtIndex:indexPath.row];
             NSMutableString *result = [[NSMutableString alloc] init];
+            
+            int j = 0;
             
             for (NSString* itemNameKey in [_theExtraPackage_itemsDictionary valueForKey:packageName]){
                 CartItemObject* cartItem = [[_theExtraPackage_itemsDictionary valueForKey:packageName] valueForKey:itemNameKey];
-                [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
+                NSArray *array = [_theExtraPackage_itemsDictionary objectForKey:@"Food"];
+                NSArray *array2 = [_theExtraPackage_itemsDictionary objectForKey:@"Drink"];
+                NSMutableArray *finalArray = [[NSMutableArray alloc] init];
+                [finalArray addObjectsFromArray:array];
+                [finalArray addObjectsFromArray:array2];
+                
+//                for(int j=0; j<[finalArray count]; j++){
+//                    NSString  *item = finalArray[j];
+//                    if(j==[_theExtraPackage_itemsDictionary[packageName] count]-1){
+//                        [result appendString:[NSString stringWithFormat:@"%@ x1", item]];
+//                    } else {
+//                        [result appendString:[NSString stringWithFormat:@"%@ x1, ", item]];
+//                    }
+//                }
+////
+//                for(int j=0; j<[_theExtraPackage_itemsDictionary[packageName] count]; j++){
+//                    CartItemObject* cartItemYo = cartItem[j];
+//                    if(j==[finalArray count]-1){
+//                        [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
+//                    } else {
+//                        [result appendString:[NSString stringWithFormat:@"%@ x%d, ", [cartItem itemName],[cartItem itemQuantity]]];
+//                    }
+//                }
+                
+                if(j==[finalArray count]-1){
+                    [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
+                } else {
+                    [result appendString:[NSString stringWithFormat:@"%@ x%d, ", [cartItem itemName],[cartItem itemQuantity]]];
+                }
+
+                j++;
+                
+//                if (finalArray.count == 1) {
+//                    [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
+//                } else {
+//                    [result appendString:[NSString stringWithFormat:@"%@ x%d, ", [cartItem itemName],[cartItem itemQuantity]]];
+//                }
+                //[result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
             }
             cell.orderTitleLabel.text = [NSString stringWithFormat:@"Extra %@ Items", packageName];
             cell.orderDescriptionLabel.text = result;
@@ -396,14 +631,61 @@
             NSString *priceString = [NSString stringWithFormat:@"$%0.2f", firstPrice];
             cell.orderPriceLabel.text = priceString;
             //cell.lockIconButton.hidden = true;
-            
+            cell.tapToEditLabel.text = @"tap to edit";
+           
             cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+
+                if (_isPastOrder) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to edit a previous order." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                } else {
+                //[ProgressHUD show:nil];
+                NSString *oldPackageName = cell.orderTitleLabel.text;
+                NSString *dasPackage;
+                NSLog(@"Package Name: %@", packageName);
+                if ([oldPackageName containsString:@"Package"]) {
+                    NSLog(@"Contains string package");
+                    dasPackage = [oldPackageName stringByReplacingOccurrencesOfString: @" Package" withString:@""];
+                    packageName = [NSString stringWithFormat:@"%@", dasPackage];
+                    
+                } else {
+                    dasPackage = packageName;
+                    if ([cell.orderTitleLabel.text containsString:@"Food"]) {
+                        dasPackage = @"Food";
+                    } else {
+                        
+                        dasPackage = @"Drink";
+                    }
+                    
+                    NSLog(@"das package: %@", dasPackage);
+                    
+                    [_thePackage_itemsDictionary removeObjectForKey:dasPackage];
+                    [_theExtraPackage_itemsDictionary removeObjectForKey:dasPackage];
+                    _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
+                    _packageKeys = _thePackage_itemsDictionary.allKeys;
+                    
+                    [self updateTotal];
+                    [tableView reloadData];
+                    [ProgressHUD dismiss];
+                    [_parentViewController.collectionView reloadData];
+                    return true;
+
+                }
+                NSLog(@"Package Name again: %@", packageName);
+                [_thePackage_itemsDictionary removeObjectForKey:packageName];
                 [_theExtraPackage_itemsDictionary removeObjectForKey:packageName];
                 _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
+                _packageKeys = _thePackage_itemsDictionary.allKeys;
+                [_parentViewController.collectionView reloadData];
                 [self updateTotal];
                 [tableView reloadData];
+                [ProgressHUD dismiss];
+                    
                 return true;
+                }
+                return false;
             }]];
+        
             break;
         }
         case 3:
@@ -415,9 +697,11 @@
                 
                 cell.orderTitleLabel.text = @"Taxes";
                 cell.orderDescriptionLabel.text = @"";
+                cell.tapToEditLabel.text = @"";
                 cell.orderPriceLabel.text = [NSString stringWithFormat:@"$%.02f", _taxes];
                 cell.titleLabelWidth.constant = self.frame.size.width;
                 [cell layoutIfNeeded];
+                
             }else if (indexPath.row == 1){
                 OrderThreeTableViewCell *cell = (OrderThreeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderThreeTableViewCell" forIndexPath:indexPath];
                 theCell = cell;
@@ -425,37 +709,69 @@
                 
                 cell.orderTitleLabel.text = @"Delivery Fee";
                 cell.orderDescriptionLabel.text = @"";
+                cell.tapToEditLabel.text = @"";
                 cell.orderPriceLabel.text = [NSString stringWithFormat:@"$%.02f", 0.0];
                 cell.titleLabelWidth.constant = self.frame.size.width;
                 [cell layoutIfNeeded];
+
+                
             }else if (indexPath.row == 2){
+                
+                OrderThreeTableViewCell *cell = (OrderThreeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderThreeTableViewCell" forIndexPath:indexPath];
+                theCell = cell;
+                theCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                cell.orderTitleLabel.text = @"Discount";
+                cell.orderDescriptionLabel.text = @"";
+                cell.tapToEditLabel.text = @"";
+                
+                if(_discount>0){
+                    cell.orderPriceLabel.text = [NSString stringWithFormat:@"-$%d.00", _discount];
+                } else {
+                    cell.orderPriceLabel.text = [NSString stringWithFormat:@"$%d.00", _discount];
+                }
+            } else if (indexPath.row == 3) {
                 OrderFourTableViewCell *cell = (OrderFourTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderFourTableViewCell" forIndexPath:indexPath];
                 theCell = cell;
                 theCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
                 cell.orderTitleLabel.text = @"Total";
                 cell.orderPriceLabel.text = [NSString stringWithFormat:@"$%.02f", _finalTotal];
-            }else if (indexPath.row == 3){
+            }
+            
+            else if (indexPath.row == 4){
                 OrderTwoTableViewCell *cell = (OrderTwoTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderTwoTableViewCell" forIndexPath:indexPath];
                 theCell = cell;
                 theCell.selectionStyle = UITableViewCellSelectionStyleGray;
-                
+                cell.sliderIconImageView.hidden = true;
                 cell.orderTitleLabel.text = @"Delivery Information";
-            }else if (indexPath.row == 4){
+            }else if (indexPath.row == 5){
                 OrderFiveTableViewCell *cell = (OrderFiveTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"OrderFiveTableViewCell" forIndexPath:indexPath];
                 theCell = cell;
                 
                 cell.orderTitleLabel.text = @"When";
                 cell.orderDescriptionLabel.text = @"Tap to edit";
+                if (_isPastOrder) {
+                    cell.orderDescriptionLabel.text = @"";
+                }
+                
+                if (!_deliveryDay) {
+                    _deliveryDay = @"Now";
+                }
+                    
                 [cell.orderButton setTitle: _deliveryDay forState:UIControlStateNormal];
                 
                 if (!_isPastOrder){
                     [cell.orderButton addTarget:self
                                      action:@selector(showPicker)
                            forControlEvents:UIControlEventTouchUpInside];
+                    [cell.orderButton setEnabled:YES];
+                }else{
+                    [cell.orderButton setEnabled:NO];
                 }
                 
-                theCell.selectionStyle = UITableViewCellSelectionStyleGray;
+                //theCell.selectionStyle = UITableViewCellSelectionStyleGray;
+                theCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             
             break;
@@ -664,7 +980,7 @@ didConfirmWithItemAtRow:(NSInteger)row{
 }
 
 -(void) showPicker{
-    CZPickerView *picker = [[CZPickerView alloc] initWithHeaderTitle:@"Date"
+    CZPickerView *picker = [[CZPickerView alloc] initWithHeaderTitle:@"Delivery Date"
                                                    cancelButtonTitle:@"Cancel"
                                                   confirmButtonTitle:@"Confirm"];
     picker.delegate = self;
@@ -677,13 +993,15 @@ didConfirmWithItemAtRow:(NSInteger)row{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (_isPastOrder){
+        NSLog(@"here");
         return;
     }
     
     if (indexPath.section == 3 && indexPath.row == 3){
-        [self showDeliveryInstructionsPopup];
+        //[self showDeliveryInstructionsPopup];
         return;
-    }else if (indexPath.section == 3 && indexPath.row == 4){
+    }else if (indexPath.section == 3 && indexPath.row == 5){
+        NSLog(@"show picker!");
         [self showPicker];
     }
     
@@ -720,23 +1038,28 @@ didConfirmWithItemAtRow:(NSInteger)row{
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     
+    CGPoint vel = [recognizer velocityInView:self];
+    if (vel.y > 0) {
+        _tableView.scrollEnabled = false;
+    }
+    
     float yPosition = self.frame.origin.y;
     float height = self.bounds.size.height;
     
-    NSLog(@"Here: %f", yPosition/height);
-    
-    if (yPosition/height < .3f) {
-        
-        
-        CGPoint translation = [recognizer translationInView:self];
-        if (!(_isUp && translation.y < 0)){
-            recognizer.view.center = CGPointMake(self.frame.size.width/2,
-                                         recognizer.view.center.y + translation.y*.4);
+    NSLog(@"Hi: %f", yPosition/height);
+
+        if (yPosition/height < .3f) {
+            
+            CGPoint translation = [recognizer translationInView:self];
+            if (!(_isUp && translation.y < 0)){
+                recognizer.view.center = CGPointMake(self.frame.size.width/2,
+                                                     recognizer.view.center.y + translation.y*.4);
+            }
+            [recognizer setTranslation:CGPointMake(0, 0) inView:self];
+            //return;
         }
-        [recognizer setTranslation:CGPointMake(0, 0) inView:self];
-        
-        //return;
-    }
+ 
+    
     
     CGPoint translation = [recognizer translationInView:self];
     
@@ -749,20 +1072,62 @@ didConfirmWithItemAtRow:(NSInteger)row{
         
         if ((_isUp && yPosition/height > 0.3f) || (!_isUp && yPosition/height >= 0.9f)) {
             [UIView animateWithDuration:0.25 animations:^{
-                self.frame = CGRectMake(0, _initialPosition.y, self.frame.size.width, self.frame.size.height);
-                _tableView.userInteractionEnabled = false;
+                self.frame = CGRectMake(0, _initialPosition.y+7, self.frame.size.width, self.frame.size.height);
+                //_tableView.userInteractionEnabled = false;
+                _tableView.scrollEnabled = false;
             } completion:^(BOOL finished) {
                 _isUp = false;
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.frame = CGRectMake(0, _initialPosition.y, self.frame.size.width, self.frame.size.height);
+                    } completion:^(BOOL finished) {
+                }];
             }];
         } else if ((!_isUp && yPosition/height < 0.9f)){
             [UIView animateWithDuration:0.25 animations:^{
-                self.frame = CGRectMake(0, self.superview.frame.size.height - self.frame.size.height, self.frame.size.width, self.frame.size.height);
-                _tableView.userInteractionEnabled = true;
+                
+            self.frame = CGRectMake(0, self.superview.frame.size.height - self.frame.size.height-6, self.frame.size.width, self.frame.size.height);
+            
+                _tableView.scrollEnabled = true;
+                //_tableView.userInteractionEnabled = true;
             } completion:^(BOOL finished) {
                 _isUp = true;
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.frame = CGRectMake(0, self.superview.frame.size.height - self.frame.size.height, self.frame.size.width, self.frame.size.height);
+                } completion:^(BOOL finished) {
+                }];
             }];
         }
     }
+    
+    if (_isUp) {
+        //_tableView.scrollEnabled = true;
+    }
+}
+
+
+-(NSString *)calculateBasketItemCount {
+    
+    NSString *basketString;
+    NSArray *array = [_theExtraPackage_itemsDictionary objectForKey:@"Food"];
+    NSArray *array2 = [_theExtraPackage_itemsDictionary objectForKey:@"Drink"];
+    NSArray *array3 = _thePackage_itemsDictionary.allKeys;
+    NSMutableArray *finalArray = [[NSMutableArray alloc] init];
+    [finalArray addObjectsFromArray:array];
+    [finalArray addObjectsFromArray:array2];
+    [finalArray addObjectsFromArray:array3];
+    
+    if (finalArray.count > 0) {
+    
+        if (finalArray.count == 1) {
+            basketString = [NSString stringWithFormat:@"%@", [finalArray objectAtIndex:0]];
+        } else {
+            basketString = [NSString stringWithFormat:@"%@ and %lu more", [finalArray objectAtIndex:0], finalArray.count-1];
+        }
+        
+        NSLog(@"Yooo: %@", basketString);
+    }
+    
+    return basketString;
 }
 
 -(void)checkIfParticipatingArea {
@@ -821,7 +1186,7 @@ didConfirmWithItemAtRow:(NSInteger)row{
             }
             NSString *userZip = [[PFUser currentUser] objectForKey:@"zipCode"];
             if ([self.zipcodes containsObject:userZip]) {
-                NSLog(@"We can deliver");
+                //NSLog(@"We can deliver");
                 _canOrder = true;
             } else {
                 
@@ -1180,18 +1545,50 @@ didConfirmWithItemAtRow:(NSInteger)row{
 
 -(void)showConfirmation {
     
-    ConfirmationTableViewController *cvc = [self.parentViewController.storyboard instantiateViewControllerWithIdentifier:@"Confirmation"];
-    cvc.subtotal = _finalTotal;
-    UINavigationController *navigationController =
-    [[UINavigationController alloc] initWithRootViewController:cvc];
-    UIBarButtonItem *newBackButton =
-    [[UIBarButtonItem alloc] initWithTitle:@""
-                                     style:UIBarButtonItemStylePlain
-                                    target:nil
-                                    action:nil];
-    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+    [ProgressHUD dismiss];
+    _justPlacedOrder = true;
+    [_tableView reloadData];
     
-    [self.parentViewController.navigationController pushViewController:cvc animated:YES];
+    if (_isUp) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.frame = CGRectMake(0, _initialPosition.y, self.frame.size.width, self.frame.size.height);
+            _tableView.userInteractionEnabled = false;
+        } completion:^(BOOL finished) {
+            _isUp = false;
+        }];
+    }
+    
+    if ([_appDelegate package_itemsDictionary] !=nil) {
+        [[_appDelegate package_itemsDictionary] removeAllObjects];
+    }
+    
+    if ([_appDelegate extraPackage_itemsDictionary] !=nil) {
+        [[_appDelegate extraPackage_itemsDictionary] removeAllObjects];
+    }
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [_tableView reloadData];
+        [self getMostRecentOrder];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    
+    
+//    ConfirmationTableViewController *cvc = [self.parentViewController.storyboard instantiateViewControllerWithIdentifier:@"Confirmation"];
+//    cvc.subtotal = _finalTotal;
+//    UINavigationController *navigationController =
+//    [[UINavigationController alloc] initWithRootViewController:cvc];
+//    UIBarButtonItem *newBackButton =
+//    [[UIBarButtonItem alloc] initWithTitle:@""
+//                                     style:UIBarButtonItemStylePlain
+//                                    target:nil
+//                                    action:nil];
+//    [[navigationController navigationItem] setBackBarButtonItem:newBackButton];
+//    
+//    [self.parentViewController.navigationController pushViewController:cvc animated:YES];
+    
+    
     
 }
 
@@ -1332,7 +1729,8 @@ didConfirmWithItemAtRow:(NSInteger)row{
             return;
         }
         
-        if (_finalTotal<=10.00) {
+        //CHANGE!!
+        if (_finalTotal<=0.00) {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"Orders must be greater than $10.00" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             

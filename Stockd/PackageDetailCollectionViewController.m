@@ -105,12 +105,34 @@
     //VIEW WILL APPEAR NOT CALLED FOR SOME REASON...
     
     if (!_orderView){
-        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-44, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView = [[OrderView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-48, self.view.frame.size.width, self.view.frame.size.height-100)];
+        _orderView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-100);
         _orderView.parentViewController = self;
+        //_orderView.alpha = 0.0;
+        [UIView animateWithDuration:0.165 delay:0.0 options:0 animations:^{
+            _orderView.frame = CGRectMake(0, self.view.frame.size.height-52.5, self.view.frame.size.width, self.view.frame.size.height-100);
+            //_orderView.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.171 delay:0 options:0 animations:^{
+                
+                if([UIScreen mainScreen].bounds.size.height == 736) {
+                    NSLog(@"6 plus!!!");
+                    _orderView.frame = CGRectMake(0, self.view.frame.size.height-48, self.view.frame.size.width, self.view.frame.size.height-150);
+                } else {
+                    _orderView.frame = CGRectMake(0, self.view.frame.size.height-48, self.view.frame.size.width, self.view.frame.size.height-100);
+                }
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+        
         [self.view addSubview:_orderView];
     }
     
     [_orderView update];
+    
+    [self.collectionView reloadData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -138,6 +160,22 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     ItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TheCell" forIndexPath:indexPath];
+    if([UIScreen mainScreen].bounds.size.height <= 568.0) {
+        //iPhone 5
+        CGRect dasFrame = CGRectMake(54, 17, 50, 50);
+        if (CGRectEqualToRect(cell.itemImageViewer.frame, dasFrame)) {
+            
+        } else {
+        cell.itemImageViewer.frame = CGRectMake(54, 17, 50, 50);
+        cell.itemImageViewer.alpha = 0.0;
+        [UIView animateWithDuration:0.2 delay:0.7 options:0 animations:^{
+            cell.itemImageViewer.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        }
+    }
+    
     cell.isEven = (indexPath.row % 2 == 0);
     cell.showTopLine = (indexPath.row < 2);
     
@@ -145,11 +183,13 @@
     cell.itemNameLabel.text = [object objectForKey:@"itemName"];
     cell.itemDetailLabel.text = [object objectForKey:@"itemQuantity"];
     
-    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:[object objectForKey:@"itemName"]]){
-        cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:self.items[indexPath.row][@"itemName"]] itemQuantity]];
-    }else{
-        cell.itemQuantityLabel.text = @"0";
-    }
+//    if ([[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:[object objectForKey:@"itemName"]]){
+//        cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%d", [[[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:self.items[indexPath.row][@"itemName"]] itemQuantity]];
+//    }else{
+//        cell.itemQuantityLabel.text = @"0";
+//    }
+    
+    cell.itemQuantityLabel.hidden = true;
     
     float price = [[object objectForKey:@"itemPrice"] floatValue];
     cell.itemPriceLabel.text = [NSString stringWithFormat:@"$%.02f",price];
@@ -157,9 +197,18 @@
     cell.decrementButton.tag = indexPath.row;
     cell.incrementButton.tag = indexPath.row;
     
+    cell.itemNameLabel.minimumFontSize = 8;
+    cell.itemNameLabel.adjustsFontSizeToFitWidth = YES;
+    
     cell.theImageURL = [object objectForKey:@"itemImageUrl"];
     
+    
+    
     return cell;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(16, 0, 0, 0);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -176,7 +225,7 @@
 
 -(void)queryForItems {
     
-    [ProgressHUD show:nil];
+    //[ProgressHUD show:nil];
     PFQuery *query = [PFQuery queryWithClassName:@"Items"];
     [query whereKey:@"itemPackage" equalTo:self.packageName];
     [query orderByAscending:@"itemName"];
@@ -202,28 +251,39 @@
 }
 
 -(BOOL) checkValidBeerLimit{
-    if ([_packageName isEqual:@"Beer"]){
-        int maxNumOfBeers = 6;
-        int totalBeers = 0;
-        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
-            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:itemNameKey];
-            totalBeers += cartItem.itemQuantity;
-        }
-        
-        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"]){
-            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"] valueForKey:itemNameKey];
-            if ([[_appDelegate beerItemsDictionary] valueForKey:itemNameKey]){
-                totalBeers += cartItem.itemQuantity;
-            }
-        }
-        
-        return totalBeers < maxNumOfBeers;
-    }
+//    if ([_packageName isEqual:@"Beer"]){
+//        int maxNumOfBeers = 6;
+//        int totalBeers = 0;
+//        for (NSString* itemNameKey in [[_appDelegate package_itemsDictionary] valueForKey:_packageName]){
+//            CartItemObject* cartItem = [[[_appDelegate package_itemsDictionary] valueForKey:_packageName] valueForKey:itemNameKey];
+//            totalBeers += cartItem.itemQuantity;
+//        }
+//        
+//        for (NSString* itemNameKey in [[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"]){
+//            CartItemObject* cartItem = [[[_appDelegate extraPackage_itemsDictionary] valueForKey:@"21+"] valueForKey:itemNameKey];
+//            if ([[_appDelegate beerItemsDictionary] valueForKey:itemNameKey]){
+//                totalBeers += cartItem.itemQuantity;
+//            }
+//        }
+//        
+//        return totalBeers < maxNumOfBeers;
+//    }
     return YES;
 }
 
 
 - (IBAction)incrementQuantityButtonTapped:(id)sender {
+    
+    UIButton *button = (UIButton *) sender;
+    [UIView animateWithDuration:0.074 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.24, 1.24);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.07 animations:^{
+            button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     ItemCollectionViewCell *cell = (ItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
@@ -231,6 +291,10 @@
     
     if (![[[_appDelegate extraPackage_itemsDictionary] valueForKey: _packageType] valueForKey:itemNameLabel]){
         if ([self checkValidBeerLimit]){
+            if ([[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] == nil) {
+                NSLog(@"NULL!");
+                [[_appDelegate extraPackage_itemsDictionary] setObject:[[NSMutableDictionary alloc] init] forKey: _packageType];
+            }
             [[[_appDelegate extraPackage_itemsDictionary] valueForKey:_packageType] setObject:[[CartItemObject alloc] initItem:self.items[indexPath.row][@"itemName"] detail:self.items[indexPath.row][@"itemQuantity"] quantity: 1 price:[self.items[indexPath.row][@"itemPrice"] floatValue] imageURLString:self.items[indexPath.row][@"itemImageUrl"]] forKey:self.items[indexPath.row][@"itemName"]];
             
             [self updateCartAnimated];
@@ -247,6 +311,19 @@
 }
 
 - (IBAction)decrementQuantityButtonTapped:(id)sender {
+    
+    UIButton *button = (UIButton *) sender;
+    [UIView animateWithDuration:0.07 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.27, 1.27);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.07 animations:^{
+            button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[sender tag] inSection:0];
     ItemCollectionViewCell *cell = (ItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     

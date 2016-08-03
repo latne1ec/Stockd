@@ -22,11 +22,15 @@
 #import "UIViewController+ENPopUp.h"
 #import "DeliveryInstructionsPopupViewController.h"
 
+#import "AddPackagesCollectionViewController.h"
 #import "OrderOneTableViewCell.h"
 #import "OrderTwoTableViewCell.h"
 #import "OrderThreeTableViewCell.h"
 #import "OrderFourTableViewCell.h"
 #import "OrderFiveTableViewCell.h"
+#import "FeesTableViewCell.h"
+#import "JustPlacedOrderViewCell.h"
+#import "PreviousOrderStatusCell.h"
 #import "CZPicker.h"
 
 @interface OrderView : UIView <UIGestureRecognizerDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,TSMessageViewProtocol, CZPickerViewDataSource, CZPickerViewDelegate>
@@ -45,6 +49,8 @@
 @property (nonatomic, strong) NSArray* extraKeys;
 @property (nonatomic, strong) NSString *packageSizeString;
 @property (nonatomic) BOOL isPastOrder;
+@property (nonatomic) BOOL onAddPackagesScreen;
+@property (nonatomic) BOOL justPlacedOrder;
 @property (nonatomic, strong) NSMutableArray *zipcodes;
 @property (nonatomic) BOOL canOrder;
 
@@ -61,7 +67,7 @@
 
 @property (nonatomic) PFObject *previousOrder;
 
-@property (nonatomic) UIViewController* parentViewController;
+@property (nonatomic) AddPackagesCollectionViewController * parentViewController;
 
 @property (nonatomic, strong) NSString *orderNumber;
 @property (nonatomic, strong) PFObject *order;
@@ -72,6 +78,8 @@
 @property (nonatomic, strong) NSMutableDictionary *theExtraPackage_itemsDictionary;
 
 @property (nonatomic) int packageSize;
+
+@property (nonatomic, assign) CGFloat lastContentOffset;
 
 -(void) removeEmptyPackages;
 -(void) update;

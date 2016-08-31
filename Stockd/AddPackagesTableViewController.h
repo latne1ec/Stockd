@@ -28,7 +28,6 @@
 @property (nonatomic, strong) NSArray *drinks;
 
 @property (nonatomic) int packageSize;
-
 @property (nonatomic, strong) NSString *packageType;
 
 -(void)updateCartAnimated;

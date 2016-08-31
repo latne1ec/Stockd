@@ -8,7 +8,6 @@
 
 #import "OrderView.h"
 #import "UpdateCartTableCell.h"
-
 #import "AddressTableViewController.h"
 #import "AddressViewController.h"
 #import "PhoneTableViewController.h"
@@ -297,11 +296,9 @@ typedef enum ScrollDirection {
     _canOrder = false;
     [self getCurrentZips];
     
-    NSString *string = [self calculateBasketItemCount];
+    //NSString *string = [self calculateBasketItemCount];
     
 }
-
-
 
 -(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     if (_isUp && _tableView.contentOffset.y <= 0){
@@ -528,24 +525,20 @@ typedef enum ScrollDirection {
       
                 //[ProgressHUD show:nil];
                 NSString *oldPackageName = cell.orderTitleLabel.text;
-                NSString *dasPackage;
+                NSString *packageTypeName;
                 if ([oldPackageName containsString:@"Package"]) {
-                    dasPackage = [oldPackageName stringByReplacingOccurrencesOfString: @" Package" withString:@""];
-                    packageName = dasPackage;
-                    NSLog(@"package name here: %@", packageName);
+                    packageTypeName = [oldPackageName stringByReplacingOccurrencesOfString: @" Package" withString:@""];
+                    packageName = packageTypeName;
                 } else {
-                    dasPackage = packageName;
+                    packageTypeName = packageName;
                     if ([cell.orderTitleLabel.text containsString:@"Food"]) {
-                        dasPackage = @"Food";
+                        packageTypeName = @"Food";
                     } else {
-                    
-                        dasPackage = @"Drink";
+                        packageTypeName = @"Drink";
                     }
                     
-                    NSLog(@"das package: %@", dasPackage);
-
-                    [_thePackage_itemsDictionary removeObjectForKey:dasPackage];
-                    [_theExtraPackage_itemsDictionary removeObjectForKey:dasPackage];
+                    [_thePackage_itemsDictionary removeObjectForKey:packageTypeName];
+                    [_theExtraPackage_itemsDictionary removeObjectForKey:packageTypeName];
                     _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
                     _packageKeys = _thePackage_itemsDictionary.allKeys;
 
@@ -555,7 +548,6 @@ typedef enum ScrollDirection {
                     [_parentViewController.collectionView reloadData];
                     return true;
                 }
-                NSLog(@"Das Package: %@", dasPackage);
                 [_thePackage_itemsDictionary removeObjectForKey:packageName];
                 [_theExtraPackage_itemsDictionary removeObjectForKey:packageName];
                 _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
@@ -592,38 +584,12 @@ typedef enum ScrollDirection {
                 [finalArray addObjectsFromArray:array];
                 [finalArray addObjectsFromArray:array2];
                 
-//                for(int j=0; j<[finalArray count]; j++){
-//                    NSString  *item = finalArray[j];
-//                    if(j==[_theExtraPackage_itemsDictionary[packageName] count]-1){
-//                        [result appendString:[NSString stringWithFormat:@"%@ x1", item]];
-//                    } else {
-//                        [result appendString:[NSString stringWithFormat:@"%@ x1, ", item]];
-//                    }
-//                }
-////
-//                for(int j=0; j<[_theExtraPackage_itemsDictionary[packageName] count]; j++){
-//                    CartItemObject* cartItemYo = cartItem[j];
-//                    if(j==[finalArray count]-1){
-//                        [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
-//                    } else {
-//                        [result appendString:[NSString stringWithFormat:@"%@ x%d, ", [cartItem itemName],[cartItem itemQuantity]]];
-//                    }
-//                }
-                
                 if(j==[finalArray count]-1){
                     [result appendString:[NSString stringWithFormat:@"%@ x%d", [cartItem itemName],[cartItem itemQuantity]]];
                 } else {
                     [result appendString:[NSString stringWithFormat:@"%@ x%d, ", [cartItem itemName],[cartItem itemQuantity]]];
                 }
-
                 j++;
-                
-//                if (finalArray.count == 1) {
-//                    [result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
-//                } else {
-//                    [result appendString:[NSString stringWithFormat:@"%@ x%d, ", [cartItem itemName],[cartItem itemQuantity]]];
-//                }
-                //[result appendString:[NSString stringWithFormat:@"%@ x%d ", [cartItem itemName],[cartItem itemQuantity]]];
             }
             cell.orderTitleLabel.text = [NSString stringWithFormat:@"Extra %@ Items", packageName];
             cell.orderDescriptionLabel.text = result;
@@ -641,26 +607,23 @@ typedef enum ScrollDirection {
                 } else {
                 //[ProgressHUD show:nil];
                 NSString *oldPackageName = cell.orderTitleLabel.text;
-                NSString *dasPackage;
-                NSLog(@"Package Name: %@", packageName);
+                NSString *packageTypeName;
                 if ([oldPackageName containsString:@"Package"]) {
                     NSLog(@"Contains string package");
-                    dasPackage = [oldPackageName stringByReplacingOccurrencesOfString: @" Package" withString:@""];
-                    packageName = [NSString stringWithFormat:@"%@", dasPackage];
+                    packageTypeName = [oldPackageName stringByReplacingOccurrencesOfString: @" Package" withString:@""];
+                    packageName = [NSString stringWithFormat:@"%@", packageTypeName];
                     
                 } else {
-                    dasPackage = packageName;
+                    packageTypeName = packageName;
                     if ([cell.orderTitleLabel.text containsString:@"Food"]) {
-                        dasPackage = @"Food";
+                        packageTypeName = @"Food";
                     } else {
                         
-                        dasPackage = @"Drink";
+                        packageTypeName = @"Drink";
                     }
                     
-                    NSLog(@"das package: %@", dasPackage);
-                    
-                    [_thePackage_itemsDictionary removeObjectForKey:dasPackage];
-                    [_theExtraPackage_itemsDictionary removeObjectForKey:dasPackage];
+                    [_thePackage_itemsDictionary removeObjectForKey:packageTypeName];
+                    [_theExtraPackage_itemsDictionary removeObjectForKey:packageTypeName];
                     _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
                     _packageKeys = _thePackage_itemsDictionary.allKeys;
                     
@@ -671,7 +634,6 @@ typedef enum ScrollDirection {
                     return true;
 
                 }
-                NSLog(@"Package Name again: %@", packageName);
                 [_thePackage_itemsDictionary removeObjectForKey:packageName];
                 [_theExtraPackage_itemsDictionary removeObjectForKey:packageName];
                 _extraKeys = _theExtraPackage_itemsDictionary.allKeys;
@@ -1043,10 +1005,17 @@ didConfirmWithItemAtRow:(NSInteger)row{
         _tableView.scrollEnabled = false;
     }
     
+    if ([_parentViewController.restorationIdentifier isEqualToString:@"AddPackagesCVC"]) {
+        
+        if (_parentViewController.toastShowing == true) {
+            _parentViewController.toast.alpha = 0.0;
+        }
+    }
+    
     float yPosition = self.frame.origin.y;
     float height = self.bounds.size.height;
     
-    NSLog(@"Hi: %f", yPosition/height);
+    //NSLog(@"Hi: %f", yPosition/height);
 
         if (yPosition/height < .3f) {
             

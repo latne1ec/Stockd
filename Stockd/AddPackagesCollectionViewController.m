@@ -25,11 +25,11 @@
 @property (nonatomic, strong) NSMutableDictionary *itemsDictionary;
 @property (nonatomic, strong) NSString *beerItem;
 @property (nonatomic, strong) NSString *liquorItem;
-@property (nonatomic, strong) UIImageView *toast;
 @property (nonatomic, strong) UIImage *toastPic;
 @property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) UITableViewHeaderFooterView *headerView;
 @property (nonatomic) float offsetY;
+
 
 @property (nonatomic, strong) OrderView *orderView;
 
@@ -373,43 +373,48 @@ static NSString * const reuseIdentifier = @"TheCell";
 
 -(void)showToast {
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasRanApp3"] isEqualToString:@"yes"]) {
-        //NSLog(@"hi");
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"hasShownCheckoutToast"] isEqualToString:@"yes"]) {
     }
     else {
-        
-        if ([UIScreen mainScreen].bounds.size.height <= 568.0) {
-            self.toastPic = [UIImage imageNamed:@"toastThreeSmall"];
-        }
-        else {
-            self.toastPic = [UIImage imageNamed:@"toastThreeBig"];
-        }
-        
-        self.toast = [[UIImageView alloc] initWithImage:self.toastPic];
-        self.toast.alpha = 1.0;
-        self.toast.tag = 9;
-        
-        CGPoint dasCenter = CGPointMake(self.navigationController.navigationBar.bounds.size.width/2, 24);
-        
+    
+    self.toastPic = [UIImage imageNamed:@"toastNew"];
+    self.toast = [[UIImageView alloc] init];
+    self.toast.alpha = 1.0;
+    self.toast.tag = 9;
+    self.toast.contentMode = UIViewContentModeScaleAspectFit;
+    _toastShowing = true;
+    
+    if ([UIScreen mainScreen].bounds.size.height <= 568.0) {
+        self.toastPic = [UIImage imageNamed:@"toastNew"];
+        self.toast.frame = CGRectMake(10, self.view.frame.size.height-100, 300, 58);
+        CGPoint dasCenter = CGPointMake(self.view.bounds.size.width/2, self.view.frame.size.height-74);
         [self.toast setCenter:dasCenter];
-        
-        [self.navigationController.navigationBar addSubview:self.toast];
-        
+        self.toast.image = self.toastPic;
+    }
+    else {
+        self.toastPic = [UIImage imageNamed:@"toastNewBig"];
+        self.toast.frame = CGRectMake(10, self.view.frame.size.height-100, 300, 68);
+        CGPoint dasCenter = CGPointMake(self.view.bounds.size.width/2, self.view.frame.size.height-80);
+        [self.toast setCenter:dasCenter];
+        self.toast.image = self.toastPic;
+    }
+    
+    [self.view addSubview:self.toast];
+    
         [UIView animateWithDuration:0.07 animations:^{
             
-            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasRanApp3"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:@"hasShownCheckoutToast"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             self.toast.alpha = 1.0;
-            
             self.toast.transform = CGAffineTransformMakeScale(1.045, 1.045);
             
         } completion:^(BOOL finished) {
             self.toast.transform = CGAffineTransformMakeScale(1.0, 1.0);
-            
         }];
-    }
+   }
 }
+
 
 -(void) updateCartAnimated{
 //    int totalNumber = 0;

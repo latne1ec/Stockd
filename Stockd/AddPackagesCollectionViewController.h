@@ -19,11 +19,11 @@
 @property (nonatomic, strong) PFFile *picture;
 @property (nonatomic, strong) NSString *orderNumber;
 @property (nonatomic, strong) PFObject *order;
-
 @property (nonatomic, strong) NSMutableArray *food;
 @property (nonatomic, strong) NSArray *drinks;
-
 @property (nonatomic) int packageSize;
-
 @property (nonatomic, strong) NSString *packageType;
+@property (nonatomic) BOOL toastShowing;
+@property (nonatomic, strong) UIImageView *toast;
+
 @end
